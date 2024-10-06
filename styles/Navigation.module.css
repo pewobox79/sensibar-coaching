@@ -1,0 +1,24 @@
+.mobileNavWrapper{
+    display: block;
+    width: 100%;
+    background-color: lightgrey;
+    height: 100vh
+}
+
+.mobileNavInner{
+    width: 80%;
+    margin: auto;
+    display: flex;
+
+
+}
+
+
+
+@media screen and (min-width: 768px) {
+
+    .mobileNavWrapper{
+        display: none;
+    };
+
+}
