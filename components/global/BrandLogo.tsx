@@ -4,10 +4,7 @@ import Link from "next/link";
 
 const BrandLogo=({src="", size, link="/"}:{src?: string, size?: "small" |"medium" |"large"|"xlarge", link?:string})=>{
 
-    let imageSize ={
-        width: 100,
-        height: 50,
-    }
+    let imageSize:{height: number, width: number}
 
     switch(size){
         case "small":
@@ -25,7 +22,7 @@ const BrandLogo=({src="", size, link="/"}:{src?: string, size?: "small" |"medium
         default: imageSize={width: 100, height: 50}
 }
 
-    return <Link href={link}><Image src={`${src ? src : brandLogo?.src}`} width={imageSize.width} height={imageSize.height}/></Link>
+    return <Link href={link}><Image src={`${src ? src : brandLogo?.src}`} alt="Sensibar Logo" width={imageSize.width} height={imageSize.height}/></Link>
 }
 
 export default BrandLogo;
