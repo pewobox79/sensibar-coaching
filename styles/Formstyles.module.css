@@ -1,0 +1,48 @@
+.formItem {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.formItem >input {
+    width: 100%;
+    padding: 10px;
+    border-radius:10px;
+    border: 1px solid gray;
+    color: black;
+    font-size: 1.2rem
+}
+
+
+.formItem >input:focus-visible,
+.formItem > input:active{
+   border: 1px solid gray
+}
+
+.inputError {
+    outline-color: red;
+    border: 1px solid red !important;
+    color: red
+}
+
+.inputErrorText{
+    color: red
+}
+
+
+@media screen and (min-width: 768px) {
+
+    .formItem {
+       width: 80%;
+        margin: auto
+    }
+
+    .gdprItem > .form-check {
+        width: 80%;
+        margin: auto
+    }
+}

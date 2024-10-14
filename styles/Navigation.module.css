@@ -1,11 +1,11 @@
-.mobileNavWrapper{
+.mobileNavWrapper {
     display: block;
     width: 100%;
     background-color: lightgrey;
     height: 100vh
 }
 
-.mobileNavInner{
+.mobileNavInner {
     width: 80%;
     margin: auto;
     display: flex;
@@ -13,12 +13,21 @@
 
 }
 
+.desktopNavWrapper {
 
+    display: none;
+}
 
 @media screen and (min-width: 768px) {
 
-    .mobileNavWrapper{
+    .mobileNavWrapper {
         display: none;
-    };
+    }
+
+    .desktopNavWrapper {
+        display: block;
+        min-height: 100px;
+        width: 100%;
+    }
 
 }

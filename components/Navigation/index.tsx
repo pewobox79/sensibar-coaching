@@ -1,9 +1,11 @@
-import MobileNav from "@/components/Navigation/MobileNav";
+
+import DesktopNav from "@/components/Navigation/DesktopNav";
 
 const Navigation =()=>{
 
     return <nav>
-       <MobileNav/>
+        <DesktopNav/>
+      {/* <MobileNav/>*/}
     </nav>
 }
 

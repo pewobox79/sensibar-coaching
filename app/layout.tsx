@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+import "../styles/globals.css";
 import MainLayout from "@/layouts/MainLayout";
 
 const geistSans = localFont({
@@ -8,9 +8,9 @@ const geistSans = localFont({
   variable: "--font-geist-sans",
   weight: "100 900",
 });
-const geistMono = localFont({
-  src: "../assets/fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
+const tanMonCheri = localFont({
+  src: "../assets/fonts/moncherifonts/tan-mon-cheri.woff",
+  variable: "--font-tan-mon-cheri",
   weight: "100 900",
 });
 
@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable} ${tanMonCheri.variable}`}>
       <MainLayout>
         {children}
       </MainLayout>

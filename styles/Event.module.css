@@ -1,0 +1,110 @@
+.singleEventWrapper {
+    width: 100%;
+    min-height: 800px;
+    height: auto
+}
+
+.singleEventInner {
+
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+
+}
+
+
+.singleEventHeader{
+
+    width: 100%;
+    height: 150px;
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.singleEventMainContent{
+
+    display: flex;
+    flex-direction:column;
+    padding-top: 40px;
+    width: 100%;
+    max-width: 1000px
+
+
+}
+.singleEventContent50{
+
+    width: 100%;
+    min-height: 500px;
+    height: auto;
+    padding: 30px;
+    display: flex;
+    align-items: normal;
+    justify-content: normal;
+    flex-direction: column;
+}
+
+
+.singleEventDescriptionParagraph{
+    margin: 15px 0;
+    line-height: 23px;
+    font-size: 1.2rem
+}
+
+.singleEventDescriptionParagraph > h3{
+    margin-bottom: 10px
+}
+
+.singleEventDescriptionParagraph>ul{
+    padding: 0 25px
+}
+
+.singleEventDetailsBoxWrapper {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+
+}
+
+.singleEventDetailsBoxWrapper >.detailsBoxItem {
+
+    width: 100%;
+    padding: 10px 30px;
+}
+
+.singleEventDetailsBoxWrapper >.detailsBoxItemHeader {
+    display: flex;
+    justify-content: flex-start;
+}
+@media screen and (min-width: 768px){
+
+    .singleEventInner {
+
+        padding: 40px;
+
+
+    }
+    .singleEventMainContent{
+        flex-direction:row;
+    }
+
+    .singleEventContent50{
+        align-items: center;
+        justify-content: center;
+        padding: 15px
+    }
+
+    .singleEventDetailsBoxWrapper {
+        width: 80%;
+        margin:auto
+    }
+}

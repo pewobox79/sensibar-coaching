@@ -1,10 +1,9 @@
 import Navigation from "@/components/Navigation";
-import BrandLogo from "@/components/global/BrandLogo";
 
-const Header =()=>{
+const Header = () => {
 
     return <header>
-<BrandLogo/>
+
         <Navigation/>
 
     </header>
