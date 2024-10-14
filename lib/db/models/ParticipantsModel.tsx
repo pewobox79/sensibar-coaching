@@ -8,8 +8,9 @@ interface Participant {
         email: string,
         phone: string,
     },
-    workshop?: string[]; // An array to store the workshop IDs associated with the participant
+    workshop?: string[];
     gdpr: boolean;
+    condition: string;
 }
 
 // Define the schema corresponding to the document interface
@@ -21,7 +22,8 @@ const participantSchema: Schema = new mongoose.Schema<Participant>({
         email: {type: String, required: true},
     },
     gdpr: {type: Boolean},
-    workshop: [{type: String}]
+    workshop: [{type: String}],
+    condition: String
 }, {
     timestamps: true, // Automatically adds createdAt and updatedAt fields
 

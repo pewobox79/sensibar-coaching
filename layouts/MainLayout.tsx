@@ -8,7 +8,7 @@ const MainLayout = ({children}: { children: React.ReactNode | React.ReactElement
     return <>
 
         <Header/>
-        <main>
+        <main className={"mainContent"}>
             { children }
         </main>
         <Footer/>
