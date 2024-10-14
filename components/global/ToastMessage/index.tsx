@@ -1,16 +1,17 @@
 import {Toast} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {  faClose } from '@fortawesome/free-solid-svg-icons'
+import {Dispatch, SetStateAction} from "react";
 
-const ToastMessage = ({state, setState}) => {
+const ToastMessage = ({state, setState}:{state: { msg: string, state: boolean, type: string }, setState: Dispatch<SetStateAction<{ state: boolean; msg: string; type: string; }>>}) => {
 
 function handleClose() {
-    setState({...state, state: false})
+    setState((prevState)=>({...prevState, state: false}))
 
     }
     let variant
 
-    switch (state.type) {
+    switch (state?.type) {
         case 'error':
             variant = 'red'
             break;

@@ -2,13 +2,11 @@
 
 import {useSearchParams} from "next/navigation";
 
-const DoubleOptInPage =({params})=>{
-console.log("params: " + params)
+const DoubleOptInPage =()=>{
 
     const searchParams = useSearchParams()
-    const id=searchParams.get("id")
-
-    const type = searchParams.get("type")
+    const id =searchParams ? searchParams.get("id"): "";
+    const type = searchParams ? searchParams.get("type"):"";
     console.log(id)
     return <>
         <h3>Deine Anmeldung zu meinen {type}. </h3>

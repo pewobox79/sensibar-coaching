@@ -1,4 +1,6 @@
-const PageLayout=({children}: {children: React.ReactNode |React.ReactElement |React.ReactElement[]})=>{
+import {ReactElement, ReactNode} from "react";
+
+const PageLayout=({children}: {children: ReactNode |ReactElement |ReactElement[]})=>{
 
     return <div className={"pageLayout"}>
         {children}
