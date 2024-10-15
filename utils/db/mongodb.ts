@@ -1,6 +1,6 @@
 
 import mongoose from "mongoose";
-const uri = process.env.NEXT_PUBLIC_MONGODB_URI
+const uri = process.env.NEXT_PUBLIC_MONGODB_URI ? process.env.NEXT_PUBLIC_MONGODB_URI:""
 
 export async function connectMongoDB() {
 

@@ -7,7 +7,6 @@ import Button from "@/components/global/Button";
 import Link from "next/link";
 import {useState} from "react";
 import ToastMessage from "@/components/global/ToastMessage";
-import {sendSubmissionEmail} from "@/utils/helper/mailingHelper";
 
 const EventRegistration = () => {
 

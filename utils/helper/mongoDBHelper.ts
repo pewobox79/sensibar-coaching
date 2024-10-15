@@ -1,6 +1,6 @@
 import Participant from "@/lib/db/models/ParticipantsModel";
 
-export const handleDoubleOptIn = async (id)=>{
+export const handleDoubleOptIn = async (id:string)=>{
 
 
     const participant = await Participant.updateOne({_id:id,
