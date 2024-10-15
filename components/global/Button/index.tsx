@@ -2,11 +2,12 @@ type ButtonType ={
 
     title?: "registrieren" |"speichern" | "anrufen";
     type?: "submit" | "button";
+    processing?: boolean;
 }
 
-const Button=({title ="registrieren",type = "submit"}:ButtonType)=>{
+const Button=({title ="registrieren",type = "submit", processing}:ButtonType)=>{
 
-    return <button className={"globalButton"}type={type}>{title?.toUpperCase()}</button>
+    return <button className={"globalButton"} type={type} disabled={processing}>{title?.toUpperCase()}</button>
 }
 
 export default Button;

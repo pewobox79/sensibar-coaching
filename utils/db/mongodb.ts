@@ -1,6 +1,6 @@
 
 import mongoose from "mongoose";
-const uri = "mongodb+srv://admin:f2tJSTJtLvLVKE8p@sensibardb.5z5st.mongodb.net/sensibarDatabase?retryWrites=true&w=majority&appName=SensibarDB";
+const uri = process.env.NEXT_PUBLIC_MONGODB_URI
 
 export async function connectMongoDB() {
 

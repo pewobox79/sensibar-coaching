@@ -7,11 +7,13 @@ import Button from "@/components/global/Button";
 import Link from "next/link";
 import {useState} from "react";
 import ToastMessage from "@/components/global/ToastMessage";
+import {sendSubmissionEmail} from "@/utils/helper/mailingHelper";
 
 const EventRegistration = () => {
 
     const [error, setError] = useState({state: false, msg: "", type: "error"});
     const [success, setSuccess] = useState({state:false, msg: "", type: "success"});
+    const [processing, setProcessing] = useState(false)
     const RegistrationSchema = yup.object().shape({
         firstname: yup.string().required(),
         lastname: yup.string().required(),
@@ -44,6 +46,7 @@ const EventRegistration = () => {
         validateOnChange: false,
         onSubmit: async (values) => {
             console.log("values", values)
+            setProcessing(true)
 
             try {
                 const response = await fetch("/api/db/participant", {
@@ -62,13 +65,17 @@ const EventRegistration = () => {
                 if(data.msg ==="Participant already exists"){
                     setSuccess({...success, state: false})
                     setError({...error, state: true, msg: "Participant already exists"})
+                    setProcessing(false)
                 }else{
                     setError({...error, state: false})
                     setSuccess({...success, state: true, msg:"Your registration was successfully"})
+                    setProcessing(false)
                     formik.resetForm()
                     setTimeout(() =>{
                         setSuccess({...success, state: false})
                     }, 3000)
+
+
                 }
             } catch (err) {
                 console.log("error", err)
@@ -200,7 +207,7 @@ const EventRegistration = () => {
                 </div>
                 <div style={ {display: "flex", justifyContent: "center"} }>
 
-                    <Button/>
+                    <Button processing={processing}/>
 
                 </div>
             <div style={{padding: "40px 0"}}>

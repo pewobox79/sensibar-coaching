@@ -1,20 +1,20 @@
 import {connectMongoDB} from "@/utils/db/mongodb";
 import {NextRequest} from "next/server";
 import Participant from "@/lib/db/models/ParticipantsModel";
+import {handleDoubleOptIn} from "@/utils/helper/mongoDBHelper";
+import {sendSubmissionEmail} from "@/utils/helper/mailingHelper";
 
 export async function POST(req: NextRequest) {
 
     // Connect to MongoDB
     const body = await req.json();
     const {firstname, lastname, contact, gdpr, condition} = body;
-    console.log("body", contact)
     try {
 
 
         const connection = await connectMongoDB();
 
         if (connection) {
-            console.log("connection", connection)
             const existing = await Participant.exists({
                 firstname,
                 lastname,
@@ -26,7 +26,6 @@ export async function POST(req: NextRequest) {
                 console.log("existing participant ")
                 return Response.json({msg: "Participant already exists"});
             }
-            console.log("existing", existing)
 
             // Create and save a new user in the database
             const newParticipant = await Participant.create({
@@ -44,7 +43,7 @@ export async function POST(req: NextRequest) {
 
                 console.log("participant failed")
             }
-            console.log("participant", newParticipant)
+            await sendSubmissionEmail(newParticipant?._id, contact?.email)
             return Response.json({msg: "added participant"});
 
         } else {
@@ -55,5 +54,15 @@ export async function POST(req: NextRequest) {
         return Response.json({message: 'Error creating user', error});
     }
 
+
+}
+
+
+
+export async function PUT(req: NextRequest){
+
+    const body = await req.json()
+    const updatedUser = await handleDoubleOptIn(body.id)
+    return Response.json({msg:"user updated", updatedUser})
 
 }
