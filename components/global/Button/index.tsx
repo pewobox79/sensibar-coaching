@@ -1,6 +1,6 @@
 type ButtonType ={
 
-    title?: "registrieren" |"speichern" | "anrufen";
+    title?: "registrieren" |"speichern" | "anrufen" | "details";
     type?: "submit" | "button";
     processing?: boolean;
 }

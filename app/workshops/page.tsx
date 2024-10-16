@@ -1,11 +1,13 @@
-import Link from "next/link";
+import EventOverview from "@/pages/Events/EventOverview";
+import {getAllWorkshops} from "@/lib/strapi/workshopHelper";
 
-const EventsPage =()=>{
+const EventsPage =async()=>{
 
-    return <><h1>Events page</h1>
-    <Link href={"/workshops/lajdlfkj" }>First event</Link>
+    const allWorkshops = await getAllWorkshops()
 
-    </>
+    return <EventOverview {...allWorkshops}/>
+
+
 
 }
 

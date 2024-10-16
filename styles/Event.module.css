@@ -85,6 +85,30 @@
     display: flex;
     justify-content: flex-start;
 }
+
+/*workshop list item*/
+
+.workshopListItemWrapper {
+
+    width: 100%;
+    height: auto;
+    margin: 5px auto;
+    display: flex;
+    padding: 30px;
+    border-radius: 5px;
+    background-color: var(--background);
+    color: var(--textColor);
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.workshopListItemContent{
+
+    display: flex;
+    flex-direction: column;
+    width: 100%
+}
 @media screen and (min-width: 768px){
 
     .singleEventInner {
@@ -106,5 +130,20 @@
     .singleEventDetailsBoxWrapper {
         width: 80%;
         margin:auto
+    }
+
+    /*workshop item*/
+
+    .workshopListItemWrapper{
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 900px
+    }
+
+    .workshopListItemContent{
+        flex-direction:row;
+        width: 50%;
+        justify-content: space-between;
     }
 }
