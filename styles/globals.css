@@ -49,13 +49,16 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%
+    width: 100%;
+    min-height: 70vh;
+    height: auto;
 }
 
 .globalButton {
 
     width: 200px;
-    height: 40px;
+    min-height: 40px;
+    height: auto;
     color: var(--background);
     background-color: var(--textColor);
     border: var(--borderColor);
