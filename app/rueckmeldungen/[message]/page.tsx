@@ -2,7 +2,6 @@ import WorkshopSubmissions from "@/pages/MessagePages/WorkshopSubmissions";
 import DoubleOptInPage from "@/pages/MessagePages/DoubleOptInPage";
 
 const DynamicMessagePage =({params}: {params: { message: string }})=>{
-console.log("dynmamic message page", params)
 
     switch (params.message) {
         case "workshopSubmission":

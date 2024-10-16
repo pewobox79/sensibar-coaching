@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
 
             if (existing) {
 
-                console.log("existing participant ")
+
                 return Response.json({msg: "Participant already exists"});
             }
 

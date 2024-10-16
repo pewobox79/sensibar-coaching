@@ -44,7 +44,6 @@ const EventRegistration = () => {
         validationSchema: RegistrationSchema,
         validateOnChange: false,
         onSubmit: async (values) => {
-            console.log("values", values)
             setProcessing(true)
 
             try {
