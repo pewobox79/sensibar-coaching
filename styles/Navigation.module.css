@@ -2,7 +2,7 @@
     display: flex;
     width: 100%;
     background-color: var(--background80);
-    height: 100vh;
+    height: 100dvh;
     flex-direction: column;
     position: absolute;
     z-index: 100;
@@ -14,7 +14,7 @@
     width: 80%;
     margin: auto;
     display: flex;
-    min-height: 60vh;
+    min-height: 40vh;
     border-radius: 5px;
     background-color: var(--background);
     align-items: center;
