@@ -1,21 +1,87 @@
 .mobileNavWrapper {
-    display: block;
+    display: flex;
     width: 100%;
-    background-color: lightgrey;
-    height: 100vh
+    background-color: var(--background80);
+    height: 100vh;
+    flex-direction: column;
+    position: absolute;
+    z-index: 100;
+    animation-name: mobileNavEffect;
+    animation-duration: 1.4s;
 }
 
 .mobileNavInner {
     width: 80%;
     margin: auto;
     display: flex;
+    height: 80vh;
+    border-radius: 5px;
+    background-color: var(--background);
+    align-items: center;
 
 
+
+}
+
+@keyframes mobileNavEffect {
+
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
 }
 
 .desktopNavWrapper {
 
     display: none;
+}
+
+.open {
+
+    display: flex;
+
+}
+
+.close {
+    display: none
+}
+
+.closeButton {
+    position: absolute;
+    bottom: 30px;
+    right: 100px
+}
+
+.burgerButton {
+    position: absolute;
+    bottom: 20px;
+    right: 100px
+
+}
+
+.mobileNavInner > ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20%
+}
+
+.mobileNavInner > ul > li {
+    margin-bottom: 10px;
+    padding: 20px 0;
+}
+
+.mobileNavInner > ul > li > a {
+
+    text-decoration: none;
+    border-bottom: 1px solid var(--background);
+    width: 100%;
+    font-size: 3rem;
+    color: var(--textColor);
 }
 
 @media screen and (min-width: 768px) {
@@ -26,8 +92,34 @@
 
     .desktopNavWrapper {
         display: block;
-        min-height: 100px;
+        min-height: 50px;
         width: 100%;
+    }
+
+    .desktopNavInner {
+        width: 50%;
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px 0
+    }
+
+    .desktopNavInner > ul {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .desktopNavInner > ul > li {
+        list-style-type: none;
+    }
+
+    .desktopNavInner > ul > li > a {
+        text-decoration: none;
+        font-size: 2.5rem
+    }
+
+
+    .closeButton, .burgerButton {
+        display: none;
     }
 
 }

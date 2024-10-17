@@ -1,5 +1,6 @@
 :root {
     --background: rgba(240, 223, 211, 1);
+    --background80: rgba(255, 255, 255, 0.8);
     --foreground: #171717;
     --textColor: rgba(51, 51, 51, 1);
     --borderColor: var(--textColor)
@@ -77,6 +78,17 @@ input[type="checkbox"] {
     width: 20px;
     height: 20px;
     margin-right: 10px;
+}
+
+
+.linkStyle {
+    color: var(--textColor);
+    text-decoration: none;
+    border-bottom: 1px solid var(--background);
+}
+.activeLink {
+    color: white;
+    border-bottom: 1px solid var(--textColor);
 }
 
 @media screen and (min-width: 768px) {

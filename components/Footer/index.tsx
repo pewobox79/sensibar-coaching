@@ -6,9 +6,8 @@ const Footer=()=>{
     return <footer>
 
         <div className={styles.footerInner}>
-
-            <div><Link href={"/impressum"}>Impressum</Link></div>
-            <div><Link href={"/datenschutz"}>Datenschutzerklärung</Link></div>
+            <div className={styles.footerLink}><Link href={"/impressum"} className={"linkStyle"}>Impressum</Link></div>
+            <div className={styles.footerLink}><Link href={"/datenschutz"} className={"linkStyle"}>Datenschutzerklärung</Link></div>
         </div>
     </footer>
 }

@@ -1,9 +1,21 @@
 import styles from '@/styles/Navigation.module.css'
+import Link from "next/link";
+import {usePathname} from "next/navigation";
+
 const DesktopNav=()=>{
 
+    const pathname = usePathname();
     return <div className={styles.desktopNavWrapper}>
-        <h3>desktiop nav</h3>
+        <div className={styles.desktopNavInner}>
 
-    </div>}
+            <ul>
+                <li><Link href="/" className={pathname === "/"? "activeLink":"linkStyle" } >Home</Link></li>
+                <li><Link href="/workshops" className={pathname === "/workshops"? "activeLink":"linkStyle" }>Workshops</Link></li>
+
+            </ul>
+        </div>
+
+    </div>
+}
 
 export default DesktopNav;

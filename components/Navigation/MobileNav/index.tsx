@@ -1,14 +1,26 @@
+'use client'
 import styles from '@/styles/Navigation.module.css'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { faClose} from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
-const MobileNav = () => {
+const MobileNav = ({handleOpen, open}:{handleOpen: ()=>void, open: boolean}) => {
 
-    return <div className={ styles.mobileNavWrapper }>
+
+
+const navStyling = `${styles.mobileNavWrapper} ${open ? styles.open : styles.close}`
+
+
+    return <div className={ navStyling }>
         <div className={styles.mobileNavInner}>
+            <div className={styles.closeButton}>
+                <FontAwesomeIcon icon={faClose} style={{width: 30, height: 30}} onClick={handleOpen }/>
+            </div>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><Link href="/" onClick={handleOpen}>Home</Link></li>
+                <li><Link href="/workshops" onClick={handleOpen}>Workshops</Link></li>
+                <li><Link href="/impressum" onClick={handleOpen}>Impressum</Link></li>
+
             </ul>
         </div>
     </div>
