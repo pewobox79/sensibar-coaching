@@ -4,11 +4,6 @@ import "../styles/globals.css";
 import MainLayout from "@/layouts/MainLayout";
 import PageLayout from "@/layouts/PageLayout";
 
-const geistSans = localFont({
-    src: "../assets/fonts/GeistVF.woff",
-    variable: "--font-geist-sans",
-    weight: "100 900",
-});
 const tanMonCheri = localFont({
     src: "../assets/fonts/moncherifonts/tan-mon-cheri.woff",
     variable: "--font-tan-mon-cheri",
@@ -27,7 +22,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-        <body className={ `${ geistSans.variable } ${ tanMonCheri.variable }` }>
+        <body className={ `${ tanMonCheri.variable }` }>
         <MainLayout>
             <PageLayout>
                 { children }

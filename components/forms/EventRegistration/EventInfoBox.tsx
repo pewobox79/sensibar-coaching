@@ -13,9 +13,9 @@ type EventInfoTypes ={
 const EventInfoBox =({workshop_date, workshopTimeStart, workshopTimeEnd, workshopType}:EventInfoTypes )=>{
     return <div className={styles.singleEventDetailsBoxWrapper}>
         <div className={styles.detailsBoxItemHeader}><h3>Event Details</h3></div>
-        <div className={styles.detailsBoxItem}><i><FontAwesomeIcon icon={faCalendar}/></i> Datum: {workshop_date} </div>
-        <div className={styles.detailsBoxItem}><i><FontAwesomeIcon icon={faClock} /></i> Uhrzeit: {workshopTimeStart} bis {workshopTimeEnd} </div>
-        <div className={styles.detailsBoxItem}><i><FontAwesomeIcon icon={faLocationDot} /></i> Ort:  {workshopType}</div>
+        <div className={styles.detailsBoxItem}><i><FontAwesomeIcon icon={faCalendar} style={{width:' 40px'}}/></i> {workshop_date} </div>
+        <div className={styles.detailsBoxItem}><i><FontAwesomeIcon icon={faClock} style={{width:' 40px'}}/></i> {workshopTimeStart} bis {workshopTimeEnd} </div>
+        <div className={styles.detailsBoxItem}><i><FontAwesomeIcon icon={faLocationDot} style={{width:' 40px'}}/></i> {workshopType}</div>
     </div>
 }
 

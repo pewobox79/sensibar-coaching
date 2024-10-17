@@ -28,6 +28,10 @@
     border-radius: 5px;
 }
 
+.singleEventHeader > h3 {
+    text-align: center;
+}
+
 .singleEventMainContent{
 
     display: flex;
@@ -53,12 +57,12 @@
 
 .singleEventDescriptionParagraph{
     margin: 15px 0;
-    line-height: 23px;
-    font-size: 1.2rem
+    line-height: 35px;
+    font-size: 1.2rem;
 }
 
 .singleEventListItem{
-    line-height: 30px;
+    line-height: 35px;
 }
 
 .singleEventDescriptionParagraph > h3{
@@ -84,12 +88,17 @@
 .singleEventDetailsBoxWrapper >.detailsBoxItem {
 
     width: 100%;
-    padding: 10px 30px;
+    padding: 10px 3px;
 }
 
 .singleEventDetailsBoxWrapper >.detailsBoxItemHeader {
     display: flex;
     justify-content: flex-start;
+}
+
+.detailsBoxItemHeader >h3{
+    font-size: 2rem;
+    padding-bottom: 10px;
 }
 
 /*workshop list item*/

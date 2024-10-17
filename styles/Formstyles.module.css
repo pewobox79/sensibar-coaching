@@ -5,7 +5,8 @@
     margin-bottom: 20px;
     width: 100%;
     justify-content: center;
-    align-items: center;
+    line-height:30px
+
 }
 
 .formItem >input {
@@ -14,7 +15,8 @@
     border-radius:10px;
     border: 1px solid gray;
     color: black;
-    font-size: 1.2rem
+    font-size: 1.2rem;
+    font-family: var(--font-tan-mon-cheri);
 }
 
 

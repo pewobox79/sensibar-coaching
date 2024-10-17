@@ -18,7 +18,6 @@ export const getAllWorkshops = async () => {
 }
 
 export const getSingleWorkshop = async (id:string|unknown) =>{
-    console.log("workshop fetch", id)
 
     try {
 

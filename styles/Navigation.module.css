@@ -50,13 +50,13 @@
 }
 
 .closeButton {
-    position: absolute;
+    position: fixed;
     bottom: 30px;
     right: 100px
 }
 
 .burgerButton {
-    position: absolute;
+    position: fixed;
     bottom: 20px;
     right: 100px
 

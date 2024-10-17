@@ -6,10 +6,6 @@
     --borderColor: var(--textColor)
 }
 
-@font-face {
-    font-family: 'Tan Mon Cheri';
-    src: url('/assets/fonts/moncherifonts/tan-mon-cheri.woff');
-}
 
 html,
 body {
@@ -20,7 +16,7 @@ body {
 body {
     color: var(--textColor);
     background: var(--background);
-    font-family: 'Tan Mon Cheri', serif;
+    font-family: var(--font-tan-mon-cheri);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
