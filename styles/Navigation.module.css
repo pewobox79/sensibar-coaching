@@ -14,7 +14,7 @@
     width: 80%;
     margin: auto;
     display: flex;
-    height: 80vh;
+    min-height: 60vh;
     border-radius: 5px;
     background-color: var(--background);
     align-items: center;
@@ -80,7 +80,7 @@
     text-decoration: none;
     border-bottom: 1px solid var(--background);
     width: 100%;
-    font-size: 3rem;
+    font-size: 2rem;
     color: var(--textColor);
 }
 

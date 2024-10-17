@@ -88,7 +88,7 @@ input[type="checkbox"] {
 }
 .activeLink {
     color: white;
-    border-bottom: 1px solid var(--textColor);
+    border-bottom: 3px solid var(--textColor);
 }
 
 @media screen and (min-width: 768px) {
