@@ -7,7 +7,7 @@ import RichTextRenderer from "@/components/strapi/RenderContentHelper";
 const SingleEvent = (props:{data:[]}) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-expect-error
-    const workshopDetails:{title: string, description2: []} = props.data ? props?.data[0]:[]
+    const workshopDetails:{title: string, description: [], workshop_date:string, workshopTimeStart: string, workshopTimeEnd: string, type:string} = props.data ? props?.data[0]:[]
 
     return <div className={ styles.singleEventWrapper }>
         <div className={ styles.singleEventInner }>
@@ -18,11 +18,11 @@ const SingleEvent = (props:{data:[]}) => {
             <div className={ styles.singleEventMainContent }>
                 <div className={ styles.singleEventContent50 }>
                     <div className={ styles.singleEventDescriptionParagraph }>
-                        <RichTextRenderer blocks={workshopDetails.description2 ?workshopDetails.description2 :[] }/>
+                        <RichTextRenderer blocks={workshopDetails.description ?workshopDetails.description :[] }/>
                     </div>
                 </div>
                 <div className={ styles.singleEventContent50 }>
-                    <EventInfoBox/>
+                    <EventInfoBox workshop_date={workshopDetails.workshop_date} workshopTimeStart={workshopDetails.workshopTimeStart} workshopTimeEnd={workshopDetails.workshopTimeEnd} workshopType={workshopDetails.type}/>
                     <EventRegistration/></div>
             </div>
             </div>

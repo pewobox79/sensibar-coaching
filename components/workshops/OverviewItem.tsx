@@ -1,7 +1,12 @@
 import Link from "next/link";
 import styles from '@/styles/Event.module.css'
 
-const OverviewItem = ({title, workshop_date, id}:{title: string, workshop_date: string, id: string}) => {
+const OverviewItem = ({title, workshop_date, id}: {
+    title: string,
+    workshop_date: string,
+    id: string,
+
+}) => {
 
     return <div className={styles.workshopListItemWrapper }>
         <div className={styles.workshopListItemContent}>

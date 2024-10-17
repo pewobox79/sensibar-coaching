@@ -20,10 +20,12 @@
 
     width: 100%;
     height: 150px;
-    background-color: lightblue;
+    background-color: var(--background);
     display: flex;
+    font-size: 2rem;
     justify-content: center;
     align-items: center;
+    border-radius: 5px;
 }
 
 .singleEventMainContent{
@@ -53,6 +55,10 @@
     margin: 15px 0;
     line-height: 23px;
     font-size: 1.2rem
+}
+
+.singleEventListItem{
+    line-height: 30px;
 }
 
 .singleEventDescriptionParagraph > h3{

@@ -1,40 +1,56 @@
 'use client'
 import {JSX} from "react/jsx-runtime";
-
+import styles from '@/styles/Event.module.css'
 
 const RichTextRenderer = ({ blocks }:{blocks:[]}) => {
 //@-ts-ignoe
-
-    const renderChildren = (children:{type: string, children: [], level: number}) => {
+    const renderChildren = (children:{type: string, children: [], level: number, format: string}) => {
 
         const mainType = children?.type
-        return children?.children?.map((child:{text: string}, index) => {
+        const listFormat = children?.format;
 
+
+        return children?.children?.map((child:{text: string, children: [{text: string}]}, index) => {
+            const individualKeyExtension = Math.random() *100
 
             switch (mainType) {
                 case 'paragraph':
 
                     if(child.text.length === 0){
 
-                        return <div style={{padding: "10px 0"}}></div>
+                        return <div key={index * individualKeyExtension} style={{padding: "10px 0"}}></div>
                     }else {
-                        return <p key={ index }>{ child.text }</p>;
+                        return <p key={ index + individualKeyExtension } className={styles.singleEventDescriptionParagraph}>{ child.text }</p>;
                     }
                 case "heading":
                         const HeadingTag = `h${children.level}` as keyof JSX.IntrinsicElements ;
-                        return <div style={{padding: "10px 0"}}><HeadingTag>{child.text}</HeadingTag></div>;
+                        return <div key={index + individualKeyExtension} style={{padding: "10px 0"}}><HeadingTag>{child.text}</HeadingTag></div>;
+                case "list":
+                    if(listFormat === "unordered") {
+
+                        return <ul key={index +individualKeyExtension}>{child.children?.map((item, index) => (
+                            <li key={index + individualKeyExtension} className={styles.singleEventListItem}>{item.text}</li>
+                        ))}</ul>;
+                    } else{
+                        return <ol key={index +individualKeyExtension}>{child.children?.map((item, index) => (
+                            <li key={index + individualKeyExtension}>{item.text}</li>
+                        ))}</ol>;
+                    }
                 default:
                     return null; // Return nothing for unrecognized types
             }
         });
     };
+
+    const RenderedComponents = blocks?.map((block) => {
+const indiKeyIndex = Math.random()*90
+        return <div key={ indiKeyIndex }>
+            { renderChildren(block) }
+        </div>
+    })
     return (
         <>
-            {blocks?.map((block, index) => (
-                <div key={index}>
-                    {renderChildren(block)}
-                </div>
-            ))}
+            {RenderedComponents}
         </>
     );
 };
