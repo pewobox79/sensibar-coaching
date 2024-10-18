@@ -13,7 +13,7 @@ const navStyling = `${styles.mobileNavWrapper} ${open ? styles.open : styles.clo
     const NavItems = navigationData?.map((item: { id: string, href: string, label: string }) => {
 
         return <li key={ item.id }>
-            <Link href={ item.href } className={ "linkStyle" }>
+            <Link href={ item.href } className={ "linkStyle" } onClick={handleOpen}>
                 { item.label.toUpperCase() }
             </Link>
         </li>
