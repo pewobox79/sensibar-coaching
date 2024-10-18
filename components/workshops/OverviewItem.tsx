@@ -14,7 +14,7 @@ const OverviewItem = ({title, workshop_date, id}: {
             <h3>{ title }</h3>
             <p>Datum: { workshop_date }</p>
         </div>
-        <Button title={"details"} href={ `/workshops/${ id }` }/>
+        <Button type={"button"} title={"details"} href={ `/workshops/${ id }` }/>
 
     </div>
 }

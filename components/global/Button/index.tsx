@@ -1,16 +1,18 @@
 import Link from "next/link";
 
-type ButtonType ={
+type ButtonType = {
 
-    title?: "registrieren" |"speichern" | "anrufen" | "details";
-    type?: "submit" | "button";
+    title?: "registrieren" | "speichern" | "anrufen" | "details";
+    type: "submit" | "button";
+    action?:()=>void;
     href?: string;
     target?: "_blank" | "_self" | "_parent" | "_top";
 }
 
-const Button=({title ="registrieren",type = "submit", href, target="_self"}:ButtonType)=>{
+const Button = ({title = "registrieren", type = "submit", href, target = "_self", action}: ButtonType) => {
 
-    return <Link className={"globalButton"} type={type} href={`${href}`} target={target}>{title?.toUpperCase()}</Link>
+    return <>{ type === "button" ? <Link className={ "globalButton" } type={ type } href={ `${ href }` }
+                                         target={ target }>{ title?.toUpperCase() }</Link> : <button className={"globalButton"} type={type} onClick={action}>{ title?.toUpperCase() }</button> }</>
 }
 
 export default Button;

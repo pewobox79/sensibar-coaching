@@ -1,13 +1,41 @@
+'use client'
+
 import styles from '@/styles/Footer.module.css'
 import Link from "next/link";
+import {useEffect, useState} from "react";
+import {getNavigation} from "@/lib/strapi/generalHelper";
 
 const Footer=()=>{
 
+    const [footerNav, setFooterNav]=useState([])
+
+
+
+
+    useEffect(() => {
+        async function fetchNavigation() {
+
+            try {
+                const response = await getNavigation()
+                setFooterNav(response.data.navLink)
+            } catch (e) {
+                console.error('Error fetching navigation data:', e)
+            }
+
+        }
+
+        fetchNavigation()
+
+    }, [])
+
+    const footerNavItems = footerNav.filter((item:{label:string})=> item.label =="impressum" || item.label == "datenschutz").map((item:{id:string, label: string, href:string})=>{
+
+        return <div key={item.id} className={styles.footerLink}><Link href={item.href} className={"linkStyle"}>{item.label.toUpperCase()}</Link></div>
+    })
     return <footer>
 
         <div className={styles.footerInner}>
-            <div className={styles.footerLink}><Link href={"/impressum"} className={"linkStyle"}>Impressum</Link></div>
-            <div className={styles.footerLink}><Link href={"/datenschutz"} className={"linkStyle"}>Datenschutzerklärung</Link></div>
+            {footerNavItems}
         </div>
     </footer>
 }
