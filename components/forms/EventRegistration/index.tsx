@@ -188,11 +188,9 @@ const EventRegistration = () => {
                       <p className={ styles.inputErrorText }>{ formik.errors.participate }</p> }
                 </div>
 
+
                 <div className={ styles.formItem }>
-                </div>
-                <div className={ styles.formItem }>
-                    <Link href={ "/datenschutz" } title={ "datenschutz bestimmungen" }
-                          target={ "_blank" }> Datenschutzbestimmungen lesen</Link>
+
                     <Form.Check // prettier-ignore
                         type={ "checkbox" }
                         id={ `gdpr` }
@@ -202,6 +200,8 @@ const EventRegistration = () => {
                         name={ "gdpr" }
                     />
                     { formik.errors.gdpr && <p className={ styles.inputErrorText }>{ formik.errors.gdpr }</p> }
+                    <Link href={ "/datenschutz" } title={ "datenschutz bestimmungen" }
+                          target={ "_blank" } className={"innerTextLinkStyle"}>Zur Datenschutzbestimmung</Link>
                 </div>
                 <div style={ {display: "flex", justifyContent: "center"} }>
 

@@ -8,7 +8,7 @@
 
 .singleEventInner {
 
-    padding: 10px;
+    padding: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,7 +49,7 @@
     width: 100%;
     min-height: 500px;
     height: auto;
-    padding: 30px;
+    padding: 15px;
     display: flex;
     align-items: normal;
     justify-content: normal;
@@ -71,10 +71,11 @@
     margin-bottom: 10px
 }
 
-.singleEventDescriptionParagraph>ul{
+
+
+.singleEventContentListWrapper {
     padding: 0 25px
 }
-
 .singleEventDetailsBoxWrapper {
     width: 100%;
     padding: 10px;
