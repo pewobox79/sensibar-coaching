@@ -113,6 +113,9 @@ input[type="checkbox"] {
     text-decoration-color: var(--background);
 }
 
+.input-group >.form-check >.form-check-label {
+    margin-left: 10px
+}
 @media screen and (min-width: 768px) {
     .mainContent {
         max-width: 1300px

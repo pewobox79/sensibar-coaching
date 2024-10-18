@@ -15,15 +15,15 @@ const EventRegistration = ({workshopId}:{workshopId: string}) => {
     const [success, setSuccess] = useState({state:false, msg: "", type: "success"});
     /*const [processing, setProcessing] = useState(false)*/
     const RegistrationSchema = yup.object().shape({
-        firstname: yup.string().required(),
-        lastname: yup.string().required(),
+        firstname: yup.string().required('Vorname ist verpflichtend'),
+        lastname: yup.string().required('Nachname ist verpflichtend'),
         gdpr: yup.boolean().oneOf([true], 'Die Datenschutzerklärung muss akzeptiert werden.'),
         participate: yup.boolean().oneOf([true], 'Wollen Sie teilnehmen?'),
         contact: yup.object({
             phone: yup.string(),
-            email: yup.string().email().required()
+            email: yup.string().email().required('Email is verpflichtend')
         }),
-        condition: yup.string()
+        condition: yup.string().required('Für den Workshop hilfreich zu wissen')
     })
 
     const INITIAL_FORM_VALUES = {
@@ -93,7 +93,7 @@ const EventRegistration = ({workshopId}:{workshopId: string}) => {
                         email: values.contact.email,
                         phone: values.contact.phone
                     }],
-                    gdpr: values.gdpr,
+                        gdpr: !values.gdpr,
                     sensitiveType: values.condition,
                     participate: values.participate
                 }
@@ -206,7 +206,8 @@ const EventRegistration = ({workshopId}:{workshopId: string}) => {
 
                     />
                 </InputGroup>
-
+                { formik.errors.condition &&
+                  <p className={ styles.inputErrorText }>{ formik.errors.condition }</p> }
             </div>
                 <div className={ styles.formItem }>
                     <Form.Check // prettier-ignore
