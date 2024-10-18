@@ -34,6 +34,30 @@ export const getSingleWorkshop = async (id:string|unknown) =>{
 }
 
 
+export const executeDoubleOptIn = async (id:string)=>{
+
+    try{
+
+        const response = await fetch(`${ STRAPI_URI }/api/workshop-registrations/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+               data:{
+                   gdpr:true
+               }
+            })
+        })
+
+        console.log("update contact", id )
+        return response.json()
+
+
+    }catch (e) {
+        console.log("double opt in update failed", e)
+    }
+}
 /*
 export const createWorkshopRegistration= async (data:unknown)=>{
 

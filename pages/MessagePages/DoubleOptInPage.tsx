@@ -2,6 +2,7 @@
 
 import {useSearchParams} from "next/navigation";
 import {useEffect} from "react";
+import {executeDoubleOptIn} from "@/lib/strapi/workshopHelper";
 
 const DoubleOptInPage = () => {
 
@@ -11,14 +12,7 @@ const DoubleOptInPage = () => {
 
     useEffect(() => {
 
-            fetch("/api/db/participant", {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({id: id}),
-            }).then(response => response.json())
-                .then(data => console.log("updated", data))
+            executeDoubleOptIn(id).then(data => console.log(data));
         },
         [id]
     )
