@@ -34,7 +34,7 @@ export const getSingleWorkshop = async (id:string|unknown) =>{
 }
 
 
-export const executeDoubleOptIn = async (id:string)=>{
+export const executeDoubleOptIn = async (id:string | null)=>{
 
     try{
 
