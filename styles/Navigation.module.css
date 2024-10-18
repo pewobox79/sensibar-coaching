@@ -80,10 +80,16 @@
     text-decoration: none;
     border-bottom: 1px solid var(--background);
     width: 100%;
-    font-size: 2rem;
+    font-size: 1.4rem;
     color: var(--textColor);
 }
 
+@media screen and (min-width: 518px) {
+
+    .mobileNavInner >ul>li>a{
+        font-size: 1.9rem;
+    }
+}
 @media screen and (min-width: 768px) {
 
     .mobileNavWrapper {
@@ -100,16 +106,21 @@
         width: 50%;
         max-width: 800px;
         margin: 20px auto;
-        padding: 20px 0
+        padding: 20px 0;
+        display: block
     }
 
     .desktopNavInner > ul {
         display: flex;
         justify-content: space-between;
+        border: 1px solid black;
+        flex-wrap: wrap;
+        align-items: center;
     }
 
     .desktopNavInner > ul > li {
         list-style-type: none;
+        margin-bottom: 20px;
     }
 
     .desktopNavInner > ul > li > a {
