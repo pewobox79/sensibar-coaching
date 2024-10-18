@@ -13,9 +13,12 @@ const EventOverview = (props:{ data: []}) => {
 
     return <>
         <h1>Meine Workshops</h1>
-        <div style={{marginTop: "30px", width: "100%"}}>
+        <br/>
+
         { ListOfWorkshops }
-        </div>
+
+        <div style={{marginTop:"20px"}}><p style={ {fontSize: "1.4rem"} }>weitere Termine folgen...</p></div>
+
 
     </>
 }

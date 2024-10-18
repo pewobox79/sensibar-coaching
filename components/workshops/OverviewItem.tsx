@@ -1,5 +1,6 @@
-import Link from "next/link";
+
 import styles from '@/styles/Event.module.css'
+import Button from "@/components/global/Button";
 
 const OverviewItem = ({title, workshop_date, id}: {
     title: string,
@@ -13,7 +14,7 @@ const OverviewItem = ({title, workshop_date, id}: {
             <h3>{ title }</h3>
             <p>Datum: { workshop_date }</p>
         </div>
-        <Link href={ `/workshops/${ id }` }>Details</Link>
+        <Button title={"details"} href={ `/workshops/${ id }` }/>
 
     </div>
 }

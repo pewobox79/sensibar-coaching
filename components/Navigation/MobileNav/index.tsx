@@ -17,9 +17,9 @@ const navStyling = `${styles.mobileNavWrapper} ${open ? styles.open : styles.clo
                 <FontAwesomeIcon icon={faClose} style={{width: 30, height: 30}} onClick={handleOpen }/>
             </div>
             <ul>
-                <li><Link href="/" onClick={handleOpen}>Home</Link></li>
-                <li><Link href="/workshops" onClick={handleOpen}>Workshops</Link></li>
-                <li><Link href="/impressum" onClick={handleOpen}>Impressum</Link></li>
+                <li><Link href="/" onClick={handleOpen} className={"linkStyle"}>Home</Link></li>
+                <li><Link href="/workshops" onClick={handleOpen} className={"linkStyle"}>Workshops</Link></li>
+                <li><Link href="/impressum" onClick={handleOpen} className={"linkStyle"}>Impressum</Link></li>
 
             </ul>
         </div>

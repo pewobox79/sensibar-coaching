@@ -4,10 +4,45 @@ import "../styles/globals.css";
 import MainLayout from "@/layouts/MainLayout";
 import PageLayout from "@/layouts/PageLayout";
 
+
 const tanMonCheri = localFont({
-    src: "../assets/fonts/moncherifonts/tan-mon-cheri.woff",
+    src: [
+        {
+            path: '../assets/fonts/moncherifonts/tan-mon-cheri.woff',
+            weight: '400',
+            style: 'normal',
+        },
+        {
+            path: '../assets/fonts/moncherifonts/tan-mon-cheri.woff2',
+            weight: '600',
+            style: 'bold',
+        },
+    ],
     variable: "--font-tan-mon-cheri",
-    weight: "100 900",
+});
+
+const TTNorms = localFont({
+    src: [
+        {
+            path: '../assets/fonts/tt_norms/TTNorms-Regular.otf',
+            weight: '400',
+            style: 'lighter',
+        }, {
+            path: '../assets/fonts/tt_norms/TTNorms-Medium.otf',
+            weight: '600',
+            style: 'normal',
+        },
+        {
+            path: '../assets/fonts/tt_norms/TTNorms-Bold.otf',
+            weight: '900',
+            style: 'bold',
+        }, {
+            path: '../assets/fonts/tt_norms/TTNorms-Italic.otf',
+            weight: '400',
+            style: 'italic',
+        },
+    ],
+    variable: "--font-tt-norms",
 });
 
 export const metadata: Metadata = {
@@ -22,7 +57,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-        <body className={ `${ tanMonCheri.variable }` }>
+        <body className={ `${ tanMonCheri.variable } ${ TTNorms.variable }` }>
         <MainLayout>
             <PageLayout>
                 { children }

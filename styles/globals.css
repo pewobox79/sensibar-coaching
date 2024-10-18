@@ -16,11 +16,14 @@ body {
 body {
     color: var(--textColor);
     background: var(--background);
-    font-family: var(--font-tan-mon-cheri);
+    font-family: var(--font-tt-norms);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
+h1,h2,h3,h4,h5,h6 {
+    font-family: var(--font-tan-mon-cheri);
+}
 * {
     box-sizing: border-box;
     padding: 0;
@@ -49,25 +52,33 @@ body {
     width: 100%;
     min-height: 70vh;
     height: auto;
+    padding: 5px 5px;
+    overflow-wrap: break-word;
+    line-height: 25px
 }
 
 .globalButton {
 
-    width: 200px;
+    min-width: 100px;
+    max-width: 200px;
+    width: auto;
     min-height: 40px;
     height: auto;
+    text-align: center;
+    padding:10px;
     color: var(--background);
     background-color: var(--textColor);
     border: var(--borderColor);
     border-radius: 10px;
     transition-timing-function: ease-in-out;
     transition-duration: 0.4s;
+    text-decoration: none;
 }
 
 .globalButton:hover {
     background-color: var(--background);
     color: var(--textColor);
-    border: 1px solid var(--textColor);
+    outline: 1px solid var(--textColor);
 }
 
 input[type="checkbox"] {
@@ -81,10 +92,12 @@ input[type="checkbox"] {
     color: var(--textColor);
     text-decoration: none;
     border-bottom: 1px solid var(--background);
+    font-family: var(--font-tan-mon-cheri)
 }
 .activeLink {
     color: white;
     border-bottom: 3px solid var(--textColor);
+    font-family: var(--font-tan-mon-cheri)
 }
 
 @media screen and (min-width: 768px) {

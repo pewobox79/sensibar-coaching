@@ -12,7 +12,7 @@ const EventRegistration = () => {
 
     const [error, setError] = useState({state: false, msg: "", type: "error"});
     const [success, setSuccess] = useState({state:false, msg: "", type: "success"});
-    const [processing, setProcessing] = useState(false)
+    /*const [processing, setProcessing] = useState(false)*/
     const RegistrationSchema = yup.object().shape({
         firstname: yup.string().required(),
         lastname: yup.string().required(),
@@ -44,7 +44,7 @@ const EventRegistration = () => {
         validationSchema: RegistrationSchema,
         validateOnChange: false,
         onSubmit: async (values) => {
-            setProcessing(true)
+            //setProcessing(true)
 
             try {
                 const response = await fetch("/api/db/participant", {
@@ -63,11 +63,11 @@ const EventRegistration = () => {
                 if(data.msg ==="Participant already exists"){
                     setSuccess({...success, state: false})
                     setError({...error, state: true, msg: "Participant already exists"})
-                    setProcessing(false)
+                    //setProcessing(false)
                 }else{
                     setError({...error, state: false})
                     setSuccess({...success, state: true, msg:"Your registration was successfully"})
-                    setProcessing(false)
+                    //setProcessing(false)
                     formik.resetForm()
                     setTimeout(() =>{
                         setSuccess({...success, state: false})
@@ -205,7 +205,7 @@ const EventRegistration = () => {
                 </div>
                 <div style={ {display: "flex", justifyContent: "center"} }>
 
-                    <Button processing={processing}/>
+                    <Button/>
 
                 </div>
             <div style={{padding: "40px 0"}}>
