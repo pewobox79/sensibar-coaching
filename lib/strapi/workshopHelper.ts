@@ -21,7 +21,7 @@ export const getSingleWorkshop = async (id:string|unknown) =>{
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/workshops/?id=${id}`)
+        const response = await fetch(`${ STRAPI_URI }/api/workshops/${id}`)
 
         if(!response.ok){
             throw new Error(`HTTP error! status: ${response.status}`)
@@ -30,6 +30,40 @@ export const getSingleWorkshop = async (id:string|unknown) =>{
     } catch (e) {
 
         console.log("workshop fetch failed", e);
+    }
+}
+
+
+export const createWorkshopRegistration= async (data:unknown)=>{
+
+const dataMapping ={
+    data:{
+        person: {
+            firstname: data.firstname,
+            lastname: data.lastname
+        },
+        workshop: [data.workshop],
+        contact:[{
+            email: data.email,
+            phone: data.phone
+        }],
+        gdpr: data.gdpr,
+        sensitiveType: data.condition,
+        participate: data.participate
+    }
+}
+    const config ={
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dataMapping)
+    }
+    try {
+        fetch(`${STRAPI_URI}/api/workshop-registrations/`, config)
+
+    }catch(e) {
+        console.log("workshop registration failed", e);
     }
 }
 

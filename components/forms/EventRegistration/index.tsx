@@ -8,7 +8,8 @@ import Link from "next/link";
 import {useState} from "react";
 import ToastMessage from "@/components/global/ToastMessage";
 
-const EventRegistration = () => {
+
+const EventRegistration = ({workshopId}) => {
 
     const [error, setError] = useState({state: false, msg: "", type: "error"});
     const [success, setSuccess] = useState({state:false, msg: "", type: "success"});
@@ -22,7 +23,7 @@ const EventRegistration = () => {
             phone: yup.string(),
             email: yup.string().email().required()
         }),
-        condition: yup.string(),
+        condition: yup.string()
     })
 
     const INITIAL_FORM_VALUES = {
@@ -34,7 +35,8 @@ const EventRegistration = () => {
             email: '',
             phone: '',
         },
-        condition: ""
+        condition: "",
+        workshops: workshopId,
 
     }
 
@@ -46,7 +48,7 @@ const EventRegistration = () => {
         onSubmit: async (values) => {
             //setProcessing(true)
 
-            try {
+          /*  try {
                 const response = await fetch("/api/db/participant", {
                     method: 'POST',
                     headers: {
@@ -78,7 +80,38 @@ const EventRegistration = () => {
             } catch (err) {
                 console.log("error", err)
             }
+*/
 
+            const dataMapping ={
+                data:{
+                    person: {
+                        firstname: values.firstname,
+                        lastname: values.lastname
+                    },
+                    workshops: [workshopId],
+                    contact:[{
+                        email: values.email,
+                        phone: values.phone
+                    }],
+                    gdpr: values.gdpr,
+                    sensitiveType: values.condition,
+                    participate: values.participate
+                }
+            }
+            const config ={
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataMapping)
+            }
+            try {
+               const response = await  fetch(`https://sensibar-cms-6ahai.ondigitalocean.app/api/workshop-registrations/`, config)
+                console.log("create reg response", response)
+
+            }catch(e) {
+                console.log("workshop registration failed", e);
+            }
 
         }
 
@@ -146,9 +179,9 @@ const EventRegistration = () => {
                         label="Ja"
                         id="condition2"
                         name="condition"
-                        value="2"
+                        value="yes"
                         onChange={formik.handleChange}
-                        checked={formik.values?.condition === '2'}
+                        checked={formik.values?.condition === 'yes'}
 
                     />
                     <Form.Check
@@ -156,9 +189,9 @@ const EventRegistration = () => {
                         label="Nein"
                         id="conditon0"
                         name="condition"
-                        value="0"
+                        value="no"
                         onChange={formik.handleChange}
-                        checked={formik.values.condition === '0'}
+                        checked={formik.values.condition === 'no'}
 
                     />
 
@@ -167,9 +200,9 @@ const EventRegistration = () => {
                         label="Weiß ich nicht"
                         id="conditon1"
                         name="condition"
-                        value="1"
+                        value="unknown"
                         onChange={formik.handleChange}
-                        checked={formik.values.condition === '1'}
+                        checked={formik.values.condition === 'unknown'}
 
                     />
                 </InputGroup>
@@ -205,7 +238,7 @@ const EventRegistration = () => {
                 </div>
                 <div style={ {display: "flex", justifyContent: "center"} }>
 
-                    <Button type={"button"}/>
+                    <Button type={"submit"}/>
 
                 </div>
             <div style={{padding: "40px 0"}}>

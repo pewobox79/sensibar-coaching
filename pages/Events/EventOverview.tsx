@@ -5,9 +5,10 @@ import OverviewItem from "@/components/workshops/OverviewItem";
 
 const EventOverview = (props:{ data: []}) => {
 
-    const ListOfWorkshops = props && props?.data?.map((item:{title: string, workshop_date: string, id: string, key:string}) => {
+    const ListOfWorkshops = props && props?.data?.map((item:{title: string, workshop_date: string, documentId: string, key:string}) => {
+        console.log("event",item)
 
-        return <OverviewItem key={item?.id} title={ item.title } id={ item.id } workshop_date={ item.workshop_date } />
+        return <OverviewItem key={item?.documentId} title={ item.title } id={ item.documentId } workshop_date={ item.workshop_date } />
     })
 
 

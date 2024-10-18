@@ -17,7 +17,6 @@ const Navigation = () => {
 
             try {
                 const response = await getNavigation()
-                console.log("navdata", response)
                 setNavigation(response.data.navLink)
             } catch (e) {
                 console.error('Error fetching navigation data:', e)
