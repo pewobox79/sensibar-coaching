@@ -9,7 +9,7 @@ import {useState} from "react";
 import ToastMessage from "@/components/global/ToastMessage";
 
 
-const EventRegistration = ({workshopId}) => {
+const EventRegistration = ({workshopId}:{workshopId: string}) => {
 
     const [error, setError] = useState({state: false, msg: "", type: "error"});
     const [success, setSuccess] = useState({state:false, msg: "", type: "success"});
@@ -90,8 +90,8 @@ const EventRegistration = ({workshopId}) => {
                     },
                     workshops: [workshopId],
                     contact:[{
-                        email: values.email,
-                        phone: values.phone
+                        email: values.contact.email,
+                        phone: values.contact.phone
                     }],
                     gdpr: values.gdpr,
                     sensitiveType: values.condition,

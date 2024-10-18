@@ -34,6 +34,7 @@ export const getSingleWorkshop = async (id:string|unknown) =>{
 }
 
 
+/*
 export const createWorkshopRegistration= async (data:unknown)=>{
 
 const dataMapping ={
@@ -67,3 +68,4 @@ const dataMapping ={
     }
 }
 
+*/
