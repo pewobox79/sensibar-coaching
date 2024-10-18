@@ -205,7 +205,7 @@ const EventRegistration = () => {
                 </div>
                 <div style={ {display: "flex", justifyContent: "center"} }>
 
-                    <Button type={"submit"}/>
+                    <Button type={"button"}/>
 
                 </div>
             <div style={{padding: "40px 0"}}>
