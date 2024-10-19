@@ -4,8 +4,8 @@
     background-color: var(--background80);
     height: 100dvh;
     flex-direction: column;
-    position: absolute;
-    z-index: 100;
+    position: fixed;
+    z-index: 999;
     animation-name: mobileNavEffect;
     animation-duration: 1.4s;
 }
