@@ -8,6 +8,7 @@ import Link from "next/link";
 import {useState} from "react";
 import ToastMessage from "@/components/global/ToastMessage";
 import {checkIfContactExists, updateWorkshopListForExistingContact} from "@/lib/strapi/workshopHelper";
+import EmailInfo from "@/components/global/EmailInfo";
 
 
 const EventRegistration = ({workshopId}: { workshopId: string }) => {
@@ -16,6 +17,7 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
 
     const [error, setError] = useState({state: false, msg: "", type: "error"});
     const [success, setSuccess] = useState({state: false, msg: "", type: "success"});
+    const [emailInfo, setEmailInfo] = useState(false);
     /*const [processing, setProcessing] = useState(false)*/
     const RegistrationSchema = yup.object().shape({
         firstname: yup.string().required('Vorname ist verpflichtend'),
@@ -92,6 +94,7 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
                             formik.resetForm()
                             setTimeout(() => {
                                 setSuccess({...success, state: false})
+                                setEmailInfo(true)
                             }, 3000)
 
                             fetch('/api/db/participant', {
@@ -121,6 +124,7 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
                             formik.resetForm()
                             setTimeout(() => {
                                 setSuccess({...success, state: false})
+                                setEmailInfo(true)
                             }, 3000)
 
                             fetch('/api/db/participant', {
@@ -130,7 +134,6 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
                                 },
                                 body: JSON.stringify({id: res.data.documentId, email: res?.data?.contact[0].email}),
                             })
-
 
                             console.log("registration successful", data)
                         })
@@ -142,7 +145,6 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
 
 
                 }
-
 
             })
         }
@@ -276,6 +278,7 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
 
             </div>
             <div style={ {padding: "40px 0"} }>
+                {emailInfo && <EmailInfo setEmailInfo={setEmailInfo}/>}
                 { success.state && <ToastMessage state={ success } setState={ setSuccess }/> }
                 { error.state && <ToastMessage state={ error } setState={ setError }/> }
             </div>

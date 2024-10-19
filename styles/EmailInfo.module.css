@@ -1,0 +1,48 @@
+.emailInfoWrapper {
+position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: var(--background80);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.emailInfoInner {
+    line-height: 40px;
+    padding: 30px;
+    border-radius:5px;
+    background-color: var(--background);
+    width: 50%;
+    height: auto;
+    min-height: 300px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.emailInfoInner >p{
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.emailInfoInner > h4{
+
+    font-size: 2.0rem;
+    text-align: center;
+    line-height: 45px;
+
+}
+
+.closeButton {
+
+    position:relative;
+    top: 10px;
+    right:10px;
+    width: 30px;
+    height: 30px
+}
