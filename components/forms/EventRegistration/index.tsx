@@ -17,7 +17,7 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
 
     const [error, setError] = useState({state: false, msg: "", type: "error"});
     const [success, setSuccess] = useState({state: false, msg: "", type: "success"});
-    const [emailInfo, setEmailInfo] = useState(true);
+    const [emailInfo, setEmailInfo] = useState(false);
     /*const [processing, setProcessing] = useState(false)*/
     const RegistrationSchema = yup.object().shape({
         firstname: yup.string().required('Vorname ist verpflichtend'),
