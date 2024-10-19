@@ -12,6 +12,8 @@ import {checkIfContactExists} from "@/lib/strapi/workshopHelper";
 
 const EventRegistration = ({workshopId}:{workshopId: string}) => {
 
+    const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV ? process.env.NEXT_PUBLIC_STRAPI_URL_DEV:""
+
     const [error, setError] = useState({state: false, msg: "", type: "error"});
     const [success, setSuccess] = useState({state:false, msg: "", type: "success"});
     /*const [processing, setProcessing] = useState(false)*/
@@ -81,7 +83,7 @@ const EventRegistration = ({workshopId}:{workshopId: string}) => {
                          body: JSON.stringify(dataMapping)
                      }
 
-                     fetch(`http://localhost:1337/api/workshop-registrations/?populate=*`, config).then(response => response.json())
+                     fetch(`${STRAPI_URI}/api/workshop-registrations/?populate=*`, config).then(response => response.json())
                          .then(data => {
 
                              console.log("data response from strapi", data)
