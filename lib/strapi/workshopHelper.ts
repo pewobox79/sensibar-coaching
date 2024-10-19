@@ -48,7 +48,7 @@ export const checkIfContactExists = async (firstname:string, lastname:string, em
         if(json.data.length === 0){
             return {msg: "new contact"}
         }else{
-            return {msg:"contact already exists", json}
+            return {msg:"contact already exists", data: json.data}
         }
 
 
@@ -57,6 +57,38 @@ export const checkIfContactExists = async (firstname:string, lastname:string, em
 
         console.log("contact check failed", e);
     }
+}
+
+export const updateWorkshopListForExistingContact =async (id: string, workshopId: string, workshopArray:unknown)=>{
+
+
+    const updatedArray = [workshopArray]
+    updatedArray.push(workshopId)
+
+
+    try{
+
+        const response = await fetch(`${ STRAPI_URI }/api/workshop-registrations/${id}?populate=*`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                data:{
+                    workshops:updatedArray
+                }
+            })
+        })
+
+        return await response.json();
+    }catch(e){
+
+        console.log("contact check failed", e)
+    }
+
+
+
+
 }
 export const executeDoubleOptIn = async (id:string | null)=>{
 

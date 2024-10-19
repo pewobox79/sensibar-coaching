@@ -5,7 +5,6 @@ import {sendRegistrationFinalEmail, sendSubmissionEmail} from "@/utils/helper/ma
 export async function POST(req: NextRequest) {
 
     const body = await req.json();
-    console.log("data received", body)
 
     const response = await sendSubmissionEmail(body.id, body.email);
     return Response.json({msg: "sending mail response", response})
@@ -17,7 +16,6 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
 
     const body = await req.json();
-    console.log("date update body", body)
 
     const updatedUser = await sendRegistrationFinalEmail(body.id, body.email, body.name)
 
