@@ -53,14 +53,16 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
         onSubmit: async (values) => {
             //setProcessing(true)
 
+            const cleanedFirstname = values.firstname.replace(/\s+/g, '').toLowerCase();
+            const cleanedLastname = values.lastname.replace(/\s+/g, '').toLowerCase();
 
-            checkIfContactExists(values.firstname, values.lastname, values.contact.email).then(data => {
+            checkIfContactExists(cleanedFirstname, cleanedLastname, values.contact.email).then(data => {
 
                 const dataMapping = {
                     data: {
                         person: {
-                            firstname: values.firstname,
-                            lastname: values.lastname
+                            firstname: cleanedFirstname,
+                            lastname: cleanedLastname
                         },
                         workshops: [workshopId],
                         contact: [{
@@ -135,7 +137,6 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
                                 body: JSON.stringify({id: res.data.documentId, email: res?.data?.contact[0].email}),
                             })
 
-                            console.log("registration successful", data)
                         })
 
 
