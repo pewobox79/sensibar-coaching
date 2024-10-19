@@ -17,7 +17,7 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
 
     const [error, setError] = useState({state: false, msg: "", type: "error"});
     const [success, setSuccess] = useState({state: false, msg: "", type: "success"});
-    const [emailInfo, setEmailInfo] = useState(false);
+    const [emailInfo, setEmailInfo] = useState(true);
     /*const [processing, setProcessing] = useState(false)*/
     const RegistrationSchema = yup.object().shape({
         firstname: yup.string().required('Vorname ist verpflichtend'),
@@ -187,6 +187,7 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
                     className={ formik.errors.contact?.email && styles.inputError }
                     value={ formik.values.contact?.email }
                     onChange={ formik.handleChange }
+                    inputMode={"email"}
                     name={ "contact.email" }
                 />
                 { formik.errors.contact?.email &&
@@ -200,6 +201,7 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
                     className={ formik.errors.contact?.phone && styles.inputError }
                     value={ formik.values.contact?.phone }
                     onChange={ formik.handleChange }
+                    inputMode={"tel"}
                     name={ "contact.phone" }
                 />
                 { formik.errors.contact?.phone &&
