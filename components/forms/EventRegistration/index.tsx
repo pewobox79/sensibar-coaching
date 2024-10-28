@@ -57,10 +57,10 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
             const cleanedLastname = values.lastname.replace(/\s+/g, '').toLowerCase();
 
             checkIfContactExists(cleanedFirstname, cleanedLastname, values.contact.email).then(data => {
-
+console.log("check contact exists", data)
                 const dataMapping = {
                     data: {
-                        person: {
+                        personalData: {
                             firstname: cleanedFirstname,
                             lastname: cleanedLastname
                         },

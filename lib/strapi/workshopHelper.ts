@@ -34,7 +34,7 @@ export const getSingleWorkshop = async (id:string|unknown) =>{
     }
 }
 
-export const checkIfContactExists = async (firstname:string, lastname:string, email:string, query:string="workshop-registrations")=>{
+export const checkIfContactExists = async (firstname:string, lastname:string, email:string, query:string="contacts")=>{
 
     try{
         const response = await fetch(`${ STRAPI_URI }/api/${query}?filters[contact][email][$eq]=${email}&filters[person][firstname][$eq]=${firstname}&filters[person][lastname][$eq]=${lastname}`)
@@ -45,7 +45,7 @@ export const checkIfContactExists = async (firstname:string, lastname:string, em
 
         const json = await response.json()
 
-        if(json.data.length === 0){
+        if(json.data.length === 0 || undefined){
             return {msg: "new contact"}
         }else{
             return {msg:"contact already exists", data: json.data}
@@ -94,7 +94,7 @@ export const executeDoubleOptIn = async (id:string | null)=>{
 
     try{
 
-        const response = await fetch(`${ STRAPI_URI }/api/workshop-registrations/${id}?populate=*`, {
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/${id}?populate=*`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -117,7 +117,7 @@ export const executeDoubleOptIn = async (id:string | null)=>{
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    name: data.data.person.firstname,
+                    name: data.data.personalData.firstname,
                     id: data.data.documentId,
                     email: data.data.contact[0].email
                 })
