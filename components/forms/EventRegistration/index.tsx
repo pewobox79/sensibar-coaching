@@ -70,8 +70,9 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
                             phone: values.contact.phone
                         }],
                         gdpr: !values.gdpr,
-                        sensitiveType: values.condition,
-                        participate: values.participate
+                        condition_status:{
+                            sensitiveStatus: values.condition,
+                        },
                     }
                 }
 
@@ -87,7 +88,7 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
                     }
 
 
-                    fetch(`${ STRAPI_URI }/api/workshop-registrations/?populate=*`, config).then(response => response.json())
+                    fetch(`${ STRAPI_URI }/api/contacts/?populate=*`, config).then(response => response.json())
                         .then(newData => {
 
 
@@ -115,7 +116,7 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
                 }else{
 
                     //handle update existing contact
-                    fetch(`${ STRAPI_URI }/api/workshop-registrations/?id=${data?.data[0].documentId}&populate=*`).then(res => res.json()).then(existingData => {
+                    fetch(`${ STRAPI_URI }/api/contacts/?id=${data?.data[0].documentId}&populate=*`).then(res => res.json()).then(existingData => {
 
 
                         updateWorkshopListForExistingContact(existingData.data[0].documentId, workshopId, existingData.data[0].workshops ).then(res => {

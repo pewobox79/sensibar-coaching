@@ -68,7 +68,7 @@ export const updateWorkshopListForExistingContact =async (id: string, workshopId
 
     try{
 
-        const response = await fetch(`${ STRAPI_URI }/api/workshop-registrations/${id}?populate=*`, {
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/${id}?populate=*`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
