@@ -37,7 +37,7 @@ export const getSingleWorkshop = async (id:string|unknown) =>{
 export const checkIfContactExists = async (firstname:string, lastname:string, email:string, query:string="contacts")=>{
 
     try{
-        const response = await fetch(`${ STRAPI_URI }/api/${query}?filters[contact][email][$eq]=${email}&filters[person][firstname][$eq]=${firstname}&filters[person][lastname][$eq]=${lastname}`)
+        const response = await fetch(`${ STRAPI_URI }/api/${query}?filters[contact][email][$eq]=${email}&filters[personalData][firstname][$eq]=${firstname}&filters[personalData][lastname][$eq]=${lastname}`)
 
         if(!response.ok){
              throw new Error(`HTTP error! status: ${response.status}`)

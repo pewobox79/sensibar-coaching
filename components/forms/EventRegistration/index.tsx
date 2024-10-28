@@ -57,7 +57,6 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
             const cleanedLastname = values.lastname.replace(/\s+/g, '').toLowerCase();
 
             checkIfContactExists(cleanedFirstname, cleanedLastname, values.contact.email).then(data => {
-console.log("check contact exists", data)
                 const dataMapping = {
                     data: {
                         personalData: {
@@ -90,7 +89,7 @@ console.log("check contact exists", data)
 
                     fetch(`${ STRAPI_URI }/api/contacts/?populate=*`, config).then(response => response.json())
                         .then(newData => {
-
+console.log("news Data response in registration", newData);
 
                             setError({...error, state: false})
                             setSuccess({...success, state: true, msg: "Your registration was successfully"})
