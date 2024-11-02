@@ -13,7 +13,7 @@ const Consent = () => {
     const localStorage=useLocalStorage("sensibarConsent")
     console.log(localStorage)
     const [open, setOpen] = useState(true);
-    const [consentValue, setConsentValue] = useState({necessary: true, marketing: false, tracking: false})
+    const [consentValue, setConsentValue] = useState(localStorage?.value ? localStorage?.value : {necessary: true, marketing: false, tracking: false})
 
     useEffect(() => {
         if(localStorage?.value != null){
