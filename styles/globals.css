@@ -74,6 +74,7 @@ h1, h2, h3, h4, h5, h6 {
     transition-timing-function: ease-in-out;
     transition-duration: 0.4s;
     text-decoration: none;
+    margin: 0 3px
 }
 
 .globalButton:hover {

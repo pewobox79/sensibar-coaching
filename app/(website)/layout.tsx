@@ -1,19 +1,20 @@
 import type {Metadata} from "next";
 import localFont from "next/font/local";
-import "../styles/globals.css";
+import "../../styles/globals.css";
 import MainLayout from "@/layouts/MainLayout";
 import PageLayout from "@/layouts/PageLayout";
+import Consent from "@/components/Consent";
 
 
 const tanMonCheri = localFont({
     src: [
         {
-            path: '../assets/fonts/moncherifonts/tan-mon-cheri.woff',
+            path: '../../assets/fonts/moncherifonts/tan-mon-cheri.woff',
             weight: '400',
             style: 'normal',
         },
         {
-            path: '../assets/fonts/moncherifonts/tan-mon-cheri.woff2',
+            path: '../../assets/fonts/moncherifonts/tan-mon-cheri.woff2',
             weight: '600',
             style: 'bold',
         },
@@ -24,20 +25,20 @@ const tanMonCheri = localFont({
 const TTNorms = localFont({
     src: [
         {
-            path: '../assets/fonts/tt_norms/TTNorms-Regular.otf',
+            path: '../../assets/fonts/tt_norms/TTNorms-Regular.otf',
             weight: '400',
             style: 'lighter',
         }, {
-            path: '../assets/fonts/tt_norms/TTNorms-Medium.otf',
+            path: '../../assets/fonts/tt_norms/TTNorms-Medium.otf',
             weight: '600',
             style: 'normal',
         },
         {
-            path: '../assets/fonts/tt_norms/TTNorms-Bold.otf',
+            path: '../../assets/fonts/tt_norms/TTNorms-Bold.otf',
             weight: '900',
             style: 'bold',
         }, {
-            path: '../assets/fonts/tt_norms/TTNorms-Italic.otf',
+            path: '../../assets/fonts/tt_norms/TTNorms-Italic.otf',
             weight: '400',
             style: 'italic',
         },
@@ -63,6 +64,7 @@ export default function RootLayout({
                 { children }
             </PageLayout>
         </MainLayout>
+        <Consent/>
         </body>
         </html>
     );

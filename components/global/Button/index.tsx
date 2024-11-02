@@ -2,7 +2,7 @@ import Link from "next/link";
 
 type ButtonType = {
 
-    title?: "registrieren" | "speichern" | "anrufen" | "details";
+    title?: "registrieren" | "speichern" | "anrufen" | "details"|"akzeptieren" | "schließen";
     type: "submit" | "button";
     action?:()=>void;
     href?: string;

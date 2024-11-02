@@ -69,14 +69,14 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
                             phone: values.contact.phone
                         }],
                         gdpr: !values.gdpr,
-                        condition_status:{
+                        condition_status: {
                             sensitiveStatus: values.condition,
                         },
                     }
                 }
 
 
-                if(data?.msg === "new contact") {
+                if (data?.msg === "new contact") {
 
                     const config = {
                         method: "POST",
@@ -89,7 +89,7 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
 
                     fetch(`${ STRAPI_URI }/api/contacts/?populate=*`, config).then(response => response.json())
                         .then(newData => {
-console.log("news Data response in registration", newData);
+                            console.log("news Data response in registration", newData);
 
                             setError({...error, state: false})
                             setSuccess({...success, state: true, msg: "Your registration was successfully"})
@@ -104,7 +104,10 @@ console.log("news Data response in registration", newData);
                                 headers: {
                                     'Content-Type': 'application/json',
                                 },
-                                body: JSON.stringify({id: newData.data.documentId, email: newData?.data?.contact[0].email}),
+                                body: JSON.stringify({
+                                    id: newData.data.documentId,
+                                    email: newData?.data?.contact[0].email
+                                }),
                             })
 
 
@@ -112,13 +115,13 @@ console.log("news Data response in registration", newData);
                         })
 
 
-                }else{
+                } else {
 
                     //handle update existing contact
-                    fetch(`${ STRAPI_URI }/api/contacts/?id=${data?.data[0].documentId}&populate=*`).then(res => res.json()).then(existingData => {
+                    fetch(`${ STRAPI_URI }/api/contacts/?id=${ data?.data[0].documentId }&populate=*`).then(res => res.json()).then(existingData => {
 
 
-                        updateWorkshopListForExistingContact(existingData.data[0].documentId, workshopId, existingData.data[0].workshops ).then(res => {
+                        updateWorkshopListForExistingContact(existingData.data[0].documentId, workshopId, existingData.data[0].workshops).then(res => {
 
 
                             setError({...error, state: false})
@@ -140,9 +143,7 @@ console.log("news Data response in registration", newData);
                         })
 
 
-
                     })
-
 
 
                 }
@@ -188,7 +189,7 @@ console.log("news Data response in registration", newData);
                     className={ formik.errors.contact?.email && styles.inputError }
                     value={ formik.values.contact?.email }
                     onChange={ formik.handleChange }
-                    inputMode={"email"}
+                    inputMode={ "email" }
                     name={ "contact.email" }
                 />
                 { formik.errors.contact?.email &&
@@ -202,7 +203,7 @@ console.log("news Data response in registration", newData);
                     className={ formik.errors.contact?.phone && styles.inputError }
                     value={ formik.values.contact?.phone }
                     onChange={ formik.handleChange }
-                    inputMode={"tel"}
+                    inputMode={ "tel" }
                     name={ "contact.phone" }
                 />
                 { formik.errors.contact?.phone &&
@@ -281,7 +282,7 @@ console.log("news Data response in registration", newData);
 
             </div>
             <div style={ {padding: "40px 0"} }>
-                {emailInfo && <EmailInfo setEmailInfo={setEmailInfo}/>}
+                { emailInfo && <EmailInfo setEmailInfo={ setEmailInfo }/> }
                 { success.state && <ToastMessage state={ success } setState={ setSuccess }/> }
                 { error.state && <ToastMessage state={ error } setState={ setError }/> }
             </div>
