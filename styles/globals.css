@@ -1,5 +1,6 @@
 :root {
     --background: rgba(240, 223, 211, 1);
+    --backgroundBoxShadow: rgba(240, 223, 211, 0.09);
     --background80: rgba(255, 255, 255, 0.8);
     --foreground: #171717;
     --textColor: rgba(51, 51, 51, 1);

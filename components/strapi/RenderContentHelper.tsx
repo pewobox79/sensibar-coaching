@@ -65,7 +65,7 @@ const RichTextRenderer = ({blocks}: { blocks: [] }) => {
 
     const RenderedComponents = blocks?.map((block) => {
         const indiKeyIndex = Math.random() * 90
-        return <div key={ indiKeyIndex }>
+        return <div key={ indiKeyIndex } >
             { renderChildren(block) }
         </div>
     })

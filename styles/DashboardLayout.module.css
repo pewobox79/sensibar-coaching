@@ -1,0 +1,86 @@
+.dashboardWrapper {
+
+    display: flex;
+    width: 100%;
+    min-height: 1000px;
+    height: auto;
+    margin: auto;
+    max-width: 2300px;
+    background-color: white
+
+}
+
+.dashboardSidebar {
+
+    position: fixed;
+    display: flex;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: white;
+}
+
+.sidebarItem {
+
+    padding: 10px;
+    border: 1px solid var(--textColor);
+    border-radius: 10px;
+    margin: 5px 5px;
+    width: 100px;
+    text-align: center;
+
+}
+
+.sidebarItem:hover{
+    border-color: var(--background)
+}
+
+
+.iconStyle {
+    font-size: 2.5rem;
+    color: var(--textColor)
+}
+
+
+.activeIconStyle {
+    color: var(--background);
+}
+
+.activeIconButtonStyle {
+    background-color: var(--textColor);
+}
+
+
+@media screen and (min-width: 768px) {
+
+
+    .dashboardSidebar {
+        position: relative;
+        width: 150px;
+        height: 80dvh;
+        padding: 10px;
+        flex-direction: column;
+        border-right: 1px solid var(--background);
+        box-shadow: var(--backgroundBoxShadow) 10px 0px 10px -2px;
+        align-items: center;
+        justify-content: normal;
+    }
+
+    .sidebarItem {
+
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 10px;
+        margin: 5px 0;
+
+    }
+
+    .iconStyle {
+        font-size: 2rem;
+    }
+
+}

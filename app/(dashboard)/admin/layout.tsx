@@ -1,13 +1,16 @@
-'use client'
 import DashboardLayout from "@/layouts/DashboardLayout";
 import React from "react";
-const AdminLayout = ({children}:{children: React.ReactNode | React.ReactElement |React.ReactElement[]})=>{
+import '@/styles/globals.css'
 
-    return <div>
+const AdminLayout = ({children}: { children: React.ReactNode | React.ReactElement | React.ReactElement[] }) => {
+
+    return <html>
+    <body>
     <DashboardLayout>
-        {children}
+        { children }
     </DashboardLayout>
-    </div>
+    </body>
+    </html>
 }
 
 export default AdminLayout;
