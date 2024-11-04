@@ -4,7 +4,7 @@ import {Suspense} from "react";
 
 const Impressum = async()=>{
 
-    const data = await getBasicPageContent("Impressum")
+    const data = await getBasicPageContent("impressum")
 
     return <div className={"innerWrapper"}>
 

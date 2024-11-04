@@ -14,11 +14,11 @@ export const getNavigation = async ()=>{
     }
 }
 
-export const getBasicPageContent= async (title:string)=>{
+export const getBasicPageContent= async (slug:string)=>{
 
     try{
 
-        const response = await fetch(`${STRAPI_URI}/api/basic-pages/?filters[title][$eq]=${title}`)
+        const response = await fetch(`${STRAPI_URI}/api/basic-pages/?filters[slug][$eq]=${slug}`)
         return await response.json()
     }catch(e){
 
