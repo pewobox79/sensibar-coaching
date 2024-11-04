@@ -7,8 +7,8 @@ const Impressum = async()=>{
 
     return <>
 
-        <h1>{ data?.data[0]?.title }</h1>
-        <RenderContentHelper blocks={data?.data[0]?.mainContent}/></>
+        <h1>{ data.data ? data?.data[0]?.title : "" }</h1>
+        <RenderContentHelper blocks={data.data ? data.data[0].mainContent: []}/></>
 }
 
 export default Impressum;
