@@ -4,6 +4,8 @@ import styles from '@/styles/Event.module.css'
 import Link from "next/link";
 
 const RichTextRenderer = ({blocks}: { blocks: [] }) => {
+
+    console.log("blocks in renderText", blocks)
 //@-ts-ignoe
     const renderChildren = (children: { type: string, children: [], level: number, format: string }) => {
 
