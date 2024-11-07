@@ -100,10 +100,10 @@ interface UpdateContact {
 export const updateContact = async (updatedData:UpdateContact, id:string) => {
 
     //remove id items
-    delete updatedData.personalData.id
-    delete updatedData.contact[0].id
+    delete updatedData.personalData?.id
+    delete updatedData.contact?.[0]?.id
 
-    if(updatedData.address != null){
+    if(updatedData?.address != null){
         delete updatedData.address.id
     }
 
