@@ -102,14 +102,14 @@ export const updateContact = async (updatedData:UpdateContact, id:string) => {
     //remove id items
 
 
-    if (updatedData.personalData && 'id' in updatedData.personalData) {
-        delete updatedData.personalData.id;
+    if (updatedData?.personalData && 'id' in updatedData?.personalData) {
+        delete updatedData?.personalData?.id;
     }
-    if (updatedData.contact && updatedData.contact[0] && 'id' in updatedData.contact[0]) {
-        delete updatedData.contact[0].id;
+    if (updatedData?.contact && updatedData?.contact[0] && 'id' in updatedData?.contact[0]) {
+        delete updatedData?.contact?.[0]?.id;
     }
-    if (updatedData.address && updatedData.address && 'id' in updatedData.address) {
-        delete updatedData.address.id;
+    if (updatedData?.address && updatedData?.address && 'id' in updatedData?.address) {
+        delete updatedData?.address?.id;
     }
 
 
