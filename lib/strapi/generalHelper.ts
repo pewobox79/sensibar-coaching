@@ -77,7 +77,27 @@ export const convertStringToFirstAndLastName = (data: string) => {
 
 }
 
-export const updateContact = async (updatedData:unknown, id:string) => {
+interface UpdateContact {
+    personalData: {
+        firstname: string,
+        lastname: string,
+        id: string
+    },
+    contact: [{
+        email: string,
+        phone: string,
+        id: string
+    }],
+    address: {
+        street: string,
+        streetNumber: string,
+        city: string,
+        country: string,
+        zipCode: string,
+        id: string
+    }
+}
+export const updateContact = async (updatedData:UpdateContact, id:string) => {
 
     //remove id items
     delete updatedData.personalData.id
