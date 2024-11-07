@@ -7,12 +7,15 @@ import Button from "@/components/global/Button";
 import Link from "next/link";
 import {useState} from "react";
 import ToastMessage from "@/components/global/ToastMessage";
-import {checkIfContactExists, updateWorkshopListForExistingContact} from "@/lib/strapi/workshopHelper";
+import {
+    addContactToWorkshop,
+    checkIfContactExists, getSingleWorkshop,
+
+} from "@/lib/strapi/workshopHelper";
 import EmailInfo from "@/components/global/EmailInfo";
 
 
 const EventRegistration = ({workshopId}: { workshopId: string }) => {
-
     const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV ? process.env.NEXT_PUBLIC_STRAPI_URL_DEV : ""
 
     const [error, setError] = useState({state: false, msg: "", type: "error"});
@@ -63,7 +66,6 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
                             firstname: cleanedFirstname,
                             lastname: cleanedLastname
                         },
-                        workshops: [workshopId],
                         contact: [{
                             email: values.contact.email,
                             phone: values.contact.phone
@@ -74,6 +76,9 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
                         },
                     }
                 }
+
+
+
 
 
                 if (data?.msg === "new contact") {
@@ -87,42 +92,77 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
                     }
 
 
+
                     fetch(`${ STRAPI_URI }/api/contacts/?populate=*`, config).then(response => response.json())
                         .then(newData => {
                             console.log("news Data response in registration", newData);
 
-                            setError({...error, state: false})
-                            setSuccess({...success, state: true, msg: "Your registration was successfully"})
-                            formik.resetForm()
-                            setTimeout(() => {
-                                setSuccess({...success, state: false})
-                                setEmailInfo(true)
-                            }, 3000)
 
-                            fetch('/api/db/participant', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify({
-                                    id: newData.data.documentId,
-                                    email: newData?.data?.contact[0].email
-                                }),
-                            })
+                            const newContactId = newData.data.documentId
 
 
-                            console.log("registration successful", data)
+
+                      getSingleWorkshop(workshopId).then(workshop =>{
+
+
+                          const updatedArray = [workshop.data.contacts]
+                          updatedArray.push(newContactId)
+
+
+                          addContactToWorkshop(newData.data.documentId, workshopId, updatedArray).then(response => {
+                              console.log("response after addcontactto workshop", response)
+                              setError({...error, state: false})
+                              setSuccess({...success, state: true, msg: "Your registration was successfully"})
+                              formik.resetForm()
+                              setTimeout(() => {
+                                  setSuccess({...success, state: false})
+                                  setEmailInfo(true)
+                              }, 3000)
+
+                              fetch('/api/db/participant', {
+                                  method: 'POST',
+                                  headers: {
+                                      'Content-Type': 'application/json',
+                                  },
+                                  body: JSON.stringify({
+                                      id: newData.data?.documentId,
+                                      email: newData?.data?.contact[0].email
+                                  }),
+                              })
+
+
+                              console.log("registration successful", data)
+                          })
+
+
+
+
+
+
+
+
+                      })
+
+
                         })
 
 
                 } else {
 
+                    const existingContactId = data?.data[0].documentId
                     //handle update existing contact
-                    fetch(`${ STRAPI_URI }/api/contacts/?id=${ data?.data[0].documentId }&populate=*`).then(res => res.json()).then(existingData => {
+
+                    console.log("data values in else", data)
+
+                    getSingleWorkshop(workshopId).then((workshop) => {
+
+                        const updatedArray = [workshop.data.contacts]
+                        updatedArray.push(existingContactId)
 
 
-                        updateWorkshopListForExistingContact(existingData.data[0].documentId, workshopId, existingData.data[0].workshops).then(res => {
 
+                        addContactToWorkshop(existingContactId, workshopId, updatedArray).then(res => {
+                            console.log("response existing contact", res)
 
                             setError({...error, state: false})
                             setSuccess({...success, state: true, msg: "Your registration was successfully"})
@@ -137,13 +177,20 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
                                 headers: {
                                     'Content-Type': 'application/json',
                                 },
-                                body: JSON.stringify({id: res.data.documentId, email: res?.data?.contact[0].email}),
+                                body: JSON.stringify({id: existingContactId, email: data?.data[0].contact[0].email}),
                             })
 
                         })
 
 
+
+
+
+
+
+
                     })
+
 
 
                 }
