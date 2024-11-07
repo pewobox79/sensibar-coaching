@@ -1,3 +1,4 @@
+import {TreatmentDataType} from "@/lib/strapi/treatmentHelper";
 
 const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
 
@@ -7,8 +8,8 @@ export const getAllWorkshops = async () => {
 
         const response = await fetch(`${ STRAPI_URI }/api/workshops`)
 
-        if(!response.ok){
-            throw new Error(`HTTP error! status: ${response.status}`)
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${ response.status }`)
         }
         return await response.json()
     } catch (e) {
@@ -18,14 +19,14 @@ export const getAllWorkshops = async () => {
 
 }
 
-export const getSingleWorkshop = async (id:string|unknown) =>{
+export const getSingleWorkshop = async (id: string | unknown) => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/workshops/${id}`)
+        const response = await fetch(`${ STRAPI_URI }/api/workshops/${ id }?populate=*`)
 
-        if(!response.ok){
-            throw new Error(`HTTP error! status: ${response.status}`)
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${ response.status }`)
         }
         return await response.json()
     } catch (e) {
@@ -34,84 +35,86 @@ export const getSingleWorkshop = async (id:string|unknown) =>{
     }
 }
 
-export const checkIfContactExists = async (firstname:string, lastname:string, email:string, query:string="contacts")=>{
+export const checkIfContactExists = async (firstname: string, lastname: string, email: string, query: string = "contacts") => {
 
-    try{
-        const response = await fetch(`${ STRAPI_URI }/api/${query}?filters[contact][email][$eq]=${email}&filters[personalData][firstname][$eq]=${firstname}&filters[personalData][lastname][$eq]=${lastname}`)
+    try {
+        const response = await fetch(`${ STRAPI_URI }/api/${ query }?filters[contact][email][$eq]=${ email }&filters[personalData][firstname][$eq]=${ firstname }&filters[personalData][lastname][$eq]=${ lastname }&populate=contact`)
 
-        if(!response.ok){
-             throw new Error(`HTTP error! status: ${response.status}`)
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${ response.status }`)
         }
 
         const json = await response.json()
 
-        if(json.data.length === 0 || undefined){
+        if (json.data.length === 0 || undefined) {
             return {msg: "new contact"}
-        }else{
-            return {msg:"contact already exists", data: json.data}
+        } else {
+            return {msg: "contact already exists", data: json.data}
         }
 
 
-
-    }catch(e){
+    } catch (e) {
 
         console.log("contact check failed", e);
     }
 }
 
-export const updateWorkshopListForExistingContact =async (id: string, workshopId: string, workshopArray:unknown)=>{
 
 
-    const updatedArray = [workshopArray]
-    updatedArray.push(workshopId)
+export const addContactToWorkshop = async (contactId: string, workshopId:string, updatedArray?:[]) => {
+
+    const newData ={
+        data:{
+            contacts: updatedArray
+        }
+    }
+    try {
+
+        const response = await fetch(`${ STRAPI_URI }/api/workshops/${ workshopId }?populate=*`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newData)
+        })
+
+        const updatedWorkshop = await response.json()
+
+        return {msg: "Kontakt zu Workshop hinzugefügt", data: updatedWorkshop.data}
 
 
-    try{
+    } catch (err) {
 
-        const response = await fetch(`${ STRAPI_URI }/api/contacts/${id}?populate=*`, {
+        console.log("konnte nicht übergeben werden", err)
+        return {msg: "workshop contact update fehlerhaft."}
+
+    }
+
+}
+
+
+export const executeDoubleOptIn = async (id: string | null) => {
+
+    try {
+
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/${ id }?populate=*`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                data:{
-                    workshops:updatedArray
+                data: {
+                    gdpr: true
                 }
             })
         })
 
-        return await response.json();
-    }catch(e){
 
-        console.log("contact check failed", e)
-    }
-
-
-
-
-}
-export const executeDoubleOptIn = async (id:string | null)=>{
-
-    try{
-
-        const response = await fetch(`${ STRAPI_URI }/api/contacts/${id}?populate=*`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-               data:{
-                   gdpr:true
-               }
-            })
-        })
-
-
-        const data =  await response.json();
+        const data = await response.json();
         console.log("after PUT to STRAPI response", data)
 
-        if(data){
-            const config ={
+        if (data) {
+            const config = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -124,12 +127,12 @@ export const executeDoubleOptIn = async (id:string | null)=>{
             }
 
             const response = await fetch(`/api/db/doi`, config)
-           return await response.json();
+            return await response.json();
 
         }
 
 
-    }catch (e) {
+    } catch (e) {
         console.log("double opt in update failed", e)
     }
 }
