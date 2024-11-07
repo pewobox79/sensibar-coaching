@@ -1,4 +1,3 @@
-import {TreatmentDataType} from "@/lib/strapi/treatmentHelper";
 
 const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
 
@@ -61,7 +60,7 @@ export const checkIfContactExists = async (firstname: string, lastname: string, 
 
 
 
-export const addContactToWorkshop = async (contactId: string, workshopId:string, updatedArray?:[]) => {
+export const addContactToWorkshop = async (contactId: string, workshopId:string, updatedArray?:unknown[]) => {
 
     const newData ={
         data:{
