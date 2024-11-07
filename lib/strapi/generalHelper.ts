@@ -78,17 +78,17 @@ export const convertStringToFirstAndLastName = (data: string) => {
 }
 
 interface UpdateContact {
-    personalData: {
+    personalData?: {
         firstname: string,
         lastname: string,
         id: string
     },
-    contact: [{
+    contact?: [{
         email: string,
         phone: string,
         id: string
     }],
-    address: {
+    address?: {
         street: string,
         streetNumber: string,
         city: string,
