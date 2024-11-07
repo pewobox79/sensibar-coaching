@@ -77,7 +77,7 @@ export const convertStringToFirstAndLastName = (data: string) => {
 
 }
 
-export const updateContact = async (updatedData, id) => {
+export const updateContact = async (updatedData:unknown, id:string) => {
 
     //remove id items
     delete updatedData.personalData.id
