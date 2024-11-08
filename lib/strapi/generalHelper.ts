@@ -1,3 +1,5 @@
+import {ClientData} from "@/stores/useClientStore";
+
 const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
 
 export const getNavigation = async () => {
@@ -77,42 +79,9 @@ export const convertStringToFirstAndLastName = (data: string) => {
 
 }
 
-interface UpdateContact {
-    personalData?: {
-        firstname: string,
-        lastname: string,
-        id: string
-    },
-    contact?: [{
-        email: string,
-        phone: string,
-        id: string
-    }],
-    address?: {
-        street: string,
-        streetNumber: string,
-        city: string,
-        country: string,
-        zipCode: string,
-        id: string
-    }
-}
-export const updateContact = async (updatedData:UpdateContact, id:string) => {
+export const updateContact = async (updatedData:ClientData, id:string|undefined) => {
 
     //remove id items
-
-
-    if (updatedData?.personalData && 'id' in updatedData?.personalData) {
-        delete updatedData?.personalData?.id;
-    }
-    if (updatedData?.contact && updatedData?.contact[0] && 'id' in updatedData?.contact[0]) {
-        delete updatedData?.contact?.[0]?.id;
-    }
-    if (updatedData?.address && updatedData?.address && 'id' in updatedData?.address) {
-        delete updatedData?.address?.id;
-    }
-
-
 
     const newData = {
         personalData: {...updatedData.personalData},
