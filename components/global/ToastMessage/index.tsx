@@ -45,11 +45,11 @@ const ToastMessage = ({state, setState}: {
             left: 0,
             backgroundColor: variant,
             width: "100%",
-            borderRadius: 10,
             minHeight: 30,
             height: "auto",
             textAlign: "center",
-            margin: "auto"
+            margin: "auto",
+            padding: "5px 0"
         } }
     >
 
