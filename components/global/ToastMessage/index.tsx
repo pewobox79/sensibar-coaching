@@ -1,14 +1,19 @@
 import {Toast} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {  faClose } from '@fortawesome/free-solid-svg-icons'
+import {faClose} from '@fortawesome/free-solid-svg-icons'
 import {Dispatch, SetStateAction} from "react";
 
-const ToastMessage = ({state, setState}:{state: { msg: string, state: boolean, type: string }, setState: Dispatch<SetStateAction<{ state: boolean; msg: string; type: string; }>>}) => {
+const ToastMessage = ({state, setState}: {
+    state: { msg: string, state: boolean, type: string },
+    setState: Dispatch<SetStateAction<{ state: boolean; msg: string; type: string; }>>
+}) => {
 
-function handleClose() {
-    setState((prevState)=>({...prevState, state: false}))
+    function handleClose() {
+
+        setState((prevState) => ({...prevState, state: false}))
 
     }
+
     let variant
 
     switch (state?.type) {
@@ -23,15 +28,35 @@ function handleClose() {
     }
 
     return <Toast
-        show={state.state}
+        show={ state.state }
+        onClose={ () => {
+            handleClose()
+        } }
+        delay={ 2000 }
+        autohide
         className="d-inline-block m-1"
-        style={{backgroundColor: variant, width:"70%", borderRadius: 10, minHeight: 30, height: "auto", textAlign: "center", margin: "auto"}}
+        style={ {
+            position: "absolute",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 2000,
+            top: 0,
+            left: 0,
+            backgroundColor: variant,
+            width: "100%",
+            borderRadius: 10,
+            minHeight: 30,
+            height: "auto",
+            textAlign: "center",
+            margin: "auto"
+        } }
     >
 
-            <FontAwesomeIcon icon={faClose} style={{width: 30, height:30,color: "white"}} onClick={handleClose}/>
+        <FontAwesomeIcon icon={ faClose } style={ {width: 30, height: 30, color: "white"} } onClick={ handleClose }/>
 
         <Toast.Body>
-            <h4 style={{color: "white"}}> { state.msg }</h4>
+            <h4 style={ {color: "white"} }> { state.msg }</h4>
 
         </Toast.Body>
     </Toast>
