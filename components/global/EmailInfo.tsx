@@ -12,7 +12,7 @@ const EmailInfo = ({setEmailInfo}:{setEmailInfo:(data:boolean)=>void}) => {
            setEmailInfo(false)
        }, 5000)
 
-    }, [])
+    }, [setEmailInfo])
 
     function handleClose(){
         setEmailInfo(false)

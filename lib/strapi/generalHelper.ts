@@ -116,3 +116,15 @@ export const updateContact = async (updatedData:ClientData, id:string|undefined)
 
 
 }
+
+export const formatDateToStrapiFormat =(date:string)=>{
+
+    const dateAsString = new Date(date).toISOString()
+
+    const indexOf = dateAsString.indexOf("T")
+    return dateAsString.slice(0, indexOf)
+
+
+
+
+}

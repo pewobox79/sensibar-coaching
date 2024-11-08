@@ -5,6 +5,8 @@ import Link from "next/link";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlusCircle, faProjectDiagram, faUser, faLineChart, faSearch} from "@fortawesome/free-solid-svg-icons";
 import {usePathname} from 'next/navigation'
+import ClientSearch from "@/components/dashboardComponents/Client/ClientSearch";
+import {useModalOpen} from "@/stores/useModalOpen";
 
 const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactElement | React.ReactElement[] }) => {
 
@@ -13,6 +15,14 @@ const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactEl
     const isWorkshopPath = path && path.includes("workshops");
     const isAdminPath = path && path === "/admin";
     const isClientPath = path && path.includes("client");
+
+    const searchStatus = useModalOpen().status
+    console.log("searchstatus",searchStatus)
+    const openSearch = useModalOpen().setSearchOpen;
+
+    function handleSearchOpen() {
+        openSearch();
+    }
 
     return <div className={ styles.dashboardWrapper }>
         <div className={ styles.dashboardSidebar }>
@@ -34,15 +44,15 @@ const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactEl
             <div className={ styles.sidebarItem }>
                 <FontAwesomeIcon icon={ faPlusCircle } className={ styles.iconStyle }/>
             </div>
-            <div className={ styles.sidebarItem }>
+            <div className={ styles.sidebarItem } onClick={ handleSearchOpen }>
                 <FontAwesomeIcon icon={ faSearch } className={ styles.iconStyle }/>
             </div>
 
         </div>
-        <div>
-            { children }
-        </div>
 
+            { children }
+
+        { searchStatus.search && <ClientSearch/> }
     </div>
 }
 

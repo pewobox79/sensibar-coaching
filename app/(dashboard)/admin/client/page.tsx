@@ -1,6 +1,9 @@
+
+import Client from "@/components/dashboardComponents/Client";
+
 const ClientPage =()=>{
 
-    return <h1>client page</h1>
+    return <Client/>
 }
 
 export default ClientPage

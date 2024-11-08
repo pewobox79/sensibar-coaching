@@ -2,8 +2,9 @@
     --background: rgba(240, 223, 211, 1);
     --backgroundBoxShadow: rgba(240, 223, 211, 0.09);
     --background80: rgba(255, 255, 255, 0.8);
-    --foreground: #171717;
+    --foreground: rgba(23, 23, 23, 1);
     --textColor: rgba(51, 51, 51, 1);
+    --seachBackground: rgba(23, 23, 23, 0.4);
     --borderColor: var(--textColor)
 }
 
@@ -36,6 +37,7 @@ h1, h2, h3, h4, h5, h6 {
 
     padding: 20px 10px;
     word-break: break-word;
+    width: 100%;
 }
 .mainContent {
     width: 80%;
@@ -123,8 +125,15 @@ input[type="checkbox"] {
 .input-group >.form-check >.form-check-label {
     margin-left: 10px
 }
+
+
 @media screen and (min-width: 768px) {
     .mainContent {
         max-width: 1300px
+    }
+
+    .innerWrapper{
+        width: 80%;
+        margin: 0 auto
     }
 }

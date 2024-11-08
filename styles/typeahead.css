@@ -1,0 +1,49 @@
+/*search feature custom style*/
+
+/* Custom style for the input */
+.rbt-input {
+    border: 2px solid var(--textColor); /* Customize border color */
+    border-radius: 8px;
+    padding: 20px;
+    font-size: 2rem;
+    width: 100%
+}
+
+/* Customize the dropdown menu */
+.rbt-menu {
+    background-color: var(--background); /* Change dropdown background */
+    border-radius: 8px;
+    border: 1px solid var(--background);
+    display: flex;
+    flex-direction: column;
+
+}
+/* Customize individual menu items */
+.rbt-menu .dropdown-item {
+    padding: 10px 15px;
+    color: var(--textColor);
+    font-size: 1.5rem;
+    font-family: var(--font-tt-norms);
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 100%;
+    display: block;
+}
+
+/* Highlighted text in the dropdown items */
+.rbt-highlight-text {
+    background-color: #ffdf7e; /* Custom highlight color */
+    color: #212529;
+    font-weight: bold;
+}
+
+
+.rbt-aux > button {
+
+    width: 30px;
+    height: 30px;
+    background-color: var(--background);
+    border: none;
+    border-radius: 5px;
+}

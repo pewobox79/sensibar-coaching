@@ -1,0 +1,189 @@
+.searchWrapper{
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--seachBackground);
+    width: 100%;
+    height: 100dvh;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchInner {
+
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    height: 50dvh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.searchItem >input {
+    width: 100%;
+    padding: 20px;
+    border-radius:10px;
+    border: 1px solid gray;
+    color: black;
+    font-size: 2rem;
+    font-family: var(--font-tt-norms);
+}
+
+.inputErrorText{
+    color: red
+}
+.inputError {
+    outline-color: red;
+    border: 1px solid red !important;
+    color: red
+}
+
+.clientPageWrapper{
+    display: flex;
+    flex-direction: column;
+    min-height: 1000px;
+    height: auto;
+    width: 100%;
+    }
+
+.contactDetailsWrapper, .treatmentOverwiewWrapper{
+
+    display: flex;
+    flex-direction: column;
+    min-height: 150px;
+    height: auto;
+    width: 100%;
+    border-radius:2px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    position: relative;
+
+}
+
+.contactDetailsSection, .treatmentSection{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    justify-content: flex-start;
+    padding: 15px;
+}
+
+.detailItemElement{
+    padding: 3px 0;
+    margin: 3px 0;
+    font-size: 1.7rem
+}
+
+.detailItemElement:first-letter{
+    text-transform: uppercase;
+}
+
+.treatmentItemElement{
+    padding: 3px 5px;
+    margin: 3px 0;
+    font-size: 1.7rem;
+    border: 1px solid var(--background);
+    border-radius: 5px;
+    display: flex;
+
+
+}
+
+.treatmentItemElement:hover{
+    background-color: var(--background)
+}
+
+.treatmentSplitLeft, .treatmentSplitRight{
+    width: 100%;
+    padding: 10px;
+    margin: 0 0 40px 0
+
+
+}
+
+.treatmentSplitRight {
+    font-size: 1.5rem
+}
+
+.detailsTypeInfoBlock{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px 0
+}
+
+.detailsTypeInfoBlock > p{
+    padding-left: 10px;
+    font-size:1.3rem
+}
+
+.activeListItem {
+    background-color: var(--background);
+}
+
+.newTreatmentButton{
+
+    position: relative;
+    padding: 10px 20px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.editButton{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.editItem{
+    font-size: 1.7rem;
+    padding: 3px 5px;
+    color: var(--textColor);
+    margin: 2px 0;
+    border-radius:5px;
+    border: 1px solid var(--background);
+    font-family: var(--font-tt-norms)
+}
+
+@media screen and (min-width: 768px) {
+
+    .searchInner{
+        width: 80%;
+
+    }
+
+
+    .contactDetailsWrapper{
+        flex-direction: row;
+    }
+
+    .detailItemElement, .treatmentItemElement{
+        font-size: 1.3rem;
+    }
+
+    .treatmentSection{
+        flex-direction: row;
+    }
+
+    .treatmentSplitLeft{
+        width: 70%;
+        min-width: 250px
+    }
+
+    .treatmentSplitRight{
+    font-size: 1.2rem;
+    }
+
+    .detailsTypeInfoBlock > p{
+        padding-left: 20px;
+    }
+
+    .editItem{
+        font-size: 1.3rem;}
+}

@@ -5,14 +5,15 @@
     margin-bottom: 20px;
     width: 100%;
     justify-content: center;
-    line-height:30px
+    line-height: 30px
 
 }
 
-.formItem >input {
+.formItem > input,
+.formItem > select{
     width: 100%;
     padding: 10px;
-    border-radius:10px;
+    border-radius: 10px;
     border: 1px solid gray;
     color: black;
     font-size: 1.2rem;
@@ -20,9 +21,9 @@
 }
 
 
-.formItem >input:focus-visible,
-.formItem > input:active{
-   border: 1px solid gray
+.formItem > input:focus-visible,
+.formItem > input:active {
+    border: 1px solid gray
 }
 
 .inputError {
@@ -32,20 +33,110 @@
 }
 
 
-.inputErrorText{
+.inputErrorText {
     color: red
 }
 
+/*login form*/
+
+.loginForm {
+
+    width: 100%
+}
+
+
+/*treatmentform */
+
+
+.newTreatmentFormWrapper {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--seachBackground);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.newTreatmentFormInner {
+
+    position: relative;
+    width: 100%;
+    max-width: 1300px;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: white;
+    flex-direction: column;
+}
+
+.newTreatmentFormInner > h3 {
+    font-size: 2rem
+}
+
+.newTreatmentCloseButton {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+}
+
+.newTreatmentFormSection {
+
+    width: 90%;
+    margin: 0 auto;
+    padding: 0 10px;
+
+
+}
+
+.textAreaStyle, .inputFieldStyle {
+
+    font-family: var(--font-tt-norms);
+    font-size: 1.7rem !important;
+}
+
+.textAreaStyle:focus-visible,
+.inputFieldStyle:focus-visible,
+.inputFieldStyle:active {
+    outline: 2px solid var(--background) !important;
+    border-radius: 3px !important;
+    border: 2px solid var(--background) !important;
+}
 
 @media screen and (min-width: 768px) {
 
     .formItem {
-       width: 80%;
+        width: 80%;
         margin: auto
     }
 
     .gdprItem > .form-check {
         width: 80%;
-        margin: auto
+        margin: auto;
+    }
+
+    /*login form*/
+    .loginForm {
+        width: 60%;
+        margin: auto;
+        max-width: 500px;
+    }
+
+
+    /*treatmentform*/
+    .newTreatmentFormInner {
+        width: 70%;
+        height: 80%;
+    }
+
+    .textAreaStyle, .inputFieldStyle, .inputFieldStyle > option {
+
+        font-size: 1.3rem !important;
     }
 }
