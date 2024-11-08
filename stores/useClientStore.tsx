@@ -1,4 +1,5 @@
 import {create} from "zustand";
+import * as lodash from 'lodash';
 
 // Define types for each part of the client data structure
 interface PersonalData {
@@ -6,11 +7,13 @@ interface PersonalData {
     lastname: string;
     birthdate: string;
     gender: string;
+    id?: string;
 }
 
 interface Contact {
     phone: string;
     email: string;
+    id?: string
 }
 
 interface Address {
@@ -19,18 +22,39 @@ interface Address {
     city: string;
     country: string;
     zipCode: string;
+    id?: string
 }
 
 interface ConditionStatus {
     sensitiveStatus: boolean;
 }
 
-interface ClientData {
+export type TreatmentNotes = {
+    id: string |number;
+    documentId: string;
+    title: string;
+    details: string;
+    type: string;
+    location: string;
+    createdAt: string;      // ISO date format (e.g., "2024-10-28T12:17:53.516Z")
+    updatedAt: string;      // ISO date format
+    publishedAt: string;    // ISO date format
+    locale: string | null;
+};
+
+export type ClientData = {
     personalData: PersonalData;
-    contact: Contact;
+    documentId?: string;
+    contact: Contact[];
     address: Address;
     workshops: string[]; // Assuming workshops is an array of strings, update if needed
     condition_status: ConditionStatus;
+    treatment_notes: TreatmentNotes[];
+    selectedClientDetails: {
+        title: string;
+        details: string;
+        type: string;
+    }
 }
 
 // Define the Zustand store interface
@@ -48,10 +72,10 @@ const defaultClientValues = {
         birthdate: "",
         gender:""
     },
-    contact: {
+    contact: [{
         phone: "",
         email: "",
-    },
+    }],
     address: {
         street: "",
         streetNumber: "",
@@ -62,6 +86,12 @@ const defaultClientValues = {
     workshops:[],
     condition_status: {
         sensitiveStatus: false,
+    },
+    treatment_notes: [],
+    selectedClientDetails: {
+        title:"",
+        details: "",
+        type: ""
     }
 }
 export const useClientStore = create<ClientStore>((set) => ({
@@ -69,10 +99,7 @@ export const useClientStore = create<ClientStore>((set) => ({
 
     // Update all data at once
     setClientData: (newData) => set((state) => ({
-        clientData: {
-            ...state.clientData,
-            ...newData
-        }
+        clientData: lodash.merge({}, state.clientData, newData)
     })),
     resetClientData: () => set(() => ({
         clientData: defaultClientValues
