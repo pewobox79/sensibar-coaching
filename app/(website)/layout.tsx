@@ -62,7 +62,7 @@ export const metadata: Metadata = {
                 alt: "SENSIBAR | sensibel & wunderbar",
             },
         ],
-        site_name: "SENSIBAR | sensibel & wunderbar",
+        siteName: "SENSIBAR | sensibel & wunderbar",
         locale: "de_DE",
     }
 };

@@ -107,7 +107,7 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
                           updatedArray.push(newContactId)
 
 
-                          addContactToWorkshop(newData.data.documentId, workshopId, updatedArray).then(response => {
+                          addContactToWorkshop(newData.data.documentId, workshopId, updatedArray).then(() => {
                               setError({...error, state: false})
                               setSuccess({...success, state: true, msg: "Your registration was successfully"})
                               formik.resetForm()
@@ -156,7 +156,7 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
 
 
 
-                        addContactToWorkshop(existingContactId, workshopId, updatedArray).then(res => {
+                        addContactToWorkshop(existingContactId, workshopId, updatedArray).then(() => {
 
                             setError({...error, state: false})
                             setSuccess({...success, state: true, msg: "Your registration was successfully"})
