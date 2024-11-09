@@ -1,6 +1,13 @@
-const WorkshopPage =()=>{
+import WorkshopsPage from "@/pages/AdminPage/WorkshopsPage";
+import {getAllWorkshops} from "@/lib/strapi/workshopHelper";
+import {Suspense} from "react";
 
-    return <h1>Workshop page</h1>
+const WorkshopPage =async ()=>{
+
+    const workshops = await getAllWorkshops();
+
+
+    return <Suspense fallback={"loading..."}><WorkshopsPage workshops={workshops ? workshops.data : []}/></Suspense>
 }
 
 export default WorkshopPage

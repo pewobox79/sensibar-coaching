@@ -8,7 +8,6 @@ const DoubleOptInPage = () => {
 
     const searchParams = useSearchParams()
     const id = searchParams ? searchParams.get("id") : "";
-    const type = searchParams ? searchParams.get("type") : "";
     const workshopId = searchParams ? searchParams.get("wsId") : "";
 
     useEffect(() => {

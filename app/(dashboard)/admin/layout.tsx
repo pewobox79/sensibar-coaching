@@ -4,20 +4,20 @@ import '@/styles/globals.css'
 import type {Metadata} from "next";
 import localFont from "next/font/local";
 
-const tanMonCheri = localFont({
+const roxborough = localFont({
     src: [
         {
-            path: '../../../assets/fonts/moncherifonts/tan-mon-cheri.woff',
+            path: '../../../assets/fonts/roxborough/roxborough-cf-regular.woff',
             weight: '400',
             style: 'normal',
         },
         {
-            path: '../../../assets/fonts/moncherifonts/tan-mon-cheri.woff2',
+            path: '../../../assets/fonts/roxborough/roxborough-cf-regular.woff',
             weight: '600',
             style: 'bold',
         },
     ],
-    variable: "--font-tan-mon-cheri",
+    variable: "--font-roxborough-cf-regular",
 });
 
 const TTNorms = localFont({
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
 const AdminLayout = ({children}: { children: React.ReactNode | React.ReactElement | React.ReactElement[] }) => {
 
     return <html>
-    <body className={ `${ tanMonCheri.variable } ${ TTNorms.variable }` }>
+    <body className={ `${ roxborough.variable } ${ TTNorms.variable }` }>
     <DashboardLayout>
         { children }
     </DashboardLayout>

@@ -6,20 +6,20 @@ import PageLayout from "@/layouts/PageLayout";
 import Consent from "@/components/Consent";
 
 
-const tanMonCheri = localFont({
+const roxborough = localFont({
     src: [
         {
-            path: '../../assets/fonts/moncherifonts/tan-mon-cheri.woff',
+            path: '../../assets/fonts/roxborough/roxborough-cf-regular.woff',
             weight: '400',
             style: 'normal',
         },
         {
-            path: '../../assets/fonts/moncherifonts/tan-mon-cheri.woff2',
+            path: '../../assets/fonts/roxborough/roxborough-cf-regular.woff',
             weight: '600',
             style: 'bold',
         },
     ],
-    variable: "--font-tan-mon-cheri",
+    variable: "--font-roxborough-cf-regular",
 });
 
 const TTNorms = localFont({
@@ -58,7 +58,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-        <body className={ `${ tanMonCheri.variable } ${ TTNorms.variable }` }>
+        <body className={ `${ roxborough.variable } ${ TTNorms.variable }` }>
         <MainLayout>
             <PageLayout>
                 { children }

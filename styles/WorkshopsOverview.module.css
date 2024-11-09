@@ -1,0 +1,66 @@
+
+.cardsOverviewWrapper {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+
+    margin: 0 auto 40px auto;
+}
+
+.cardWrapper {
+
+    border: 1px solid var(--background);
+    min-width: 300px;
+    width: auto;
+    max-width: 500px;
+    min-height: 500px;
+    height: auto;
+    border-radius: 5px;
+    color: var(--textColor);
+    margin: 5px
+}
+
+.cardInner {
+
+
+    display: flex;
+    padding: 10px 0;
+    flex-direction: column;
+    flex-wrap: inherit;
+    align-content: space-between;
+    min-height: 500px;
+    height: auto;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    position: relative;
+}
+
+.cardButtons {
+
+    position: absolute;
+    padding: 10px;
+    flex-wrap: wrap;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.cardBody {
+    padding: 10px;
+}
+
+.cardBodySection {
+    padding: 15px 0;
+
+}
+
+.cardButtons > button {
+    margin: 5px 0
+}
+
+.editButton{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}

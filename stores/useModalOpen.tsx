@@ -2,14 +2,16 @@ import {create} from "zustand/index";
 
 
 interface modalOpen {
-    status: {search: boolean, treatmentForm: boolean}
+    status: {search: boolean, treatmentForm: boolean, createModal: boolean}
     setSearchOpen: () => void;
     setSearchClose: () => void;
     setTreatmentFormOpen:()=>void;
     setTreatmentFormClose: () => void;
+    setCreateModalOpen: () => void;
+    setCreateModalClose: () => void;
 }
 export const useModalOpen = create<modalOpen>((set) => ({
-    status: { search: false, treatmentForm: false },
+    status: { search: false, treatmentForm: false, createModal:false },
 
     // Update search to open
     setSearchOpen: () => set((state) => ({
@@ -29,5 +31,14 @@ export const useModalOpen = create<modalOpen>((set) => ({
     // Update treatmentForm to close
     setTreatmentFormClose: () => set((state) => ({
         status: { ...state.status, treatmentForm: false }
+    })),// Update treatmentForm to open
+
+    setCreateModalOpen: () => set((state) => ({
+        status: { ...state.status, createModal: true }
+    })),
+
+    // Update treatmentForm to close
+    setCreateModalClose: () => set((state) => ({
+        status: { ...state.status, createModal: false }
     })),
 }));
