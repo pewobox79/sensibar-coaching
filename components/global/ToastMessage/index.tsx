@@ -37,7 +37,7 @@ const ToastMessage = ({state, setState}: {
         className="d-inline-block m-1"
         style={ {
             position: "absolute",
-            display: "flex",
+            display: "fixed",
             justifyContent: "center",
             alignItems: "center",
             zIndex: 2000,

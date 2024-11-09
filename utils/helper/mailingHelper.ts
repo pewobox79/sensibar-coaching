@@ -24,7 +24,7 @@ export async function sendSubmissionEmail(userId:string, email:string, workshopN
         const info = await transporter.sendMail({
             to: `${ email }`, // list of receivers
             subject: "Deine Workshop Registrierung", // Subject line
-            text: `Danke für Deine Anmeldung zum Workshop "${workshopName.toUpperCase()}". Bitte klicke auf den folgenden Link, um Deine Anmeldung zu bestätigen. https://www.sensibar-coaching.de/rueckmeldungen/doubleOptIn?id=${userId}&wsId=${workshopId} . Dein Sensibar Team`, // plain text body
+            text: `Danke für Deine Anmeldung zum Workshop "${workshopName.toUpperCase()}".\n Bitte klicke auf den folgenden Link, um Deine Anmeldung zu bestätigen. https://www.sensibar-coaching.de/rueckmeldungen/doubleOptIn?id=${userId}&wsId=${workshopId} .\n Dein Sensibar Team`, // plain text body
             //html: `<div>Danke für Deine Anmeldung. Bitte schließe Deine Anmeldung ab, um Deinen Platz zu sichern.<br/><a href={"https://www.webdeveloper-peterwolf.com/${userId}"} target="_blank"><h3>Anmeldung abschließen</h3></a> </div>`, // html body
         })
 
@@ -43,7 +43,7 @@ export async function sendRegistrationFinalEmail(userId:string, email:string, na
             to: `${ email }`, // list of receivers
             subject: "Dein Platz ist gesichert!", // Subject line
 
-            html: `<div>Hey ${name}, <br/>Deine Anmeldung zum Workshop ${title.toUpperCase()} am ${workshopDate} ist bestätigt. <p>Nachfolgend findest du Deinen Einwähllink.<br/>WebLink:  ${workshopLink}<p><p>Ich freue mich auf Dich, </p><p>Deine Yessica</p><p>Sensibar-Coaching<br/>Email: hello@sensibar-coaching.de <br/>Mobil: +49 176 625 05 701<br/>Adresse: Lindenstrasse 6a 85309 Pörnbach</p></div>`, // html body
+            html: `<div><p>Hey ${name.toUpperCase()},</p> <p>Deine Anmeldung zum Workshop ${title.toUpperCase()} am ${workshopDate} ist bestätigt.</p> <p>Nachfolgend findest du Deinen Einwähllink.<br/>WebLink:  ${workshopLink}<p><p>Ich freue mich auf Dich, </p><p>Deine Yessica</p><p>Sensibar-Coaching | sensibel & wunderbar</p><p>Email: hello@sensibar-coaching.de <br/>Mobil: +49 176 625 05 701<br/>Adresse: Lindenstrasse 6a 85309 Pörnbach</p></div>`, // html body
         })
 
         return {msg: "email sucessfully sent", info}
