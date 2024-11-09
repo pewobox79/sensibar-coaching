@@ -5,7 +5,7 @@ export const getAllWorkshops = async () => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/workshops`)
+        const response = await fetch(`${ STRAPI_URI }/api/workshops?populate=*`)
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${ response.status }`)
@@ -92,7 +92,7 @@ export const addContactToWorkshop = async (contactId: string, workshopId:string,
 }
 
 
-export const executeDoubleOptIn = async (id: string | null) => {
+export const executeDoubleOptIn = async (id: string | null, workshopLink:string, title: string, workshop_date: string) => {
 
     try {
 
@@ -121,6 +121,9 @@ export const executeDoubleOptIn = async (id: string | null) => {
                 body: JSON.stringify({
                     name: data.data.personalData.firstname,
                     id: data.data.documentId,
+                    workshopLink: workshopLink,
+                    workshopDate: workshop_date,
+                    workshopTitle: title,
                     email: data.data.contact[0].email
                 })
             }

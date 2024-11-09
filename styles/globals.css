@@ -24,7 +24,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-tan-mon-cheri);
+    font-family: var(--font-roxborough-cf-regular);
 }
 
 * {
@@ -102,13 +102,13 @@ input[type="checkbox"] {
     color: var(--textColor);
     text-decoration: none;
     border-bottom: 1px solid var(--background);
-    font-family: var(--font-tan-mon-cheri)
+    font-family: var(--font-roxborough-cf-regular)
 }
 
 .activeLink {
     color: white;
     border-bottom: 3px solid var(--textColor);
-    font-family: var(--font-tan-mon-cheri)
+    font-family: var(--font-roxborough-cf-regular)
 }
 
 .innerTextLinkStyle {
@@ -126,7 +126,40 @@ input[type="checkbox"] {
     margin-left: 10px
 }
 
+.globalModal {
 
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100dvh;
+    background-color: var(--seachBackground);
+    z-index: 1000;
+}
+
+.globalModalInner{
+
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center
+
+}
+
+.globalModalBody{
+
+    width: 100%;
+    height: 500px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px
+}
 @media screen and (min-width: 768px) {
     .mainContent {
         max-width: 1300px

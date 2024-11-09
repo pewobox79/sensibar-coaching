@@ -18,13 +18,13 @@ export const transporter = nodemailer.createTransport({
 } as SMTPTransport.Options)
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function sendSubmissionEmail(userId:string, email:string) {
+export async function sendSubmissionEmail(userId:string, email:string, workshopName:string, workshopId: string) {
 
     try {
         const info = await transporter.sendMail({
             to: `${ email }`, // list of receivers
             subject: "Deine Workshop Registrierung", // Subject line
-            text: `Danke für Deine Anmeldung. Bitte schließe Deine Anmeldung ab, um Deinen Platz zu sichern. https://www.sensibar-coaching.de/rueckmeldungen/doubleOptIn?id=${userId}`, // plain text body
+            text: `Danke für Deine Anmeldung zum Workshop "${workshopName.toUpperCase()}". Bitte klicke auf den folgenden Link, um Deine Anmeldung zu bestätigen. https://www.sensibar-coaching.de/rueckmeldungen/doubleOptIn?id=${userId}&wsId=${workshopId} . Dein Sensibar Team`, // plain text body
             //html: `<div>Danke für Deine Anmeldung. Bitte schließe Deine Anmeldung ab, um Deinen Platz zu sichern.<br/><a href={"https://www.webdeveloper-peterwolf.com/${userId}"} target="_blank"><h3>Anmeldung abschließen</h3></a> </div>`, // html body
         })
 
@@ -36,14 +36,14 @@ export async function sendSubmissionEmail(userId:string, email:string) {
 
 
 
-export async function sendRegistrationFinalEmail(userId:string, email:string, name:string) {
+export async function sendRegistrationFinalEmail(userId:string, email:string, name:string, workshopLink: string,title: string, workshopDate: string) {
 
     try {
         const info = await transporter.sendMail({
             to: `${ email }`, // list of receivers
             subject: "Dein Platz ist gesichert!", // Subject line
 
-            html: `<div>Hallo ${name}, <br/>Ich habe Dir Deinen Platz gesichert. <br/><p>Gruß Yessica</p><p>Sensibar-Coaching<br/>Lindenstrasse 6a<br/>85309 Pörnbach</p></div>`, // html body
+            html: `<div>Hey ${name}, <br/>Deine Anmeldung zum Workshop ${title.toUpperCase()} am ${workshopDate} ist bestätigt. <p>Nachfolgend findest du Deinen Einwähllink.<br/>WebLink:  ${workshopLink}<p><p>Ich freue mich auf Dich, </p><p>Deine Yessica</p><p>Sensibar-Coaching<br/>Email: hello@sensibar-coaching.de <br/>Mobil: +49 176 625 05 701<br/>Adresse: Lindenstrasse 6a 85309 Pörnbach</p></div>`, // html body
         })
 
         return {msg: "email sucessfully sent", info}

@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
 
-    const response = await sendRegistrationFinalEmail(body.id, body.email, body.name);
+    const response = await sendRegistrationFinalEmail(body.id, body.email, body.name, body.workshopLink, body.workshopTitle, body.workshopDate);
     return Response.json({msg: "sending mail response", response})
 
 

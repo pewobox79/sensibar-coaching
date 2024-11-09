@@ -4,13 +4,17 @@ import React from "react";
 import Link from "next/link";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlusCircle, faProjectDiagram, faUser, faLineChart, faSearch} from "@fortawesome/free-solid-svg-icons";
-import {usePathname} from 'next/navigation'
+import {usePathname, useRouter} from 'next/navigation'
 import ClientSearch from "@/components/dashboardComponents/Client/ClientSearch";
 import {useModalOpen} from "@/stores/useModalOpen";
+import GlobalModal from "@/components/global/GlobalModal";
+import WorkshopForm from "@/components/forms/WorkshopForm";
+import Button from "@/components/global/Button";
 
 const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactElement | React.ReactElement[] }) => {
 
     const path = usePathname();
+    const router = useRouter();
 
     const isWorkshopPath = path && path.includes("workshops");
     const isAdminPath = path && path === "/admin";
@@ -19,9 +23,22 @@ const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactEl
     const searchStatus = useModalOpen().status
     console.log("searchstatus",searchStatus)
     const openSearch = useModalOpen().setSearchOpen;
+    const openCreateModal = useModalOpen().setCreateModalOpen
+    const closeCreateModal = useModalOpen().setCreateModalClose
+
+    function handleCreateNewWorkshop(){
+
+        router.push("/admin/workshops/create")
+        closeCreateModal()
+
+    }
 
     function handleSearchOpen() {
         openSearch();
+    }
+
+    function handleCreateModal() {
+        openCreateModal()
     }
 
     return <div className={ styles.dashboardWrapper }>
@@ -41,7 +58,7 @@ const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactEl
                 <FontAwesomeIcon icon={ faProjectDiagram }
                                  className={ `${ styles.iconStyle } ${ isWorkshopPath && styles.activeIconStyle }` }/>
             </Link>
-            <div className={ styles.sidebarItem }>
+            <div className={ styles.sidebarItem } onClick={ handleCreateModal }>
                 <FontAwesomeIcon icon={ faPlusCircle } className={ styles.iconStyle }/>
             </div>
             <div className={ styles.sidebarItem } onClick={ handleSearchOpen }>
@@ -53,6 +70,7 @@ const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactEl
             { children }
 
         { searchStatus.search && <ClientSearch/> }
+        { searchStatus.createModal && <GlobalModal><h1>Was möchtest du kreieren?</h1><Button type={"submit"} action={handleCreateNewWorkshop} title={"neuer workshop"}/><Button title={"neuer Coachee"} type={"submit"}/></GlobalModal> }
     </div>
 }
 

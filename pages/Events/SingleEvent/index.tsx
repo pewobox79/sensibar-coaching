@@ -23,7 +23,7 @@ const SingleEvent = (props:{data:{title:string, description:[],workshop_date:str
                 </div>
                 <div className={ styles.singleEventContent50 }>
                     <EventInfoBox workshop_date={workshopDetails.workshop_date} workshopTimeStart={workshopDetails.workshopTimeStart} workshopTimeEnd={workshopDetails.workshopTimeEnd} workshopType={workshopDetails.type}/>
-                    <EventRegistration workshopId={workshopDetails.documentId}/></div>
+                    <EventRegistration workshopId={workshopDetails.documentId} workshopName={workshopDetails.title}/></div>
             </div>
             </div>
 
