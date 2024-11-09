@@ -27,7 +27,7 @@ const ContactDetails = ({context}: { context: ClientData }) => {
         delete context?.contact[0]?.id
         delete context?.address?.id
         updateContact(context, context.documentId).then(response => {
-            console.log("updateContact", response)
+
             setSuccess({...success, state: true})
         })
         setEdit(false)

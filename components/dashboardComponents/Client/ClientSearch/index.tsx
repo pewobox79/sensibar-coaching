@@ -50,7 +50,6 @@ const ClientSearch = () => {
     }, [])
 
     const handleClientChange = (selected: Option[]) => {
-        console.log("handleClientChange", selected)
         // Directly set the selected items as strings
         setClient(selected);
     };

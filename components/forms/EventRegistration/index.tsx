@@ -95,8 +95,6 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
 
                     fetch(`${ STRAPI_URI }/api/contacts/?populate=*`, config).then(response => response.json())
                         .then(newData => {
-                            console.log("news Data response in registration", newData);
-
 
                             const newContactId = newData.data.documentId
 
@@ -110,7 +108,6 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
 
 
                           addContactToWorkshop(newData.data.documentId, workshopId, updatedArray).then(response => {
-                              console.log("response after addcontactto workshop", response)
                               setError({...error, state: false})
                               setSuccess({...success, state: true, msg: "Your registration was successfully"})
                               formik.resetForm()
@@ -132,8 +129,6 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
                                   }),
                               })
 
-
-                              console.log("registration successful", data)
                           })
 
 
@@ -154,8 +149,6 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
                     const existingContactId = data?.data[0].documentId
                     //handle update existing contact
 
-                    console.log("data values in else", data)
-
                     getSingleWorkshop(workshopId).then((workshop) => {
 
                         const updatedArray = [workshop.data.contacts]
@@ -164,7 +157,6 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
 
 
                         addContactToWorkshop(existingContactId, workshopId, updatedArray).then(res => {
-                            console.log("response existing contact", res)
 
                             setError({...error, state: false})
                             setSuccess({...success, state: true, msg: "Your registration was successfully"})

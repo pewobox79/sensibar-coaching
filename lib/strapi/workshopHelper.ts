@@ -110,7 +110,6 @@ export const executeDoubleOptIn = async (id: string | null, workshopLink:string,
 
 
         const data = await response.json();
-        console.log("after PUT to STRAPI response", data)
 
         if (data) {
             const config = {

@@ -1,4 +1,4 @@
-import type {Metadata} from "next";
+import type {Metadata, Viewport} from "next";
 import localFont from "next/font/local";
 import "../../styles/globals.css";
 import MainLayout from "@/layouts/MainLayout";
@@ -49,7 +49,30 @@ const TTNorms = localFont({
 export const metadata: Metadata = {
     title: "SENSIBAR | sensibel & wunderbar",
     description: "Hochsensible Menschen bekommen bei mir hilfreiche tipps und methoden für eine bessere Lebensqualität",
+    openGraph:{
+        type: "website",
+        url: "https://sensibar-coaching.de",
+        title: "SENSIBAR | sensibel & wunderbar",
+        description: "Hochsensible Menschen bekommen bei mir hilfreiche tipps und methoden für eine bessere Lebensqualität",
+        images: [
+            {
+                url: "https://sensibar-coaching.de/logo.png",
+                width: 1200,
+                height: 630,
+                alt: "SENSIBAR | sensibel & wunderbar",
+            },
+        ],
+        site_name: "SENSIBAR | sensibel & wunderbar",
+        locale: "de_DE",
+    }
 };
+
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+}
 
 export default function RootLayout({
                                        children,

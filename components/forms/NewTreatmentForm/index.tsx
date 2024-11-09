@@ -37,7 +37,6 @@ const NewTreatmentForm = ({clientId, clientName}: { clientId: string, clientName
         validateOnChange: false,
         onSubmit: async (values) => {
             //setProcessing(true)
-            console.log("item values",values)
             try {
 
 
@@ -65,7 +64,6 @@ const NewTreatmentForm = ({clientId, clientName}: { clientId: string, clientName
                     setError({...error, state: true, msg: "Ein Fehler ist aufgetreten"})
                 }
 
-                console.log("new item", newItemValue)
             } catch (err) {
                 console.log(err)
             }

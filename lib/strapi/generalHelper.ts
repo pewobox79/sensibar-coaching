@@ -7,7 +7,6 @@ export const getNavigation = async () => {
     try {
 
         const response = await fetch(`${ STRAPI_URI }/api/navigation/?populate=*`)
-        console.log("response", response)
         return await response.json()
 
     } catch (e) {
@@ -91,7 +90,6 @@ export const updateContact = async (updatedData:ClientData, id:string|undefined)
 
     }
 
-    console.log("newData", newData)
     try {
 
         const response = await fetch(`${ STRAPI_URI }/api/contacts/${ id }?populate=*`, {
@@ -109,8 +107,8 @@ export const updateContact = async (updatedData:ClientData, id:string|undefined)
 
     } catch (err) {
 
-        console.log("konnte nicht aktualisiert werden", err)
-        return {msg: "Kontakt update fehlerhaft."}
+
+        return {msg: "Kontakt update fehlerhaft.", err}
 
     }
 

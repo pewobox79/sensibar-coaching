@@ -11,7 +11,6 @@ import ConsentForm from "@/components/forms/ConsentForm";
 const Consent = () => {
 
     const localStorage=useLocalStorage("sensibarConsent")
-    console.log(localStorage)
     const [open, setOpen] = useState(true);
     const [consentValue, setConsentValue] = useState(localStorage?.value ? localStorage?.value : {necessary: true, marketing: false, tracking: false})
 
@@ -23,7 +22,6 @@ const Consent = () => {
     }, [])
 
     function handleConsent() {
-        console.log("handleConsent")
         setOpen(!open)
     }
 

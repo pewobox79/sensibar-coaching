@@ -9,6 +9,7 @@ const SingleEvent = (props:{data:{title:string, description:[],workshop_date:str
     //@ts-expect-error
     const workshopDetails:{title: string, description: [], workshop_date:string, workshopTimeStart: string, workshopTimeEnd: string, type:string, documentId:string} = props.data ? props?.data:{}
 
+    console.log("workshop details", workshopDetails)
     return <div className={ styles.singleEventWrapper }>
         <div className={ styles.singleEventInner }>
             <div className={ styles.singleEventHeader }>
