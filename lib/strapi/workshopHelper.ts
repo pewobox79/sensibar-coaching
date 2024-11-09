@@ -5,7 +5,7 @@ export const getAllWorkshops = async () => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/workshops?populate=*`)
+        const response = await fetch(`${ STRAPI_URI }/api/workshops?populate=*`, {next: { revalidate: 60 }})
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${ response.status }`)
@@ -22,7 +22,7 @@ export const getSingleWorkshop = async (id: string | unknown) => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/workshops/${ id }?populate=*`)
+        const response = await fetch(`${ STRAPI_URI }/api/workshops/${ id }?populate=*`, {next: { revalidate: 60 }})
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${ response.status }`)
