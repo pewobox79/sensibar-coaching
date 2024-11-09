@@ -47,13 +47,15 @@ export const metadata: Metadata = {
     title: "SENSIBAR | sensibel & wunderbar",
     description: "Hochsensible Menschen bekommen bei mir hilfreiche tipps und methoden für eine bessere Lebensqualität",
 };
+
+const access = false;
 const AdminLayout = ({children}: { children: React.ReactNode | React.ReactElement | React.ReactElement[] }) => {
 
     return <html>
     <body className={ `${ roxborough.variable } ${ TTNorms.variable }` }>
-    <DashboardLayout>
+    {access &&<DashboardLayout>
         { children }
-    </DashboardLayout>
+    </DashboardLayout>}
     </body>
     </html>
 }
