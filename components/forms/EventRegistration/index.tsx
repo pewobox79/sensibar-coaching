@@ -15,7 +15,7 @@ import {
 import EmailInfo from "@/components/global/EmailInfo";
 
 
-const EventRegistration = ({workshopId}: { workshopId: string }) => {
+const EventRegistration = ({workshopId, workshopName}: { workshopId: string, workshopName:string }) => {
     const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV ? process.env.NEXT_PUBLIC_STRAPI_URL_DEV : ""
 
     const [error, setError] = useState({state: false, msg: "", type: "error"});
@@ -126,6 +126,8 @@ const EventRegistration = ({workshopId}: { workshopId: string }) => {
                                   },
                                   body: JSON.stringify({
                                       id: newData.data?.documentId,
+                                      workshopName: workshopName,
+                                      workshopId:workshopId,
                                       email: newData?.data?.contact[0].email
                                   }),
                               })
