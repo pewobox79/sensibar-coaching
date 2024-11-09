@@ -35,7 +35,7 @@ export const getTreatmentItemsByContact = async (contactId:string)=>{
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/contacts/${contactId}?populate=treatment_notes`)
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/${contactId}?populate=treatment_notes`, {next: { revalidate: 60 }})
 
         const treatmentList = await response.json()
 

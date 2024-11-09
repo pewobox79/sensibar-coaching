@@ -6,7 +6,7 @@ export const getNavigation = async () => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/navigation/?populate=*`)
+        const response = await fetch(`${ STRAPI_URI }/api/navigation/?populate=*`, {next: { revalidate: 60 }})
         return await response.json()
 
     } catch (e) {
@@ -31,7 +31,7 @@ export const getClientsArray = async () => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/contacts/?populate=*`)
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/?populate=*`, {next: { revalidate: 60 }})
         const clientsData = await response.json()
         let clientsArray = []
         if (clientsData) {
@@ -57,7 +57,7 @@ export const getSelectedClientFromAPI = async (firstname: string, lastname: stri
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/contacts/?filters[personalData][firstname][$eq]=${ firstname.toLowerCase() }&[personalData][firstname][$eq]=${ lastname.toLowerCase() }&populate=*`)
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/?filters[personalData][firstname][$eq]=${ firstname.toLowerCase() }&[personalData][firstname][$eq]=${ lastname.toLowerCase() }&populate=*`, {next: { revalidate: 60 }})
         const clientData = await response.json()
         return clientData.data[0]
 
