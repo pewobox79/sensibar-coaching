@@ -36,8 +36,8 @@ const ToastMessage = ({state, setState}: {
         autohide
         className="d-inline-block m-1"
         style={ {
-            position: "absolute",
-            display: "fixed",
+            position: "fixed",
+            display: "flex",
             justifyContent: "center",
             alignItems: "center",
             zIndex: 2000,
