@@ -25,13 +25,13 @@ const DoubleOptInPage = () => {
         },
         [id]
     )
-    return <>
+    return <div className={"innerWrapper"}>
         <h3>Deine Anmeldung zu meinen Workshop. </h3>
         <p>Ich freue mich über Dein Kommen.</p>
         <p>Du bekommst alle nötigen Informationen in den nächsten Minuten per Email</p>
 
         <p>Gruß Yessica</p>
-    </>
+    </div>
 }
 
 export default DoubleOptInPage;
