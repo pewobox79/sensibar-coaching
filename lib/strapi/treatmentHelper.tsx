@@ -1,8 +1,5 @@
 
 const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
-const config = {
-
-}
 
 export type TreatmentDataType = {
     data: { title: string, details: string, location: "vor Ort" | "online" | "telefonisch", contact: string }
