@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     description: "Hochsensible Menschen bekommen bei mir hilfreiche tipps und methoden für eine bessere Lebensqualität",
 };
 
-const access = true;
+const access = false;
 const AdminLayout = ({children}: { children: React.ReactNode | React.ReactElement | React.ReactElement[] }) => {
 
     return <html>
