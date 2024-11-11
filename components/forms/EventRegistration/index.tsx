@@ -86,7 +86,8 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
                     const config = {
                         method: "POST",
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN? process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN : ""}`
                         },
                         body: JSON.stringify(dataMapping)
                     }

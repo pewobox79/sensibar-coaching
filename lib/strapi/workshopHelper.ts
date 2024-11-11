@@ -1,11 +1,16 @@
-
 const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
 
 export const getAllWorkshops = async () => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/workshops?populate=*`, {next: { revalidate: 60 }})
+        const response = await fetch(`${ STRAPI_URI }/api/workshops?populate=*`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+            },
+            next: {revalidate: 60}
+        })
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${ response.status }`)
@@ -22,7 +27,13 @@ export const getSingleWorkshop = async (id: string | unknown) => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/workshops/${ id }?populate=*`, {next: { revalidate: 60 }})
+        const response = await fetch(`${ STRAPI_URI }/api/workshops/${ id }?populate=*`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+            },
+            next: {revalidate: 60}
+        })
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${ response.status }`)
@@ -37,7 +48,13 @@ export const getSingleWorkshop = async (id: string | unknown) => {
 export const checkIfContactExists = async (firstname: string, lastname: string, email: string, query: string = "contacts") => {
 
     try {
-        const response = await fetch(`${ STRAPI_URI }/api/${ query }?filters[contact][email][$eq]=${ email }&filters[personalData][firstname][$eq]=${ firstname }&filters[personalData][lastname][$eq]=${ lastname }&populate=contact`)
+        const response = await fetch(`${ STRAPI_URI }/api/${ query }?filters[contact][email][$eq]=${ email }&filters[personalData][firstname][$eq]=${ firstname }&filters[personalData][lastname][$eq]=${ lastname }&populate=contact`,{
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+            },
+            next: {revalidate: 60}
+        })
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${ response.status }`)
@@ -59,11 +76,10 @@ export const checkIfContactExists = async (firstname: string, lastname: string, 
 }
 
 
+export const addContactToWorkshop = async (contactId: string, workshopId: string, updatedArray?: unknown[]) => {
 
-export const addContactToWorkshop = async (contactId: string, workshopId:string, updatedArray?:unknown[]) => {
-
-    const newData ={
-        data:{
+    const newData = {
+        data: {
             contacts: updatedArray
         }
     }
@@ -72,7 +88,8 @@ export const addContactToWorkshop = async (contactId: string, workshopId:string,
         const response = await fetch(`${ STRAPI_URI }/api/workshops/${ workshopId }?populate=*`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
             },
             body: JSON.stringify(newData)
         })
@@ -92,14 +109,15 @@ export const addContactToWorkshop = async (contactId: string, workshopId:string,
 }
 
 
-export const executeDoubleOptIn = async (id: string | null, workshopLink:string, title: string, workshop_date: string) => {
+export const executeDoubleOptIn = async (id: string | null, workshopLink: string, title: string, workshop_date: string) => {
 
     try {
 
         const response = await fetch(`${ STRAPI_URI }/api/contacts/${ id }?populate=*`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
             },
             body: JSON.stringify({
                 data: {

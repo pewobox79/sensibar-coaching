@@ -2,6 +2,13 @@ import {ClientData} from "@/stores/useClientStore";
 
 const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
 
+const config={
+    method: 'GET',
+    headers: {
+        Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+    },
+    next: { revalidate: 60 }
+}
 export const getNavigation = async () => {
 
     try {
@@ -29,9 +36,11 @@ export const getBasicPageContent = async (slug: string) => {
 
 export const getClientsArray = async () => {
 
+
+
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/contacts/?populate=*`, {next: { revalidate: 60 }})
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/?populate=*`,config )
         const clientsData = await response.json()
         let clientsArray = []
         if (clientsData) {
@@ -57,7 +66,7 @@ export const getSelectedClientFromAPI = async (firstname: string, lastname: stri
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/contacts/?filters[personalData][firstname][$eq]=${ firstname.toLowerCase() }&[personalData][firstname][$eq]=${ lastname.toLowerCase() }&populate=*`, {next: { revalidate: 60 }})
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/?filters[personalData][firstname][$eq]=${ firstname.toLowerCase() }&[personalData][firstname][$eq]=${ lastname.toLowerCase() }&populate=*`, config)
         const clientData = await response.json()
         return clientData.data[0]
 
@@ -95,7 +104,8 @@ export const updateContact = async (updatedData:ClientData, id:string|undefined)
         const response = await fetch(`${ STRAPI_URI }/api/contacts/${ id }?populate=*`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
             },
             body: JSON.stringify({data:newData})
         })
