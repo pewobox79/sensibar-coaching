@@ -7,10 +7,14 @@ import * as yup from "yup";
 import Button from "@/components/global/Button";
 import {useLocalStorage} from "@/hooks/useLocalStorage";
 import {useRouter} from "next/navigation";
+import {useState} from "react";
+import ToastMessage from "@/components/global/ToastMessage";
 
 const LoginForm = () => {
     const router = useRouter();
     const localStorage = useLocalStorage("sensiUser")
+    const [error, setError] = useState({msg: "", state: false, type: "error"})
+    const [success, setSuccess] = useState({state: false, msg: "", type: "success"})
     const LoginSchema = yup.object().shape({
         identifier: yup.string().required('Email oder Username ist verpflichtend'),
         password: yup.string().required('Passwort ist verpflichtend')
@@ -38,11 +42,16 @@ const LoginForm = () => {
             })
 
             const data = await response.json()
+            if (data.msg === "user login failed") {
+                setError({...error, state: true, msg: data.msg})
+            } else {
+// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                localStorage && localStorage.setStoredValue({jwt: data?.jwt, id: data?.user?.documentId})
+                setSuccess({...success, state: true, msg: "login successful"})
+                setTimeout(() => {
+                    router.replace("/admin")
+                }, 800)
 
-            if (data) {
-                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                localStorage && localStorage.setStoredValue({jwt: data.jwt, id: data.user.documentId})
-              await router.replace("/admin")
             }
         }
 
@@ -83,7 +92,8 @@ const LoginForm = () => {
                 <div style={ {display: "flex", justifyContent: "center"} }>
 
                     <Button type={ "submit" } title={ "login" }/>
-
+                    { error && <ToastMessage state={ error } setState={ setError }/> }
+                    { success && <ToastMessage state={ success } setState={ setSuccess }/> }
                 </div>
 
             </form>
