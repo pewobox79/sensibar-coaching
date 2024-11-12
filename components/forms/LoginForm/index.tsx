@@ -6,8 +6,10 @@ import styles from '@/styles/Formstyles.module.css'
 import * as yup from "yup";
 import Button from "@/components/global/Button";
 import {useLocalStorage} from "@/hooks/useLocalStorage";
+import {useRouter} from "next/navigation";
 
 const LoginForm = () => {
+    const router = useRouter();
     const localStorage = useLocalStorage("sensiUser")
     const LoginSchema = yup.object().shape({
         identifier: yup.string().required('Email oder Username ist verpflichtend'),
@@ -40,7 +42,7 @@ const LoginForm = () => {
             if (data) {
                 // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                 localStorage && localStorage.setStoredValue({jwt: data.jwt, id: data.user.documentId})
-                window.location.href = "/admin"
+              await router.replace("/admin")
             }
         }
 
