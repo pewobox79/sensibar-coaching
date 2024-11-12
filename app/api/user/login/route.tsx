@@ -10,7 +10,7 @@ const cookieStore = await cookies()
 
     const response = await userLoginRequest(identifier, password)
 console.log("response", response)
-    cookieStore.set("sensiToken", response.jwt)
+    await cookieStore.set("sensiToken", response.jwt)
 
     return Response.json(response)
 
