@@ -50,7 +50,7 @@ const LoginForm = () => {
                 setSuccess({...success, state: true, msg: "login successful"})
                 setTimeout(() => {
                     router.replace("/admin")
-                }, 800)
+                }, 500)
 
             }
         }

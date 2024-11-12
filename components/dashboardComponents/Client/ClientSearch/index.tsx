@@ -56,7 +56,7 @@ const ClientSearch = () => {
         // Directly set the selected items as strings
         setClient(selected);
     };
-    return <div className={ styles.searchWrapper }>
+    return <div className={ styles.searchWrapper } onClick={closeSearch}>
         <div className={ styles.searchInner }>
 
 

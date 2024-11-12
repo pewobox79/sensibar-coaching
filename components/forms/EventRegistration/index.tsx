@@ -13,13 +13,15 @@ import {
 
 } from "@/lib/strapi/workshopHelper";
 import EmailInfo from "@/components/global/EmailInfo";
+import Loader from "@/components/global/Loader";
 
 
-const EventRegistration = ({workshopId, workshopName}: { workshopId: string, workshopName:string }) => {
+const EventRegistration = ({workshopId, workshopName}: { workshopId: string, workshopName: string }) => {
     const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV ? process.env.NEXT_PUBLIC_STRAPI_URL_DEV : ""
 
     const [error, setError] = useState({state: false, msg: "", type: "error"});
     const [success, setSuccess] = useState({state: false, msg: "", type: "success"});
+    const [registrationProcess, setRegistrationProcess] = useState(false);
     const [emailInfo, setEmailInfo] = useState(false);
     /*const [processing, setProcessing] = useState(false)*/
     const RegistrationSchema = yup.object().shape({
@@ -56,6 +58,7 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
         onSubmit: async (values) => {
             //setProcessing(true)
 
+            setRegistrationProcess(true)
             const cleanedFirstname = values.firstname.replace(/\s+/g, '').toLowerCase();
             const cleanedLastname = values.lastname.replace(/\s+/g, '').toLowerCase();
 
@@ -78,20 +81,16 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
                 }
 
 
-
-
-
                 if (data?.msg === "new contact") {
 
                     const config = {
                         method: "POST",
                         headers: {
                             'Content-Type': 'application/json',
-                            Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN? process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN : ""}`
+                            Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN ? process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN : "" }`
                         },
                         body: JSON.stringify(dataMapping)
                     }
-
 
 
                     fetch(`${ STRAPI_URI }/api/contacts/?populate=*`, config).then(response => response.json())
@@ -100,48 +99,40 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
                             const newContactId = newData.data.documentId
 
 
-
-                      getSingleWorkshop(workshopId).then(workshop =>{
-
-
-                          const updatedArray = [workshop.data.contacts]
-                          updatedArray.push(newContactId)
+                            getSingleWorkshop(workshopId).then(workshop => {
 
 
-                          addContactToWorkshop(newData.data.documentId, workshopId, updatedArray).then(() => {
-                              setError({...error, state: false})
-                              setSuccess({...success, state: true, msg: "Your registration was successfully"})
-                              formik.resetForm()
-                              setTimeout(() => {
-                                  setSuccess({...success, state: false})
-                                  setEmailInfo(true)
-                              }, 3000)
-
-                              fetch('/api/db/participant', {
-                                  method: 'POST',
-                                  headers: {
-                                      'Content-Type': 'application/json',
-                                  },
-                                  body: JSON.stringify({
-                                      id: newData.data?.documentId,
-                                      workshopName: workshopName,
-                                      workshopId:workshopId,
-                                      email: newData?.data?.contact[0].email
-                                  }),
-                              })
-
-                          })
+                                const updatedArray = [workshop.data.contacts]
+                                updatedArray.push(newContactId)
 
 
+                                addContactToWorkshop(newData.data.documentId, workshopId, updatedArray).then(() => {
+                                    setRegistrationProcess(false)
+                                    setError({...error, state: false})
+                                    setSuccess({...success, state: true, msg: "Your registration was successfully"})
+                                    formik.resetForm()
+                                    setTimeout(() => {
+                                        setSuccess({...success, state: false})
+                                        setEmailInfo(true)
 
+                                    }, 3000)
 
+                                    fetch('/api/db/participant', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify({
+                                            id: newData.data?.documentId,
+                                            workshopName: workshopName,
+                                            workshopId: workshopId,
+                                            email: newData?.data?.contact[0].email
+                                        }),
+                                    })
 
+                                })
 
-
-
-                      })
-
-
+                            })
                         })
 
 
@@ -156,9 +147,8 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
                         updatedArray.push(existingContactId)
 
 
-
                         addContactToWorkshop(existingContactId, workshopId, updatedArray).then(() => {
-
+                            setRegistrationProcess(false)
                             setError({...error, state: false})
                             setSuccess({...success, state: true, msg: "Your registration was successfully"})
                             formik.resetForm()
@@ -178,14 +168,7 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
                         })
 
 
-
-
-
-
-
-
                     })
-
 
 
                 }
@@ -320,7 +303,7 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
             </div>
             <div style={ {display: "flex", justifyContent: "center"} }>
 
-                <Button type={ "submit" }/>
+                { registrationProcess ? <Loader/> : <Button type={ "submit" }/> }
 
             </div>
             <div style={ {padding: "40px 0"} }>
