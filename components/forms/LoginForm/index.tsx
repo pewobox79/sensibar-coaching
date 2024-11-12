@@ -5,24 +5,19 @@ import {useFormik} from "formik";
 import styles from '@/styles/Formstyles.module.css'
 import * as yup from "yup";
 import Button from "@/components/global/Button";
+import {useLocalStorage} from "@/hooks/useLocalStorage";
 
-const LoginForm =()=>{
-
+const LoginForm = () => {
+    const localStorage = useLocalStorage("sensiUser")
     const LoginSchema = yup.object().shape({
-        firstname: yup.string().required('Vorname ist verpflichtend'),
-        lastname: yup.string().required('Nachname ist verpflichtend'),
-        contact: yup.object({
-            email: yup.string().email().required('Email is verpflichtend')
-        }),
+        identifier: yup.string().required('Email oder Username ist verpflichtend'),
+        password: yup.string().required('Passwort ist verpflichtend')
+
     })
 
     const INITIAL_FORM_VALUES = {
-        firstname: '',
-        lastname: '',
-        contact: {
-            email: '',
-            phone: '',
-        }
+        identifier: "",
+        password: ""
     }
 
     const formik = useFormik({
@@ -31,61 +26,66 @@ const LoginForm =()=>{
         validateOnChange: false,
         onSubmit: async (values) => {
             //setProcessing(true)
-            console.log(values)
 
+            const response = await fetch("/api/user/login", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(values)
+            })
+
+            const data = await response.json()
+
+            if (data) {
+                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                localStorage && localStorage.setStoredValue({jwt: data.jwt, id: data.user.documentId})
+                window.location.href = "/admin"
+            }
         }
 
     })
     return <>
-
-        <form onSubmit={ formik.handleSubmit } className={styles.loginForm}>
-
-            <div className={ styles.formItem }>
-                <Form.Control
-                    type="text"
-                    id="firstname"
-                    placeholder="Vorname"
-                    name={ "firstname" }
-                    className={ formik.errors.firstname && styles.inputError }
-                    value={ formik.values.firstname }
-                    onChange={ formik.handleChange }
-                />
-                { formik.errors.firstname && <p className={ styles.inputErrorText }>{ formik.errors.firstname }</p> }
+        <div className={ styles.loginFormInner }>
+            <div className={ styles.loginFormHeader }>
+                <h2>User Login</h2>
             </div>
-            <div className={ styles.formItem }>
-                <Form.Control
-                    type="text"
-                    id="lastname"
-                    placeholder="Nachname"
-                    className={ formik.errors.firstname && styles.inputError }
-                    value={ formik.values.lastname }
-                    onChange={ formik.handleChange }
-                    name={ "lastname" }
-                />
-                { formik.errors.lastname && <p className={ styles.inputErrorText }>{ formik.errors.lastname }</p> }
-            </div>
+            <form onSubmit={ formik.handleSubmit } className={ styles.loginForm }>
 
-            <div className={ styles.formItem }>
-                <Form.Control
-                    type="text"
-                    id="contact.email"
-                    placeholder="E-Mail Adresse"
-                    className={ formik.errors.contact?.email && styles.inputError }
-                    value={ formik.values.contact?.email }
-                    onChange={ formik.handleChange }
-                    inputMode={ "email" }
-                    name={ "contact.email" }
-                />
-                { formik.errors.contact?.email &&
-                  <p className={ styles.inputErrorText }>{ formik.errors.contact?.email }</p> }
-            </div>
-            <div style={ {display: "flex", justifyContent: "center"} }>
+                <div className={ styles.formItem }>
+                    <Form.Control
+                        type="text"
+                        id="identifier"
+                        placeholder="Email oder Username"
+                        name={ "identifier" }
+                        className={ formik.errors.identifier && styles.inputError }
+                        value={ formik.values.identifier }
+                        onChange={ formik.handleChange }
+                    />
+                    { formik.errors.identifier &&
+                      <p className={ styles.inputErrorText }>{ formik.errors.identifier }</p> }
+                </div>
+                <div className={ styles.formItem }>
+                    <Form.Control
+                        type="password"
+                        id="password"
+                        placeholder="Passwort"
+                        className={ formik.errors.password && styles.inputError }
+                        value={ formik.values.password }
+                        onChange={ formik.handleChange }
+                        name={ "password" }
+                    />
+                    { formik.errors.password &&
+                      <p className={ styles.inputErrorText }>{ formik.errors.password }</p> }
+                </div>
+                <div style={ {display: "flex", justifyContent: "center"} }>
 
-                <Button type={ "submit" } title={"login"}/>
+                    <Button type={ "submit" } title={ "login" }/>
 
-            </div>
+                </div>
 
-        </form>
+            </form>
+        </div>
 
     </>
 }

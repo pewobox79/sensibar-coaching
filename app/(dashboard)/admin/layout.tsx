@@ -3,6 +3,7 @@ import React from "react";
 import '@/styles/globals.css'
 import type {Metadata} from "next";
 import localFont from "next/font/local";
+import AuthLayout from "@/layouts/AuthLayout";
 
 const roxborough = localFont({
     src: [
@@ -48,14 +49,15 @@ export const metadata: Metadata = {
     description: "Hochsensible Menschen bekommen bei mir hilfreiche tipps und methoden für eine bessere Lebensqualität",
 };
 
-const access = false;
 const AdminLayout = ({children}: { children: React.ReactNode | React.ReactElement | React.ReactElement[] }) => {
 
     return <html>
     <body className={ `${ roxborough.variable } ${ TTNorms.variable }` }>
-    {access &&<DashboardLayout>
-        { children }
-    </DashboardLayout>}
+   <AuthLayout>
+      <DashboardLayout>
+          { children }
+      </DashboardLayout>
+    </AuthLayout>
     </body>
     </html>
 }

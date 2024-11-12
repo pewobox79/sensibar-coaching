@@ -8,7 +8,6 @@ import {usePathname, useRouter} from 'next/navigation'
 import ClientSearch from "@/components/dashboardComponents/Client/ClientSearch";
 import {useModalOpen} from "@/stores/useModalOpen";
 import GlobalModal from "@/components/global/GlobalModal";
-import WorkshopForm from "@/components/forms/WorkshopForm";
 import Button from "@/components/global/Button";
 
 const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactElement | React.ReactElement[] }) => {

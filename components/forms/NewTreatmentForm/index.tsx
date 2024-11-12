@@ -8,9 +8,11 @@ import {createNewTreatmentItem, getTreatmentItemsByContact, TreatmentDataType} f
 import {useState} from "react";
 import ToastMessage from "@/components/global/ToastMessage";
 import {useClientStore} from "@/stores/useClientStore";
+import {useLocalStorage} from "@/hooks/useLocalStorage";
 
 const NewTreatmentForm = ({clientId, clientName}: { clientId: string, clientName:string }) => {
 
+    const token = useLocalStorage("sensiUser")?.value
     const modalClose = useModalOpen().setTreatmentFormClose;
     const [success, setSuccess] = useState({state: false, msg: "", type: "success"});
     const [error, setError] = useState({state: false, msg: "", type: "error"});
@@ -44,14 +46,12 @@ const NewTreatmentForm = ({clientId, clientName}: { clientId: string, clientName
                     data: {...values}
                 }
 
-                const response = await createNewTreatmentItem(formatedData as TreatmentDataType)
-                const newItemValue = await response
+                const response = await createNewTreatmentItem(formatedData as TreatmentDataType,token.jwt )
 
-                if (newItemValue.msg === "neuer Eintrag hinzugefügt") {
+                if (response.msg === "neuer Eintrag hinzugefügt") {
 
-
-
-                    const newTreatmentList = await getTreatmentItemsByContact(clientId)
+                    const newTreatmentList = await getTreatmentItemsByContact(clientId, token.jwt)
+                    console.log("new treatment list", newTreatmentList)
                     useClientStore.getState().setClientData({treatment_notes: newTreatmentList?.data})
 
                     setSuccess({...success, state: true, msg: "Eintrag erfolgreich hinzugefügt"})

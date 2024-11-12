@@ -6,22 +6,25 @@ export type TreatmentDataType = {
 }
 
 
-export const createNewTreatmentItem = async (data: TreatmentDataType) => {
-
+export const createNewTreatmentItem = async (data: TreatmentDataType, token:string) => {
     try {
 
         const response = await fetch(`${ STRAPI_URI }/api/treatment-notes`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+                'Authorization': `Bearer ${ token }`
             },
             body: JSON.stringify(data)
         })
 
         const newTreatmentData = await response.json()
 
-        return {msg: "neuer Eintrag hinzugefügt", data: newTreatmentData.data}
+        if(!response.ok){
+            return {msg: "failed", status: response.statusText}
+        }else{
+            return {msg: "neuer Eintrag hinzugefügt", data: newTreatmentData.data}
+        }
 
 
     } catch (err) {
@@ -34,14 +37,14 @@ export const createNewTreatmentItem = async (data: TreatmentDataType) => {
 }
 
 
-export const getTreatmentItemsByContact = async (contactId:string)=>{
+export const getTreatmentItemsByContact = async (contactId:string, token:string)=>{
 
 
     const config ={
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+            Authorization: `Bearer ${ token }`
         },
         next:{
             revalidate: 60,

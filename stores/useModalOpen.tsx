@@ -1,6 +1,5 @@
 import {create} from "zustand/index";
 
-
 interface modalOpen {
     status: {search: boolean, treatmentForm: boolean, createModal: boolean}
     setSearchOpen: () => void;

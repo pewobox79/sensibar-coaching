@@ -87,8 +87,8 @@ export const convertStringToFirstAndLastName = (data: string) => {
 
 }
 
-export const updateContact = async (updatedData:ClientData, id:string|undefined) => {
-
+export const updateContact = async (updatedData:ClientData, id:string|undefined, token:string) => {
+console.log("token in update", token)
     //remove id items
 
     const newData = {
@@ -105,14 +105,17 @@ export const updateContact = async (updatedData:ClientData, id:string|undefined)
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+                Authorization: `Bearer ${ token }`
             },
             body: JSON.stringify({data:newData})
         })
 
-        const updatedContact = await response.json()
-
-        return {msg: "Kontakt aktualisiert", data: updatedContact.data}
+        if(!response.ok){
+            return {msg: "update failed", status: response.statusText}
+        }else{
+            const updatedContact = await response.json()
+            return {msg: "Kontakt aktualisiert", data: updatedContact.data}
+        }
 
 
     } catch (err) {

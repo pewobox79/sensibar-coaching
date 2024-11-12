@@ -9,26 +9,37 @@ import {useState} from "react";
 import EditItem from "@/components/dashboardComponents/Client/ContactDetails/components/EditItem";
 import {updateContact} from "@/lib/strapi/generalHelper";
 import ToastMessage from "@/components/global/ToastMessage";
+import {useLocalStorage} from "@/hooks/useLocalStorage";
 
 
 const ContactDetails = ({context}: { context: ClientData }) => {
 
+    const token = useLocalStorage("sensiUser")?.value
     const [edit, setEdit] = useState(false)
     const [success, setSuccess]=useState({state: false, type: "success", msg:"Kontakt aktualisiert"})
+    const [error, setError]=useState({state: false, type: "error", msg:""})
 
     function handleEditFeature() {
         setEdit(!edit)
     }
 
-    function handleUpdateContact() {
+    async function handleUpdateContact() {
 
         //remove Id´s to update the data => required
         delete context?.personalData?.id
         delete context?.contact[0]?.id
         delete context?.address?.id
-        updateContact(context, context.documentId).then(() => {
+        updateContact(context, context.documentId, token.jwt).then((value) => {
+            const typedValue = value as { msg: string; status: string; data: undefined; err: undefined };
+            if(typedValue.msg === "update failed"){
 
-            setSuccess({...success, state: true})
+                setError({...error, state: true, msg: typedValue.status})
+            }else{
+
+                setSuccess({...success, state: true})
+            }
+
+
         })
         setEdit(false)
 
@@ -36,6 +47,7 @@ const ContactDetails = ({context}: { context: ClientData }) => {
 
     return <div className={ "innerWrapper" }>
         { success.state && <ToastMessage state={success} setState={setSuccess}/> }
+        { error.state && <ToastMessage state={error} setState={setError}/> }
         <div className={ styles.contactDetailsWrapper }>
             { edit ? <div className={ styles.editButton } onClick={ handleUpdateContact }>
                     <FontAwesomeIcon icon={ faSave }/></div> :

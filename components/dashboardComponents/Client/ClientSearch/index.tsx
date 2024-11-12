@@ -10,12 +10,15 @@ import {useEffect, useState} from "react";
 import {convertStringToFirstAndLastName, getClientsArray, getSelectedClientFromAPI} from "@/lib/strapi/generalHelper";
 import {useRouter} from 'next/navigation'
 import ToastMessage from "@/components/global/ToastMessage";
+import {useTokenStore} from "@/stores/useTokenStore";
 
 
 type Option = string | Record<string, unknown>;
 const ClientSearch = () => {
     const router = useRouter()
     const closeSearch = useModalOpen().setSearchClose;
+    const tokenValue = useTokenStore.getState()
+    console.log("tokenstore", tokenValue)
     const [error, setError] = useState({msg: "Bitte Kunden auswählen", state: false, type: "error"})
     const [selection, setSelection] = useState<Option[]>([""])
     const [client, setClient] = useState<Option[]>([]);
