@@ -73,7 +73,7 @@ const NewTreatmentForm = ({clientId, clientName}: { clientId: string, clientName
 
 
     })
-    return <div className={ styles.newTreatmentFormWrapper } onClick={modalClose}>
+    return <div className={ styles.newTreatmentFormWrapper }>
         <div className={ styles.newTreatmentFormInner }>
             <div className={ styles.newTreatmentCloseButton }><Button type={ "submit" } action={ modalClose }
                                                                       title={ "schließen" }/></div>
