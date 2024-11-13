@@ -30,7 +30,7 @@
     border-radius:10px;
     border: 1px solid gray;
     color: black;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-family: var(--font-tt-norms);
 }
 
@@ -46,7 +46,7 @@
 .clientPageWrapper{
     display: flex;
     flex-direction: column;
-    min-height: 1000px;
+    min-height: 100dvh;
     height: auto;
     width: 100%;
     }
@@ -76,7 +76,7 @@
 .detailItemElement{
     padding: 3px 0;
     margin: 3px 0;
-    font-size: 1.7rem
+    font-size: 1.4rem
 }
 
 .detailItemElement:first-letter{
@@ -107,7 +107,7 @@
 }
 
 .treatmentSplitRight {
-    font-size: 1.5rem
+    font-size: 1.4rem
 }
 
 .detailsTypeInfoBlock{
@@ -143,7 +143,8 @@
 }
 
 .editItem{
-    font-size: 1.7rem;
+    font-size: 1.4rem;
+    width: 100%;
     padding: 3px 5px;
     color: var(--textColor);
     margin: 2px 0;

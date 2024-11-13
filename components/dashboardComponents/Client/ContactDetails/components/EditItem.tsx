@@ -96,6 +96,7 @@ const EditItem = ({value, name, property}: ContactEditItemType) => {
                 selected={dateFormatForDatePicker}
                 name={name}
                 onChange={(date) => handleDateChange(date)}
+
             />
         );
     } else if (name === "gender") {
