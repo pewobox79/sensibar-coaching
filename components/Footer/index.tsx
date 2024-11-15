@@ -9,7 +9,8 @@ const Footer=()=>{
 
     const [footerNav, setFooterNav]=useState([])
 
-
+const date = new Date();
+    const year = date.getFullYear();
 
 
     useEffect(() => {
@@ -34,9 +35,11 @@ const Footer=()=>{
     })
     return <footer>
 
-        <div className={styles.footerInner}>
-            {footerNavItems}
+        <div className={ styles.footerInner }>
+            { footerNavItems }
+            <p>&copy; { year } Yessica Wolf. All Rights Reserved.</p>
         </div>
+
     </footer>
 }
 
