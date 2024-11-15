@@ -36,9 +36,14 @@ const date = new Date();
     return <footer>
 
         <div className={ styles.footerInner }>
-            { footerNavItems }
-            <p>&copy; { year } Yessica Wolf. All Rights Reserved.</p>
+            <div className={styles.footerNavWrapper}>
+                { footerNavItems }
+            </div>
+
+
         </div>
+
+        <div className={styles.legalFooterNote}><p>&copy; { year } Yessica Wolf. All Rights Reserved.</p></div>
 
     </footer>
 }
