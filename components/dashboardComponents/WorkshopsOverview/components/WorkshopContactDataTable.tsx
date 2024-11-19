@@ -1,9 +1,25 @@
 'use client'
-import DataTable from 'react-data-table-component';
+import DataTable, {TableStyles} from 'react-data-table-component';
 import {ContactData} from "@/components/dashboardComponents/WorkshopsOverview/components/WorkshopContactOverview";
 
 const WorkshopContactDataTable =({contacts}: { contacts:ContactData[] })=>{
 
+    const customStyles:TableStyles = {
+        headCells: {
+            style: {
+                backgroundColor: "rgba(240, 223, 211, 1)", // Light gray background
+                color: "rgba(51, 51, 51, 1)", // Dark text
+                fontWeight: "bold",
+                textTransform: "uppercase", // Make text uppercase
+                borderBottom: "1px solid rgba(51, 51, 51, 1)", // Add a border below the header
+            },
+        },
+        headRow: {
+            style: {
+                backgroundColor: "rgba(51, 51, 51, 1)", // Different background for the entire header row
+            },
+        },
+    };
 
     const columns = [
         {
@@ -60,6 +76,7 @@ const WorkshopContactDataTable =({contacts}: { contacts:ContactData[] })=>{
                 data={contacts}
                 columns={columns}
                 pagination
+                customStyles={customStyles}
             />
         );
 }

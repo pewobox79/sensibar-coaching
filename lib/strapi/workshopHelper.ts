@@ -233,3 +233,44 @@ export const generateMailingList = async (contactList:[]) => {
 
     return [...new Set(emailList)];
 };
+
+
+export const updateWorkshopStatus = async ( workshopId: string, state:"cancelled" |"planned" |"confirmed"="planned", token:string) => {
+
+    const newData = {
+        data: {
+            ws_status: state
+        }
+    }
+    try {
+
+        const response = await fetch(`${ STRAPI_URI }/api/workshops/${ workshopId }?populate=*`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${ token }`
+            },
+            body: JSON.stringify(newData),
+            next:{revalidate: 60}
+        })
+
+        const updatedWorkshop = await response.json()
+
+        if(updatedWorkshop.data != null){
+            return {msg: "workshop updated"}
+
+        }else{
+            return {msg: "workshop update failed"}
+        }
+
+
+
+
+    } catch (err) {
+
+        console.log("konnte nicht übergeben werden", err)
+        return {msg: "workshop contact update fehlerhaft."}
+
+    }
+
+}

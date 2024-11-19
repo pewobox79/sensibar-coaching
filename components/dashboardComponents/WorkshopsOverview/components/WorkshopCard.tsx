@@ -6,9 +6,11 @@ import {faCopy, faPen, faSave} from "@fortawesome/free-solid-svg-icons";
 import {useState} from "react";
 import WorkshopContactOverview
     from "@/components/dashboardComponents/WorkshopsOverview/components/WorkshopContactOverview";
-import {generateMailingList} from "@/lib/strapi/workshopHelper";
+import {generateMailingList, updateWorkshopStatus} from "@/lib/strapi/workshopHelper";
 import ToastMessage from "@/components/global/ToastMessage";
 import WorkshopCancelWindow from "@/components/dashboardComponents/WorkshopsOverview/components/WorkshopCancelWindow";
+
+import {useLocalStorage} from "@/hooks/useLocalStorage";
 
 const WorkshopCard = (props: {
     key: string,
@@ -20,6 +22,8 @@ const WorkshopCard = (props: {
     ws_status: string,
     contacts: []
 }) => {
+
+    const token = useLocalStorage("sensiUser")?.value
 
     const [contactDetails, setContactDetails] = useState(false)
     const [edit, setEdit] = useState(false);
@@ -79,13 +83,23 @@ const WorkshopCard = (props: {
             if (response) {
 
                 const cancelResponse = await fetch("/api/workshop", config)
-                const data = await cancelResponse.json()
+                const data = await cancelResponse.json();
 
 
                 if (data.msg === "email successfully sent") {
 
-                    setSuccess({...success, state: true})
-                    cancelMessageWindow()
+                    const wsUpdateResponse = await updateWorkshopStatus(props.documentId, "cancelled", token.jwt)
+
+                    if (wsUpdateResponse.msg === "workshop updated") {
+
+                        setSuccess({...success, state: true})
+                        cancelMessageWindow()
+
+                    } else {
+                        setError({...error, state: true, msg: "update workshop in database failed"})
+                        cancelMessageWindow()
+                    }
+
 
                 }
             } else {
@@ -138,12 +152,12 @@ const WorkshopCard = (props: {
                         <h4>Teilnehmer:</h4>
                         <p> { props.contacts?.length }</p>
                     </div>
-                    <div className={ styles.cardBodySection }>
+                    {/*<div className={ styles.cardBodySection }>
                         <h4>Rückmeldungen:</h4>
                         <p>Sensitive: 10</p>
                         <p>Weiß nicht: 25</p>
                         <p>Nein: 19</p>
-                    </div>
+                    </div>*/}
                 </div>
 
                 <div className={ styles.cardButtons }>
