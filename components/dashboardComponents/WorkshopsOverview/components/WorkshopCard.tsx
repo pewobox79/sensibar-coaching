@@ -85,9 +85,12 @@ const WorkshopCard = (props: {
                 if (data.msg === "email successfully sent") {
 
                     setSuccess({...success, state: true})
+                    cancelMessageWindow()
+
                 }
             } else {
                 setError({...error, state: true,})
+                cancelMessageWindow()
             }
         } catch (e) {
             console.error('Error generating mailing list:', e)
