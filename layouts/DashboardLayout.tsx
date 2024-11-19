@@ -20,7 +20,6 @@ const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactEl
     const isClientPath = path && path.includes("client");
 
     const searchStatus = useModalOpen().status
-    console.log("searchstatus",searchStatus)
     const openSearch = useModalOpen().setSearchOpen;
     const openCreateModal = useModalOpen().setCreateModalOpen
     const closeCreateModal = useModalOpen().setCreateModalClose

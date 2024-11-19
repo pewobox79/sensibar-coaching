@@ -5,7 +5,7 @@ import {faClose} from "@fortawesome/free-solid-svg-icons";
 import {useModalOpen} from "@/stores/useModalOpen";
 
 
-const GlobalModal = ({children, type}: { children: React.ReactElement[] | React.ReactElement|React.ReactNode , type: "create" |"contacts"}) => {
+const GlobalModal = ({children, type}: { children: React.ReactElement[] | React.ReactElement|React.ReactNode , type: "create" |"contacts" |"absage"}) => {
     let modalAction
 
     switch (type) {
@@ -14,6 +14,9 @@ const GlobalModal = ({children, type}: { children: React.ReactElement[] | React.
             break;
         case "contacts":
             modalAction = useModalOpen.getState().setContactsTableClose;
+            break;
+        case "absage":
+            modalAction = useModalOpen.getState().setCancelWorkshopModalClose;
             break;
         default:
             throw new Error("Invalid modal type");

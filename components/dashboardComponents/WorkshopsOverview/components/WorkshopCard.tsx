@@ -8,6 +8,7 @@ import WorkshopContactOverview
     from "@/components/dashboardComponents/WorkshopsOverview/components/WorkshopContactOverview";
 import {generateMailingList} from "@/lib/strapi/workshopHelper";
 import ToastMessage from "@/components/global/ToastMessage";
+import WorkshopCancelWindow from "@/components/dashboardComponents/WorkshopsOverview/components/WorkshopCancelWindow";
 
 const WorkshopCard = (props: {
     key: string,
@@ -19,11 +20,14 @@ const WorkshopCard = (props: {
     ws_status: string,
     contacts: []
 }) => {
+
     const [contactDetails, setContactDetails] = useState(false)
     const [edit, setEdit] = useState(false);
     const [onClipboard, setOnClipboard] = useState(false);
     const [success, setSuccess] = useState({state: false, type: "success", msg: "Absage Emails versendet"});
     const [error, setError] = useState({state: false, type: "error", msg: "absage konnte nicht verschickt werden"});
+    const [openCancel, setOpenCancel] = useState(false)
+
 
     function handleCopyLink() {
         navigator.clipboard.writeText(`${ props?.link?.href }`).then(() => {
@@ -46,6 +50,11 @@ const WorkshopCard = (props: {
 
     function handleContactDetails() {
         setContactDetails(!contactDetails)
+    }
+
+    function cancelMessageWindow() {
+
+        setOpenCancel(!openCancel)
     }
 
     async function handleWorkshopCancel() {
@@ -87,9 +96,13 @@ const WorkshopCard = (props: {
 
     }
 
+
     return <>
         { error.state && <ToastMessage state={ error } setState={ setError }/> }
         { success.state && <ToastMessage state={ success } setState={ setSuccess }/> }
+        { openCancel &&
+          <WorkshopCancelWindow title={ props.title } date={ props.workshop_date } action={ handleWorkshopCancel }
+                                close={ cancelMessageWindow }/> }
 
         <div className={ styles.cardWrapper }>
             <div className={ styles.cardInner }>
@@ -131,7 +144,7 @@ const WorkshopCard = (props: {
                 </div>
 
                 <div className={ styles.cardButtons }>
-                    <Button type={ "submit" } title={ "absagen" } action={ handleWorkshopCancel }/>
+                    <Button type={ "submit" } title={ "absagen" } action={ cancelMessageWindow }/>
                     <Button type={ "submit" } title={ "einladen" }/>
                 </div>
             </div>
@@ -139,6 +152,7 @@ const WorkshopCard = (props: {
             { contactDetails &&
               <WorkshopContactOverview contacts={ props.contacts } action={ handleContactDetails }/>
             }
+
 
         </div>
     </>
