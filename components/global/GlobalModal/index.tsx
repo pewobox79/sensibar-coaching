@@ -5,13 +5,24 @@ import {faClose} from "@fortawesome/free-solid-svg-icons";
 import {useModalOpen} from "@/stores/useModalOpen";
 
 
-const GlobalModal = ({children}: { children: React.ReactElement[] | React.ReactElement }) => {
-    const modalClose = useModalOpen.getState().setCreateModalClose
+const GlobalModal = ({children, type}: { children: React.ReactElement[] | React.ReactElement|React.ReactNode , type: "create" |"contacts"}) => {
+    let modalAction
+
+    switch (type) {
+        case "create":
+            modalAction = useModalOpen.getState().setCreateModalClose;
+            break;
+        case "contacts":
+            modalAction = useModalOpen.getState().setContactsTableClose;
+            break;
+        default:
+            throw new Error("Invalid modal type");
+    }
 
     return (
-        <div className={ "globalModal" }>
+        <div className={ "globalModal" } >
             <div className={ "globalModalInner" }>
-                <div className={ "modalCloseButton" } onClick={ modalClose }><FontAwesomeIcon icon={ faClose }/></div>
+                <div className={ "modalCloseButton" } onClick={ modalAction }><FontAwesomeIcon icon={ faClose }/></div>
                 <div className={ "globalModalBody" }>
                     { children }
                 </div>

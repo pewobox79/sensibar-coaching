@@ -1,5 +1,12 @@
 const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
 
+const config={
+    method: 'GET',
+    headers: {
+        Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+    },
+    next: { revalidate: 60 }
+}
 export const getAllWorkshops = async () => {
 
     try {
@@ -155,3 +162,74 @@ export const executeDoubleOptIn = async (id: string | null, workshopLink: string
         console.log("double opt in update failed", e)
     }
 }
+
+export const getSingleContactForSingleWorkshop = async (id:string)=>{
+
+    try {
+
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/${id}?populate=personalData&populate=condition_status&sort=personalData.firstname:asc`, config)
+        const clientData = await response.json()
+        return await clientData.data
+
+    } catch (e) {
+
+        console.error('Error fetching basic page content:', e)
+    }
+
+
+}
+
+export const getWorkshopContacts = async (id:string)=>{
+
+    return await getSingleContactForSingleWorkshop(id as string)
+
+
+
+
+}
+
+export const getSingleContactEmail =async (id:string)=>{
+
+    try {
+
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/${id}?populate=contact`, config)
+        const clientData = await response.json()
+        return await clientData.data
+
+    } catch (e) {
+
+        console.error('Error fetching basic page content:', e)
+    }
+
+}
+
+
+export const generateMailingList = async (contactList:[]) => {
+    const emailList = [];
+
+    const handleGetContact = async (id:string) => {
+        try {
+            const response = await getSingleContactEmail(id);
+            return response.contact[0].email;
+
+        } catch (e) {
+            console.error('Error fetching single contact email:', e);
+            return null; // Return null to handle errors gracefully
+        }
+    };
+
+    // Map contactList to an array of promises
+    const emailPromises = contactList.map((contact:{documentId: string}) =>
+        handleGetContact(contact.documentId)
+    );
+
+    try {
+        // Resolve all promises and filter out null values (failed requests)
+        const emails = await Promise.all(emailPromises);
+        emailList.push(...emails.filter((email:string) => email !== null));
+    } catch (e) {
+        console.error('Error generating mailing list:', e);
+    }
+
+    return [...new Set(emailList)];
+};

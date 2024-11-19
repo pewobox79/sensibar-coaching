@@ -40,6 +40,12 @@ const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactEl
         openCreateModal()
     }
 
+    function handleCreateClientOpen(){
+
+        router.push("/admin/client/create")
+        closeCreateModal()
+    }
+
     return <div className={ styles.dashboardWrapper }>
         <div className={ styles.dashboardSidebar }>
             <Link href={ "/admin" }
@@ -69,7 +75,7 @@ const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactEl
             { children }
 
         { searchStatus.search && <ClientSearch/> }
-        { searchStatus.createModal && <GlobalModal><h1>Was möchtest du kreieren?</h1><br/><Button type={"submit"} action={handleCreateNewWorkshop} title={"neuer workshop"}/><br/><Button title={"neuer Coachee"} type={"submit"}/></GlobalModal> }
+        { searchStatus.createModal && <GlobalModal type="create"><h1>Was möchtest du kreieren?</h1><br/><Button type={"submit"} action={handleCreateNewWorkshop} title={"neuer workshop"}/><br/><Button title={"neuer Coachee"} action={handleCreateClientOpen} type={"submit"} /></GlobalModal> }
     </div>
 }
 

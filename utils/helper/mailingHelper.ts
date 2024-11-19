@@ -51,3 +51,24 @@ export async function sendRegistrationFinalEmail(userId:string, email:string, na
         return ({msg:"error sending email", error:e})
     }
 }
+
+
+
+export async function sendWorkshopCancelEmail(emails:string[], title: string, workshopDate: string) {
+
+    const emailList = emails.join(", ")
+    console.log("emailList: ", emailList, title, workshopDate)
+    try {
+        const info = await transporter.sendMail({
+            from:'"Sensibar-Coaching - NoReply"',
+            to: `${ emailList}`, // list of receivers
+            subject: "Workshop wird abgesagt!", // Subject line
+
+            html: `<div><p>Lieber Workshop Teilnehmer,</p> <p>Der Workshop ${title.toUpperCase()} am ${workshopDate} wird wegen zu geringer Teilnehmerzahl abgesagt.</p> <p>Ich bedaure dies sehr. <br/>Melde dich gern zu einem der anderen Workshops an. https://sensibar-coaching.de/workshops</p><p>Deine Yessica</p><p>Sensibar-Coaching | sensibel & wunderbar</p><p>Email: hello@sensibar-coaching.de <br/>Mobil: +49 176 625 05 701<br/>Adresse: Lindenstrasse 6a 85309 Pörnbach</p></div>`, // html body
+        })
+
+        return {msg: "email sucessfully sent", info}
+    }catch (e) {
+        return ({msg:"error sending email", error:e})
+    }
+}

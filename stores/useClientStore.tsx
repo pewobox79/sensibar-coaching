@@ -44,6 +44,7 @@ export type TreatmentNotes = {
 
 export type ClientData = {
     personalData: PersonalData;
+    isPatient: boolean;
     documentId?: string;
     contact: Contact[];
     address: Address;
@@ -88,6 +89,7 @@ const defaultClientValues = {
         sensitiveStatus: false,
     },
     treatment_notes: [],
+    isPatient:false,
     selectedClientDetails: {
         title:"",
         details: "",

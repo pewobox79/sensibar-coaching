@@ -34,18 +34,17 @@ export const getBasicPageContent = async (slug: string) => {
     }
 }
 
-export const getClientsArray = async () => {
-
-
+export const getClientsArray = async (type:"patient" |"all") => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/contacts/?populate=*`,config )
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/?populate=*&sort=personalData.firstname:asc`,config )
         const clientsData = await response.json()
         let clientsArray = []
         if (clientsData) {
 
-            clientsArray = clientsData.data.map((client: { personalData: { firstname: string, lastname: string } }) => {
+            const finalList = clientsData?.data?.filter((item: {isPatient: boolean}) => type === "all" ? !item.isPatient : item.isPatient);
+            clientsArray = finalList.map((client: { personalData: { firstname: string, lastname: string } }) => {
 
                 return `${ client.personalData.firstname.toUpperCase() } ${ client.personalData.lastname.toUpperCase() }`
 
@@ -94,7 +93,8 @@ console.log("token in update", token)
     const newData = {
         personalData: {...updatedData.personalData},
         contact: [...updatedData.contact],
-        address: {...updatedData.address}
+        address: {...updatedData.address},
+        isPatient: updatedData.isPatient
 
 
     }
@@ -139,3 +139,4 @@ export const formatDateToStrapiFormat =(date:string)=>{
 
 
 }
+

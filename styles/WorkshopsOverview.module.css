@@ -55,6 +55,11 @@
 
 }
 
+.participantArea:hover{
+    cursor: pointer;
+
+}
+
 .cardButtons > button {
     margin: 5px 0
 }

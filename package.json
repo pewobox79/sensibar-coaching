@@ -21,8 +21,10 @@
     "react": "^18",
     "react-bootstrap": "^2.10.5",
     "react-bootstrap-typeahead": "^6.3.2",
+    "react-data-table-component": "^7.6.2",
     "react-datepicker": "^7.5.0",
     "react-dom": "^18",
+    "styled-components": "^6.1.13",
     "yup": "^1.4.0",
     "zustand": "^5.0.1"
   },

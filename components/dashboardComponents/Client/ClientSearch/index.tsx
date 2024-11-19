@@ -13,7 +13,7 @@ import ToastMessage from "@/components/global/ToastMessage";
 import {useTokenStore} from "@/stores/useTokenStore";
 
 
-type Option = string | Record<string, unknown>;
+export type Option = string | Record<string, unknown>;
 const ClientSearch = () => {
     const router = useRouter()
     const closeSearch = useModalOpen().setSearchClose;
@@ -48,7 +48,7 @@ const ClientSearch = () => {
 
     useEffect(() => {
 
-        getClientsArray().then(data => setSelection(data))
+        getClientsArray("patient").then(data => setSelection(data))
 
     }, [])
 
@@ -66,7 +66,7 @@ const ClientSearch = () => {
                     <Typeahead
                         id="search"
                         placeholder="Kunde suchen"
-                        options={selection}  // Ensure `selection` is typed as the correct array type
+                        options={selection? selection :[]}  // Ensure `selection` is typed as the correct array type
                         onChange={ handleClientChange }  // Ensure `handleClientChange` is properly typed
                         clearButton={true}
                     />
