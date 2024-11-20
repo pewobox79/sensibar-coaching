@@ -7,12 +7,35 @@ import {createNewWorkshop, formatTimeToStrapiFormat} from "@/lib/strapi/workshop
 import {useLocalStorage} from "@/hooks/useLocalStorage";
 import {useState} from "react";
 import ToastMessage from "@/components/global/ToastMessage";
+import TextEditor from "@/components/global/TextEditor";
+import {generateEditorJSONFormat} from "@/lib/strapi/textEditorHelper";
 
 
+export interface FormValues {
+    title: string,
+    type: string,
+    link: {
+        href: string,
+        active: boolean,
+        target: string
+    },
+    workshop_date: string,
+    description: string,
+    ws_status: string,
+    workshopTimeStart: string,
+    workshopTimeEnd: string,
+    location: {
+        street: string,
+        zipCode: string,
+        country: string,
+        streetNumber: string,
+        city: string
+    },
+}
 const INIT_WS_VALUES = {
     title: '',
     type: 'online',
-    link:{
+    link: {
         href: '',
         active: true,
         target: "external"
@@ -32,8 +55,8 @@ const INIT_WS_VALUES = {
 }
 const WorkshopForm = () => {
 
-    const [success, setSuccess] = useState({state: false, msg: "Neuer Workshop angelegt",type:"success"})
-    const [error, setError] = useState({state: false, msg: "workshop konnte nicht angelegt werden", type:"error"})
+    const [success, setSuccess] = useState({state: false, msg: "Neuer Workshop angelegt", type: "success"})
+    const [error, setError] = useState({state: false, msg: "workshop konnte nicht angelegt werden", type: "error"})
     const token = useLocalStorage("sensiUser")
 
     const formik = useFormik({
@@ -41,27 +64,34 @@ const WorkshopForm = () => {
         initialValues: INIT_WS_VALUES,
         onSubmit: async (values) => {
 
-            const startTime = formatTimeToStrapiFormat(values.workshopTimeStart)
-            const endTime = formatTimeToStrapiFormat(values.workshopTimeEnd)
-            const newData ={
-                data: {...values, workshopTimeEnd: endTime,workshopTimeStart: startTime}
+            generateEditorJSONFormat(values.description)
+            console.log("values", values)
+            const startTime = formatTimeToStrapiFormat(values.workshopTimeStart);
+            const endTime = formatTimeToStrapiFormat(values.workshopTimeEnd);
+
+
+            const richTextJSON = generateEditorJSONFormat(values.description)
+
+
+            const newData = {
+                data: {...values, workshopTimeEnd: endTime, workshopTimeStart: startTime, description: richTextJSON}
             }
             // TODO: Send the form data to the server
-            try{
+            try {
 
                 const response = await createNewWorkshop(newData, token?.value?.jwt)
 
-                if(response.msg === "neuer Workshop angelegt"){
+                if (response.msg === "neuer Workshop angelegt") {
 
                     setSuccess({...success, state: true})
                     formik.resetForm();
 
-                }else{
+                } else {
 
                     setError({...error, state: true})
                 }
 
-            }catch (e){
+            } catch (e) {
                 console.error('Error generating new workshop:', e)
                 setError({...error, state: true})
 
@@ -71,7 +101,7 @@ const WorkshopForm = () => {
 
 
     return <div className={ styles.newWorkshopWrapper }>
-        {success.state && <ToastMessage state={success} setState={setSuccess}/>}
+        { success.state && <ToastMessage state={ success } setState={ setSuccess }/> }
 
         <div className={ styles.workshopFormInner }>
             <div className={ styles.workshopFormHeader }>
@@ -98,7 +128,7 @@ const WorkshopForm = () => {
                     <div className={ styles.formItem }>
                         <label htmlFor={ "link" }>Weblink</label>
                         <input type={ "text" } name={ "link.href" } id={ "link" } value={ formik.values.link.href }
-                               onChange={ formik.handleChange } placeholder={"Zoom Link, Google Meet Link..."}/>
+                               onChange={ formik.handleChange } placeholder={ "Zoom Link, Google Meet Link..." }/>
                     </div>
                 </div>
 
@@ -113,13 +143,15 @@ const WorkshopForm = () => {
                     </div>
                     <div className={ styles.formItem }>
                         <label htmlFor={ "workshopTimeStart" }>Uhrzeit Start</label>
-                        <input type={ "time" } min="09:00" max="18:00" name={ "workshopTimeStart" } id={ "workshopTimeStart" }
+                        <input type={ "time" } min="09:00" max="18:00" name={ "workshopTimeStart" }
+                               id={ "workshopTimeStart" }
                                value={ formik.values.workshopTimeStart }
                                onChange={ formik.handleChange }/>
                     </div>
                     <div className={ styles.formItem }>
                         <label htmlFor={ "workshopTimeEnd" }>Uhrzeit Ende</label>
-                        <input type={ "time" } min="09:00" max="18:00" name={ "workshopTimeEnd" } id={ "workshopTimeEnd" }
+                        <input type={ "time" } min="09:00" max="18:00" name={ "workshopTimeEnd" }
+                               id={ "workshopTimeEnd" }
                                value={ formik.values.workshopTimeEnd }
                                onChange={ formik.handleChange }/>
                     </div>
@@ -127,10 +159,15 @@ const WorkshopForm = () => {
 
 
                 <div className={ styles.workshopFormGroup }>
-                    <div className={ `${styles.formItem} ${styles.workshopDescriptionItem}`  }>
+                    {/*<div className={ `${styles.formItem} ${styles.workshopDescriptionItem}`  }>
                         <label htmlFor={ "description" }>Beschreibung</label>
                         <textarea name={ "description" } id={ "description" } cols={ 50 }
                                   rows={ 10 } onChange={ formik.handleChange }></textarea>
+                    </div>*/ }
+
+                    <div className={ `${ styles.formItem } ${ styles.workshopDescriptionItem }` }>
+                        <label htmlFor={ "description" }>Beschreibung</label>
+                        <TextEditor formik={formik} fieldname={"description"}/>
                     </div>
                 </div>
                 <div style={ {display: "flex", justifyContent: "center"} }>
