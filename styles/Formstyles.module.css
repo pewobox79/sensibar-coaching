@@ -10,8 +10,9 @@
 }
 
 .formItem > input,
-.formItem > select{
-    width: 100%;
+.formItem > select,
+.formItem > textarea  {
+    width: auto;
     padding: 10px;
     border-radius: 10px;
     border: 1px solid gray;
@@ -51,10 +52,11 @@
     background-color: white;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
-.loginFormHeader {
+.loginFormHeader, .workshopFormHeader {
     width: 100%;
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 .loginForm {
 
@@ -129,6 +131,50 @@
     border: 2px solid var(--background) !important;
 }
 
+/*workshop form*/
+
+.workshopForm{
+    width: 100%;
+    max-width: 700px;
+}
+.newWorkshopWrapper{
+    width: 100%;
+    max-width: 2000px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.workshopFormInner{
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+}
+
+.workshopFormGroup{
+    width: auto;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+
 @media screen and (min-width: 768px) {
 
     .formItem {
@@ -136,6 +182,9 @@
         margin: auto
     }
 
+    .workshopDescriptionItem {
+        width: 100% !important  ;
+    }
     .gdprItem > .form-check {
         width: 80%;
         margin: auto;
@@ -159,5 +208,11 @@
     .textAreaStyle, .inputFieldStyle, .inputFieldStyle > option {
 
         font-size: 1.3rem !important;
+    }
+
+    /*workshop form*/
+
+    .workshopFormGroup{
+        flex-direction: row;
     }
 }

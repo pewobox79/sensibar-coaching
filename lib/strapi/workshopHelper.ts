@@ -274,3 +274,49 @@ export const updateWorkshopStatus = async ( workshopId: string, state:"cancelled
     }
 
 }
+
+
+export const formatTimeToStrapiFormat =(time:string)=>{
+
+    const timeRegex = /^(\d{2}):(\d{2})$/;
+    const match = time.match(timeRegex);
+
+    if (!match) {
+        throw new Error("Invalid time format, expected HH:mm");
+    }
+
+    // Extract hours and minutes
+    const hours = match[1];
+    const minutes = match[2];
+
+    // Return the time in HH:mm:ss.SSS format
+    return `${hours}:${minutes}:00.000`;
+}
+export const createNewWorkshop = async (data:unknown, token: string) => {
+
+    const config ={
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${ token }`
+        },
+        body: JSON.stringify(data),
+        next:{revalidate: 60}
+    }
+
+    try{
+
+        const response = await fetch(`${ STRAPI_URI }/api/workshops`, config)
+
+        if(response.ok){
+            const newWorkshop = await response.json()
+            return {msg: "neuer Workshop angelegt", data: newWorkshop.data}
+        }else{
+            return {msg: "workshop creation failed"}
+        }
+
+    }catch(err){
+
+        return {msg:"failed to create workshop", err}
+    }
+}

@@ -20,7 +20,7 @@ const WorkshopCard = (props: {
     link: { href: string, target: string, label: string },
     type: string,
     ws_status: string,
-    contacts: []
+    contacts: [],
 }) => {
 
     const token = useLocalStorage("sensiUser")?.value

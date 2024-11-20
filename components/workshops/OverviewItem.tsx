@@ -2,10 +2,11 @@
 import styles from '@/styles/Event.module.css'
 import Button from "@/components/global/Button";
 
-const OverviewItem = ({title, workshop_date, id}: {
+const OverviewItem = ({title, workshop_date, id, status}: {
     title: string,
     workshop_date: string,
     id: string,
+    status: string
 
 }) => {
 
@@ -13,6 +14,7 @@ const OverviewItem = ({title, workshop_date, id}: {
         <div className={styles.workshopListItemContent}>
             <h3>{ title }</h3>
             <p>Datum: { workshop_date }</p>
+            <p>{status}</p>
         </div>
         <Button type={"button"} title={"details"} href={ `/workshops/${title.replace(/\s/g, "")}/${ id }` }/>
 
