@@ -3,12 +3,13 @@ import styles from '@/styles/DashboardLayout.module.css'
 import React from "react";
 import Link from "next/link";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlusCircle, faProjectDiagram, faUser, faLineChart, faSearch} from "@fortawesome/free-solid-svg-icons";
+import {faPlusCircle, faProjectDiagram, faUser, faLineChart, faSearch, faSignOut} from "@fortawesome/free-solid-svg-icons";
 import {usePathname, useRouter} from 'next/navigation'
 import ClientSearch from "@/components/dashboardComponents/Client/ClientSearch";
 import {useModalOpen} from "@/stores/useModalOpen";
 import GlobalModal from "@/components/global/GlobalModal";
 import Button from "@/components/global/Button";
+import {useLocalStorage} from "@/hooks/useLocalStorage";
 
 const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactElement | React.ReactElement[] }) => {
 
@@ -23,6 +24,7 @@ const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactEl
     const openSearch = useModalOpen().setSearchOpen;
     const openCreateModal = useModalOpen().setCreateModalOpen
     const closeCreateModal = useModalOpen().setCreateModalClose
+    const removeStorage = useLocalStorage("sensiUser")
 
     function handleCreateNewWorkshop(){
 
@@ -43,6 +45,12 @@ const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactEl
 
         router.push("/admin/client/create")
         closeCreateModal()
+    }
+
+    function handleSignOut(){
+        removeStorage?.deleteLocalStorage()
+        router.push("/login")
+
     }
 
     return <div className={ styles.dashboardWrapper }>
@@ -67,6 +75,10 @@ const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactEl
             </div>
             <div className={ styles.sidebarItem } onClick={ handleSearchOpen }>
                 <FontAwesomeIcon icon={ faSearch } className={ styles.iconStyle }/>
+            </div>
+
+            <div className={ styles.sidebarItem } onClick={ handleSignOut }>
+                <FontAwesomeIcon icon={ faSignOut } className={ styles.iconStyle }/>
             </div>
 
         </div>

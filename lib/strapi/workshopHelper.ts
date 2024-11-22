@@ -257,7 +257,7 @@ export const updateWorkshopStatus = async ( workshopId: string, state:"cancelled
         const updatedWorkshop = await response.json()
 
         if(updatedWorkshop.data != null){
-            return {msg: "workshop updated"}
+            return {msg: "workshop updated", workshop: updatedWorkshop.data.title}
 
         }else{
             return {msg: "workshop update failed"}
@@ -319,4 +319,27 @@ export const createNewWorkshop = async (data:unknown, token: string) => {
 
         return {msg:"failed to create workshop", err}
     }
+}
+
+export const deleteWorkshopById = async (id:string, token:string)=>{
+
+    const config ={
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${ token }`
+        },
+        next:{revalidate: 60}
+    }
+
+    try{
+
+        const response = await fetch(`${ STRAPI_URI }/api/workshops/${id}`, config)
+
+        return {msg: "workshop deleted", response: response}
+
+    }catch(err){
+
+        return {msg:"failed to delete workshop", err}
+    }
+
 }

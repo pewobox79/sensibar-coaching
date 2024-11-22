@@ -32,7 +32,7 @@ export interface FormValues {
         city: string
     },
 }
-const INIT_WS_VALUES = {
+const INIT_WS_VALUES:FormValues = {
     title: '',
     type: 'online',
     link: {

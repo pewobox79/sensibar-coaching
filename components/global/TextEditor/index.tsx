@@ -1,10 +1,16 @@
 import {Editor} from "@tinymce/tinymce-react";
+import {FormikProps} from "formik";
+import {FormValues} from "@/components/forms/WorkshopForm";
 
-const TextEditor =({formik, fieldname}:{formik: {values: string, setFieldValue: (name:string, data:undefined)=>void}, fieldname:string})=>{
-
+interface TextEditorProps {
+    formik: Pick<FormikProps<FormValues>, 'values' | 'setFieldValue'>; // Only pass relevant Formik props
+    fieldname: keyof Pick<FormValues, 'title' | 'type' | 'description' | 'ws_status'>; // Fields must be strings
+}
+function TextEditor({ formik, fieldname }: TextEditorProps){
+    const fieldValue = formik.values[fieldname];
     return <Editor
         apiKey='4llvbiwdmrw5rewez0b5iwicw7kpg4gw7d2dcixd1l9a3m0s'
-        value={ formik?.values[fieldname]  }
+        value={ fieldValue  }
         init={ {
             height: 500,
             menubar: false,

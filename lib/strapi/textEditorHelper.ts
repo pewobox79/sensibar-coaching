@@ -1,11 +1,11 @@
-export const generateEditorJSONFormat = (data:unknown) => {
+export const generateEditorJSONFormat = (data:string) => {
 
 
-    const dataArray = data.split("\n")
+    const dataArray = data?.split("\n")
     console.log("dataArray", dataArray)
 
 
-    return dataArray.map(item => {
+    return dataArray?.map(item => {
         if (item.includes("<h")) {
             const heading = item.substring(0, 4)
             console.log("heading", heading)

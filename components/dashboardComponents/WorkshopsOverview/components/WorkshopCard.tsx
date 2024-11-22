@@ -6,11 +6,11 @@ import {faCopy, faPen, faSave} from "@fortawesome/free-solid-svg-icons";
 import {useState} from "react";
 import WorkshopContactOverview
     from "@/components/dashboardComponents/WorkshopsOverview/components/WorkshopContactOverview";
-import {generateMailingList, updateWorkshopStatus} from "@/lib/strapi/workshopHelper";
+import {deleteWorkshopById, generateMailingList, updateWorkshopStatus} from "@/lib/strapi/workshopHelper";
 import ToastMessage from "@/components/global/ToastMessage";
 import WorkshopCancelWindow from "@/components/dashboardComponents/WorkshopsOverview/components/WorkshopCancelWindow";
-
 import {useLocalStorage} from "@/hooks/useLocalStorage";
+import WsEditItem from "@/components/dashboardComponents/WorkshopsOverview/components/WsEditItem";
 
 const WorkshopCard = (props: {
     key: string,
@@ -23,10 +23,19 @@ const WorkshopCard = (props: {
     contacts: [],
 }) => {
 
+
+    const INIT_WS_VALUES ={
+        documentId: props.documentId,
+        title: props.title,
+        workshop_date: props.workshop_date,
+        link: { href: props.link?.href },
+        type: props.type,
+        ws_status: props.ws_status,
+    }
     const token = useLocalStorage("sensiUser")?.value
 
     const [contactDetails, setContactDetails] = useState(false)
-    const [edit, setEdit] = useState(false);
+    const [edit, setEdit] = useState({state: false, values: INIT_WS_VALUES});
     const [onClipboard, setOnClipboard] = useState(false);
     const [success, setSuccess] = useState({state: false, type: "success", msg: "Absage Emails versendet"});
     const [error, setError] = useState({state: false, type: "error", msg: "absage konnte nicht verschickt werden"});
@@ -45,11 +54,11 @@ const WorkshopCard = (props: {
 
     function handleUpdateWorkshop() {
 
-        setEdit(!edit)
+        setEdit({...edit, state: !edit.state})
     }
 
     function handleEditFeature() {
-        setEdit(!edit)
+        setEdit({...edit, state: !edit.state})
     }
 
     function handleContactDetails() {
@@ -113,6 +122,41 @@ const WorkshopCard = (props: {
 
     }
 
+    async function handleWSDelete (){
+
+        try{
+
+            const response = await deleteWorkshopById(props.documentId, token.jwt)
+            console.log("delete response: ", response)
+
+            if(response.msg === "workshop deleted"){
+                setSuccess({...success, state: true, msg: "Workshop gelöscht"})
+                setTimeout(() =>{
+
+                    window.location.reload()
+                }, 2000)
+            }
+
+        }catch(e){
+
+            console.log("delete error", e)
+        }
+    }
+
+    async function handleConfirmWorkshop(){
+
+        try{
+
+            const response = await updateWorkshopStatus(props.documentId, "confirmed",token.jwt);
+            if (response.msg === "workshop updated") {
+
+                setSuccess({...success, state: true, msg: "Workshop zu Bestätigt geändert"})
+            }
+
+        }catch(e){
+            console.log("delete error", e)
+        }
+    }
 
     return <>
         { error.state && <ToastMessage state={ error } setState={ setError }/> }
@@ -123,26 +167,26 @@ const WorkshopCard = (props: {
 
         <div className={ styles.cardWrapper }>
             <div className={ styles.cardInner }>
-                { edit ? <div className={ styles.editButton } onClick={ handleUpdateWorkshop }>
+                { edit.state ? <div className={ styles.editButton } onClick={ handleUpdateWorkshop }>
                         <FontAwesomeIcon icon={ faSave }/></div> :
                     <div className={ styles.editButton } onClick={ handleEditFeature }>
                         <FontAwesomeIcon icon={ faPen }/></div> }
 
-                <div className={ styles.cardBody }>
-                    <h4 style={ {textAlign: "center"} }>{ props?.title }</h4>
+                <div className={ styles.cardBody } style={{marginTop: `${edit.state ? "20px": null}`}}>
+                    {edit.state ? <WsEditItem type={"text"} value={edit.values.title} /> :<h4 style={ {textAlign: "center"} }>{ props?.title }</h4>}
                     <div className={ styles.cardBodySection }>
                         <h4>Details:</h4>
-                        <p>Datum: { props.workshop_date }</p>
-                        <p>Status: { props?.ws_status }</p>
+                        {edit.state ? <WsEditItem type={"date"} value={edit.values.workshop_date}/> :<p>Datum: { props.workshop_date }</p>}
+                        {edit.state ? <WsEditItem type={"select"} value={edit.values.ws_status} property={"ws_status"}/>:<p>Status: { props?.ws_status }</p>}
                     </div>
 
                     <div className={ styles.cardBodySection }>
-                        <p>Location: { props?.type }</p>
-                        <p><a href={ `${ props?.link?.href }` } title={ `${ props.link?.label }` }
+                        {edit.state ? <WsEditItem type={"select"} value={edit.values.link.href} property={"location"}/> :<p>Location: { props?.type }</p>}
+                        {edit.state ? <WsEditItem type={"text"} value={edit.values.link.href} /> :<p><a href={ `${ props?.link?.href }` } title={ `${ props.link?.label }` }
                               target={ `${ props.link?.target }` }>Weblink</a>
-                        </p>
-                        <p><FontAwesomeIcon icon={ faCopy } onClick={ () => handleCopyLink() }/> { onClipboard &&
-                          <span style={ {color: "green"} }>Link copied</span> }</p>
+                        </p>}
+                        <p>{!edit.state && <><FontAwesomeIcon icon={ faCopy } onClick={ () => handleCopyLink() }/> { onClipboard &&
+                          <span style={ {color: "green"} }>Link copied</span> }</>}</p>
 
                     </div>
 
@@ -161,8 +205,10 @@ const WorkshopCard = (props: {
                 </div>
 
                 <div className={ styles.cardButtons }>
-                    <Button type={ "submit" } title={ "absagen" } action={ cancelMessageWindow }/>
-                    <Button type={ "submit" } title={ "einladen" }/>
+                    {props.ws_status === "confirmed" && <Button type={ "submit" } title={"absagen"} action={ cancelMessageWindow }/>}
+                    {props.ws_status === "cancelled" && <Button type={ "submit" } title={ "löschen"} action={ handleWSDelete }/>}
+                    {props.ws_status != "cancelled" && <Button type={ "submit" } title={ "einladen" }/>}
+                    {props.ws_status === "planned" && <Button type={ "submit" } title={ "bestätigen" }action={handleConfirmWorkshop}/>}
                 </div>
             </div>
 
