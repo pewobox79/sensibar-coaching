@@ -181,7 +181,7 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
 
     return <>
         <form onSubmit={ formik.handleSubmit }>
-
+            <div className={styles.eventRegistrationHeader}><h3>Anmeldung</h3></div>
             <div className={ styles.formItem }>
                 <Form.Control
                     type="text"

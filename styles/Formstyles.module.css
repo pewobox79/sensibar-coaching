@@ -1,3 +1,17 @@
+/*event registration*/
+
+.eventRegistrationHeader {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 1.75rem;
+
+}
+
 .formItem {
     display: flex;
     flex-direction: column;
