@@ -23,7 +23,7 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
     const [success, setSuccess] = useState({state: false, msg: "", type: "success"});
     const [registrationProcess, setRegistrationProcess] = useState(false);
     const [emailInfo, setEmailInfo] = useState(false);
-    /*const [processing, setProcessing] = useState(false)*/
+
     const RegistrationSchema = yup.object().shape({
         firstname: yup.string().required('Vorname ist verpflichtend'),
         lastname: yup.string().required('Nachname ist verpflichtend'),
@@ -56,7 +56,6 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
         validationSchema: RegistrationSchema,
         validateOnChange: false,
         onSubmit: async (values) => {
-            //setProcessing(true)
 
             setRegistrationProcess(true)
             const cleanedFirstname = values.firstname.replace(/\s+/g, '').toLowerCase();
