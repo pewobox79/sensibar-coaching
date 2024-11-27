@@ -66,7 +66,7 @@ const CreateClient = () => {
                     birthdate: formatDateToStrapiFormat(values.personalData.birthdate)
                 },
                 contact: [{
-                    email: values.contact.email,
+                    email: values.contact.email.toLowerCase(),
                     phone: values.contact.phone
                 }]
             }
