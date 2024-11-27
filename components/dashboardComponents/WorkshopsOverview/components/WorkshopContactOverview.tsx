@@ -8,6 +8,7 @@ import Button from "@/components/global/Button";
 import Loader from "@/components/global/Loader";
 
  export type ContactData = {
+     documentId?: string;
     personalData: {
         firstname: string;
         lastname: string;
@@ -21,7 +22,7 @@ import Loader from "@/components/global/Loader";
 };
 const WorkshopContactOverview = ({contacts=[], action}: { contacts: [], action: () => void }) => {
 
-    const [listOfContacts, setListOfContacts] = useState<ContactData[]>([{personalData: {firstname: "",lastname: "", gender: "", birthdate: ""},isPatient: false, condition_status: {sensitiveStatus: ""}}])
+    const [listOfContacts, setListOfContacts] = useState<ContactData[]>([{documentId: "",personalData: {firstname: "",lastname: "", gender: "", birthdate: ""},isPatient: false, condition_status: {sensitiveStatus: ""}}])
     const [status, setStatus] =useState<"loading" | "done" |"error">("loading")
     useEffect(() => {
 

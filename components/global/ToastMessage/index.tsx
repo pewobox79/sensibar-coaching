@@ -40,7 +40,7 @@ const ToastMessage = ({state, setState}: {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            zIndex: 2000,
+            zIndex: 3000,
             top: 0,
             left: 0,
             backgroundColor: variant,
@@ -57,7 +57,6 @@ const ToastMessage = ({state, setState}: {
 
         <Toast.Body>
             <h4 style={ {color: "white"} }> { state.msg }</h4>
-
         </Toast.Body>
     </Toast>
 }

@@ -79,10 +79,42 @@ export const getSelectedClientFromAPI = async (firstname: string, lastname: stri
 
 
 export const convertStringToFirstAndLastName = (data: string) => {
-
+console.log("in convertStringToFirst", data)
     const [firstName, lastName] = data?.split(' ');
 
     return {firstName, lastName};
+
+}
+export const transformContactToCoachee =async (token: string, id: string)=>{
+
+    console.log("in transform to coachee", token, id)
+
+    try {
+
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/${ id }?populate=*`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${ token }`
+            },
+            body: JSON.stringify({data:{isPatient: true}})
+        })
+
+        if(!response.ok){
+            return {msg: "update failed", status: response.statusText}
+        }else{
+            const updatedContact = await response.json()
+            return {msg: "new coachee added", data: updatedContact.data}
+        }
+
+
+    } catch (err) {
+
+
+        return {msg: "Kontakt update fehlerhaft.", err}
+
+    }
+
 
 }
 

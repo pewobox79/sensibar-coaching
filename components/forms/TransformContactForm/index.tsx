@@ -14,11 +14,17 @@ const CreateContactForm = ({contacts}: { contacts: [] }) => {
 
     function handleClientChange(selected: Option[]){
 
-        const {firstName, lastName} = convertStringToFirstAndLastName(selected[0] as string)
+        if(selected[0]){
 
-        getSelectedClientFromAPI(firstName, lastName).then(data => {
-            setClient(data)
-        })
+            const {firstName, lastName} = convertStringToFirstAndLastName(selected[0] as string)
+
+            getSelectedClientFromAPI(firstName, lastName).then(data => {
+                setClient(data)
+            })
+        }else{
+            return
+        }
+
     }
 
     function handleSource(e:{target:{value: string}}){
@@ -40,6 +46,7 @@ const CreateContactForm = ({contacts}: { contacts: [] }) => {
                 <Typeahead
                     id="search"
                     placeholder="Kontakt Suchen"
+                    defaultInputValue={""}
                     options={ contacts ? contacts : [] }  // Ensure `selection` is typed as the correct array type
                     onChange={ handleClientChange }  // Ensure `handleClientChange` is properly typed
                     clearButton={ true }
