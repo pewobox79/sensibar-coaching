@@ -226,6 +226,11 @@
 
     /*workshop form*/
 
+
+}
+
+@media screen and (min-width: 1208px) {
+
     .workshopFormGroup{
         flex-direction: row;
     }

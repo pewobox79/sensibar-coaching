@@ -6,6 +6,7 @@ import styles from "@/styles/Client.module.css";
 import {Typeahead} from "react-bootstrap-typeahead";
 import {convertStringToFirstAndLastName, getSelectedClientFromAPI} from "@/lib/strapi/generalHelper";
 import TransformationForm from "@/components/forms/TransformContactForm/TransformationForm";
+import CreateClient from "@/components/forms/CreateClient";
 
 const CreateContactForm = ({contacts}: { contacts: [] }) => {
 
@@ -52,7 +53,7 @@ const CreateContactForm = ({contacts}: { contacts: [] }) => {
                     clearButton={ true }
                 />
             </div>
-        </form> : <div>new contact form</div> }
+        </form> : <CreateClient/> }
 
 
 

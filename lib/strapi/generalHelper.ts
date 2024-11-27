@@ -172,3 +172,33 @@ export const formatDateToStrapiFormat =(date:string)=>{
 
 }
 
+export const createNewCoachee = async (token:string, newData: unknown)=>{
+
+    try {
+
+        const response = await fetch(`${ STRAPI_URI }/api/contacts`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${ token }`
+            },
+            body: JSON.stringify({data:newData})
+        })
+
+        if(!response.ok){
+            return {msg: "create failed", status: response.statusText}
+        }else{
+            const updatedContact = await response.json()
+            return {msg: "coachee created", data: updatedContact.data}
+        }
+
+
+    } catch (err) {
+
+
+        return {msg: "Coachee create failed", err}
+
+    }
+
+}
+
