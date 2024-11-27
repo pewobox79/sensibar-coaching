@@ -60,7 +60,9 @@ const CreateClient = () => {
             const formatedData = {
                 ...values,
                 personalData: {
-                    ...values.personalData,
+                    firstname: values.personalData.firstname.toLowerCase(),
+                    lastname: values.personalData.lastname.toLowerCase(),
+                    gender: values.personalData.gender,
                     birthdate: formatDateToStrapiFormat(values.personalData.birthdate)
                 },
                 contact: [{
