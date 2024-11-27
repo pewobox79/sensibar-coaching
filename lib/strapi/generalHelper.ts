@@ -65,7 +65,7 @@ export const getSelectedClientFromAPI = async (firstname: string, lastname: stri
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/contacts/?filters[personalData][firstname][$eq]=${ firstname.toLowerCase() }&[personalData][firstname][$eq]=${ lastname.toLowerCase() }&populate=*`, config)
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/?filters[personalData][firstname][$eq]=${ firstname.toLowerCase() }&[personalData][lastname][$eq]=${ lastname.toLowerCase() }&populate=*`, config)
         const clientData = await response.json()
         return clientData.data[0]
 
@@ -79,7 +79,6 @@ export const getSelectedClientFromAPI = async (firstname: string, lastname: stri
 
 
 export const convertStringToFirstAndLastName = (data: string) => {
-console.log("in convertStringToFirst", data)
     const [firstName, lastName] = data?.split(' ');
 
     return {firstName, lastName};
