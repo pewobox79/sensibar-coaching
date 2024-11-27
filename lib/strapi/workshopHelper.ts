@@ -16,7 +16,7 @@ export const getAllWorkshops = async () => {
             headers: {
                 Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
             },
-            next: {revalidate: 60}
+            next: {revalidate: 20}
         })
 
         if (!response.ok) {
@@ -39,7 +39,7 @@ export const getSingleWorkshop = async (id: string | unknown) => {
             headers: {
                 Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
             },
-            next: {revalidate: 60}
+            next: {revalidate: 20}
         })
 
         if (!response.ok) {
@@ -60,7 +60,7 @@ export const checkIfContactExists = async (firstname: string, lastname: string, 
             headers: {
                 Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
             },
-            next: {revalidate: 60}
+            next: {revalidate: 20}
         })
 
         if (!response.ok) {
@@ -251,7 +251,48 @@ export const updateWorkshopStatus = async ( workshopId: string, state:"cancelled
                 Authorization: `Bearer ${ token }`
             },
             body: JSON.stringify(newData),
-            next:{revalidate: 60}
+            next:{revalidate: 20}
+        })
+
+        const updatedWorkshop = await response.json()
+
+        if(updatedWorkshop.data != null){
+            return {msg: "workshop updated", workshop: updatedWorkshop.data.title}
+
+        }else{
+            return {msg: "workshop update failed"}
+        }
+
+
+
+
+    } catch (err) {
+
+        console.log("konnte nicht übergeben werden", err)
+        return {msg: "workshop contact update fehlerhaft."}
+
+    }
+
+}
+
+export const updateWorkshop = async ( workshopId: string, data: unknown, token:string) => {
+
+    console.log("data in updateWorkshop", data)
+
+    const newData = {
+        data: data
+
+    }
+    try {
+
+        const response = await fetch(`${ STRAPI_URI }/api/workshops/${ workshopId }?populate=*`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${ token }`
+            },
+            body: JSON.stringify(newData),
+            next:{revalidate: 20}
         })
 
         const updatedWorkshop = await response.json()
@@ -301,7 +342,7 @@ export const createNewWorkshop = async (data:unknown, token: string) => {
             Authorization: `Bearer ${ token }`
         },
         body: JSON.stringify(data),
-        next:{revalidate: 60}
+        next:{revalidate: 20}
     }
 
     try{
@@ -328,7 +369,7 @@ export const deleteWorkshopById = async (id:string, token:string)=>{
         headers: {
             Authorization: `Bearer ${ token }`
         },
-        next:{revalidate: 60}
+        next:{revalidate: 20}
     }
 
     try{
