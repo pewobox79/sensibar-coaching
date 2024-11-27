@@ -1,11 +1,11 @@
 const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
 
-const config={
+const config = {
     method: 'GET',
     headers: {
         Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
     },
-    next: { revalidate: 60 }
+    next: {revalidate: 60}
 }
 export const getAllWorkshops = async () => {
 
@@ -55,7 +55,7 @@ export const getSingleWorkshop = async (id: string | unknown) => {
 export const checkIfContactExists = async (firstname: string, lastname: string, email: string, query: string = "contacts") => {
 
     try {
-        const response = await fetch(`${ STRAPI_URI }/api/${ query }?filters[contact][email][$eq]=${ email }&filters[personalData][firstname][$eq]=${ firstname }&filters[personalData][lastname][$eq]=${ lastname }&populate=contact`,{
+        const response = await fetch(`${ STRAPI_URI }/api/${ query }?filters[contact][email][$eq]=${ email }&filters[personalData][firstname][$eq]=${ firstname }&filters[personalData][lastname][$eq]=${ lastname }&populate=contact`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
@@ -163,11 +163,11 @@ export const executeDoubleOptIn = async (id: string | null, workshopLink: string
     }
 }
 
-export const getSingleContactForSingleWorkshop = async (id:string)=>{
+export const getSingleContactForSingleWorkshop = async (id: string) => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/contacts/${id}?populate=personalData&populate=condition_status&sort=personalData.firstname:asc`, config)
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/${ id }?populate=personalData&populate=condition_status&sort=personalData.firstname:asc`, config)
         const clientData = await response.json()
         return await clientData.data
 
@@ -179,20 +179,18 @@ export const getSingleContactForSingleWorkshop = async (id:string)=>{
 
 }
 
-export const getWorkshopContacts = async (id:string)=>{
+export const getWorkshopContacts = async (id: string) => {
 
     return await getSingleContactForSingleWorkshop(id as string)
 
 
-
-
 }
 
-export const getSingleContactEmail =async (id:string)=>{
+export const getSingleContactEmail = async (id: string) => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/contacts/${id}?populate=contact`, config)
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/${ id }?populate=contact`, config)
         const clientData = await response.json()
         return await clientData.data
 
@@ -204,10 +202,10 @@ export const getSingleContactEmail =async (id:string)=>{
 }
 
 
-export const generateMailingList = async (contactList:[]) => {
+export const generateMailingList = async (contactList: []) => {
     const emailList = [];
 
-    const handleGetContact = async (id:string) => {
+    const handleGetContact = async (id: string) => {
         try {
             const response = await getSingleContactEmail(id);
             return response.contact[0].email;
@@ -219,14 +217,14 @@ export const generateMailingList = async (contactList:[]) => {
     };
 
     // Map contactList to an array of promises
-    const emailPromises = contactList.map((contact:{documentId: string}) =>
+    const emailPromises = contactList.map((contact: { documentId: string }) =>
         handleGetContact(contact.documentId)
     );
 
     try {
         // Resolve all promises and filter out null values (failed requests)
         const emails = await Promise.all(emailPromises);
-        emailList.push(...emails.filter((email:string) => email !== null));
+        emailList.push(...emails.filter((email: string) => email !== null));
     } catch (e) {
         console.error('Error generating mailing list:', e);
     }
@@ -235,7 +233,7 @@ export const generateMailingList = async (contactList:[]) => {
 };
 
 
-export const updateWorkshopStatus = async ( workshopId: string, state:"cancelled" |"planned" |"confirmed"="planned", token:string) => {
+export const updateWorkshopStatus = async (workshopId: string, state: "cancelled" | "planned" | "confirmed" = "planned", token: string) => {
 
     const newData = {
         data: {
@@ -251,19 +249,17 @@ export const updateWorkshopStatus = async ( workshopId: string, state:"cancelled
                 Authorization: `Bearer ${ token }`
             },
             body: JSON.stringify(newData),
-            next:{revalidate: 20}
+            next: {revalidate: 20}
         })
 
         const updatedWorkshop = await response.json()
 
-        if(updatedWorkshop.data != null){
+        if (updatedWorkshop.data != null) {
             return {msg: "workshop updated", workshop: updatedWorkshop.data.title}
 
-        }else{
+        } else {
             return {msg: "workshop update failed"}
         }
-
-
 
 
     } catch (err) {
@@ -275,9 +271,7 @@ export const updateWorkshopStatus = async ( workshopId: string, state:"cancelled
 
 }
 
-export const updateWorkshop = async ( workshopId: string, data: unknown, token:string) => {
-
-    console.log("data in updateWorkshop", data)
+export const updateWorkshop = async (workshopId: string, data: unknown, token: string) => {
 
     const newData = {
         data: data
@@ -292,19 +286,17 @@ export const updateWorkshop = async ( workshopId: string, data: unknown, token:s
                 Authorization: `Bearer ${ token }`
             },
             body: JSON.stringify(newData),
-            next:{revalidate: 20}
+            next: {revalidate: 20}
         })
 
         const updatedWorkshop = await response.json()
 
-        if(updatedWorkshop.data != null){
+        if (updatedWorkshop.data != null) {
             return {msg: "workshop updated", workshop: updatedWorkshop.data.title}
 
-        }else{
+        } else {
             return {msg: "workshop update failed"}
         }
-
-
 
 
     } catch (err) {
@@ -317,7 +309,7 @@ export const updateWorkshop = async ( workshopId: string, data: unknown, token:s
 }
 
 
-export const formatTimeToStrapiFormat =(time:string)=>{
+export const formatTimeToStrapiFormat = (time: string) => {
 
     const timeRegex = /^(\d{2}):(\d{2})$/;
     const match = time.match(timeRegex);
@@ -331,56 +323,62 @@ export const formatTimeToStrapiFormat =(time:string)=>{
     const minutes = match[2];
 
     // Return the time in HH:mm:ss.SSS format
-    return `${hours}:${minutes}:00.000`;
+    return `${ hours }:${ minutes }:00.000`;
 }
-export const createNewWorkshop = async (data:unknown, token: string) => {
 
-    const config ={
+export const formatTimeToAdminFormat = (time: string) => {
+
+    return time?.slice(0, 5)
+};
+
+export const createNewWorkshop = async (data: unknown, token: string) => {
+
+    const config = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${ token }`
         },
         body: JSON.stringify(data),
-        next:{revalidate: 20}
+        next: {revalidate: 20}
     }
 
-    try{
+    try {
 
         const response = await fetch(`${ STRAPI_URI }/api/workshops`, config)
 
-        if(response.ok){
+        if (response.ok) {
             const newWorkshop = await response.json()
             return {msg: "neuer Workshop angelegt", data: newWorkshop.data}
-        }else{
+        } else {
             return {msg: "workshop creation failed"}
         }
 
-    }catch(err){
+    } catch (err) {
 
-        return {msg:"failed to create workshop", err}
+        return {msg: "failed to create workshop", err}
     }
 }
 
-export const deleteWorkshopById = async (id:string, token:string)=>{
+export const deleteWorkshopById = async (id: string, token: string) => {
 
-    const config ={
+    const config = {
         method: 'DELETE',
         headers: {
             Authorization: `Bearer ${ token }`
         },
-        next:{revalidate: 20}
+        next: {revalidate: 20}
     }
 
-    try{
+    try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/workshops/${id}`, config)
+        const response = await fetch(`${ STRAPI_URI }/api/workshops/${ id }`, config)
 
         return {msg: "workshop deleted", response: response}
 
-    }catch(err){
+    } catch (err) {
 
-        return {msg:"failed to delete workshop", err}
+        return {msg: "failed to delete workshop", err}
     }
 
 }

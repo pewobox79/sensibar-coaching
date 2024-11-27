@@ -7,7 +7,7 @@ import {useState} from "react";
 import WorkshopContactOverview
     from "@/components/dashboardComponents/WorkshopsOverview/components/WorkshopContactOverview";
 import {
-    deleteWorkshopById,
+    deleteWorkshopById, formatTimeToAdminFormat, formatTimeToStrapiFormat,
     generateMailingList,
     updateWorkshop,
     updateWorkshopStatus
@@ -26,7 +26,9 @@ const WorkshopCard = (props: {
     type: string,
     ws_status: string,
     contacts: [],
-    description: []
+    description: [],
+    workshopTimeStart: string,
+    workshopTimeEnd: string,
 }) => {
 
 
@@ -37,6 +39,8 @@ const WorkshopCard = (props: {
         link: {href: props.link?.href, target: props.link?.target,},
         type: props.type,
         ws_status: props.ws_status,
+        workshopTimeStart: props.workshopTimeStart,
+        workshopTimeEnd: props.workshopTimeEnd,
     }
     const token = useLocalStorage("sensiUser")?.value
 
@@ -62,30 +66,30 @@ const WorkshopCard = (props: {
     async function handleUpdateWorkshop() {
         console.log("save updates", edit.values)
 
-        const updatedData={
+        const updatedData = {
             title: edit.values.title,
             workshop_date: edit.values.workshop_date,
             link: {href: edit.values.link?.href},
             type: edit.values.type,
             ws_status: edit.values.ws_status,
+            workshopTimeStart: formatTimeToStrapiFormat(edit.values.workshopTimeStart),
+            workshopTimeEnd: formatTimeToStrapiFormat(edit.values.workshopTimeEnd)
 
         }
-        try{
+        try {
 
-            const response = await updateWorkshop(props.documentId, updatedData,token.jwt);
-            if(response.msg === "workshop updated"){
-                setSuccess({...success, state: true, msg:"Workshop wurde aktualisiert"})
-                setEdit({...edit, state:!edit.state})
-            }else{
-                setError({...error, state: true, msg:"Workshop konnte nicht aktualisiert werden"})
+            const response = await updateWorkshop(props.documentId, updatedData, token.jwt);
+            if (response.msg === "workshop updated") {
+                setSuccess({...success, state: true, msg: "Workshop wurde aktualisiert"})
+                setEdit({...edit, state: !edit.state})
+            } else {
+                setError({...error, state: true, msg: "Workshop konnte nicht aktualisiert werden"})
             }
 
         } catch (e) {
             console.error("Error updating workshop:", e)
-            setError({...error, state: true, msg:"ein Fehler ist aufgetreten"})
+            setError({...error, state: true, msg: "ein Fehler ist aufgetreten"})
         }
-
-
 
 
         setEdit({...edit, state: !edit.state})
@@ -229,6 +233,20 @@ const WorkshopCard = (props: {
                             <WsEditItem type={ "date" } value={ edit.values.workshop_date } property={ "workshop_date" }
                                         changeAction={ handleChange }/> :
                             <p>Datum: { edit.values.workshop_date }</p> }
+
+                        { edit.state ?
+                            <WsEditItem type={ "time" } value={ edit.values.workshopTimeStart }
+                                        property={ "workshopTimeStart" }
+                                        changeAction={ handleChange }/> :
+                            <p>Beginn: { formatTimeToAdminFormat(edit.values.workshopTimeStart) }</p> }
+
+                        { edit.state ?
+                            <WsEditItem type={ "time" } value={ edit.values.workshopTimeEnd }
+                                        property={ "workshopTimeEnd" }
+                                        changeAction={ handleChange }/> :
+                            <p>Datum: { formatTimeToAdminFormat(edit.values.workshopTimeEnd) }</p> }
+
+
                         { edit.state ?
                             <WsEditItem type={ "select" } value={ edit.values.ws_status } property={ "ws_status" }
                                         changeAction={ handleChange }/> :
@@ -256,11 +274,11 @@ const WorkshopCard = (props: {
                     </div>
 
 
-                    {!edit.state && <div className={ `${ styles.cardBodySection } ${ styles.participantArea }` }
-                         onClick={ handleContactDetails }>
-                        <h4>Teilnehmer:</h4>
-                        <p> { props.contacts?.length }</p>
-                    </div>}
+                    { !edit.state && <div className={ `${ styles.cardBodySection } ${ styles.participantArea }` }
+                                          onClick={ handleContactDetails }>
+                      <h4>Teilnehmer:</h4>
+                      <p> { props.contacts?.length }</p>
+                    </div> }
                     {/*<div className={ styles.cardBodySection }>
                         <h4>Rückmeldungen:</h4>
                         <p>Sensitive: 10</p>

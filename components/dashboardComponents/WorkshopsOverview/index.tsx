@@ -3,7 +3,7 @@ import styles from '@/styles/WorkshopsOverview.module.css'
 
 const WorkshopsOverview = ({workshops=[]}) => {
 
-    const ListOfWorkshops =workshops.map((workshop:{ documentId: string,title: string, workshop_date:string, description: [] , link:{href: string, target: string, label: string}, type: string, ws_status: string, contacts:[]}) =>{
+    const ListOfWorkshops =workshops.map((workshop:{ documentId: string,title: string, workshop_date:string, workshopTimeStart: string, workshopTimeEnd:string, description: [] , link:{href: string, target: string, label: string}, type: string, ws_status: string, contacts:[]}) =>{
 
         return <WorkshopCard key={workshop.documentId} {...workshop } />
     })
