@@ -11,7 +11,6 @@ import {useLocalStorage} from "@/hooks/useLocalStorage";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 import {useClientStore} from "@/stores/useClientStore";
-import {Spinner} from "react-bootstrap";
 
 
 const TransformationForm = ({data}: { data: ContactData }) => {
@@ -31,8 +30,6 @@ const TransformationForm = ({data}: { data: ContactData }) => {
             if (response.msg === "new coachee added") {
 
                 setSuccess({...success, state: true})
-
-
                 getSelectedClientFromAPI(data.personalData.firstname, data.personalData.lastname).then(data => {
                     const updatedClientState = {...data, selectedClientDetails: {type: "", details: "", title: ""}} //removes old selection details state
                     useClientStore.getState().setClientData(updatedClientState)
