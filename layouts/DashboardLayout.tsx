@@ -48,6 +48,22 @@ const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactEl
     }
 
     function handleSignOut(){
+
+        const config ={
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+        fetch('/api/user/logout', config ).then((response) => {
+
+            if(!response.ok){
+                console.log("logout failed")
+            } else{
+                console.log("logout successful")
+            }
+
+        })
         removeStorage?.deleteLocalStorage()
         router.push("/login")
 
