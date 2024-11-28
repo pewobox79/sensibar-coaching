@@ -143,14 +143,14 @@ const WorkshopForm = () => {
                     </div>
                     <div className={ styles.formItem }>
                         <label htmlFor={ "workshopTimeStart" }>Uhrzeit Start</label>
-                        <input type={ "time" } min="09:00" max="18:00" name={ "workshopTimeStart" }
+                        <input type={ "time" } min="07:00" max="23:00" name={ "workshopTimeStart" }
                                id={ "workshopTimeStart" }
                                value={ formik.values.workshopTimeStart }
                                onChange={ formik.handleChange }/>
                     </div>
                     <div className={ styles.formItem }>
                         <label htmlFor={ "workshopTimeEnd" }>Uhrzeit Ende</label>
-                        <input type={ "time" } min="09:00" max="18:00" name={ "workshopTimeEnd" }
+                        <input type={ "time" } min="07:00" max="23:00" name={ "workshopTimeEnd" }
                                id={ "workshopTimeEnd" }
                                value={ formik.values.workshopTimeEnd }
                                onChange={ formik.handleChange }/>
