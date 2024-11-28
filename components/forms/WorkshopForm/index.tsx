@@ -32,7 +32,8 @@ export interface FormValues {
         city: string
     },
 }
-const INIT_WS_VALUES:FormValues = {
+
+const INIT_WS_VALUES: FormValues = {
     title: '',
     type: 'online',
     link: {
@@ -159,15 +160,9 @@ const WorkshopForm = () => {
 
 
                 <div className={ styles.workshopFormGroup }>
-                    {/*<div className={ `${styles.formItem} ${styles.workshopDescriptionItem}`  }>
-                        <label htmlFor={ "description" }>Beschreibung</label>
-                        <textarea name={ "description" } id={ "description" } cols={ 50 }
-                                  rows={ 10 } onChange={ formik.handleChange }></textarea>
-                    </div>*/ }
-
                     <div className={ `${ styles.formItem } ${ styles.workshopDescriptionItem }` }>
                         <label htmlFor={ "description" }>Beschreibung</label>
-                        <TextEditor formik={formik} fieldname={"description"}/>
+                        <TextEditor formik={ formik } fieldname={ "description" }/>
                     </div>
                 </div>
                 <div style={ {display: "flex", justifyContent: "center"} }>
