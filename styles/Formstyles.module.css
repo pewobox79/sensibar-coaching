@@ -112,8 +112,9 @@
     flex-direction: column;
 }
 
-.newTreatmentFormInner > h3 {
-    font-size: 2rem
+.newTreatmentHeading {
+    font-size: 2rem;
+    text-align: center;
 }
 
 .newTreatmentCloseButton {
@@ -129,6 +130,13 @@
     padding: 0 10px;
 
 
+}
+
+.newTreatmentBody{
+ width: 100%;
+    flex: 1; /* Takes up the remaining space in the modal */
+    overflow-y: auto; /* Enables vertical scrolling */
+    background: #fff;
 }
 
 .textAreaStyle, .inputFieldStyle {

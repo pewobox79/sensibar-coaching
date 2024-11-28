@@ -10,7 +10,7 @@ import ToastMessage from "@/components/global/ToastMessage";
 import {useClientStore} from "@/stores/useClientStore";
 import {useLocalStorage} from "@/hooks/useLocalStorage";
 
-const NewTreatmentForm = ({clientId, clientName}: { clientId: string, clientName:string }) => {
+const NewTreatmentForm = ({clientId, clientName}: { clientId: string, clientName: string }) => {
 
     const token = useLocalStorage("sensiUser")?.value
     const modalClose = useModalOpen().setTreatmentFormClose;
@@ -46,7 +46,7 @@ const NewTreatmentForm = ({clientId, clientName}: { clientId: string, clientName
                     data: {...values}
                 }
 
-                const response = await createNewTreatmentItem(formatedData as TreatmentDataType,token.jwt )
+                const response = await createNewTreatmentItem(formatedData as TreatmentDataType, token.jwt)
 
                 if (response.msg === "neuer Eintrag hinzugefügt") {
 
@@ -77,59 +77,61 @@ const NewTreatmentForm = ({clientId, clientName}: { clientId: string, clientName
         <div className={ styles.newTreatmentFormInner }>
             <div className={ styles.newTreatmentCloseButton }><Button type={ "submit" } action={ modalClose }
                                                                       title={ "schließen" }/></div>
+            <div className={styles.newTreatmentBody}>
+                <h3 className={styles.newTreatmentHeading}>Neuer Eintrag</h3>
+                <form onSubmit={ formik.handleSubmit } className={ styles.newTreatmentFormSection }>
 
-            <h3>Neuer Eintrag</h3>
-            <form onSubmit={ formik.handleSubmit } className={ styles.newTreatmentFormSection }>
+                    <div className={ styles.formItem }>
+                        <label htmlFor="name">Name</label>
+                        <input type="text" id="title" name="title" defaultValue={ clientName.toUpperCase() }
+                               className={ styles.inputFieldStyle }/>
+                    </div>
 
-                <div className={ styles.formItem }>
-                    <label htmlFor="name">Name</label>
-                    <input type="text" id="title" name="title" defaultValue={ clientName.toUpperCase() }
-                           className={ styles.inputFieldStyle }/>
-                </div>
+                    <div className={ styles.formItem }>
+                        <label htmlFor="title">Title</label>
+                        <input type="text" id="title" name="title" value={ formik.values.title }
+                               onChange={ formik.handleChange } className={ styles.inputFieldStyle }/>
+                        { formik.errors.title &&
+                          <div className={ styles.inputErrorText }>{ formik.errors.title }</div> }
+                    </div>
 
-                <div className={ styles.formItem }>
-                    <label htmlFor="title">Title</label>
-                    <input type="text" id="title" name="title" value={ formik.values.title }
-                           onChange={ formik.handleChange } className={ styles.inputFieldStyle }/>
-                    { formik.errors.title && <div className={ styles.inputErrorText }>{ formik.errors.title }</div> }
-                </div>
+                    <div className={ styles.formItem }>
+                        <label htmlFor="location">Ort</label>
+                        <select id="location" name="location" value={ formik.values.location }
+                                onChange={ formik.handleChange } className={ styles.inputFieldStyle }>
+                            <option value={ "vor Ort" }>vor Ort</option>
+                            <option value={ "online" }>online</option>
+                            <option value={ "telefonisch" }>telefonisch</option>
+                        </select>
+                    </div>
 
-                <div className={ styles.formItem }>
-                    <label htmlFor="location">Ort</label>
-                    <select id="location" name="location" value={ formik.values.location }
-                            onChange={ formik.handleChange } className={ styles.inputFieldStyle }>
-                        <option value={ "vor Ort" }>vor Ort</option>
-                        <option value={ "online" }>online</option>
-                        <option value={ "telefonisch" }>telefonisch</option>
-                    </select>
-                </div>
+                    <div className={ styles.formItem }>
+                        <label htmlFor="type">Ort</label>
+                        <select id="type" name="type" value={ formik.values.type }
+                                onChange={ formik.handleChange } className={ styles.inputFieldStyle }>
+                            <option value={ "Erstberatung" }>Erstberatung</option>
+                            <option value={ "Folgeberatung" }>Folgeberatung</option>
+                            <option value={ "Testung" }>Testung</option>
+                        </select>
+                    </div>
+                    <div className={ styles.formItem }>
+                        <label htmlFor="details">Details</label>
+                        <textarea id="details" name="details" value={ formik.values.details }
+                                  onChange={ formik.handleChange } rows={ 10 }
+                                  className={ styles.textAreaStyle }></textarea>
+                        { formik.errors.details &&
+                          <div className={ styles.inputErrorText }>{ formik.errors.details }</div> }
+                    </div>
+                    <div className={ styles.formItem }>
+                        <Button type="submit" title="speichern"/>
+                    </div>
 
-                <div className={ styles.formItem }>
-                    <label htmlFor="type">Ort</label>
-                    <select id="type" name="type" value={ formik.values.type }
-                            onChange={ formik.handleChange } className={ styles.inputFieldStyle }>
-                        <option value={ "Erstberatung" }>Erstberatung</option>
-                        <option value={ "Folgeberatung" }>Folgeberatung</option>
-                        <option value={ "Testung" }>Testung</option>
-                    </select>
-                </div>
-                <div className={ styles.formItem }>
-                    <label htmlFor="details">Details</label>
-                    <textarea id="details" name="details" value={ formik.values.details }
-                              onChange={ formik.handleChange } rows={ 10 }
-                              className={ styles.textAreaStyle }></textarea>
-                    { formik.errors.details &&
-                      <div className={ styles.inputErrorText }>{ formik.errors.details }</div> }
-                </div>
-                <div className={ styles.formItem }>
-                    <Button type="submit" title="speichern"/>
-                </div>
-
-            </form>
-            { success.state && <ToastMessage state={ success } setState={ setSuccess }/> }
-            { error.state && <ToastMessage state={ error } setState={ setError }/> }
+                </form>
+                { success.state && <ToastMessage state={ success } setState={ setSuccess }/> }
+                { error.state && <ToastMessage state={ error } setState={ setError }/> }
 
 
+            </div>
         </div>
     </div>
 }

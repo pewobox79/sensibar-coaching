@@ -15,6 +15,7 @@ const Client = () => {
 
     const openClientModal = useModalOpen().setSearchOpen;
     return <div className={ styles.clientPageWrapper }>
+
         { clientContext.clientData.personalData.firstname.length > 0 ? <><ContactDetails
             context={ clientContext?.clientData as ClientData }/>
             <TreatmentSection/></> : <div style={ {
@@ -26,6 +27,7 @@ const Client = () => {
             alignItems: "center"
         } }><Button type={ "submit" } action={ openClientModal } title={ "Kunde suchen" }/>
         </div> }
+
     </div>
 }
 
