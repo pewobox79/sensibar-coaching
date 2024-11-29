@@ -138,7 +138,6 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
 
                 } else {
 
-                    console.log("existing contact", data.data)
                     const existingContactId = data?.data[0].documentId
                     //handle update existing contact
 
