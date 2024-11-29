@@ -6,7 +6,6 @@ const AuthLayout =async ({children}:{children: React.ReactNode | React.ReactElem
 
     const cookieStore = cookies()
     const token:{name: string, value: string} |undefined = cookieStore.get('sensiToken')
-    console.log("token", token)
 
     if(!token?.value){
         redirect("/login")

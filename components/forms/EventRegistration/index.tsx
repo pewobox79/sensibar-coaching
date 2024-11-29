@@ -60,8 +60,9 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
             setRegistrationProcess(true)
             const cleanedFirstname = values.firstname.replace(/\s+/g, '').toLowerCase();
             const cleanedLastname = values.lastname.replace(/\s+/g, '').toLowerCase();
+            const cleanedEmail = values.contact.email?.trim()?.toLowerCase();
 
-            checkIfContactExists(cleanedFirstname, cleanedLastname, values.contact.email).then(data => {
+            checkIfContactExists(cleanedFirstname, cleanedLastname, cleanedEmail).then(data => {
                 const dataMapping = {
                     data: {
                         personalData: {
