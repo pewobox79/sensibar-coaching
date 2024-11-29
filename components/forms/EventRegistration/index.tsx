@@ -138,6 +138,7 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
 
                 } else {
 
+                    console.log("existing contact", data.data)
                     const existingContactId = data?.data[0].documentId
                     //handle update existing contact
 
@@ -162,7 +163,12 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
                                 headers: {
                                     'Content-Type': 'application/json',
                                 },
-                                body: JSON.stringify({id: existingContactId, email: data?.data[0].contact[0].email}),
+                                body: JSON.stringify({
+                                    id: existingContactId,
+                                    email: data?.data[0].contact[0].email,
+                                    workshopName: workshopName,
+                                    workshopId: workshopId,
+                                }),
                             })
 
                         })
@@ -181,7 +187,7 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
 
     return <>
         <form onSubmit={ formik.handleSubmit }>
-            <div className={styles.eventRegistrationHeader}><h3>Anmeldung</h3></div>
+            <div className={ styles.eventRegistrationHeader }><h3>Anmeldung</h3></div>
             <div className={ styles.formItem }>
                 <Form.Control
                     type="text"
