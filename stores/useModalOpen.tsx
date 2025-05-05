@@ -1,4 +1,4 @@
-import {create} from "zustand/index";
+    import {create} from "zustand/index";
 
 interface modalOpen {
     status: { search: boolean, treatmentForm: boolean, createModal: boolean, contacts: boolean, workshop: boolean }

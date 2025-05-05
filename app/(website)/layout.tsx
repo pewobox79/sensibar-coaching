@@ -43,7 +43,7 @@ const TTNorms = localFont({
             style: 'italic',
         },
     ],
-    variable: "--font-tt-norms",
+        variable: "--font-tt-norms",
 });
 
 export const metadata: Metadata = {

@@ -2,18 +2,18 @@ import {ClientData} from "@/stores/useClientStore";
 
 const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
 
-const config={
+const config = {
     method: 'GET',
     headers: {
         Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
     },
-    next: { revalidate: 60 }
+    next: {revalidate: 60}
 }
 export const getNavigation = async () => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/navigation/?populate=*`, {next: { revalidate: 60 }})
+        const response = await fetch(`${ STRAPI_URI }/api/navigation/?populate=*`, {next: {revalidate: 60}})
         return await response.json()
 
     } catch (e) {
@@ -34,16 +34,18 @@ export const getBasicPageContent = async (slug: string) => {
     }
 }
 
-export const getClientsArray = async (type:"patient" |"all") => {
+export const getClientsArray = async (type: "patient" | "all") => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/contacts/?populate=*&sort=personalData.firstname:asc`,config )
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/?populate=*&sort=personalData.firstname:asc`, config)
         const clientsData = await response.json()
         let clientsArray = []
         if (clientsData) {
 
-            const finalList = clientsData?.data?.filter((item: {isPatient: boolean}) => type === "all" ? !item.isPatient : item.isPatient);
+            const finalList = clientsData?.data?.filter((item: {
+                isPatient: boolean
+            }) => type === "all" ? !item.isPatient : item.isPatient);
             clientsArray = finalList.map((client: { personalData: { firstname: string, lastname: string } }) => {
 
                 return `${ client.personalData.firstname.toUpperCase() } ${ client.personalData.lastname.toUpperCase() }`
@@ -84,7 +86,7 @@ export const convertStringToFirstAndLastName = (data: string) => {
     return {firstName, lastName};
 
 }
-export const transformContactToCoachee =async (token: string, id: string)=>{
+export const transformContactToCoachee = async (token: string, id: string) => {
 
     console.log("in transform to coachee", token, id)
 
@@ -96,12 +98,12 @@ export const transformContactToCoachee =async (token: string, id: string)=>{
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${ token }`
             },
-            body: JSON.stringify({data:{isPatient: true}})
+            body: JSON.stringify({data: {isPatient: true}})
         })
 
-        if(!response.ok){
+        if (!response.ok) {
             return {msg: "update failed", status: response.statusText}
-        }else{
+        } else {
             const updatedContact = await response.json()
             return {msg: "new coachee added", data: updatedContact.data}
         }
@@ -117,8 +119,8 @@ export const transformContactToCoachee =async (token: string, id: string)=>{
 
 }
 
-export const updateContact = async (updatedData:ClientData, id:string|undefined, token:string) => {
-console.log("token in update", token)
+export const updateContact = async (updatedData: ClientData, id: string | undefined, token: string) => {
+    console.log("token in update", token)
     //remove id items
 
     const newData = {
@@ -138,12 +140,12 @@ console.log("token in update", token)
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${ token }`
             },
-            body: JSON.stringify({data:newData})
+            body: JSON.stringify({data: newData})
         })
 
-        if(!response.ok){
+        if (!response.ok) {
             return {msg: "update failed", status: response.statusText}
-        }else{
+        } else {
             const updatedContact = await response.json()
             return {msg: "Kontakt aktualisiert", data: updatedContact.data}
         }
@@ -159,7 +161,7 @@ console.log("token in update", token)
 
 }
 
-export const formatDateToStrapiFormat =(date:string)=>{
+export const formatDateToStrapiFormat = (date: string) => {
 
     const dateAsString = new Date(date).toISOString()
 
@@ -167,11 +169,9 @@ export const formatDateToStrapiFormat =(date:string)=>{
     return dateAsString.slice(0, indexOf)
 
 
-
-
 }
 
-export const createNewCoachee = async (token:string, newData: unknown)=>{
+export const createNewCoachee = async (token: string, newData: unknown) => {
 
     try {
 
@@ -181,12 +181,12 @@ export const createNewCoachee = async (token:string, newData: unknown)=>{
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${ token }`
             },
-            body: JSON.stringify({data:newData})
+            body: JSON.stringify({data: newData})
         })
 
-        if(!response.ok){
+        if (!response.ok) {
             return {msg: "create failed", status: response.statusText}
-        }else{
+        } else {
             const updatedContact = await response.json()
             return {msg: "coachee created", data: updatedContact.data}
         }
@@ -200,4 +200,41 @@ export const createNewCoachee = async (token:string, newData: unknown)=>{
     }
 
 }
+
+
+export const getTestQuestions = async () => {
+
+    try {
+
+        const response = await fetch(`${ STRAPI_URI }/api/testing-questions`, {next: {revalidate: 60}})
+        return await response.json()
+
+    } catch (e) {
+
+        console.error('Error fetching navigation data:', e)
+    }
+}
+
+
+export const getTestResultsByHighestValue = async (token:string, value:number) => {
+
+    try {
+
+        const response = await fetch(`${ STRAPI_URI }/api/answers-ratings?filters[lowestRate][$lte]=${value}&filters[highestRate][$gte]=${value}`, {method:"GET",
+            headers: {
+            'Authentication': `bearer ${token}`
+            },next: {revalidate: 60}})
+        const data = await response.json();
+        console.log("response", data)
+        return data
+
+    } catch (e) {
+
+        console.error('Error fetching navigation data:', e)
+    }
+
+}
+
+
+
 

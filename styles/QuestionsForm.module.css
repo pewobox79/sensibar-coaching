@@ -1,0 +1,129 @@
+.displayNone {
+    display: none;
+
+}
+
+.questionItemWrapper {
+    border: 1px solid var(--seachBackground);
+    border-radius: 5px;
+    padding: 10px;
+    min-width: 150px;
+    width: 96%;
+    min-height: 300px;
+    height: auto;
+
+    /* Animation */
+    opacity: 0;
+    transform: scale(0.95);
+    animation: fadeInScale 0.5s ease-in forwards;
+}
+
+@keyframes fadeInScale {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+.questionTitle {
+    text-align: center;
+    font-size: 2rem;
+    text-wrap: wrap;
+    height: auto;
+    padding: 20px 0;
+    line-height: 40px;
+}
+
+.questionInputField {
+    text-align: center;
+    padding: 40px 0 0 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;;
+}
+
+.questionsCounter{
+
+    font-size: 1.5rem;
+    margin: 10px
+}
+
+.questionInputElement{
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.questionInputElement >label {
+    width: 90px;
+    font-size: 1.5rem;
+    margin: 5px
+
+}
+
+.nextPrevButtonsWrapper{
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.questionButton{
+
+    padding: 5px;
+    width: 100px;
+   background-color: var(--background);
+    border-radius: 5px;
+    margin: 20px;
+    text-align: center;
+}
+
+.resultButton{
+    background-color: var(--textColor);
+    color: var(--background);
+    outline: 1px solid var(--background);
+    border-radius: 5px;
+}
+
+.resultButton:hover{
+    background-color: var(--background);
+    color: var(--textColor)
+}
+
+.questionButton:hover{
+    cursor: pointer;
+}
+
+.questionButtonHide {
+   visibility: hidden;
+}
+
+.questionResultItem{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--seachBackground);
+    border-radius: 5px
+}
+
+
+
+@media screen and (min-width: 768px) {
+
+    .questionItemWrapper{
+        max-width: 900px;
+        padding: 20px
+    }
+
+    .nextPrevButtonsWrapper{
+
+        width: 50%;
+
+    }
+
+}
