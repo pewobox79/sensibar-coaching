@@ -8,11 +8,11 @@ export async function generateMetadata(): Promise<Metadata> {
     // Fetch data based on slug (can be from CMS, DB, etc.)
     const data = await getQuestionsPageIntro();
     return {
-        title:  `SENSIBAR | ${data?.data.seoData?.metaTitle}`,
-        description: data?.data.seoData?.metaDescription,
+        title:  `SENSIBAR | ${data?.data?.seoData?.metaTitle}`,
+        description: data?.data?.seoData?.metaDescription,
         openGraph: {
-            title: data?.data.seoData?.metaTitle,
-            description: data?.data.seoData?.metaDescription,
+            title: data?.data?.seoData?.metaTitle,
+            description: data?.data?.seoData?.metaDescription,
         },
     }
 }

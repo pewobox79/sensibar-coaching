@@ -14,11 +14,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const data = await getSingleWorkshop(workshopId);
     console.log("data", data)
     return {
-        title:  `SENSIBAR | ${data?.data.seoData?.metaTitle}`,
-        description: data?.data.seoData?.metaDescription,
+        title:  `SENSIBAR | ${data?.data?.seoData?.metaTitle}`,
+        description: data?.data?.seoData?.metaDescription,
         openGraph: {
-            title: data?.data.seoData?.metaTitle,
-            description: data?.data.seoData?.metaDescription,
+            title: data?.data?.seoData?.metaTitle,
+            description: data?.data?.seoData?.metaDescription,
         },
     }
 }
