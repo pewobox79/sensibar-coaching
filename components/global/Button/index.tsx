@@ -4,7 +4,7 @@ import React from "react";
 
 type ButtonType = {
 
-    title?: "registrieren" | "speichern" | "anrufen" | "details"|"akzeptieren" | "bestätigen" |"schließen" | "login" |"neu" | "Kunde suchen" |"öffnen" |"absagen" |"einladen" |"neuer workshop" |"neuer Coachee" |"löschen";
+    title?: "registrieren" | "speichern" | "anrufen" | "details"|"akzeptieren" | "bestätigen" |"schließen" | "login" |"neu" | "Kunde suchen" |"öffnen" |"absagen" |"einladen" |"neuer workshop" |"neuer Coachee" |"löschen" |"Start";
     type: "submit" | "button";
     action?:()=>void;
     href?: string;

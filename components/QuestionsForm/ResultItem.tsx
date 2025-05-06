@@ -22,7 +22,7 @@ const ResultItem = ({diff}: { diff: number }) => {
       router.push(`/selbsttest/ergebnis?value=${resultValue}`)
     }
 
-    return <div className={ styles.nextPrevButtonsWrapper }>
+    return <div className={ styles.questionItemWrapper }>
         <div className={ styles.questionResultItem }>
             { diff != 0 ? <div className={ styles.questionTitle }>Du hast leider nicht alle Fragen beantwortet</div> :
                 <>

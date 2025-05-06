@@ -222,7 +222,7 @@ export const getTestResultsByHighestValue = async (token:string, value:number) =
 
         const response = await fetch(`${ STRAPI_URI }/api/answers-ratings?filters[lowestRate][$lte]=${value}&filters[highestRate][$gte]=${value}`, {method:"GET",
             headers: {
-            'Authentication': `bearer ${token}`
+                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
             },next: {revalidate: 60}})
         const data = await response.json();
         console.log("response", data)
@@ -233,6 +233,26 @@ export const getTestResultsByHighestValue = async (token:string, value:number) =
         console.error('Error fetching navigation data:', e)
     }
 
+}
+
+
+export const getQuestionsPageIntro =async ()=>{
+
+    try {
+
+        const response = await fetch(`${ STRAPI_URI }/api/questioning-page?populate=*`, {
+            method:"GET",
+            headers: {
+                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+            },next: {revalidate: 10}})
+        const data = await response.json();
+        console.log("response", data)
+        return data
+
+    } catch (e) {
+
+        console.error('Error fetching navigation data:', e)
+    }
 }
 
 

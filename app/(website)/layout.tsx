@@ -49,6 +49,9 @@ const TTNorms = localFont({
 export const metadata: Metadata = {
     title: "SENSIBAR | sensibel & wunderbar",
     description: "Hochsensible Menschen bekommen bei mir hilfreiche tipps und methoden für eine bessere Lebensqualität",
+    icons:[{
+        url: "/favicon.png"
+    }],
     openGraph:{
         type: "website",
         url: "https://sensibar-coaching.de",
@@ -56,7 +59,7 @@ export const metadata: Metadata = {
         description: "Hochsensible Menschen bekommen bei mir hilfreiche tipps und methoden für eine bessere Lebensqualität",
         images: [
             {
-                url: "https://sensibar-coaching.de/logo.png",
+                url: "/favicon.png",
                 width: 1200,
                 height: 630,
                 alt: "SENSIBAR | sensibel & wunderbar",
