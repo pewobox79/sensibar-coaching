@@ -206,7 +206,7 @@ export const getTestQuestions = async () => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/testing-questions`, {next: {revalidate: 60}})
+        const response = await fetch(`${ STRAPI_URI }/api/testing-questions?pagination[pageSize]=40`, {next: {revalidate: 60}})
         return await response.json()
 
     } catch (e) {
