@@ -1,4 +1,4 @@
-import SingleEvent from "@/pages/Events/SingleEvent";
+import SingleEvent from "@/pagesComponents/Events/SingleEvent";
 import {getSingleWorkshop} from "@/lib/strapi/workshopHelper";
 import {Metadata} from "next";
 

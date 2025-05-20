@@ -1,4 +1,4 @@
-import EventOverview from "@/pages/Events/EventOverview";
+import EventOverview from "@/pagesComponents/Events/EventOverview";
 import {getAllWorkshops} from "@/lib/strapi/workshopHelper";
 import {Metadata} from "next";
 

@@ -1,4 +1,4 @@
-import SelbstTestPage from "@/pages/SelbstTestPage";
+import SelbstTestPage from "@/pagesComponents/SelbstTestPage";
 import {getQuestionsPageIntro, getTestQuestions} from "@/lib/strapi/generalHelper";
 
 import { Metadata } from 'next'
@@ -21,7 +21,6 @@ const SelbstTest = async ()=>{
 
     const questions = await getTestQuestions();
     const introContent = await getQuestionsPageIntro();
-    console.log("selbsttest intro", introContent)
 
 
 

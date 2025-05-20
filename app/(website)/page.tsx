@@ -1,6 +1,6 @@
 
 
-import Homepage from "@/pages/Homepage";
+import Homepage from "@/pagesComponents/Homepage";
 
 
 export default function Home() {

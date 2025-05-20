@@ -1,4 +1,4 @@
-import WorkshopsPage from "@/pages/AdminPage/WorkshopsPage";
+import WorkshopsPage from "@/pagesComponents/AdminPage/WorkshopsPage";
 import {getAllWorkshops} from "@/lib/strapi/workshopHelper";
 import {Suspense} from "react";
 

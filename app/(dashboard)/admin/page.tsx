@@ -1,5 +1,5 @@
 
-import AdminPage from "@/pages/AdminPage";
+import AdminPage from "@/pagesComponents/AdminPage";
 
 const Admin =()=>{
 

@@ -1,9 +1,8 @@
-import SelbstTestResultPage from "@/pages/SelbstTestResultPage";
+import SelbstTestResultPage from "@/pagesComponents/SelbstTestResultPage";
 
 const Ergebnis = async ({searchParams}:{searchParams: Promise<{value: string}>})=>{
 
     const {value} = await searchParams;
-    console.log("value", value)
     return <SelbstTestResultPage value={value} />
 }
 

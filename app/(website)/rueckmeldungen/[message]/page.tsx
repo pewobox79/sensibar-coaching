@@ -1,5 +1,5 @@
-import WorkshopSubmissions from "@/pages/MessagePages/WorkshopSubmissions";
-import DoubleOptInPage from "@/pages/MessagePages/DoubleOptInPage";
+import WorkshopSubmissions from "@/pagesComponents/MessagePages/WorkshopSubmissions";
+import DoubleOptInPage from "@/pagesComponents/MessagePages/DoubleOptInPage";
 
 const DynamicMessagePage =({params}: {params: { message: string }})=>{
 
