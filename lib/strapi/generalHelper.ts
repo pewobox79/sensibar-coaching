@@ -88,7 +88,6 @@ export const convertStringToFirstAndLastName = (data: string) => {
 }
 export const transformContactToCoachee = async (token: string, id: string) => {
 
-    console.log("in transform to coachee", token, id)
 
     try {
 
@@ -224,9 +223,7 @@ export const getTestResultsByHighestValue = async (token:string, value:number) =
             headers: {
                 Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
             },next: {revalidate: 60}})
-        const data = await response.json();
-        console.log("response", data)
-        return data
+       return  await response.json();
 
     } catch (e) {
 
@@ -245,9 +242,8 @@ export const getQuestionsPageIntro =async ()=>{
             headers: {
                 Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
             },next: {revalidate: 10}})
-        const data = await response.json();
-        console.log("response", data)
-        return data
+        return await response.json();
+
 
     } catch (e) {
 

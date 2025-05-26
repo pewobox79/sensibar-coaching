@@ -55,6 +55,7 @@ export type ClientData = {
         title: string;
         details: string;
         type: string;
+        documentId: string
     }
 }
 
@@ -93,7 +94,8 @@ const defaultClientValues = {
     selectedClientDetails: {
         title:"",
         details: "",
-        type: ""
+        type: "",
+        documentId: ""
     }
 }
 export const useClientStore = create<ClientStore>((set) => ({

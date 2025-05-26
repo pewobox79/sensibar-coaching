@@ -2,15 +2,15 @@ export const generateEditorJSONFormat = (data:string) => {
 
 
     const dataArray = data?.split("\n")
-    console.log("dataArray", dataArray)
+
 
 
     return dataArray?.map(item => {
         if (item.includes("<h")) {
             const heading = item.substring(0, 4)
-            console.log("heading", heading)
+
             const textValue = item.replace(/<\/?h[1-6]>/g, "")
-            console.log("item contains h", textValue)
+
 
             switch (heading) {
                 case "<h1>" :

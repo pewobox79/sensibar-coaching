@@ -19,7 +19,6 @@ export const transporter = nodemailer.createTransport({
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function sendSubmissionEmail(userId:string, email:string, workshopName:string, workshopId: string) {
-console.log("Sending submission email", email )
     try {
         const info = await transporter.sendMail({
             to: `${ email }`, // list of receivers
@@ -57,7 +56,6 @@ export async function sendRegistrationFinalEmail(userId:string, email:string, na
 export async function sendWorkshopCancelEmail(emails:string[], title: string, workshopDate: string) {
 
     const emailList = emails.join(", ")
-    console.log("emailList: ", emailList, title, workshopDate)
     try {
         const info = await transporter.sendMail({
             from:'"Sensibar-Coaching - NoReply"',

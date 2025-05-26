@@ -30,7 +30,7 @@ export const createNewTreatmentItem = async (data: TreatmentDataType, token:stri
     } catch (err) {
 
         console.log("konnte nicht übergeben werden", err)
-        return {msg: "Eintrag update fehlerhaft."}
+        return {msg: "Eintrag erstellen fehlerhaft."}
 
     }
 
@@ -65,5 +65,39 @@ export const getTreatmentItemsByContact = async (contactId:string, token:string)
         return {msg: "Eintrag update fehlerhaft."}
 
     }
+
+}
+
+
+export const updateTreatmentById =async (id:string, data:{data:{details: string, title: string, type: string} }, token:string)=>{
+
+    try {
+
+        const response = await fetch(`${ STRAPI_URI }/api/treatment-notes/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${ token }`
+            },
+            body: JSON.stringify(data)
+        })
+
+
+        const newTreatmentData = await response.json()
+        if(!response.ok){
+            return {msg: "failed", status: response.statusText}
+        }else{
+            return {msg: "eintrag aktualisiert", data: newTreatmentData.data}
+        }
+
+
+    } catch (err) {
+
+        console.log("konnte nicht übergeben werden", err)
+        return {msg: "failed"}
+
+    }
+
+
 
 }
