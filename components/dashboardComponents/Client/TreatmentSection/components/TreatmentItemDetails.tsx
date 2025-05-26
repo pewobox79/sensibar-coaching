@@ -1,6 +1,7 @@
 'use client'
 
 import styles from "@/styles/Client.module.css";
+import styleForm from '@/styles/Formstyles.module.css'
 import {useClientStore} from "@/stores/useClientStore";
 import {useState} from "react";
 import {updateTreatmentById} from "@/lib/strapi/treatmentHelper";
@@ -66,7 +67,7 @@ const TreatmentItemDetails = () => {
             { clientContext.clientData?.selectedClientDetails?.title && <h3>Art des Termins:</h3> }
             { !update ? <p>{ clientContext.clientData?.selectedClientDetails?.type }</p> :
                 <select id="type" name="type" value={ data.type }
-                        onChange={ handleChange } className={ styles.inputFieldStyle }>
+                        onChange={ handleChange } className={ styleForm.inputFieldStyle }>
                     <option value={ "Erstberatung" }>Erstberatung</option>
                     <option value={ "Folgeberatung" }>Folgeberatung</option>
                     <option value={ "Testung" }>Testung</option>
@@ -78,7 +79,7 @@ const TreatmentItemDetails = () => {
                 wordBreak: "break-word",
                 marginBottom: 30
             } }>{ clientContext.clientData?.selectedClientDetails?.details }</div>
-            : <textarea defaultValue={ data.details } name="details" onChange={ handleChange } rows={ 10 }
+            : <textarea className={ styleForm.inputFieldStyle } defaultValue={ data.details } name="details" onChange={ handleChange } rows={ 10 }
                         cols={ 40 }></textarea> }
             <div style={ {display: "flex", marginTop: 10} }>{ clientContext.clientData?.selectedClientDetails?.title &&
 
