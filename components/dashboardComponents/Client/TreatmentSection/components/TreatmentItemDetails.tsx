@@ -27,7 +27,8 @@ const TreatmentItemDetails = () => {
         setData({
             ...data,
             details: clientContext.clientData?.selectedClientDetails?.details,
-            title: clientContext.clientData?.selectedClientDetails?.title
+            title: clientContext.clientData?.selectedClientDetails?.title,
+            type: clientContext.clientData?.selectedClientDetails?.type,
         })
         setUpdate(!update)
 
@@ -43,6 +44,7 @@ const TreatmentItemDetails = () => {
             data: {title: data.title, details: data.details, type: data.type}
         }
 
+
         updateTreatmentById(clientContext.clientData?.selectedClientDetails?.documentId, formatedData, token.jwt).then(res => {
 
             if (res.msg === "failed") {
@@ -55,6 +57,8 @@ const TreatmentItemDetails = () => {
             }
 
         })
+
+        clientContext.updateSelectedClientDetails(data)
     }
 
     return <div className={ styles.treatmentSplitRight }>

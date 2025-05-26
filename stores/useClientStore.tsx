@@ -59,11 +59,18 @@ export type ClientData = {
     }
 }
 
+type SelectedClientDetails = {
+    title: string;
+    details: string;
+    type: string;
+    documentId: string;
+};
 // Define the Zustand store interface
 interface ClientStore {
     clientData: ClientData;
     setClientData: (newData: Partial<ClientData>) => void;
     resetClientData: () => void;
+    updateSelectedClientDetails: (updatedFields: Partial<SelectedClientDetails>) => void;
 }
 
 
@@ -108,4 +115,14 @@ export const useClientStore = create<ClientStore>((set) => ({
     resetClientData: () => set(() => ({
         clientData: defaultClientValues
     })),
+    updateSelectedClientDetails: (updatedFields) =>
+        set((state) => ({
+            clientData: {
+                ...state.clientData,
+                selectedClientDetails: {
+                    ...state.clientData.selectedClientDetails,
+                    ...updatedFields,
+                },
+            },
+        })),
 }))
