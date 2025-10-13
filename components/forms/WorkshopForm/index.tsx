@@ -54,6 +54,8 @@ const INIT_WS_VALUES: FormValues = {
         city: "Pörnbach"
     },
 }
+
+
 const WorkshopForm = () => {
 
     const [success, setSuccess] = useState({state: false, msg: "Neuer Workshop angelegt", type: "success"})
@@ -100,7 +102,7 @@ const WorkshopForm = () => {
         },
     })
 
-
+    console.log("data", formik.values)
     return <div className={ styles.newWorkshopWrapper }>
         { success.state && <ToastMessage state={ success } setState={ setSuccess }/> }
 
@@ -158,7 +160,40 @@ const WorkshopForm = () => {
                     </div>
                 </div>
 
+                <h3>Veranstaltungsort</h3>
+                <div className={ styles.workshopFormGroup }>
 
+                    <div className={ styles.formItem }>
+                        <label htmlFor={ "street" }>Strasse</label>
+                        <input type={ "text" } name={ "location.street" } id={ "street" }
+                               value={ formik.values.location.street }
+                               onChange={ formik.handleChange }/>
+                    </div>
+                    <div className={ styles.formItem }>
+                        <label htmlFor={ "streetNumber" }>Hausnummer</label>
+                        <input type={ "text" } name={ "location.streetNumber" }
+                               id={ "streetNumber" }
+                               value={ formik.values.location.streetNumber }
+                               onChange={ formik.handleChange }/>
+                    </div>
+
+                </div>
+                <div className={ styles.workshopFormGroup }>
+                    <div className={ styles.formItem }>
+                        <label htmlFor={ "zipCode" }>Postleitzahl</label>
+                        <input type={ "text" }  name={ "location.zipCode" }
+                               id={ "zipCode" }
+                               value={ formik.values.location.zipCode }
+                               onChange={ formik.handleChange }/>
+                    </div>
+                    <div className={ styles.formItem }>
+                        <label htmlFor={ "city" }>Ort</label>
+                        <input type={ "text" } name={ "location.city" }
+                               id={ "city" }
+                               value={ formik.values.location.city }
+                               onChange={ formik.handleChange }/>
+                    </div>
+                </div>
                 <div className={ styles.workshopFormGroup }>
                     <div className={ `${ styles.formItem } ${ styles.workshopDescriptionItem }` }>
                         <label htmlFor={ "description" }>Beschreibung</label>

@@ -29,8 +29,10 @@ const WorkshopCard = (props: {
     description: [],
     workshopTimeStart: string,
     workshopTimeEnd: string,
+    location:{city: string, street: string, streetNumber: string, zipCode: string, country: string},
 }) => {
 
+    console.log("ws props", props)
 
     const INIT_WS_VALUES = {
         documentId: props.documentId,
@@ -41,7 +43,14 @@ const WorkshopCard = (props: {
         ws_status: props.ws_status,
         workshopTimeStart: props.workshopTimeStart,
         workshopTimeEnd: props.workshopTimeEnd,
+        city: props.location.city,
+        zipCode: props.location.zipCode,
+        country: props.location.country,
+        street: props.location.street,
+        streetNumber: props.location.streetNumber,
     }
+
+    console.log("INIT_WS_VALUES", INIT_WS_VALUES)
     const token = useLocalStorage("sensiUser")?.value
 
     const [contactDetails, setContactDetails] = useState(false)
@@ -73,7 +82,15 @@ const WorkshopCard = (props: {
             type: edit.values.type,
             ws_status: edit.values.ws_status,
             workshopTimeStart: formatTimeToStrapiFormat(edit.values.workshopTimeStart),
-            workshopTimeEnd: formatTimeToStrapiFormat(edit.values.workshopTimeEnd)
+            workshopTimeEnd: formatTimeToStrapiFormat(edit.values.workshopTimeEnd),
+            location:{
+                city: edit.values.city,
+                street: edit.values.street,
+                streetNumber: edit.values.streetNumber,
+                zipCode: edit.values.zipCode,
+                country: edit.values.country,
+            }
+
 
         }
         try {
@@ -251,6 +268,33 @@ const WorkshopCard = (props: {
                             <WsEditItem type={ "select" } value={ edit.values.ws_status } property={ "ws_status" }
                                         changeAction={ handleChange }/> :
                             <p>Status: { edit.values?.ws_status }</p> }
+
+####
+
+                        { edit.state ?
+                            <WsEditItem type={ "text" } value={ edit.values.city } property={ "city" }
+                                        changeAction={ handleChange }/> :
+                            <p>Stadt: { edit.values.city }</p> }
+
+                        { edit.state ?
+                            <WsEditItem type={ "text" } value={ edit.values.street } property={ "street" }
+                                        changeAction={ handleChange }/> :
+                            <p>Strasse: { edit.values.street }</p> }
+
+
+                        { edit.state ?
+                            <WsEditItem type={ "text" } value={ edit.values.streetNumber } property={ "streetNumber" }
+                                        changeAction={ handleChange }/> :
+                            <p>Nr: { edit.values.streetNumber }</p> }
+
+                        { edit.state ?
+                            <WsEditItem type={ "text" } value={ edit.values.zipCode } property={ "zipCode" }
+                                        changeAction={ handleChange }/> :
+                            <p>Nr: { edit.values.zipCode }</p> }
+
+
+
+
                     </div>
 
                     <div className={ styles.cardBodySection }>
