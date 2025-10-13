@@ -25,7 +25,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const SingleEventPage = async ({params}:{params: {workshopId: string}})=>{
     const singleWorkshopData = await getSingleWorkshop(params ?params?.workshopId:"")
-    console.log("single page",singleWorkshopData)
     return <SingleEvent {...singleWorkshopData}/>
 }
 
