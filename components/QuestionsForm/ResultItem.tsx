@@ -17,7 +17,6 @@ const ResultItem = ({diff}: { diff: number }) => {
                 resultValue +=1
             }
         })
-        console.log("submit values", values, resultValue)
 
       router.push(`/selbsttest/ergebnis?value=${resultValue}`)
     }

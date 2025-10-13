@@ -14,7 +14,6 @@ type EventInfoTypes ={
     location: EventDetailsProps['location']
 }
 const EventInfoBox =({workshop_date, workshopTimeStart, workshopTimeEnd, workshopType, location}:EventInfoTypes )=>{
-console.log("props event info", location, workshopType)
     const addressData = `${location.street} ${location.streetNumber}, ${location.zipCode} ${location.city} `
 
     return <div className={styles.singleEventDetailsBoxWrapper}>

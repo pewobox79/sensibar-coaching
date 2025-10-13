@@ -32,8 +32,6 @@ const WorkshopCard = (props: {
     location:{city: string, street: string, streetNumber: string, zipCode: string, country: string},
 }) => {
 
-    console.log("ws props", props)
-
     const INIT_WS_VALUES = {
         documentId: props.documentId,
         title: props.title,
@@ -50,7 +48,6 @@ const WorkshopCard = (props: {
         streetNumber: props.location.streetNumber,
     }
 
-    console.log("INIT_WS_VALUES", INIT_WS_VALUES)
     const token = useLocalStorage("sensiUser")?.value
 
     const [contactDetails, setContactDetails] = useState(false)
@@ -59,8 +56,6 @@ const WorkshopCard = (props: {
     const [success, setSuccess] = useState({state: false, type: "success", msg: "Absage Emails versendet"});
     const [error, setError] = useState({state: false, type: "error", msg: "absage konnte nicht verschickt werden"});
     const [openCancel, setOpenCancel] = useState(false);
-
-    console.log("description", edit.values)
 
     function handleCopyLink() {
         navigator.clipboard.writeText(`${ edit.values?.link?.href }`).then(() => {
@@ -73,7 +68,6 @@ const WorkshopCard = (props: {
     }
 
     async function handleUpdateWorkshop() {
-        console.log("save updates", edit.values)
 
         const updatedData = {
             title: edit.values.title,
@@ -113,9 +107,7 @@ const WorkshopCard = (props: {
     }
 
     function handleChange(event: { target: { value: string, name: string } }) {
-        console.log("event", event)
         if (event.target.name === "href") {
-            console.log("update href")
             setEdit({
                 ...edit,
                 values: {...edit.values, link: {...edit.values.link, [event.target.name]: event.target.value}}
@@ -195,7 +187,6 @@ const WorkshopCard = (props: {
         try {
 
             const response = await deleteWorkshopById(props.documentId, token.jwt)
-            console.log("delete response: ", response)
 
             if (response.msg === "workshop deleted") {
                 setSuccess({...success, state: true, msg: "Workshop gelöscht"})

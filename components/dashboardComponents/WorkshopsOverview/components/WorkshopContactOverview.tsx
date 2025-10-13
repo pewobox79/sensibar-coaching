@@ -47,10 +47,6 @@ const WorkshopContactOverview = ({contacts=[], action}: { contacts: [], action: 
 
     }, [contacts])
 
-
-    console.log("list state", listOfContacts)
-
-
     return <div className={ "globalModal" }>
 
         <div className={ "globalModalInner" }>

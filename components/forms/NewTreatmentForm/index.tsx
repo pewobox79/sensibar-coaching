@@ -51,7 +51,6 @@ const NewTreatmentForm = ({clientId, clientName}: { clientId: string, clientName
                 if (response.msg === "neuer Eintrag hinzugefügt") {
 
                     const newTreatmentList = await getTreatmentItemsByContact(clientId, token.jwt)
-                    console.log("new treatment list", newTreatmentList)
                     useClientStore.getState().setClientData({treatment_notes: newTreatmentList?.data})
 
                     setSuccess({...success, state: true, msg: "Eintrag erfolgreich hinzugefügt"})

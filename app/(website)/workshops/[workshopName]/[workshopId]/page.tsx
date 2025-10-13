@@ -12,7 +12,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { workshopId } = params
     // Fetch data based on slug (can be from CMS, DB, etc.)
     const data = await getSingleWorkshop(workshopId);
-    console.log("data", data)
     return {
         title:  `SENSIBAR | ${data?.data?.seoData?.metaTitle}`,
         description: data?.data?.seoData?.metaDescription,

@@ -68,7 +68,6 @@ const WorkshopForm = () => {
         onSubmit: async (values) => {
 
             generateEditorJSONFormat(values.description)
-            console.log("values", values)
             const startTime = formatTimeToStrapiFormat(values.workshopTimeStart);
             const endTime = formatTimeToStrapiFormat(values.workshopTimeEnd);
 

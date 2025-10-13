@@ -15,7 +15,6 @@ import {useClientStore} from "@/stores/useClientStore";
 
 const TransformationForm = ({data}: { data: ContactData }) => {
 
-    console.log("data", data)
     const router = useRouter()
 
     const [success, setSuccess] = useState({state: false, msg: "Neuer Coachee hinzugefügt", type: "success"})
