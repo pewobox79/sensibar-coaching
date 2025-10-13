@@ -148,7 +148,9 @@ export const executeDoubleOptIn = async (id: string | null, workshopLink: string
                     workshopLink: workshopLink,
                     workshopDate: workshop_date,
                     workshopTitle: title,
-                    email: data.data.contact[0].email
+                    email: data.data.contact[0].email,
+                    location: data.data.location,
+                    workshopType: data.data.type
                 })
             }
 
