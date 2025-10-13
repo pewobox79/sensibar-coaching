@@ -47,10 +47,10 @@ export async function sendRegistrationFinalEmail(userId: string, email: string, 
 
     switch (workshopType) {
         case 'hybrid':
-            content = `<p>Du kannst dich entweder über den <br/>WebLink:  ${ workshopLink } einwählen oder <br> oder zu folgender Adresse: ${ locationAddress }<p></p>`
+            content = `<p>Du kannst dich entweder über den <br/>WebLink:  ${ workshopLink } einwählen oder <br> oder zu folgender Adresse: <br/>${ locationAddress }<p></p>`
             break;
         case 'inPerson':
-            content = `<p>Der Workshop findet an folgender Addresse statt: ${ locationAddress }<p>`
+            content = `<p>Der Workshop findet an folgender Addresse statt: <br/> ${ locationAddress }<p>`
             break;
         default:
             content = `<p>Nachfolgend findest du Deinen Einwähllink.<br/>WebLink:  ${ workshopLink }<p>`
