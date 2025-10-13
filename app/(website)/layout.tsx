@@ -4,9 +4,10 @@ import "../../styles/globals.css";
 import MainLayout from "@/layouts/MainLayout";
 import PageLayout from "@/layouts/PageLayout";
 import Consent from "@/components/Consent";
+import { Poppins, Montserrat } from 'next/font/google'
 
 
-const roxborough = localFont({
+/*const roxborough = localFont({
     src: [
         {
             path: '../../assets/fonts/roxborough/roxborough-cf-regular.woff',
@@ -44,7 +45,21 @@ const TTNorms = localFont({
         },
     ],
         variable: "--font-tt-norms",
-});
+});*/
+
+const poppins = Poppins({
+    subsets: ['latin'],
+    weight: ['400', '600', '700'], // nur die benötigten Gewichtungen importieren
+    variable: '--font-poppins',
+    display: 'swap',
+})
+
+const montserrat = Montserrat({
+    subsets: ['latin'],
+    weight: ['400', '600', '700'],
+    variable: '--font-montserrat',
+    display: 'swap',
+})
 
 export const metadata: Metadata = {
     title: "SENSIBAR | sensibel & wunderbar",
@@ -84,7 +99,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-        <body className={ `${ roxborough.variable } ${ TTNorms.variable }` }>
+        <body className={ `${ montserrat.variable } ${ poppins.variable }` }>
         <MainLayout>
             <PageLayout>
                 { children }

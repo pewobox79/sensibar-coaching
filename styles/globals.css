@@ -18,13 +18,13 @@ body {
 body {
     color: var(--textColor);
     background: var(--background);
-    font-family: var(--font-tt-norms);
+    font-family: var(--font-montserrat);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-roxborough-cf-regular);
+    font-family: var(--font-poppins);
 }
 
 * {
@@ -135,19 +135,19 @@ input[type="checkbox"] {
     color: var(--textColor);
     text-decoration: none;
     border-bottom: 1px solid var(--background);
-    font-family: var(--font-roxborough-cf-regular)
+    font-family: var(--font-montserrat);
 }
 
 .activeLink {
     color: white;
     border-bottom: 3px solid var(--textColor);
-    font-family: var(--font-roxborough-cf-regular)
+    font-family: var(--font-montserrat);
 }
 
 .innerTextLinkStyle {
     color: var(--textColor);
     text-decoration: none;
-    font-family: var(--font-tt-norms)
+    font-family: var(--font-montserrat);
 }
 
 .innerTextLinkStyle:hover {
