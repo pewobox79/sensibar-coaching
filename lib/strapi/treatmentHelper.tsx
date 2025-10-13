@@ -84,7 +84,6 @@ export const updateTreatmentById =async (id:string, data:{data:{details: string,
 
 
         const dataReturn = await response.json();
-        console.log("data", data)
         if(!response.ok){
             return {msg: "failed", status: response.statusText}
         }else{

@@ -7,8 +7,6 @@ import RichTextRenderer from "@/components/strapi/RenderContentHelper";
 
 export type EventDetailsProps={title:string, description:[],workshop_date:string,ws_status: string, workshopTimeStart:string,workshopTimeEnd:string, documentId:string, id:string, type: string, location: {street: string, zipCode: string, country: string,streetNumber: string, city:string} }
 const SingleEvent = (props:{data:EventDetailsProps}) => {
-    console.log("event details", props)
-
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-expect-error
     const workshopDetails:EventDetailsProps = props.data ? props?.data:{}

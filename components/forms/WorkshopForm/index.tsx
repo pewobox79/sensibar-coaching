@@ -101,7 +101,6 @@ const WorkshopForm = () => {
         },
     })
 
-    console.log("data", formik.values)
     return <div className={ styles.newWorkshopWrapper }>
         { success.state && <ToastMessage state={ success } setState={ setSuccess }/> }
 

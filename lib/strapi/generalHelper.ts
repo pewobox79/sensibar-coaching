@@ -119,8 +119,6 @@ export const transformContactToCoachee = async (token: string, id: string) => {
 }
 
 export const updateContact = async (updatedData: ClientData, id: string | undefined, token: string) => {
-    console.log("token in update", token)
-    //remove id items
 
     const newData = {
         personalData: {...updatedData.personalData},

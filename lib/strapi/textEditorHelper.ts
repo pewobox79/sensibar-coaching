@@ -112,10 +112,8 @@ export const generateEditorJSONFormat = (data:string) => {
 
 
         } else if (item.includes("<ul>")) {
-            console.log("item contains ul", item)
             return {ul: item}
         } else {
-            console.log("item contains non")
             return {text: item}
         }
 

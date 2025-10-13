@@ -2,7 +2,6 @@
 const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
 
 export const userLoginRequest = async (identifier: string, password:string)=>{
-console.log("in user login request",identifier, password)
     const config = {
         method: 'POST',
         headers: {

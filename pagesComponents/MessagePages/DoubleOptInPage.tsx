@@ -12,7 +12,6 @@ const DoubleOptInPage = () => {
 
     useEffect(() => {
         getSingleWorkshop(workshopId).then((data)=>{
-console.log("data", data)
             const workshopLink = data.data?.link?.href;
             const {title, workshop_date, location, type} = data?.data
 
