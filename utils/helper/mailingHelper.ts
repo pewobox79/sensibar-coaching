@@ -47,7 +47,7 @@ export async function sendRegistrationFinalEmail(userId: string, email: string, 
             to: `${ email }`, // list of receivers
             subject: "Dein Platz ist gesichert!", // Subject line
 
-            html: `<div><p>Hey ${ name.toUpperCase() },</p> <p>Deine Anmeldung zum Workshop ${ title.toUpperCase() } am ${ workshopDate } ist bestätigt.</p> ${ workshopType === 'online' || workshopType === "hybrid" && `<p>Nachfolgend findest du Deinen Einwähllink.<br/>WebLink:  ${ workshopLink }<p>` } ${ workshopType === "inPerson" || workshopType === "hybrid" && `<p>Der Workshop findet an folgender Addresse statt: ${ locationAddress }</p>` }<p>Ich freue mich auf Dich, </p><p>Deine Yessica</p><p>Sensibar-Coaching | sensibel & wunderbar</p><p>Email: hello@sensibar-coaching.de <br/>Mobil: +49 176 625 05 701<br/>Adresse: Lindenstrasse 6a 85309 Pörnbach</p></div>`, // html body
+            html: `<div><p>Hey ${ name.toUpperCase() },</p> <p>Deine Anmeldung zum Workshop ${ title.toUpperCase() } am ${ workshopDate } ist bestätigt.</p> ${ workshopType === 'online' && `<p>Nachfolgend findest du Deinen Einwähllink.<br/>WebLink:  ${ workshopLink }<p>` } ${ workshopType === "inPerson" && `<p>Der Workshop findet an folgender Addresse statt: ${ locationAddress }</p>` }<p>Ich freue mich auf Dich, </p><p>Deine Yessica</p><p>Sensibar-Coaching | sensibel & wunderbar</p><p>Email: hello@sensibar-coaching.de <br/>Mobil: +49 176 625 05 701<br/>Adresse: Lindenstrasse 6a 85309 Pörnbach</p></div>`, // html body
         })
 
         return {msg: "email sucessfully sent", info}
