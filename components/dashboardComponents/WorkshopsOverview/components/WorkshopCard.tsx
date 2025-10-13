@@ -260,7 +260,6 @@ const WorkshopCard = (props: {
                                         changeAction={ handleChange }/> :
                             <p>Status: { edit.values?.ws_status }</p> }
 
-####
 
                         { edit.state ?
                             <WsEditItem type={ "text" } value={ edit.values.city } property={ "city" }
