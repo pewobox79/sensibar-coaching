@@ -42,12 +42,27 @@ export async function sendRegistrationFinalEmail(userId: string, email: string, 
 }, workshopType: string) {
 
     const locationAddress = `${ location.street } ${ location.streetNumber }, ${ location.zipCode } ${ location.city }`
+
+    let content: string
+
+    switch (workshopType) {
+        case 'hybrid':
+            content = `<p>Du kannst dich entweder über den <br/>WebLink:  ${ workshopLink } einwählen oder <br> oder zu folgender Adresse: ${ locationAddress }<p></p>`
+            break;
+        case 'inPerson':
+            content = `<p>Der Workshop findet an folgender Addresse statt: ${ locationAddress }<p>`
+            break;
+        default:
+            content = `<p>Nachfolgend findest du Deinen Einwähllink.<br/>WebLink:  ${ workshopLink }<p>`
+    }
+
+
     try {
         const info = await transporter.sendMail({
             to: `${ email }`, // list of receivers
             subject: "Dein Platz ist gesichert!", // Subject line
 
-            html: `<div><p>Hey ${ name.toUpperCase() },</p> <p>Deine Anmeldung zum Workshop ${ title.toUpperCase() } am ${ workshopDate } ist bestätigt.</p> ${ workshopType === 'online' && `<p>Nachfolgend findest du Deinen Einwähllink.<br/>WebLink:  ${ workshopLink }<p>` } ${ workshopType === "inPerson" && `<p>Der Workshop findet an folgender Addresse statt: ${ locationAddress }</p>` }<p>Ich freue mich auf Dich, </p><p>Deine Yessica</p><p>Sensibar-Coaching | sensibel & wunderbar</p><p>Email: hello@sensibar-coaching.de <br/>Mobil: +49 176 625 05 701<br/>Adresse: Lindenstrasse 6a 85309 Pörnbach</p></div>`, // html body
+            html: `<div><p>Hey ${ name.toUpperCase() },</p> <p>Deine Anmeldung zum Workshop ${ title.toUpperCase() } am ${ workshopDate } ist bestätigt.</p>${content}<p>Ich freue mich auf Dich, </p><p>Deine Yessica</p><p>Sensibar-Coaching | sensibel & wunderbar</p><p>Email: hello@sensibar-coaching.de <br/>Mobil: +49 176 625 05 701<br/>Adresse: Lindenstrasse 6a 85309 Pörnbach</p></div>`, // html body
         })
 
         return {msg: "email sucessfully sent", info}
