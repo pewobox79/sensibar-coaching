@@ -14,9 +14,10 @@ import {
 } from "@/lib/strapi/workshopHelper";
 import EmailInfo from "@/components/global/EmailInfo";
 import Loader from "@/components/global/Loader";
+import {EventDetailsProps} from "@/pagesComponents/Events/SingleEvent";
 
 
-const EventRegistration = ({workshopId, workshopName}: { workshopId: string, workshopName: string }) => {
+const EventRegistration = ({workshopId, workshopName, location, workshopType}: { workshopId: string, workshopName: string, location: EventDetailsProps['location'], workshopType: string }) => {
     const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV ? process.env.NEXT_PUBLIC_STRAPI_URL_DEV : ""
 
     const [error, setError] = useState({state: false, msg: "", type: "error"});
@@ -126,7 +127,9 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
                                             id: newData.data?.documentId,
                                             workshopName: workshopName,
                                             workshopId: workshopId,
-                                            email: newData?.data?.contact[0].email
+                                            email: newData?.data?.contact[0].email,
+                                            location: location,
+                                            workshopType: workshopType,
                                         }),
                                     })
 

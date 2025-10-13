@@ -27,7 +27,7 @@ const SingleEvent = (props:{data:EventDetailsProps}) => {
                 </div>
                 <div className={ styles.singleEventContent50 }>
                     <EventInfoBox location={workshopDetails.location} workshop_date={workshopDetails.workshop_date} workshopTimeStart={workshopDetails.workshopTimeStart} workshopTimeEnd={workshopDetails.workshopTimeEnd} workshopType={workshopDetails.type}/>
-                    {workshopDetails.ws_status === "confirmed" &&<EventRegistration workshopId={workshopDetails.documentId} workshopName={workshopDetails.title}/>}</div>
+                    {workshopDetails.ws_status === "confirmed" &&<EventRegistration workshopId={workshopDetails.documentId} workshopName={workshopDetails.title} location={workshopDetails.location} workshopType={workshopDetails.type}/>}</div>
             </div>
             </div>
 
