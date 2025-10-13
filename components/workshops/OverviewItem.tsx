@@ -1,6 +1,7 @@
 
 import styles from '@/styles/Event.module.css'
 import Button from "@/components/global/Button";
+import {slugify} from "@/utils/helper/slugify";
 
 const OverviewItem = ({title, workshop_date, id, status}: {
     title: string,
@@ -16,7 +17,7 @@ const OverviewItem = ({title, workshop_date, id, status}: {
             <p>Datum: { workshop_date }</p>
             <p>{status}</p>
         </div>
-        <Button type={"button"} title={"details"} href={ `/workshops/${title.replace(/\s/g, "")}/${ id }` }/>
+        <Button type={"button"} title={"details"} href={ `/workshops/${slugify(title)}/${ id }` }/>
 
     </div>
 }
