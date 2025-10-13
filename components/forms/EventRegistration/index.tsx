@@ -282,7 +282,7 @@ const EventRegistration = ({workshopId, workshopName}: { workshopId: string, wor
                 <Form.Check // prettier-ignore
                     type={ "checkbox" }
                     id={ `participate` }
-                    label={ "Ich nehme an dem Infoabend zum Thema Hochsensibiltät teil." }
+                    label={ "Ja, ich nehme teil." }
                     checked={ formik.values.participate }
                     onChange={ formik.handleChange }
                     name={ "participate" }
