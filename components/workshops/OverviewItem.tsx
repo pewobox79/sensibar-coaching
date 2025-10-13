@@ -13,9 +13,13 @@ const OverviewItem = ({title, workshop_date, id, status}: {
 
     return <div className={styles.workshopListItemWrapper }>
         <div className={styles.workshopListItemContent}>
-            <h3>{ title }</h3>
-            <p>Datum: { workshop_date }</p>
-            <p>{status}</p>
+            <div className={styles.workshopListItemTitle}>
+                <h3>{ title }</h3>
+            </div>
+            <div>
+                <p>Datum: { workshop_date }</p>
+                <p>{status}</p>
+            </div>
         </div>
         <Button type={"button"} title={"details"} href={ `/workshops/${slugify(title)}/${ id }` }/>
 
