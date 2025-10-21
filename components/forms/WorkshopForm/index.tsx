@@ -47,11 +47,11 @@ const INIT_WS_VALUES: FormValues = {
     workshopTimeStart: "",
     workshopTimeEnd: "",
     location: {
-        street: "form test",
-        zipCode: "85309",
-        country: "Deutschland",
-        streetNumber: "12",
-        city: "Pörnbach"
+        street: "",
+        zipCode: "",
+        country: "",
+        streetNumber: "",
+        city: ""
     },
 }
 
