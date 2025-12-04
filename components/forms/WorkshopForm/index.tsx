@@ -49,7 +49,7 @@ const INIT_WS_VALUES: FormValues = {
     location: {
         street: "",
         zipCode: "",
-        country: "",
+        country: "Deutschland",
         streetNumber: "",
         city: ""
     },
@@ -190,6 +190,15 @@ const WorkshopForm = () => {
                                id={ "city" }
                                value={ formik.values.location.city }
                                onChange={ formik.handleChange }/>
+                    </div>
+                    <div className={ styles.formItem }>
+                        <label htmlFor={ "country" }>Land</label>
+                        <select name={ "type" } id={ "country" } value={ formik.values.location.city }
+                                onChange={ formik.handleChange }>
+                            <option value={ "Deutschland" }>Deutschland</option>
+                            <option value={ "Österreich" }>Österreich</option>
+                            <option value={ "Schweiz" }>Schweiz</option>
+                        </select>
                     </div>
                 </div>
                 <div className={ styles.workshopFormGroup }>
