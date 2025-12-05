@@ -17,6 +17,7 @@ import WorkshopCancelWindow from "@/components/dashboardComponents/WorkshopsOver
 import {useLocalStorage} from "@/hooks/useLocalStorage";
 import WsEditItem from "@/components/dashboardComponents/WorkshopsOverview/components/WsEditItem";
 import {isPastEvent} from "@/utils/helper/strapiHelper";
+import {createWorkshopLink} from "@/utils/helper/formater";
 
 const WorkshopCard = (props: {
     key: string,
@@ -53,18 +54,18 @@ const WorkshopCard = (props: {
     const eventIsInThePast = isPastEvent(props.workshop_date)
     const [contactDetails, setContactDetails] = useState(false)
     const [edit, setEdit] = useState({state: false, values: INIT_WS_VALUES});
-    const [onClipboard, setOnClipboard] = useState(false);
+    const [onClipboard, setOnClipboard] = useState({zoomLink: false, wsLink: false});
     const [success, setSuccess] = useState({state: false, type: "success", msg: "Absage Emails versendet"});
     const [error, setError] = useState({state: false, type: "error", msg: "absage konnte nicht verschickt werden"});
     const [openCancel, setOpenCancel] = useState(false);
 
-    function handleCopyLink() {
-        navigator.clipboard.writeText(`${ edit.values?.link?.href }`).then(() => {
-            setOnClipboard(true)
+    function handleCopyLink(string:string, type: 'zoomLink' |'wsLink') {
+        navigator.clipboard.writeText(string).then(() => {
+            setOnClipboard({...onClipboard, [type]: !onClipboard[type]});
         });
 
         setTimeout(() => {
-            setOnClipboard(false)
+            setOnClipboard({...onClipboard, [type]: !onClipboard[type]})
         }, 2000);
     }
 
@@ -301,12 +302,25 @@ const WorkshopCard = (props: {
                         { edit.state ?
                             <WsEditItem type={ "text" } value={ edit.values.link.href as string } property={ "href" }
                                         changeAction={ handleChange }/> :
-                            <p><a href={ `${ edit.values?.link?.href }` } title={ `${ props.link?.label }` }
-                                  target={ `${ edit.values.link?.target }` }>Weblink</a>
-                            </p> }
-                        <p>{ !edit.state && <><FontAwesomeIcon icon={ faCopy }
-                                                               onClick={ () => handleCopyLink() }/> { onClipboard &&
-                          <span style={ {color: "green"} }>Link copied</span> }</> }</p>
+                            <p>
+                                <a href={ `${ edit.values?.link?.href }` } title={ `${ props.link?.label }` }
+                                  target={ `${ edit.values.link?.target }` }>Zoom Link</a>
+                                <FontAwesomeIcon icon={ faCopy } style={{paddingLeft: 8}}
+                                                 onClick={ () => handleCopyLink(edit.values?.link?.href, "zoomLink") }/>
+                                { onClipboard.zoomLink &&
+                                  <span style={ {color: "green"} }>Link copied</span> }
+                            </p>
+                        }
+                        { edit.state ?
+                            <div style={{paddingBottom: 60}}></div>:
+                            <p>
+                                Workshop Link
+                                <FontAwesomeIcon icon={ faCopy } style={{paddingLeft: 8}}
+                                                 onClick={ () => handleCopyLink(createWorkshopLink(props.title, props.documentId), "wsLink") }/>
+                                { onClipboard.wsLink &&
+                                  <span style={ {color: "green"} }>Link copied</span> }
+                            </p>
+                        }
 
                     </div>
 

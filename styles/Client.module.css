@@ -34,6 +34,10 @@
     font-family: var(--font-tt-norms);
 }
 
+.editItemLabel {
+    font-size: 1rem;
+    font-family: var(--font-tt-norms);
+}
 .searchItem > select{
     width: 100%;
     padding: 10px;
