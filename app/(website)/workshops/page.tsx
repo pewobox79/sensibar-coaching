@@ -1,6 +1,7 @@
 import EventOverview from "@/pagesComponents/Events/EventOverview";
 import {getAllWorkshops} from "@/lib/strapi/workshopHelper";
 import {Metadata} from "next";
+import {slugify} from "@/utils/helper/slugify";
 
 
 
@@ -17,13 +18,11 @@ export async function generateMetadata(): Promise<Metadata> {
     }
 }
 
-
 const EventsPage =async()=>{
 
 
 
     const allWorkshops = await getAllWorkshops()
-
     return <EventOverview {...allWorkshops}/>
 
 

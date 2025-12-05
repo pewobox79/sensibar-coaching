@@ -1,12 +1,12 @@
 import SingleEvent from "@/pagesComponents/Events/SingleEvent";
-import {getSingleWorkshop} from "@/lib/strapi/workshopHelper";
+import {getAllWorkshops, getSingleWorkshop} from "@/lib/strapi/workshopHelper";
 import {Metadata} from "next";
+import {slugify} from "@/utils/helper/slugify";
 
-
+export const dynamicParams = true
 type Props = {
     params: { workshopId: string }
 }
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const { workshopId } = await params
@@ -29,3 +29,16 @@ const SingleEventPage = async ({params}:{params: {workshopId: string}})=>{
 }
 
 export default SingleEventPage;
+
+
+export const dynamic = 'force-static'
+
+export async function generateStaticParams() {
+    const workshops = await getAllWorkshops();
+    if (!workshops?.data) return [];
+
+    return workshops.data.map((ws: {title: string, documentId: string}) => ({
+        workshopName: slugify(ws.title),
+        workshopId: ws.documentId
+    }));
+}

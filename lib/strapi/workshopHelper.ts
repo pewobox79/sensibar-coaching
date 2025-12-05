@@ -33,7 +33,6 @@ export const getAllWorkshops = async () => {
 export const getSingleWorkshop = async (id: string | unknown) => {
 
     try {
-
         const response = await fetch(`${ STRAPI_URI }/api/workshops/${ id }?populate=*`, {
             method: 'GET',
             headers: {
