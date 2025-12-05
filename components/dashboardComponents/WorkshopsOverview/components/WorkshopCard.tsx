@@ -280,7 +280,8 @@ const WorkshopCard = (props: {
                         { edit.state ?
                             <WsEditItem type={ "text" } value={ edit.values.zipCode } property={ "zipCode" }
                                         changeAction={ handleChange }/> :
-                            <p>Nr: { edit.values.zipCode }</p> }
+                            <p>ZipCode: { edit.values.zipCode }</p> }
+
 
 
 

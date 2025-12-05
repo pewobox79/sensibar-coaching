@@ -23,13 +23,18 @@
 
 }
 
+.formItem >label {
+    font-family: var(--font-tt-norms);
+    font-size: 1.25rem;
+}
+
 .formItem > input,
 .formItem > select,
 .formItem > textarea  {
     width: auto;
     padding: 10px;
-    border-radius: 10px;
-    border: 1px solid gray;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
     color: black;
     font-size: 1.2rem;
     font-family: var(--font-tt-norms);
@@ -49,7 +54,9 @@
 
 
 .inputErrorText {
-    color: red
+    color: red;
+    font-family: var(--font-tt-norms);
+    font-size: 0.9rem;
 }
 
 /*login form*/
@@ -169,7 +176,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 3px;
     background-color: white;
 }
 
@@ -182,7 +189,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 3px;
     background-color: white;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 
@@ -204,7 +211,10 @@
         width: 80%;
         margin: auto
     }
-
+    .formItem >label {
+        font-family: var(--font-tt-norms);
+        font-size: 1rem;
+    }
     .workshopDescriptionItem {
         width: 100% !important  ;
     }
