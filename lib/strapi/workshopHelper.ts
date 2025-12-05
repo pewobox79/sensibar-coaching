@@ -143,6 +143,7 @@ export const executeDoubleOptIn = async (id: string | null, workshopLink: string
                 },
                 body: JSON.stringify({
                     name: data.data.personalData.firstname,
+                    lastname: data.data.personalData.lastname,
                     id: data.data.documentId,
                     workshopLink: workshopLink,
                     workshopDate: workshop_date,

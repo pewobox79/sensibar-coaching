@@ -91,7 +91,7 @@ export async function sendWorkshopCancelEmail(emails: string[], title: string, w
     }
 }
 
-export async function sendEmailToAdminAfterNewWorkshopRegistration(title: string, workshopDate: string, participant: string) {
+export async function sendEmailToAdminAfterNewWorkshopRegistration(title: string, workshopDate: string, firstname: string, lastname:string) {
 
     try {
         const info = await transporter.sendMail({
@@ -99,7 +99,7 @@ export async function sendEmailToAdminAfterNewWorkshopRegistration(title: string
             to: 'hello@sensibar-coaching.de',
             subject: "Neue Workshop anmeldung!", // Subject line
 
-            html: `<div><p>Hallo Yessica,</p> <p>Du hast eine neue Anmeldung zu dem Workshop ${ title?.toUpperCase() } am ${ workshopDate } von ${participant?.toUpperCase()}.</div>`, // html body
+            html: `<div><p>Hallo Yessica,</p> <p>Du hast eine neue Anmeldung zu dem Workshop ${ title?.toUpperCase() } am ${ workshopDate } von ${firstname?.toUpperCase()} ${lastname.toUpperCase()}.</div>`, // html body
         })
         return {msg: "email sucessfully sent", info}
     } catch (e) {
