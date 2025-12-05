@@ -61,8 +61,9 @@ export async function sendRegistrationFinalEmail(userId: string, email: string, 
         const info = await transporter.sendMail({
             to: `${ email }`, // list of receivers
             subject: "Dein Platz ist gesichert!", // Subject line
-
-            html: `<div><p>Hey ${ name.toUpperCase() },</p> <p>Deine Anmeldung zum Workshop ${ title.toUpperCase() } am ${ workshopDate } ist bestätigt.</p>${content}<p>Ich freue mich auf Dich, </p><p>Deine Yessica</p><p>Sensibar-Coaching | sensibel & wunderbar</p><p>Email: hello@sensibar-coaching.de <br/>Mobil: +49 176 625 05 701<br/>Adresse: Lindenstrasse 6a 85309 Pörnbach</p></div>`, // html body
+            from: 'hello@sensibar-coaching.de',
+            replyTo: 'hello@sensibar-coaching.de',
+            html: `<div><p>Hey ${ name.toUpperCase() },</p> <p>Deine Anmeldung zum Workshop ${ title.toUpperCase() } am ${ workshopDate } ist bestätigt.</p>${ content }<p>Ich freue mich auf Dich, </p><p>Deine Yessica</p><p>Sensibar-Coaching | sensibel & wunderbar</p><p>Email: hello@sensibar-coaching.de <br/>Mobil: +49 176 625 05 701<br/>Adresse: Lindenstrasse 6a 85309 Pörnbach</p></div>`, // html body
         })
 
         return {msg: "email sucessfully sent", info}
@@ -84,6 +85,22 @@ export async function sendWorkshopCancelEmail(emails: string[], title: string, w
             html: `<div><p>Lieber Workshop Teilnehmer,</p> <p>Der Workshop ${ title.toUpperCase() } am ${ workshopDate } wird wegen zu geringer Teilnehmerzahl abgesagt.</p> <p>Ich bedaure dies sehr. <br/>Melde dich gern zu einem der anderen Workshops an. https://sensibar-coaching.de/workshops</p><p>Deine Yessica</p><p>Sensibar-Coaching | sensibel & wunderbar</p><p>Email: hello@sensibar-coaching.de <br/>Mobil: +49 176 625 05 701<br/>Adresse: Lindenstrasse 6a 85309 Pörnbach</p></div>`, // html body
         })
 
+        return {msg: "email sucessfully sent", info}
+    } catch (e) {
+        return ({msg: "error sending email", error: e})
+    }
+}
+
+export async function sendEmailToAdminAfterNewWorkshopRegistration(title: string, workshopDate: string, participant: string) {
+
+    try {
+        const info = await transporter.sendMail({
+            from: '"Sensibar-Coaching - NoReply"',
+            to: 'hello@sensibar-coaching.de',
+            subject: "Neue Workshop anmeldung!", // Subject line
+
+            html: `<div><p>Hallo Yessica,</p> <p>Du hast eine neue Anmeldung zu dem Workshop ${ title?.toUpperCase() } am ${ workshopDate } von ${participant?.toUpperCase()}.</div>`, // html body
+        })
         return {msg: "email sucessfully sent", info}
     } catch (e) {
         return ({msg: "error sending email", error: e})
