@@ -51,7 +51,6 @@ const WorkshopCard = (props: {
 
     const token = useLocalStorage("sensiUser")?.value
     const eventIsInThePast = isPastEvent(props.workshop_date)
-    console.log("eventIsInThePast", eventIsInThePast)
     const [contactDetails, setContactDetails] = useState(false)
     const [edit, setEdit] = useState({state: false, values: INIT_WS_VALUES});
     const [onClipboard, setOnClipboard] = useState(false);
