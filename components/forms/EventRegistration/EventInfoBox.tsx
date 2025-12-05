@@ -14,9 +14,7 @@ type EventInfoTypes ={
     location: EventDetailsProps['location']
 }
 const EventInfoBox =({workshop_date, workshopTimeStart, workshopTimeEnd, workshopType, location}:EventInfoTypes )=>{
-    console.log("location", location)
     const addressData = `${location?.street} ${location?.streetNumber}, ${location?.zipCode} ${location?.city} `
-
     return <div className={styles.singleEventDetailsBoxWrapper}>
         <div className={styles.detailsBoxItemHeader}><h3>Event Details</h3></div>
         <div className={styles.detailsBoxItem}><i><FontAwesomeIcon icon={faCalendar} style={{width:' 40px'}}/></i> {workshop_date} </div>

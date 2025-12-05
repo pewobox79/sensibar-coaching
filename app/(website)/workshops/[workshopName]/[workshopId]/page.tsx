@@ -9,7 +9,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
-    const { workshopId } = params
+    const { workshopId } = await params
     // Fetch data based on slug (can be from CMS, DB, etc.)
     const data = await getSingleWorkshop(workshopId);
     return {
