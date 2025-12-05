@@ -1,6 +1,5 @@
 import styles from '@/styles/Event.module.css'
 import Button from "@/components/global/Button";
-import {slugify} from "@/utils/helper/slugify";
 import {isPastEvent} from "@/utils/helper/strapiHelper";
 import {createWorkshopLink} from "@/utils/helper/formater";
 
