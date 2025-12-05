@@ -16,6 +16,7 @@ import ToastMessage from "@/components/global/ToastMessage";
 import WorkshopCancelWindow from "@/components/dashboardComponents/WorkshopsOverview/components/WorkshopCancelWindow";
 import {useLocalStorage} from "@/hooks/useLocalStorage";
 import WsEditItem from "@/components/dashboardComponents/WorkshopsOverview/components/WsEditItem";
+import {isPastEvent} from "@/utils/helper/strapiHelper";
 
 const WorkshopCard = (props: {
     key: string,
@@ -49,7 +50,8 @@ const WorkshopCard = (props: {
     }
 
     const token = useLocalStorage("sensiUser")?.value
-
+    const eventIsInThePast = isPastEvent(props.workshop_date)
+    console.log("eventIsInThePast", eventIsInThePast)
     const [contactDetails, setContactDetails] = useState(false)
     const [edit, setEdit] = useState({state: false, values: INIT_WS_VALUES});
     const [onClipboard, setOnClipboard] = useState(false);
@@ -226,6 +228,7 @@ const WorkshopCard = (props: {
 
         <div className={ styles.cardWrapper }>
             <div className={ styles.cardInner }>
+                { eventIsInThePast && <p className={styles.eventIsInPast}>Workshop liegt in der Vergangenheit!</p>}
                 { edit.state ? <div className={ styles.editButton } onClick={ handleUpdateWorkshop }>
                         <FontAwesomeIcon icon={ faSave }/></div> :
                     <div className={ styles.editButton } onClick={ handleEditFeature }>
@@ -322,7 +325,7 @@ const WorkshopCard = (props: {
                     </div>*/ }
                 </div>
 
-                <div className={ styles.cardButtons }>
+                {!eventIsInThePast && <div className={ styles.cardButtons }>
                     { props.ws_status === "confirmed" &&
                       <Button type={ "submit" } title={ "absagen" } action={ cancelMessageWindow }/> }
                     { props.ws_status === "cancelled" &&
@@ -330,7 +333,7 @@ const WorkshopCard = (props: {
                     { props.ws_status != "cancelled" && <Button type={ "submit" } title={ "einladen" }/> }
                     { props.ws_status === "planned" &&
                       <Button type={ "submit" } title={ "bestätigen" } action={ handleConfirmWorkshop }/> }
-                </div>
+                </div>}
             </div>
 
             { contactDetails &&

@@ -1,7 +1,7 @@
-
 import styles from '@/styles/Event.module.css'
 import Button from "@/components/global/Button";
 import {slugify} from "@/utils/helper/slugify";
+import {isPastEvent} from "@/utils/helper/strapiHelper";
 
 const OverviewItem = ({title, workshop_date, id, status}: {
     title: string,
@@ -11,17 +11,19 @@ const OverviewItem = ({title, workshop_date, id, status}: {
 
 }) => {
 
-    return <div className={styles.workshopListItemWrapper }>
-        <div className={styles.workshopListItemContent}>
-            <div className={styles.workshopListItemTitle}>
+    const eventIsInThePast = isPastEvent(workshop_date)
+    if (eventIsInThePast) return null
+    return <div className={ styles.workshopListItemWrapper }>
+        <div className={ styles.workshopListItemContent }>
+            <div className={ styles.workshopListItemTitle }>
                 <h3>{ title }</h3>
             </div>
             <div>
                 <p>Datum: { workshop_date }</p>
-                <p>{status}</p>
+                <p>{ status }</p>
             </div>
         </div>
-        <Button type={"button"} title={"details"} href={ `/workshops/${slugify(title)}/${ id }` }/>
+        <Button type={ "button" } title={ "details" } href={ `/workshops/${ slugify(title) }/${ id }` }/>
 
     </div>
 }

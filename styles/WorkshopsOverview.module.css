@@ -20,6 +20,12 @@
     margin: 5px
 }
 
+.eventIsInPast {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
 .cardInner {
 
 
@@ -55,7 +61,7 @@
 
 }
 
-.participantArea:hover{
+.participantArea:hover {
     cursor: pointer;
 
 }
@@ -64,7 +70,7 @@
     margin: 5px 0
 }
 
-.editButton{
+.editButton {
     position: absolute;
     top: 20px;
     right: 20px;
