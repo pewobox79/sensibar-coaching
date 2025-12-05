@@ -1,9 +1,9 @@
 import WorkshopSubmissions from "@/pagesComponents/MessagePages/WorkshopSubmissions";
 import DoubleOptInPage from "@/pagesComponents/MessagePages/DoubleOptInPage";
 
-const DynamicMessagePage =({params}: {params: { message: string }})=>{
-
-    switch (params.message) {
+const DynamicMessagePage = async ({params}: {params: { message: string }})=>{
+    const {message} = await params;
+    switch (message) {
         case "workshopSubmission":
             return <WorkshopSubmissions/>
         case "doubleOptIn":

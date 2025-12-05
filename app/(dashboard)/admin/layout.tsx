@@ -53,10 +53,10 @@ const AdminLayout = ({children}: { children: React.ReactNode | React.ReactElemen
 
     return <html>
     <body className={ `${ roxborough.variable } ${ TTNorms.variable }` }>
-   <AuthLayout>
-      <DashboardLayout>
-          { children }
-      </DashboardLayout>
+    <AuthLayout>
+        <DashboardLayout>
+            { children }
+        </DashboardLayout>
     </AuthLayout>
     </body>
     </html>
