@@ -33,8 +33,7 @@ const RichTextRenderer = ({blocks}: { blocks: TextBlockType}) => {
                         }
                     } else if (child?.type === "link") {
                         return child?.children?.map((item) => {
-
-                            return <Link className={ "innerTextLinkStyle" } href={ `${child.url}` }
+                            return <Link className={ "innerTextLinkStyle" } href={ child.url }
                                          key={ item.text + individualKeyExtension }>{ item.text }</Link>
 
                         })
