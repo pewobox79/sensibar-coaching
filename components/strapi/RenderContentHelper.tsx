@@ -5,8 +5,6 @@ import Link from "next/link";
 import {TextBlockType} from "@/types/generalTypes";
 
 const RichTextRenderer = ({blocks}: { blocks: TextBlockType}) => {
-
-    console.log("blocks", blocks)
     const renderChildren = (children: { type: string, children: [], level: number, format: string }) => {
         const mainType = children?.type
         const listFormat = children?.format;
