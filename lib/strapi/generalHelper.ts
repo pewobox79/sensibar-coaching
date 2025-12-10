@@ -1,4 +1,5 @@
 import {ClientData} from "@/stores/useClientStore";
+import {homepageQuery} from "@/utils/helper/queries/homepageQuery";
 
 const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
 
@@ -14,6 +15,22 @@ export const getNavigation = async () => {
     try {
 
         const response = await fetch(`${ STRAPI_URI }/api/navigation/?populate=*`, {next: {revalidate: 60}})
+        return await response.json()
+
+    } catch (e) {
+
+        console.error('Error fetching navigation data:', e)
+    }
+}
+
+export const getHomepage = async () => {
+
+    const URL = `${ STRAPI_URI }/api/homepage/?${homepageQuery}`
+    console.log("query",URL )
+
+
+    try {
+        const response = await fetch(URL, config)
         return await response.json()
 
     } catch (e) {

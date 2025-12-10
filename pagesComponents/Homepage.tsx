@@ -1,11 +1,11 @@
+import StrapiItemsRendering from "@/layouts/StrapiItemsRendering";
+import {StrapiData} from "@/types/generalTypes";
 
-import Image from "next/image";
-import SensibarLogo from "@/assets/images/sensibar_logo_new.png"
+const Homepage = ({data}:{data: StrapiData}) => {
 
-const Homepage=()=>{
-
-
-    return <Image src={SensibarLogo["src"]} alt={"senisbar logo"} width={500} height={500}/>
+    return <>
+        { data?.items?.map(item => <StrapiItemsRendering key={ item.id } { ...item }/>) }
+    </>
 
 }
 

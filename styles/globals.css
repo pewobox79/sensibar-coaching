@@ -1,5 +1,6 @@
 :root {
-    --background: rgba(240, 223, 211, 1);
+    --background: rgb(230, 211, 198);
+    --headingColor: var(--background);
     --backgroundBoxShadow: rgba(240, 223, 211, 0.09);
     --background80: rgba(255, 255, 255, 0.8);
     --foreground: rgba(23, 23, 23, 1);
@@ -13,6 +14,7 @@ html,
 body {
     max-width: 100vw;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -28,6 +30,21 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.3;
 }
 
+h1 {
+    font-size: 4rem;
+}
+h2 {
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+p {
+    font-size: 1.2rem;
+}
+
 * {
     box-sizing: border-box;
     padding: 0;
@@ -35,13 +52,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .innerWrapper{
-
-    padding: 20px 5px;
     word-break: break-word;
     width: 100%;
 }
 .mainContent {
-    width: 95%;
+    width: 100%;
     margin: auto;
     padding: 0;
     display: flex;
@@ -62,7 +77,6 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     min-height: 70vh;
     height: auto;
-    padding: 5px 5px;
     overflow-wrap: break-word;
     line-height: 25px
 }
@@ -133,15 +147,13 @@ input[type="checkbox"] {
 
 
 .linkStyle {
-    color: var(--textColor);
+    color: var(--background);
     text-decoration: none;
-    border-bottom: 1px solid var(--background);
     font-family: var(--font-montserrat);
 }
 
 .activeLink {
-    color: white;
-    border-bottom: 3px solid var(--textColor);
+    color: black;
     font-family: var(--font-montserrat);
 }
 
@@ -205,12 +217,12 @@ input[type="checkbox"] {
 
 @media screen and (min-width: 768px) {
     .mainContent {
-        width: 80%;
+        width: 100%;
         max-width: 1300px
     }
 
     .innerWrapper{
-        width: 80%;
+        width: 90%;
         margin: 0 auto
     }
 }

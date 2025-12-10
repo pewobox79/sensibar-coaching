@@ -1,14 +1,12 @@
-
-
 import Homepage from "@/pagesComponents/Homepage";
+import {getHomepage} from "@/lib/strapi/generalHelper";
 
 
-export default function Home() {
+export default async function Home() {
+
+  const homepageData = await getHomepage()
+  console.log("homepagedata", homepageData)
   return (
-
-
-     <Homepage/>
-
-
+     <Homepage data={homepageData.data}/>
   );
 }

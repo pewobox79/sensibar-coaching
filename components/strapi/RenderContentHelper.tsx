@@ -2,12 +2,12 @@
 import {JSX} from "react/jsx-runtime";
 import styles from '@/styles/Event.module.css'
 import Link from "next/link";
+import {TextBlockType} from "@/types/generalTypes";
 
-const RichTextRenderer = ({blocks}: { blocks: [] }) => {
+const RichTextRenderer = ({blocks}: { blocks: TextBlockType}) => {
 
-//@-ts-ignoe
+    console.log("blocks", blocks)
     const renderChildren = (children: { type: string, children: [], level: number, format: string }) => {
-
         const mainType = children?.type
         const listFormat = children?.format;
 

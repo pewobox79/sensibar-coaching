@@ -97,17 +97,20 @@
     }
 
     .desktopNavWrapper {
-        display: block;
+        position: fixed;
+        background-color: #fff;
+        display: flex;
         min-height: 50px;
         width: 100%;
     }
 
     .desktopNavInner {
-        width: 50%;
+        width: 100%;
+        margin: auto;
         max-width: 800px;
-        margin: 20px auto;
-        padding: 20px 0;
-        display: block
+        padding: 10px 0;
+        display: flex;
+        justify-content: flex-end
     }
 
     .desktopNavInner > ul {
@@ -119,7 +122,7 @@
 
     .desktopNavInner > ul > li {
         list-style-type: none;
-        margin-bottom: 20px;
+        margin: 0 0 20px 10px;
     }
 
     .desktopNavInner > ul > li > a {

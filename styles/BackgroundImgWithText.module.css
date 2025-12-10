@@ -1,0 +1,23 @@
+.backgroundImgWithTextInner {
+    display: flex;
+    width: 100vw;
+    max-width: 1300px;
+    height: 100vh;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.textBlock {
+    position: absolute;
+    text-align: center;
+    color: var(--headingColor)
+}
+
+
+@media screen and (min-width: 768px) {
+
+    .textBlock {
+        padding: 0 30px;
+    }
+
+}
