@@ -36,13 +36,14 @@ export interface JumbotronType {
 }
 
 export interface TextImageSectionType {
-    __component: string,
+    __component: string
+    textLeft:boolean
     bgColor: BgColorType
     image: ImageType
     id: string
     link: LinkType
     text?: {
-        title?: string,
+        title?: string
         body?: TextBlockType
     }
 }
