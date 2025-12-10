@@ -4,9 +4,9 @@ import React from "react";
 
 type ButtonType = {
 
-    title?: "registrieren" | "speichern" | "anrufen" | "details"|"akzeptieren" | "bestätigen" |"schließen" | "login" |"neu" | "Kunde suchen" |"öffnen" |"absagen" |"einladen" |"neuer workshop" |"neuer Coachee" |"löschen" |"Start" |"edit" |"update";
+    title?: string
     type: "submit" | "button";
-    action?:()=>void;
+    action?: () => void;
     href?: string;
     target?: "_blank" | "_self" | "_parent" | "_top";
     style?: React.CSSProperties,
@@ -14,11 +14,11 @@ type ButtonType = {
 }
 
 const Button = ({title = "registrieren", type = "submit", href, target = "_self", action, style}: ButtonType) => {
-
-
-
-    return <>{ type === "button" ? <Link style={style} className={ "globalButton" } type={ type } href={ `${ href }` }
-                                         target={ target }>{ title?.toUpperCase() }</Link> : <button style={style} className={'globalButton'} type={type} onClick={action}>{ title?.toUpperCase() }</button> }</>
+    return <>{ type === "button" ?
+        <Link style={ style } className={ "globalButton" } type={ type } href={ href || '' }
+              target={ target }>{ title?.toUpperCase() }</Link> :
+        <button style={ style } className={ 'globalButton' } type={ type }
+                onClick={ action }>{ title?.toUpperCase() }</button> }</>
 }
 
 export default Button;

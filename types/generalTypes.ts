@@ -21,7 +21,8 @@ export type LinkType ={
     id: number | string
     label: string
     target: string
-    titleAttribute: string
+    titleAttribute: string,
+    bgColor?: {color: string}
 }
 
 export type BgColorType = {color: string}

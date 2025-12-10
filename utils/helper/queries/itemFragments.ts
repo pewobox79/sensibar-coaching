@@ -6,7 +6,13 @@ export const jumbotronFragment = {
 
 export const textImgFragment = {
     'components.text-img-component': {
-        populate: ['bgColor', 'text', 'image', 'link']
+        populate: {
+            bgColor: true,
+            text: true,
+            image: true,
+            link: {
+                populate: ['bgColor'],
+            },
+        },
     },
-}
-
+};
