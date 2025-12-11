@@ -6,11 +6,11 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import styles from '@/styles/Navigation.module.css'
 import {getNavigation} from "@/lib/strapi/generalHelper";
+import {usePathname} from "next/navigation";
 
 const Navigation = () => {
     const [open, setOpen] = useState(false);
     const [navigation, setNavigation] = useState([])
-
 
     useEffect(() => {
         async function fetchNavigation() {

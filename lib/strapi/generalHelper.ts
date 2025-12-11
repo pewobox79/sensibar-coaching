@@ -269,3 +269,13 @@ export const getQuestionsPageIntro =async ()=>{
 
 
 
+export const getValidInternalLink =(sitepath:string, href:string)=>{
+    const DOMAIN_URL = process.env.NEXT_PUBLIC_FRONTEND_URL ||''
+    if(!href) return DOMAIN_URL
+
+    if(sitepath != "/"){
+        return `${DOMAIN_URL}${href}`
+    }
+    return href
+
+}
