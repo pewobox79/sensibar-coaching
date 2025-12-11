@@ -45,6 +45,7 @@ export interface JumbotronType {
 
 export interface TextImageSectionType {
     __component: string
+    hashId?:string
     textLeft: boolean
     bgColor: BgColorType
     image: ImageType
@@ -64,6 +65,7 @@ export interface GridItemTypes {
 }
 
 export interface GridBundleType {
+    hashId:string
     item: GridItemTypes[]
     bgColor: BgColorType
     title: string

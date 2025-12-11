@@ -21,7 +21,7 @@ const StrapiItemsRendering =(item:Items)=>{
             return <GridSectionBundle data={item as GridBundleType}/>
         case 'components.text-img-component':
             const textImageItem = item as TextImageSectionType;
-            return <TextImageSection body={textImageItem?.text as TextImageSectionType["text"]} isTextLeft={textImageItem.textLeft} sectionId={"kjdlkf"} image={textImageItem?.image} button={textImageItem.link } backgroundColor={textImageItem.bgColor}/>
+            return <TextImageSection body={textImageItem?.text as TextImageSectionType["text"]} isTextLeft={textImageItem.textLeft} sectionId={textImageItem?.hashId ||''} image={textImageItem?.image} button={textImageItem.link } backgroundColor={textImageItem.bgColor}/>
         default: return <div>default</div>
     }
 

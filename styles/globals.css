@@ -153,6 +153,7 @@ input[type="checkbox"] {
 
 .linkStyle {
     color: var(--background);
+    font-size: 1.4rem;
     text-decoration: none;
     font-family: var(--font-montserrat);
 }

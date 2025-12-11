@@ -7,8 +7,19 @@ const DesktopNav = ({navigationData}: { navigationData: {label: string, href: st
     const pathname = usePathname();
     const NavItems = navigationData?.filter((item:{label: string}) => item.label != "datenschutz" && item.label != "impressum" ).map((item: { id: string, href: string, label: string }) => {
 
+        const getValidInternalLink =(sitepath:string, href:string)=>{
+            const DOMAIN_URL = process.env.NEXT_PUBLIC_FRONTEND_URL ||''
+            if(!href) return DOMAIN_URL
+
+            if(sitepath != "/"){
+                return `${DOMAIN_URL}${href}`
+            }
+            return href
+
+        }
+
         return <li key={ item.id }>
-            <Link href={ item.href } className={ pathname === item.href ? "activeLink" : "linkStyle" }>
+            <Link href={ getValidInternalLink(pathname,item.href) } className={ pathname === item.href ? "activeLink" : "linkStyle" }>
                 { item.label.toUpperCase() }
             </Link>
         </li>
