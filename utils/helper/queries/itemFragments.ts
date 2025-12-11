@@ -16,3 +16,12 @@ export const textImgFragment = {
         },
     },
 };
+export const textBlockFragment = {
+    'elements.text-block': {
+        populate: ['bgColor'],
+    },
+};export const gridSectionFragment = {
+    'elements.grid-section': {
+        populate: ['item', 'bgColor'],
+    },
+};

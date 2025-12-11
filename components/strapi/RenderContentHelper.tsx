@@ -2,9 +2,10 @@
 import {JSX} from "react/jsx-runtime";
 import styles from '@/styles/Event.module.css'
 import Link from "next/link";
-import {TextBlockType} from "@/types/generalTypes";
+import {TextBlock} from "@/types/generalTypes";
 
-const RichTextRenderer = ({blocks}: { blocks: TextBlockType}) => {
+
+const RichTextRenderer = ({blocks, textColor}: { blocks: TextBlock, textColor?:string}) => {
     const renderChildren = (children: { type: string, children: [], level: number, format: string }) => {
         const mainType = children?.type
         const listFormat = children?.format;
@@ -63,7 +64,7 @@ const RichTextRenderer = ({blocks}: { blocks: TextBlockType}) => {
 
     const RenderedComponents = blocks?.map((block) => {
         const indiKeyIndex = Math.random() * 90
-        return <div key={ indiKeyIndex } >
+        return <div key={ indiKeyIndex } style={{color: textColor || '#333'}}>
             { renderChildren(block) }
         </div>
     })

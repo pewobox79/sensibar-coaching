@@ -2,7 +2,7 @@ import Container from "@/components/global/Container";
 import styles from '@/styles/BackgroundImgWithText.module.css'
 import RichTextRenderer from "@/components/strapi/RenderContentHelper";
 import {createImgUrl} from "@/utils/helper/imgHelper";
-import {JumbotronType, TextBlockType} from "@/types/generalTypes";
+import {JumbotronType, TextBlock} from "@/types/generalTypes";
 
 
 const BackgroundImgWithText=({data}:{data: JumbotronType})=>{
@@ -21,7 +21,7 @@ const BackgroundImgWithText=({data}:{data: JumbotronType})=>{
 
             <div style={backgroundStyle}></div>
             <div className={styles.textBlock}>
-                <RichTextRenderer blocks={data.text as TextBlockType}/>
+                <RichTextRenderer blocks={data.text as TextBlock}/>
             </div>
 
         </div>

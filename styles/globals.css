@@ -19,7 +19,6 @@ body {
 
 body {
     color: var(--textColor);
-    background: var(--background);
     font-family: var(--font-montserrat);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -69,6 +68,13 @@ p {
 
 }
 
+.sectionInner {
+    padding: 30px;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
 .pageLayout {
     display: flex;
     flex-direction: column;
@@ -223,5 +229,10 @@ input[type="checkbox"] {
     .innerWrapper{
         width: 90%;
         margin: 0 auto
+    }
+
+    .sectionInner {
+        padding: 100px;
+
     }
 }
