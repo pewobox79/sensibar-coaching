@@ -8,6 +8,7 @@ import {getColor} from "@/utils/helper/colorHelper";
 
 const BackgroundImgWithText=({data}:{data: JumbotronType})=>{
 
+    console.log("data", data)
     const colorSet = getColor(data?.bgColor?.color as string)
     return <Container id='jumbotron'>
         <div className={styles.backgroundImgWithTextInner}>

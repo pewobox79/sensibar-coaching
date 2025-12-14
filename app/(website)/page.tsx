@@ -5,10 +5,10 @@ import Container from "@/components/global/Container";
 
 export default async function Home() {
 
-  const isMaintanence = false
+  const isMaintanence = true
   if(isMaintanence) return <Container id={"kajd"}><div style={{height: '100vh', display: "flex", justifyContent: "center", alignItems: "center", color: 'black'}}><h3>Seite befindet sich im Umbau</h3></div></Container>
   const homepageData = await getHomepage()
   return (
-     <Homepage data={homepageData.data}/>
+     <Homepage data={homepageData?.data}/>
   );
 }
