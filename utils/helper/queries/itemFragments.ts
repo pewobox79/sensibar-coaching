@@ -1,6 +1,6 @@
 export const jumbotronFragment = {
     'elements.jumbotron': {
-        populate: ['Image'],
+        populate: ['Image', 'bgColor'],
     }
 }
 

@@ -42,6 +42,7 @@ export interface JumbotronType {
     Image?: ImageType | undefined
     image?: ImageType | undefined
     text?: TextBlock
+    bgColor: BgColorType
 }
 
 export interface QuoteSectionTypes{

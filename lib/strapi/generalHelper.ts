@@ -26,7 +26,6 @@ export const getNavigation = async () => {
 export const getHomepage = async () => {
 
     const URL = `${ STRAPI_URI }/api/homepage/?${homepageQuery}`
-    console.log("query",URL )
 
 
     try {
