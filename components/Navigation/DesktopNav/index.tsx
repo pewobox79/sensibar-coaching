@@ -14,7 +14,6 @@ const DesktopNav = ({navigationData}: { navigationData: { label: string, href: s
         href: string,
         label: string
     }) => {
-        console.log("href", item.href)
         return <li key={ item.id } >
             <Link href={ getValidInternalLink(pathname, item.href) }
                   className={ pathname === item.href ? "activeLink" : "linkStyle" }>

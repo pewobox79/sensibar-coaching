@@ -8,7 +8,7 @@ import { TextImgGridTypes} from "@/types/generalTypes";
 
 const TextImgGrid = ({data}:{data: TextImgGridTypes}) => {
 
-    const colorSet = getColor(data.bgColor.color)
+    const colorSet = getColor(data?.bgColor?.color as string)
     const buttonColorSet = getColor(data?.button?.bgColor?.color as string)
     return <Container id={ data.hashId } backgroundColor={ colorSet.bgColor }>
         <div className={ 'sectionInner' }>

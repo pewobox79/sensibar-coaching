@@ -6,11 +6,9 @@ import Button from "@/components/global/Button";
 import styles from '@/styles/QuoteSection.module.css'
 
 const QuoteSection = ({data}: { data: QuoteSectionTypes }) => {
-    console.log("data quote", data)
 
-    const colorSet = getColor(data.bgColor.color)
-    const btnColorSet = getColor(data.button.bgColor?.color as string)
-    console.log("btn", btnColorSet)
+    const colorSet = getColor(data?.bgColor?.color)
+    const btnColorSet = getColor(data?.button?.bgColor?.color as string)
 
     return <Container id={ data.hashId } backgroundColor={ colorSet.bgColor }>
         <div className={styles.quoteSectionInner} >
