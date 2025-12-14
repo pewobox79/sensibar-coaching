@@ -26,7 +26,7 @@ const TextImgGrid = ({data}:{data: TextImgGridTypes}) => {
             { data.images && <div className={ styles.textImgImagesGrid }>
                 { data?.images?.map((image: { url: string }) => {
                     return <img className={ styles.textImgImagesGridItem } key={ image.url }
-                                src={ createImgUrl(image.url) }/>
+                                src={ createImgUrl(image.url) } alt={'sensibel und wunderbar'}/>
                 }) }
             </div> }
         </div>
