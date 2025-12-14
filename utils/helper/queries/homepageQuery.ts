@@ -1,5 +1,6 @@
 import qs from 'qs';
 import {
+    contactComponentFragment,
     gridSectionFragment,
     jumbotronFragment, quoteSectionFragment,
     textBlockFragment,
@@ -15,7 +16,8 @@ export const homepageQuery = qs.stringify({
                 ...textBlockFragment,
                 ...gridSectionFragment,
                 ...quoteSectionFragment,
-                ...textImgGridFragment
+                ...textImgGridFragment,
+                ...contactComponentFragment
             },
         },
     },

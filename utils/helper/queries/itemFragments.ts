@@ -16,6 +16,17 @@ export const textImgFragment = {
         },
     },
 };
+
+export const contactComponentFragment = {
+    'components.contact': {
+        populate: {
+            bgColor: true,
+            logo: true,
+            socialLinks: true,
+            legalLinks: true
+        },
+    },
+};
 export const textBlockFragment = {
     'elements.text-block': {
         populate: ['bgColor'],

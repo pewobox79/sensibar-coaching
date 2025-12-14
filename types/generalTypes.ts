@@ -20,7 +20,7 @@ export type LinkType = {
     href: string
     id: number | string
     label: string
-    target: string
+    target: 'internal' |'external' |undefined
     titleAttribute: string,
     bgColor?: { color: string }
 }
@@ -94,6 +94,16 @@ export interface TextImgGridTypes {
     rightTextBlock: TextBlock
     bgColor: BgColorType
     images: ImageType[]
+}
+
+
+export interface ContactSectionTypes{
+    __component: string
+    socialLinks: LinkType[]
+    legalLinks: LinkType[]
+    bgColor: BgColorType
+    hashId: string
+    contactData: TextBlock
 }
 export type Items = JumbotronType | TextImageSectionType | TextBlockType | GridBundleType
 
