@@ -15,7 +15,8 @@
     justify-content: space-evenly;
     align-items: center;
     border-bottom: 1px solid var(--foreground);
-    margin: 5px 0
+    margin: 5px 0;
+    text-decoration: none;
 }
 .gridItemWrapper:last-child{
     border: none

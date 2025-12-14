@@ -3,15 +3,16 @@ import BackgroundImgWithText from "@/components/fontendEndComponents/BackgroundI
 import {
     GridBundleType,
     Items,
-    JumbotronType,
+    JumbotronType, QuoteSectionTypes,
     TextBlockType,
-    TextImageSectionType
+    TextImageSectionType, TextImgGridTypes
 } from "@/types/generalTypes";
 import TextBlock from "@/components/fontendEndComponents/TextBlock";
 import GridSectionBundle from "@/components/fontendEndComponents/GridSection/GridSectionBundle";
+import QuoteSection from "@/components/fontendEndComponents/QuoteSection";
+import TextImgGrid from "@/components/fontendEndComponents/TextImgGrid/TextImgGrid";
 
 const StrapiItemsRendering =(item:Items)=>{
-    console.log("item in render", item)
     switch(item?.__component){
         case "elements.jumbotron":
             return <BackgroundImgWithText data={item as JumbotronType}/>
@@ -19,10 +20,15 @@ const StrapiItemsRendering =(item:Items)=>{
             return <TextBlock data={item as TextBlockType}/>
         case 'elements.grid-section':
             return <GridSectionBundle data={item as GridBundleType}/>
+        case 'components.quote-section':
+            return <QuoteSection data={item as QuoteSectionTypes}/>
+
+        case 'components.text-img-grid':
+            return <TextImgGrid data={item as TextImgGridTypes}/>
         case 'components.text-img-component':
             const textImageItem = item as TextImageSectionType;
             return <TextImageSection body={textImageItem?.text as TextImageSectionType["text"]} isTextLeft={textImageItem.textLeft} sectionId={textImageItem?.hashId ||''} image={textImageItem?.image} button={textImageItem.link } backgroundColor={textImageItem.bgColor}/>
-        default: return <div>default</div>
+        default: return <div>No component available</div>
     }
 
 }

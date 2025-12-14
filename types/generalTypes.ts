@@ -29,6 +29,7 @@ export type BgColorType = { color: string }
 
 export interface TextBlockType {
     __component: string
+    hashId: string
     bgColor: BgColorType
     body: TextBlock
     id: string
@@ -43,6 +44,16 @@ export interface JumbotronType {
     text?: TextBlock
 }
 
+export interface QuoteSectionTypes{
+    __component: string,
+    id: string,
+    title: string
+    button: LinkType
+    hashId: string
+    bgColor: BgColorType
+    image: ImageType
+    hasBgImage:boolean
+}
 export interface TextImageSectionType {
     __component: string
     hashId?:string
@@ -62,6 +73,7 @@ export interface GridItemTypes {
     description: TextBlock
     active: boolean
     id: string
+    link: LinkType
 }
 
 export interface GridBundleType {
@@ -73,6 +85,16 @@ export interface GridBundleType {
     __component: string
 }
 
+export interface TextImgGridTypes {
+    __component: string
+    id: string
+    hashId:string
+    button: LinkType
+    leftTextBlock: TextBlock
+    rightTextBlock: TextBlock
+    bgColor: BgColorType
+    images: ImageType[]
+}
 export type Items = JumbotronType | TextImageSectionType | TextBlockType | GridBundleType
 
 export interface StrapiData {

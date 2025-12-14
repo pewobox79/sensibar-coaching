@@ -1,9 +1,9 @@
 import qs from 'qs';
 import {
     gridSectionFragment,
-    jumbotronFragment,
+    jumbotronFragment, quoteSectionFragment,
     textBlockFragment,
-    textImgFragment
+    textImgFragment, textImgGridFragment
 } from "@/utils/helper/queries/itemFragments";
 
 export const homepageQuery = qs.stringify({
@@ -13,7 +13,9 @@ export const homepageQuery = qs.stringify({
                 ...jumbotronFragment,
                 ...textImgFragment,
                 ...textBlockFragment,
-                ...gridSectionFragment
+                ...gridSectionFragment,
+                ...quoteSectionFragment,
+                ...textImgGridFragment
             },
         },
     },

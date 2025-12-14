@@ -1,11 +1,12 @@
 import styles from '@/styles/Navigation.module.css'
 import Link from "next/link";
-import {usePathname} from "next/navigation";
+import { usePathname} from "next/navigation";
 import {getValidInternalLink} from "@/lib/strapi/generalHelper";
 
-const DesktopNav = ({navigationData}: { navigationData: { label: string, href: string, id: string }[] }) => {
 
+const DesktopNav = ({navigationData}: { navigationData: { label: string, href: string, id: string }[] }) => {
     const pathname = usePathname();
+
     const NavItems = navigationData?.filter((item: {
         label: string
     }) => item.label != "datenschutz" && item.label != "impressum").map((item: {
@@ -13,9 +14,8 @@ const DesktopNav = ({navigationData}: { navigationData: { label: string, href: s
         href: string,
         label: string
     }) => {
-
-
-        return <li key={ item.id }>
+        console.log("href", item.href)
+        return <li key={ item.id } >
             <Link href={ getValidInternalLink(pathname, item.href) }
                   className={ pathname === item.href ? "activeLink" : "linkStyle" }>
                 { item.label.toUpperCase() }
@@ -26,10 +26,8 @@ const DesktopNav = ({navigationData}: { navigationData: { label: string, href: s
 
     return <div className={ styles.desktopNavWrapper }>
         <div className={ styles.desktopNavInner }>
-
             <ul>
                 { NavItems }
-
             </ul>
         </div>
 

@@ -1,0 +1,20 @@
+.quoteSectionInner {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    max-width: 1300px;
+    height: 30vh;
+    justify-content: flex-start;
+    align-items: center
+}
+
+.quoteTextBlock {
+    position: absolute;
+    padding-top: 60px
+}
+
+.quoteButton {
+    width: 100%;
+    text-align: center;
+    padding-top: 130px
+}

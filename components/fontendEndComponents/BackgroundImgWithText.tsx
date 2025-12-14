@@ -1,25 +1,14 @@
 import Container from "@/components/global/Container";
 import styles from '@/styles/BackgroundImgWithText.module.css'
 import RichTextRenderer from "@/components/strapi/RenderContentHelper";
-import {createImgUrl} from "@/utils/helper/imgHelper";
 import {JumbotronType, TextBlock} from "@/types/generalTypes";
+import BackgroundImage from "@/components/global/BackgroundImage";
 
 
 const BackgroundImgWithText=({data}:{data: JumbotronType})=>{
-    const imgUrl = createImgUrl(data?.Image?.url)
-    const backgroundStyle={
-        backgroundColor:'#fff',
-        backgroundImage: `url(${imgUrl})`,
-        backgroundSize:'cover',
-        backgroundPosition:'center',
-        backgroundRepeat:'no-repeat',
-        height: '100%',
-        width: '100%',
-    }
-    return <Container id={"kdjf"}>
+    return <Container id='jumbotron'>
         <div className={styles.backgroundImgWithTextInner}>
-
-            <div style={backgroundStyle}></div>
+            <BackgroundImage imageUrl={data?.Image?.url as string}/>
             <div className={styles.textBlock}>
                 <RichTextRenderer blocks={data.text as TextBlock}/>
             </div>
