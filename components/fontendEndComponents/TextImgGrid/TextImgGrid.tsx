@@ -15,11 +15,11 @@ const TextImgGrid = ({data}:{data: TextImgGridTypes}) => {
             <div>
                 <div className={ styles.textImgImagesGridTextGrid }>
                     <div>
-                        <RichTextRenderer blocks={ data.leftTextBlock }/>
+                        <RichTextRenderer blocks={ data.leftTextBlock } textColor={colorSet.color}/>
                         <div style={ {paddingBottom: 30} }></div>
                         <Button type={ "button" } title={ data.button.label }
                                 style={ {color: buttonColorSet.color, backgroundColor: buttonColorSet.bgColor} }/></div>
-                    <div><RichTextRenderer blocks={ data.rightTextBlock }/></div>
+                    <div><RichTextRenderer blocks={ data.rightTextBlock } textColor={colorSet.color}/></div>
                 </div>
             </div>
 
