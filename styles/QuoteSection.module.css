@@ -3,19 +3,22 @@
     flex-direction: column;
     width: 100vw;
     max-width: 1300px;
-    min-height: 30vh;
+    min-height: 30vh;   /* keep if you want a minimum visible height */
     height: auto;
     justify-content: flex-start;
-    align-items: center
+    align-items: center;
+    gap: 24px;          /* add spacing between text and button */
+    padding-top: 60px;  /* replaces quoteTextBlock padding-top */
 }
 
 .quoteTextBlock {
-    position: absolute;
-    padding-top: 60px
+    position: static;   /* or just remove the position rule */
+    padding-top: 0;
+    word-break: break-word;
 }
 
 .quoteButton {
     width: 100%;
     text-align: center;
-    padding-top: 130px
+    padding: 130px 0 30px 0;     /* spacing now handled by gap */
 }
