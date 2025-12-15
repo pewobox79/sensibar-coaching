@@ -15,6 +15,7 @@ import TextImgGrid from "@/components/fontendEndComponents/TextImgGrid/TextImgGr
 import ContactSection from "@/components/fontendEndComponents/ContactSection";
 
 const StrapiItemsRendering =(item:Items)=>{
+    console.log("item", item)
     switch(item?.__component){
         case "elements.jumbotron":
             return <BackgroundImgWithText data={item as JumbotronType}/>
@@ -30,7 +31,7 @@ const StrapiItemsRendering =(item:Items)=>{
             return <ContactSection data={item as ContactSectionTypes}/>
         case 'components.text-img-component':
             const textImageItem = item as TextImageSectionType;
-            return <TextImageSection body={textImageItem?.text as TextImageSectionType["text"]} isTextLeft={textImageItem.textLeft} sectionId={textImageItem?.hashId ||''} image={textImageItem?.image} button={textImageItem.link } backgroundColor={textImageItem.bgColor}/>
+            return <TextImageSection body={textImageItem?.text as TextImageSectionType["text"]} isTextLeft={textImageItem?.textLeft} sectionId={textImageItem?.hashId ||''} image={textImageItem?.image} button={textImageItem.link } backgroundColor={textImageItem.bgColor}/>
         default: return <div>No component available</div>
     }
 
