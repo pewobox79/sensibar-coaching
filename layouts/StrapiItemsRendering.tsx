@@ -15,7 +15,6 @@ import TextImgGrid from "@/components/fontendEndComponents/TextImgGrid/TextImgGr
 import ContactSection from "@/components/fontendEndComponents/ContactSection";
 
 const StrapiItemsRendering =(item:Items)=>{
-    console.log("item", item)
     switch(item?.__component){
         case "elements.jumbotron":
             return <BackgroundImgWithText data={item as JumbotronType}/>

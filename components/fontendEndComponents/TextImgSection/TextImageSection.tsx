@@ -14,7 +14,6 @@ const TextImgSection = ({isTextLeft = false, backgroundColor, sectionId, body, b
     backgroundColor?: TextImageSectionType["bgColor"],
     sectionId: string
 }) => {
-    console.log("isTextleft", isTextLeft)
     const imgUrl = createImgUrl(image?.url)
     const buttonColor = getColor(button?.bgColor?.color as string)
     const background = getColor(backgroundColor?.color as string)

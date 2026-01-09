@@ -38,8 +38,6 @@ export const createNewTicket =async (workshopDate:string, workshopId:string)=>{
         })
 
         const ticketData = await response.json()
-        console.log("ticket", ticketData)
-
         return {ticketId: ticketData.data?.documentId}
 
 
