@@ -4,7 +4,6 @@ import EventRegistration from "@/components/forms/EventRegistration";
 import EventInfoBox from "@/components/forms/EventRegistration/EventInfoBox";
 import RichTextRenderer from "@/components/strapi/RenderContentHelper";
 
-
 export type EventDetailsProps={title:string, description:[],workshop_date:string,ws_status: string, workshopTimeStart:string,workshopTimeEnd:string, documentId:string, id:string, type: string, location: {street: string, zipCode: string, country: string,streetNumber: string, city:string} }
 const SingleEvent = (props:{data:EventDetailsProps}) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -25,7 +24,7 @@ const SingleEvent = (props:{data:EventDetailsProps}) => {
                 </div>
                 <div className={ styles.singleEventContent50 }>
                     <EventInfoBox location={workshopDetails?.location} workshop_date={workshopDetails?.workshop_date} workshopTimeStart={workshopDetails?.workshopTimeStart} workshopTimeEnd={workshopDetails?.workshopTimeEnd} workshopType={workshopDetails?.type}/>
-                    {workshopDetails.ws_status === "confirmed" &&<EventRegistration workshopId={workshopDetails.documentId} workshopName={workshopDetails.title} location={workshopDetails.location} workshopType={workshopDetails.type}/>}</div>
+                    {workshopDetails.ws_status === "confirmed" &&<EventRegistration workshopId={workshopDetails.documentId} workshopDate={workshopDetails.workshop_date} workshopName={workshopDetails.title} location={workshopDetails.location} workshopType={workshopDetails.type}/>}</div>
             </div>
             </div>
 

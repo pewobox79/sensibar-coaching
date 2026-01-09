@@ -82,11 +82,54 @@ export const checkIfContactExists = async (firstname: string, lastname: string, 
 }
 
 
-export const addContactToWorkshop = async (contactId: string, workshopId: string, updatedArray?: unknown[]) => {
+export const addTicketToExistingContact = async (ticketId: string, contactId: string) => {
+    const existingEventTicketList = await getSingleContactEventTicketList(contactId)
+    const updatedEventTicketList = [existingEventTicketList]
+    updatedEventTicketList.push(ticketId)
+    const newData = {
+        data: {
+            event_tickets: updatedEventTicketList
+        }
+    }
+
+    try {
+
+
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/${ contactId }?populate=*`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+            },
+            body: JSON.stringify(newData)
+        })
+
+        const updatedContact = await response.json()
+
+        return {msg: "ticket zu kontakt hinzugefügt", data: updatedContact.data}
+
+
+    } catch (err) {
+
+        console.log("konnte nicht übergeben werden", err)
+        return {msg: "workshop contact update fehlerhaft."}
+
+    }
+
+
+}
+
+
+export const addContactToWorkshop = async (contactId: string, workshopId: string, workshopData?: {
+    contactList: [] | unknown[],
+    ticketList: [] | unknown[]
+}) => {
+
 
     const newData = {
         data: {
-            contacts: updatedArray
+            contacts: workshopData?.contactList,
+            event_tickets: workshopData?.ticketList
         }
     }
     try {
@@ -115,7 +158,7 @@ export const addContactToWorkshop = async (contactId: string, workshopId: string
 }
 
 
-export const executeDoubleOptIn = async (id: string | null, workshopLink: string, title: string, workshop_date: string, location:string, type: string) => {
+export const executeDoubleOptIn = async (id: string | null, workshopLink: string, title: string, workshop_date: string, location: string, type: string) => {
 
     try {
 
@@ -195,6 +238,21 @@ export const getSingleContactEmail = async (id: string) => {
         const response = await fetch(`${ STRAPI_URI }/api/contacts/${ id }?populate=contact`, config)
         const clientData = await response.json()
         return await clientData.data
+
+    } catch (e) {
+
+        console.error('Error fetching basic page content:', e)
+    }
+
+}
+
+export const getSingleContactEventTicketList = async (id: string) => {
+
+    try {
+
+        const response = await fetch(`${ STRAPI_URI }/api/contacts/${ id }?populate=event_tickets`, config)
+        const clientData = await response.json()
+        return clientData?.data?.event_tickets
 
     } catch (e) {
 
