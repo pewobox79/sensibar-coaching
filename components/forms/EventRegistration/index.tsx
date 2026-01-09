@@ -103,12 +103,12 @@ const EventRegistration = ({workshopId, workshopDate, workshopName, location, wo
                     fetch(`${ STRAPI_URI }/api/contacts/?populate=*`, config).then(response => response.json())
                         .then(newData => {
 
-                            const newContactId = newData.data.documentId
+                            const newContactId = newData?.data?.documentId
                             getSingleWorkshop(workshopId).then(workshop => {
 
                                 const updatedWorkshopData = {
-                                    contactList: [workshop.data.contacts],
-                                    ticketList: [workshop.data.event_tickets]
+                                    contactList: [workshop?.data?.contacts],
+                                    ticketList: [workshop?.data?.event_tickets]
                                 }
                                 updatedWorkshopData.contactList.push(newContactId)
 
