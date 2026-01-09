@@ -6,7 +6,7 @@ import BackgroundImage from "@/components/global/BackgroundImage";
 
 
 const BackgroundImgWithText=({data}:{data: JumbotronType})=>{
-
+console.log("data jumbotron", data)
     return <Container id='jumbotron'>
         <div className={styles.backgroundImgWithTextInner}>
             <BackgroundImage imageUrl={data?.Image?.url as string}/>
