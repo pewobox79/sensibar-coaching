@@ -75,6 +75,7 @@ export interface GridItemTypes {
     active: boolean
     id: string
     link: LinkType
+    image?: ImageType
 }
 
 export interface GridBundleType {

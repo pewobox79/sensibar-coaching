@@ -20,5 +20,10 @@
 .quoteButton {
     width: 100%;
     text-align: center;
-    padding: 130px 0 30px 0;     /* spacing now handled by gap */
+    padding: 50px 0 30px 0;     /* spacing now handled by gap */
+}
+
+.signature{
+    font-family: var(--font-whisper);
+    font-size: 4rem
 }

@@ -55,5 +55,9 @@
 
     .gridItemImg {
         display: block;
+        width: 250px;
+        max-height: 150px;
+        height: auto;
+        object-fit: cover;
     }
 }

@@ -15,7 +15,7 @@ const QuoteSection = ({data}: { data: QuoteSectionTypes }) => {
             { data.hasBgImage && <BackgroundImage imageUrl={ data?.image?.url as string }/> }
             <div className={styles.quoteTextBlock}>
                 <h2 style={{textAlign: "center", color: `${colorSet.color}`}}>{ data.title }</h2>
-                <h3 style={{textAlign: "center", color: `${colorSet.color}`}}>Yessica Wolf</h3>
+                <h3 style={{textAlign: "center", color: `${colorSet.color}`}} className={styles.signature}>Yessica Wolf</h3>
                 <div className={styles.quoteButton}>{data.button && <Button type={"button"} title={data?.button?.label} href={data?.button?.href} style={{backgroundColor: btnColorSet.bgColor, margin: "auto", width: "50%"}}/>}</div>
 
             </div>

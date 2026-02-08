@@ -3,7 +3,7 @@ import "../../styles/globals.css";
 import MainLayout from "@/layouts/MainLayout";
 import PageLayout from "@/layouts/PageLayout";
 import Consent from "@/components/Consent";
-import { Poppins, Montserrat } from 'next/font/google'
+import { Poppins, Montserrat, Whisper } from 'next/font/google'
 
 const poppins = Poppins({
     subsets: ['latin'],
@@ -16,6 +16,13 @@ const montserrat = Montserrat({
     subsets: ['latin'],
     weight: ['400', '600', '700'],
     variable: '--font-montserrat',
+    display: 'swap',
+})
+
+const whisper = Whisper({
+    subsets: ['latin'],
+    weight: ['400'],
+    variable: '--font-whisper',
     display: 'swap',
 })
 
@@ -57,7 +64,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-        <body className={ `${ montserrat.variable } ${ poppins.variable }` }>
+        <body className={ `${ montserrat.variable } ${ poppins.variable } ${whisper.variable}` }>
         <MainLayout>
             <PageLayout>
                 { children }
