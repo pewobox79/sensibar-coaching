@@ -8,14 +8,17 @@
 
 .textImgImagesGridItem {
     width: 100%;
-    max-height: 220px;
+    aspect-ratio: 16 / 9;
+    height: auto;
     object-fit: cover;
+    object-position: top;
+    margin: 5px 0;
 }
 
 .textImgImagesGridTextGrid{
     display: flex;
     flex-direction: column;
- margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 
@@ -31,6 +34,7 @@
     }
     .textImgImagesGridItem{
         width: 48%;
-        max-height: 120px
+        max-height: 250px;
+        object-position: top;
     }
 }

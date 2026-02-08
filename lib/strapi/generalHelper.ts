@@ -8,7 +8,7 @@ const config = {
     headers: {
         Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
     },
-    next: {revalidate: 60}
+    next: {revalidate: 0}
 }
 export const getNavigation = async () => {
 

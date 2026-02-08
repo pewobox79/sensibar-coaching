@@ -10,7 +10,7 @@
 .textBlock {
     position: absolute;
     text-align: center;
-    color: var(--headingColor)
+    color: var(--headingColor);
 }
 
 
