@@ -22,7 +22,9 @@
 
 .imageContainer {
     flex: 1;
-    display: none;
+    display: block;
+    height: 600px;
+    object-fit: contain;
 }
 
 .imageContainer img {
@@ -63,7 +65,8 @@
     }
 
     .imageContainer {
-        display: block;
+        display: inline-block;
+        height: 900px;
         flex: 0 0 25%;
     }
 }

@@ -55,8 +55,8 @@
 
     .gridItemImg {
         display: block;
-        width: 250px;
-        max-height: 150px;
+        width: 150px;
+        max-height: 100px;
         height: auto;
         object-fit: cover;
     }

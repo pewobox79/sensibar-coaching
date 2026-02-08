@@ -12,7 +12,8 @@ export type QuestionsType = {
 
 export type TextBlock = { type: string, level: number, format: string, children: [] }[]
 export type ImageType = {
-    url: string
+    url: string,
+    alternativeText?: string
 }
 
 export type LinkType = {
