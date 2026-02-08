@@ -4,5 +4,5 @@ export const createImgUrl = (imgData: string |undefined, placeholderWidth: numbe
 
     if (!imgData) return getPlaceholderImg(placeholderWidth, placeholderHeight)
 
-    return `${ process.env.NEXT_PUBLIC_STRAPI_URL_DEV }${ imgData }`
+    return imgData
 }
