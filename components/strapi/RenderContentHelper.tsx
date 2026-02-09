@@ -3,6 +3,7 @@ import {JSX} from "react/jsx-runtime";
 import styles from '@/styles/Event.module.css'
 import Link from "next/link";
 import {TextBlock} from "@/types/generalTypes";
+import {formatVowel} from "@/utils/helper/strapiHelper";
 
 
 const RichTextRenderer = ({blocks, textColor}: { blocks: TextBlock, textColor?:string}) => {
@@ -28,12 +29,12 @@ const RichTextRenderer = ({blocks, textColor}: { blocks: TextBlock, textColor?:s
                             return <div key={ index * individualKeyExtension } style={ {padding: "10px 0"} }></div>
                         } else {
                             return <p key={ index + individualKeyExtension }
-                                      className={ styles.singleEventDescriptionParagraph }>{ child.text }</p>;
+                                      className={ styles.singleEventDescriptionParagraph }>{ formatVowel(child.text) }</p>;
                         }
                     } else if (child?.type === "link") {
                         return child?.children?.map((item) => {
                             return <Link className={ "innerTextLinkStyle" } href={ child.url }
-                                         key={ item.text + individualKeyExtension }>{ item.text }</Link>
+                                         key={ item.text + individualKeyExtension }>{ formatVowel(item.text) }</Link>
 
                         })
 
@@ -42,18 +43,18 @@ const RichTextRenderer = ({blocks, textColor}: { blocks: TextBlock, textColor?:s
                 case "heading":
                     const HeadingTag = `h${ children.level }` as keyof JSX.IntrinsicElements;
                     return <div key={ index + individualKeyExtension } style={ {padding: "10px 0"} }>
-                        <HeadingTag>{ child.text }</HeadingTag></div>;
+                        <HeadingTag>{ formatVowel(child.text) }</HeadingTag></div>;
                 case "list":
                     if (listFormat === "unordered") {
 
                         return <ul key={ index + individualKeyExtension }
                                    className={ styles.singleEventContentListWrapper }>{ child.children?.map((item, index) => (
                             <li key={ index + individualKeyExtension }
-                                className={ styles.singleEventListItem }>{ item.text }</li>
+                                className={ styles.singleEventListItem }>{ formatVowel(item.text) }</li>
                         )) }</ul>;
                     } else {
                         return <ol key={ index + individualKeyExtension }>{ child.children?.map((item, index) => (
-                            <li key={ index + individualKeyExtension }>{ item.text }</li>
+                            <li key={ index + individualKeyExtension }>{ formatVowel(item.text) }</li>
                         )) }</ol>;
                     }
                 default:
