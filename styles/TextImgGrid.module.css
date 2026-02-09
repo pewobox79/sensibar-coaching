@@ -21,6 +21,13 @@
     margin-bottom: 30px;
 }
 
+.desktopBtn{
+    display: none
+}
+
+.mobileBtn {
+    margin-top: 20px;
+}
 
 @media screen and (min-width: 768px) {
 
@@ -36,5 +43,12 @@
         width: 48%;
         max-height: 250px;
         object-position: top;
+    }
+
+    .mobileBtn{
+        display: none
+    }
+    .desktopBtn {
+        display: block
     }
 }
