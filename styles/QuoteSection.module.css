@@ -25,5 +25,12 @@
 
 .signature{
     font-family: var(--font-whisper);
-    font-size: 4rem
+    font-size: 2.5rem
+}
+
+@media screen and (min-width: 756px) {
+
+    .signature {
+        font-size: 3rem
+    }
 }
