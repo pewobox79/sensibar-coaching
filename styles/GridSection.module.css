@@ -11,10 +11,10 @@
 }
 .gridItemWrapper {
     display: flex;
-    width: 100%;
+    width: 90%;
     justify-content: space-evenly;
     align-items: center;
-    margin: 5px 0;
+    margin: 5px auto;
     text-decoration: none;
     transition: box-shadow 0.9s ease;
     border-radius: 10px;
