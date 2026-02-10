@@ -6,7 +6,7 @@ import{ GridBundleType } from "@/types/generalTypes";
 
 const GridSectionBundle =({data}:{data:GridBundleType})=>{
     const colorSet=getColor(data?.bgColor?.color as string)
-    console.log("griddata", data.item[1])
+    console.log("griddata", data.item[0])
     return<Container id={data.hashId} backgroundColor={colorSet?.bgColor}>
         <div>
             <h2 className={styles.heading} style={{color: colorSet.color}}>{data?.title || ''}</h2>

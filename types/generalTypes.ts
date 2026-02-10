@@ -26,7 +26,7 @@ export type LinkType = {
     bgColor?: { color: string }
 }
 
-export type BgColorType = { color: string }
+export type BgColorType = { color: 'lightBeige' |'beige' | 'white' | 'darkGrey' }
 
 export interface TextBlockType {
     __component: string
@@ -77,6 +77,12 @@ export interface GridItemTypes {
     id: string
     link: LinkType
     image?: ImageType
+    hasIcon:boolean
+    border:{
+        color: BgColorType
+        position: "right" |"left" | "bottom" |"top" |"leftTop" |"bottomRight"
+    }
+
 }
 
 export interface GridBundleType {

@@ -31,7 +31,7 @@ const TextImgSection = ({isTextLeft = false, backgroundColor, sectionId, body, b
                 </div>
             </div>
             <div className={ styles.imageContainer }>
-                <img src={ imgUrl } alt={image.alternativeText}/>
+                <img src={ imgUrl } alt={image?.alternativeText ||"Sensibar Coaching hochsensible menschen"}/>
             </div>
         </div>
     </Container>
