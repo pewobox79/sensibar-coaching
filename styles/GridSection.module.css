@@ -69,9 +69,6 @@
     border-color: var(--foreground) !important;
 }
 
-.gridItemWrapper:last-child{
-    border: none
-}
 .gridItemContent {
     padding: 30px;
     font-size: 0.9rem
