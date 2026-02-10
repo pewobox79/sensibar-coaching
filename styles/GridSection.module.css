@@ -12,7 +12,7 @@
 .gridItemWrapper {
     display: flex;
     width: 90%;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     margin: 5px auto;
     text-decoration: none;
