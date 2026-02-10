@@ -17,6 +17,7 @@
     margin: 5px 0;
     text-decoration: none;
     transition: box-shadow 0.9s ease;
+    border-radius: 10px;
 }
 
 .gridItemWrapper:hover{
