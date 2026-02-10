@@ -60,7 +60,9 @@ export const gridSectionFragment = {
                 populate: {
                     link: true,
                     image: true,
-                    border: true
+                    border: {
+                        populate: ["color"]
+                    }
                 }
             },
             bgColor: true,
