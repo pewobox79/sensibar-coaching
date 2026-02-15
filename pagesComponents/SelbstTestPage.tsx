@@ -7,6 +7,7 @@ import ResultItem from "@/components/QuestionsForm/ResultItem";
 import {QuestionsType} from "@/types/generalTypes";
 import HeaderDescriptionBlock from "@/components/global/blocks/HeaderDescriptionBlock";
 import Button from "@/components/global/Button";
+import Container from "@/components/global/Container";
 const SelbstTestPage =({questionsData, intro}:{questionsData: {title: string, documentId: string}[], intro:{title: string, description: []}})=>{
 
     const [qNumber, setQNumber]=useState(1);
