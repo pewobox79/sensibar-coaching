@@ -7,7 +7,7 @@ import {
     textImgFragment, textImgGridFragment
 } from "@/utils/helper/queries/itemFragments";
 
-export const homepageQuery = qs.stringify({
+export const DynamicContentQuery = qs.stringify({
     populate: {
         items: {
             on: {
@@ -24,3 +24,5 @@ export const homepageQuery = qs.stringify({
 }, {
     encodeValuesOnly: true,
 });
+
+

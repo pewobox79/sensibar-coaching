@@ -1,5 +1,5 @@
 import {ClientData} from "@/stores/useClientStore";
-import {homepageQuery} from "@/utils/helper/queries/homepageQuery";
+import {DynamicContentQuery} from "@/utils/helper/queries/DynamicContentQuery";
 
 const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
 
@@ -25,7 +25,7 @@ export const getNavigation = async () => {
 
 export const getHomepage = async () => {
 
-    const URL = `${ STRAPI_URI }/api/homepage/?${homepageQuery}`
+    const URL = `${ STRAPI_URI }/api/homepage/?${ DynamicContentQuery }`
 
 
     try {
@@ -229,15 +229,17 @@ export const getTestQuestions = async () => {
 }
 
 
-export const getTestResultsByHighestValue = async (token:string, value:number) => {
+export const getTestResultsByHighestValue = async (token: string, value: number) => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/answers-ratings?filters[lowestRate][$lte]=${value}&filters[highestRate][$gte]=${value}`, {method:"GET",
+        const response = await fetch(`${ STRAPI_URI }/api/answers-ratings?filters[lowestRate][$lte]=${ value }&filters[highestRate][$gte]=${ value }`, {
+            method: "GET",
             headers: {
                 Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
-            },next: {revalidate: 60}})
-       return  await response.json();
+            }, next: {revalidate: 60}
+        })
+        return await response.json();
 
     } catch (e) {
 
@@ -247,15 +249,16 @@ export const getTestResultsByHighestValue = async (token:string, value:number) =
 }
 
 
-export const getQuestionsPageIntro =async ()=>{
+export const getQuestionsPageIntro = async () => {
 
     try {
 
         const response = await fetch(`${ STRAPI_URI }/api/questioning-page?populate=*`, {
-            method:"GET",
+            method: "GET",
             headers: {
                 Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
-            },next: {revalidate: 10}})
+            }, next: {revalidate: 10}
+        })
         return await response.json();
 
 
@@ -266,15 +269,28 @@ export const getQuestionsPageIntro =async ()=>{
 }
 
 
+export const getValidInternalLink = (sitepath: string, href: string) => {
+    const DOMAIN_URL = process.env.NEXT_PUBLIC_FRONTEND_URL || ''
+    if (!href) return DOMAIN_URL
 
-
-export const getValidInternalLink =(sitepath:string, href:string)=>{
-    const DOMAIN_URL = process.env.NEXT_PUBLIC_FRONTEND_URL ||''
-    if(!href) return DOMAIN_URL
-
-    if(sitepath != "/"){
-        return `${DOMAIN_URL}${href}`
+    if (sitepath != "/") {
+        return `${ DOMAIN_URL }${ href }`
     }
     return href
 
+}
+
+export const getPage = async (slug:string) => {
+    try {
+        const response = await fetch(`${ STRAPI_URI }/api/pages?filter[slug][$eq]=${ slug }&${ DynamicContentQuery }`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+            }, next: {revalidate: 10}
+        })
+        return await response.json();
+    } catch (err) {
+
+        console.log("fetch failed", err)
+    }
 }
