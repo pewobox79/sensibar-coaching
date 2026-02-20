@@ -6,6 +6,7 @@ import '@/styles/References.css'
 import Container from "@/components/global/Container";
 import {BgColorType, ReferencesTypes} from "@/types/generalTypes";
 import {getColor} from "@/utils/helper/colorHelper";
+// SOURCE: https://github.com/leandrowd/react-responsive-carousel
 
 const ReferencesSlider = ({references, bgColor, title}: { references: ReferencesTypes["data"], bgColor: BgColorType, title: string }) => {
     const ListOfReferences = references.map((reference)=>{
