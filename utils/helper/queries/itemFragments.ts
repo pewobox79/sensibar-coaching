@@ -32,6 +32,12 @@ export const textBlockFragment = {
         populate: ['bgColor'],
     },
 };
+
+export const referencesFragment = {
+    'components.reference-section': {
+        populate: ['bgColor'],
+    },
+};
 export const textImgGridFragment = {
     'components.text-img-grid': {
         populate: {bgColor: true, images: true, button:{

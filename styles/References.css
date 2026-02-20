@@ -1,0 +1,23 @@
+.referenceWrapper {
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.referenceItemWrapper {
+    padding: 30px;
+    position: relative;
+}
+
+.stylingElement {
+    border-bottom: 3px solid var(--headingColor);
+    width: 30%;
+    margin: 20px auto;
+}
+
+.referenceHeading {
+        width: 100%;
+        padding: 60px 20px 0 20px;
+        text-align: left}

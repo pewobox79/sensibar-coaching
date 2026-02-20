@@ -294,3 +294,19 @@ export const getPage = async (slug:string) => {
         console.log("fetch failed", err)
     }
 }
+
+export const getReferences =async ()=>{
+
+    try {
+        const response = await fetch(`${ STRAPI_URI }/api/references?populate=*`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+            }, next: {revalidate: 10}
+        })
+        return await response.json();
+    } catch (err) {
+
+        console.log("fetch failed", err)
+    }
+}

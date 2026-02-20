@@ -8,6 +8,7 @@ export default async function Home() {
   const isMaintenance = false
   if(isMaintenance) return <Container id={"kajd"}><div style={{height: '100vh', display: "flex", justifyContent: "center", alignItems: "center", color: 'black'}}><h3>Seite befindet sich im Umbau</h3></div></Container>
   const homepageData = await getHomepage()
+  console.log("homepage", homepageData)
   return (
      <Homepage data={homepageData?.data}/>
   );

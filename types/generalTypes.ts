@@ -113,10 +113,37 @@ export interface ContactSectionTypes{
     bgColor: BgColorType
     hashId: string
     contactData: TextBlock
+    id: string
 }
-export type Items = JumbotronType | TextImageSectionType | TextBlockType | GridBundleType
+
+export type Items = JumbotronType | TextImageSectionType | TextBlockType | GridBundleType | TextImgGridTypes | ContactSectionTypes |ReferenceSectionTypes
 
 export interface StrapiData {
     items: Items[]
 
+}
+
+
+export interface ReferenceSectionTypes {
+    __component: string
+    bgColor: {id: string, color:BgColorType["color"] }
+    title: string |undefined
+    id: string
+    internalName: string
+
+}
+export interface ReferencesTypes {
+    data:ReferenceType[]
+    bgColor: {color: BgColorType}
+    title?: string |undefined
+    __component: string
+
+
+}
+
+export type ReferenceType={
+    documentId: string
+    wer: string
+    referenz: []
+    color?: string
 }

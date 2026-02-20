@@ -2,7 +2,7 @@ import qs from 'qs';
 import {
     contactComponentFragment,
     gridSectionFragment,
-    jumbotronFragment, quoteSectionFragment,
+    jumbotronFragment, quoteSectionFragment, referencesFragment,
     textBlockFragment,
     textImgFragment, textImgGridFragment
 } from "@/utils/helper/queries/itemFragments";
@@ -17,7 +17,8 @@ export const DynamicContentQuery = qs.stringify({
                 ...gridSectionFragment,
                 ...quoteSectionFragment,
                 ...textImgGridFragment,
-                ...contactComponentFragment
+                ...contactComponentFragment,
+                ...referencesFragment
             },
         },
     },

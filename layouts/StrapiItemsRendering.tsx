@@ -4,7 +4,7 @@ import {
     ContactSectionTypes,
     GridBundleType,
     Items,
-    JumbotronType, QuoteSectionTypes,
+    JumbotronType, QuoteSectionTypes, ReferenceSectionTypes,
     TextBlockType,
     TextImageSectionType, TextImgGridTypes
 } from "@/types/generalTypes";
@@ -13,8 +13,10 @@ import GridSectionBundle from "@/components/fontendEndComponents/GridSection/Gri
 import QuoteSection from "@/components/fontendEndComponents/QuoteSection";
 import TextImgGrid from "@/components/fontendEndComponents/TextImgGrid/TextImgGrid";
 import ContactSection from "@/components/fontendEndComponents/ContactSection";
+import References from "@/components/fontendEndComponents/References/References";
 
 const StrapiItemsRendering =(item:Items)=>{
+    console.log("rendered item", item)
     switch(item?.__component){
         case "elements.jumbotron":
             return <BackgroundImgWithText data={item as JumbotronType}/>
@@ -28,6 +30,8 @@ const StrapiItemsRendering =(item:Items)=>{
             return <TextImgGrid data={item as TextImgGridTypes}/>
         case 'components.contact':
             return <ContactSection data={item as ContactSectionTypes}/>
+        case 'components.reference-section':
+            return <References data={item as ReferenceSectionTypes}/>
         case 'components.text-img-component':
             const textImageItem = item as TextImageSectionType;
             return <TextImageSection body={textImageItem?.text as TextImageSectionType["text"]} isTextLeft={textImageItem?.textLeft} sectionId={textImageItem?.hashId ||''} image={textImageItem?.image} button={textImageItem.link } backgroundColor={textImageItem.bgColor}/>
