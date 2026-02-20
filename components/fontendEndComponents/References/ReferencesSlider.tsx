@@ -14,7 +14,7 @@ const ReferencesSlider = ({references, bgColor, title}: { references: References
     return <Container id={"references"} backgroundColor={getColor(bgColor?.color || "white").bgColor}>
         <h2 className='referenceHeading' style={ {color: getColor(bgColor.color).color} }>{ title || '' }</h2>
         <div className='referenceWrapper'>
-        <Carousel autoPlay={true} dynamicHeight={true} emulateTouch={true} showIndicators={false} showStatus={false} infiniteLoop={true} showArrows={false} className={'referencesCarousel'}>
+        <Carousel autoPlay={true} dynamicHeight={true} emulateTouch={true} showIndicators={false} showStatus={false} infiniteLoop={true} showArrows={false}>
             { ListOfReferences }
         </Carousel>
         </div>

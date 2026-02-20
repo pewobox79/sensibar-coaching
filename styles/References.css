@@ -6,7 +6,7 @@
 
 }
 
-.referencesCarousel{
+.carousel{
     max-width: 500px !important;
 }
 
@@ -28,14 +28,14 @@
 
 
 @media screen and (min-width: 550px){
-    .referencesCarousel{
+    .carousel{
         max-width: 700px !important
     }
 }
 
 
 @media screen and (min-width: 768px){
-    .referencesCarousel{
+    .carousel{
         width: 100%;
         max-width: 1250px !important;
     }
