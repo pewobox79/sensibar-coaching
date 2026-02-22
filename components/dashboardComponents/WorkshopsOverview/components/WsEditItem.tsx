@@ -10,11 +10,23 @@ const WsEditItem=({type, value, property = "", changeAction}:{type:string, value
             <option value={"confirmed"}>bestätigt</option>
 
         </select></>
-    } else if(type === "select" && property === "type"){
+    }
+
+    if(type === "select" && property === "type"){
         return <><label className={styles.editItemLabel}>{property}</label><select value={value} className={styles.editItem} name={property} onChange={changeAction}>
             <option value={"online"}>online</option>
             <option value={"inPerson"}>vor Ort</option>
             <option value={"hybrid"}>Hybrid</option>
+
+        </select></>
+
+
+    }
+
+    if(type === "select" && property === "format"){
+        return <><label className={styles.editItemLabel}>{property}</label><select value={value} className={styles.editItem} name={property} onChange={changeAction}>
+            <option value={"Workshop"}>Workshop</option>
+            <option value={"Vortrag"}>Vortrag</option>
 
         </select></>
 

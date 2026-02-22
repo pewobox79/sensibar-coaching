@@ -23,6 +23,7 @@ export interface FormValues {
     workshop_date: string,
     description: string,
     ws_status: string,
+    format: string
     workshopTimeStart: string,
     workshopTimeEnd: string,
     location: {
@@ -45,6 +46,7 @@ const INIT_WS_VALUES: FormValues = {
     workshop_date: '',
     description: '',
     ws_status: "planned",
+    format: "Vortrag",
     workshopTimeStart: "",
     workshopTimeEnd: "",
     location: {
@@ -94,6 +96,10 @@ const WorkshopForm = () => {
 
         ws_status: Yup.string()
             .oneOf(['planned', 'confirmed', 'cancelled', 'completed'], 'Invalid status')
+            .required('Status is required'),
+
+        format: Yup.string()
+            .oneOf(['Workshop', 'Vortrag'], 'Invalid status')
             .required('Status is required'),
 
         workshopTimeStart: Yup.string()
@@ -197,7 +203,17 @@ const WorkshopForm = () => {
 
 
                     <div className={ styles.formItem }>
-                        <label htmlFor={ "type" }>Format</label>
+                        <label htmlFor={ "format" }>Format</label>
+                        <select name={ "format" } id={ "format" } value={ formik.values.format }
+                                onChange={ formik.handleChange }>
+                            <option value={ "Workshop" }>Workshop</option>
+                            <option value={ "Vortrag" }>Vortrag</option>
+                        </select>
+                        <p className={styles.inputErrorText}> {formik.errors.format}</p>
+                    </div>
+
+                    <div className={ styles.formItem }>
+                        <label htmlFor={ "type" }>Type</label>
                         <select name={ "type" } id={ "type" } value={ formik.values.type }
                                 onChange={ formik.handleChange }>
                             <option value={ "online" }>online</option>

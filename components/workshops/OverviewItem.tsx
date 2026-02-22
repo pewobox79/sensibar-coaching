@@ -1,13 +1,13 @@
 import styles from '@/styles/Event.module.css'
 import Button from "@/components/global/Button";
 import {isPastEvent} from "@/utils/helper/strapiHelper";
-import {createWorkshopLink} from "@/utils/helper/formater";
+import {createWorkshopLink, formatIsoDateToGerman} from "@/utils/helper/formater";
 
-const OverviewItem = ({title, workshop_date, id, status}: {
+const OverviewItem = ({title, workshop_date, id, format}: {
     title: string,
     workshop_date: string,
     id: string,
-    status: string
+    format: string
 
 }) => {
 
@@ -19,8 +19,9 @@ const OverviewItem = ({title, workshop_date, id, status}: {
                 <h3>{ title }</h3>
             </div>
             <div>
-                <p>Datum: { workshop_date }</p>
-                <p>{ status }</p>
+                <h4>{format}</h4>
+                <p>{ formatIsoDateToGerman(workshop_date) }</p>
+
             </div>
         </div>
         <Button type={ "button" } title={ "details" } href={ createWorkshopLink(title, id) } />

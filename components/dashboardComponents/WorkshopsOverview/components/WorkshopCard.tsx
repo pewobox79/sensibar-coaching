@@ -26,6 +26,7 @@ const WorkshopCard = (props: {
     workshop_date: string,
     link: { href: string, target: string, label: string },
     type: string,
+    format: string
     ws_status: string,
     contacts: [],
     description: [],
@@ -40,6 +41,7 @@ const WorkshopCard = (props: {
         workshop_date: props.workshop_date,
         link: {href: props.link?.href, target: props.link?.target,},
         type: props.type,
+        format: props.format,
         ws_status: props.ws_status,
         workshopTimeStart: props.workshopTimeStart,
         workshopTimeEnd: props.workshopTimeEnd,
@@ -76,6 +78,7 @@ const WorkshopCard = (props: {
             workshop_date: edit.values.workshop_date,
             link: {href: edit.values.link?.href},
             type: edit.values.type,
+            format: edit.values.format,
             ws_status: edit.values.ws_status,
             workshopTimeStart: formatTimeToStrapiFormat(edit.values.workshopTimeStart),
             workshopTimeEnd: formatTimeToStrapiFormat(edit.values.workshopTimeEnd),
@@ -299,6 +302,10 @@ const WorkshopCard = (props: {
                         { edit.state ? <WsEditItem type={ "select" } value={ edit.values.type as string }
                                                    property={ "type" } changeAction={ handleChange }/> :
                             <p>Location: { edit.values?.type }</p> }
+
+                        { edit.state ? <WsEditItem type={ "select" } value={ edit.values.format as string }
+                                                   property={ "format" } changeAction={ handleChange }/> :
+                            <p>Format: { edit.values?.format }</p> }
                         { edit.state ?
                             <WsEditItem type={ "text" } value={ edit.values.link.href as string } property={ "href" }
                                         changeAction={ handleChange }/> :

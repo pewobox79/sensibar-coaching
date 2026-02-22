@@ -102,7 +102,7 @@ const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactEl
             { children }
 
         { searchStatus.search && <ClientSearch/> }
-        { searchStatus.createModal && <GlobalModal type="create"><h1>Was möchtest du kreieren?</h1><br/><Button type={"submit"} action={handleCreateNewWorkshop} title={"neuer workshop"}/><br/><Button title={"neuer Coachee"} action={handleCreateClientOpen} type={"submit"} /></GlobalModal> }
+        { searchStatus.createModal && <GlobalModal type="create"><h1>Was möchtest du kreieren?</h1><br/><Button type={"submit"} action={handleCreateNewWorkshop} title={"Neues Event"}/><br/><Button title={"Neuer Coachee"} action={handleCreateClientOpen} type={"submit"} /></GlobalModal> }
     </div>
 }
 

@@ -6,7 +6,7 @@
 
 }
 
-.carousel{
+.carousel {
     max-width: 400px !important;
 }
 
@@ -22,20 +22,21 @@
 }
 
 .referenceHeading {
-        width: 100%;
-        padding: 60px 20px 0 20px;
-        text-align: left}
+    width: 100%;
+    padding: 60px 20px 0 20px;
+    text-align: left
+}
 
 
-@media screen and (min-width: 550px){
-    .carousel{
+@media screen and (min-width: 550px) {
+    .carousel {
         max-width: 700px !important
     }
 }
 
 
-@media screen and (min-width: 768px){
-    .carousel{
+@media screen and (min-width: 768px) {
+    .carousel {
         width: 100%;
         max-width: 1250px !important;
     }
