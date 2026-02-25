@@ -12,7 +12,7 @@
     border: 1px solid var(--background);
     min-width: 300px;
     width: auto;
-    max-width: 500px;
+    max-width: 400px;
     min-height: 500px;
     height: auto;
     border-radius: 5px;
@@ -27,21 +27,18 @@
 }
 
 .cardInner {
-
-
     display: flex;
     padding: 10px 0;
     flex-direction: column;
     flex-wrap: inherit;
     align-content: space-between;
     min-height: 500px;
-    height: auto;
+    height: 100%;
     box-shadow: rgba(9, 30, 66, 0.25) 0 4px 8px -2px, rgba(9, 30, 66, 0.08) 0 0 0 1px;
     position: relative;
 }
 
 .cardButtons {
-
     position: absolute;
     padding: 10px;
     flex-wrap: wrap;
@@ -52,12 +49,18 @@
 
 }
 
+.clipBoardLinks{
+
+    padding: 10px 0
+}
+
 .cardBody {
     padding: 10px;
 }
 
 .cardBodySection {
     padding: 15px 0;
+    margin-bottom: 30px;
 
 }
 

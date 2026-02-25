@@ -288,16 +288,7 @@ const WorkshopCard = (props: {
                                         changeAction={ handleChange }/> :
                             <p>ZipCode: { edit.values.zipCode }</p> }
 
-
-
-
-
                     </div>
-
-                    <div className={ styles.cardBodySection }>
-
-                    </div>
-
                     <div className={ styles.cardBodySection }>
                         { edit.state ? <WsEditItem type={ "select" } value={ edit.values.type as string }
                                                    property={ "type" } changeAction={ handleChange }/> :
@@ -309,7 +300,7 @@ const WorkshopCard = (props: {
                         { edit.state ?
                             <WsEditItem type={ "text" } value={ edit.values.link.href as string } property={ "href" }
                                         changeAction={ handleChange }/> :
-                            <p>
+                            <p className={styles.clipBoardLinks}>
                                 <a href={ `${ edit.values?.link?.href }` } title={ `${ props.link?.label }` }
                                   target={ `${ edit.values.link?.target }` }>Zoom Link</a>
                                 <FontAwesomeIcon icon={ faCopy } style={{paddingLeft: 8}}
@@ -319,7 +310,7 @@ const WorkshopCard = (props: {
                             </p>
                         }
                         { edit.state ?
-                            <div style={{paddingBottom: 60}}></div>:
+                            <div style={{paddingBottom: 30}}></div>:
                             <p>
                                 Workshop Link
                                 <FontAwesomeIcon icon={ faCopy } style={{paddingLeft: 8}}
@@ -334,17 +325,9 @@ const WorkshopCard = (props: {
 
                     { !edit.state && <div className={ `${ styles.cardBodySection } ${ styles.participantArea }` }
                                           onClick={ handleContactDetails }>
-                      <h4>Teilnehmer:</h4>
-                      <p> { props.contacts?.length }</p>
+                      <h4>Teilnehmer: { props.contacts?.length }</h4>
                     </div> }
-                    {/*<div className={ styles.cardBodySection }>
-                        <h4>Rückmeldungen:</h4>
-                        <p>Sensitive: 10</p>
-                        <p>Weiß nicht: 25</p>
-                        <p>Nein: 19</p>
-                    </div>*/ }
                 </div>
-
                 {!eventIsInThePast && <div className={ styles.cardButtons }>
                     { props.ws_status === "confirmed" &&
                       <Button type={ "submit" } title={ "absagen" } action={ cancelMessageWindow }/> }
@@ -355,12 +338,9 @@ const WorkshopCard = (props: {
                       <Button type={ "submit" } title={ "bestätigen" } action={ handleConfirmWorkshop }/> }
                 </div>}
             </div>
-
             { contactDetails &&
               <WorkshopContactOverview contacts={ props.contacts } action={ handleContactDetails }/>
             }
-
-
         </div>
     </>
 
