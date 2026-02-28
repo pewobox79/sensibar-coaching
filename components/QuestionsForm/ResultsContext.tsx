@@ -3,7 +3,6 @@ import {useLocalStorage} from "@/hooks/useLocalStorage";
 import {getTestResultsByHighestValue} from "@/lib/strapi/generalHelper";
 import {useEffect, useState} from "react";
 import RenderContentHelper from "@/components/strapi/RenderContentHelper";
-import Button from "@/components/global/Button";
 import ResultsAsPdf from "@/components/fontendEndComponents/ResultsAsPdf/ResultsAsPdf";
 import {PDFDownloadLink} from "@react-pdf/renderer";
 
@@ -28,7 +27,6 @@ const ResultsContext = ({value}: { value: string }) => {
                 loading ? 'Dokument lädt...' : 'Download Ergebnis'
             }
         </PDFDownloadLink>
-        <Button type={ "submit" } title={ "An Sensibar Schicken" } action={ () => console.log("sensibar") }/>
     </div>
 }
 

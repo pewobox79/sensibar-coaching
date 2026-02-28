@@ -19,8 +19,11 @@ Font.register({
     src:'https://fonts.gstatic.com/s/poppins/v1/TDTjCH39JjVycIF24TlO-Q.ttf'
 })
 
-const BLACK_COLOR = '#171717'
+const BLACK_COLOR = '#000'
 const BEIGE_COLOR = '#E6D3C6'
+const GREY_COLOR = '#535353'
+const EMOTIONAL_COLOR = '#eb8f8c'
+
 // Create styles
 const styles = StyleSheet.create({
     page: {
@@ -100,22 +103,22 @@ const styles = StyleSheet.create({
     },
     kategoryBg: {
         emotionale: {
-            borderLeft: `5px solid ${BEIGE_COLOR}`,
+            borderLeft: `5px solid ${EMOTIONAL_COLOR}`,
             flexDirection: "row" as const,
             padding: 10
         },
-        sensorische: {
-            borderLeft: "5px solid blue",
+        sonsorische: {
+            borderLeft: `5px solid ${BEIGE_COLOR}`,
             flexDirection: "row" as const,
             padding: 10,
         },
         soziale: {
-            borderLeft: `5px solid ${BLACK_COLOR}`,
+            borderLeft: `5px solid ${GREY_COLOR}`,
             flexDirection: "row" as const,
             padding: 10,
         },
         kognitive: {
-            borderLeft: "5px solid red",
+            borderLeft: `5px solid ${BLACK_COLOR}`,
             flexDirection: "row" as const,
             padding: 10
         }
@@ -138,11 +141,13 @@ const styles = StyleSheet.create({
         width: 160
     },
     contactSection:{
+        marginTop: 20,
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "space-between",
         padding: 10,
-        border: "1px solid black"
+        border: `1.5px solid ${BEIGE_COLOR}`,
+        borderRadius: 10,
     },
     copyright: {
         position: 'absolute',
@@ -186,9 +191,6 @@ const styles = StyleSheet.create({
 const ResultsAsPdf = ({context, value}: { value: string, context: { title: string, description: [] } }) => {
 
     const {values} = useQuestionsStore()
-
-    console.log("values", values, checkIcon)
-
     const ListOfAnswers = values.map(answer => {
         return <View key={ answer.question } style={ styles.kategoryBg[answer.kategory.toLowerCase() as keyof typeof styles.kategoryBg] }>
             <Text style={ styles.title }>{ answer.question }</Text>
@@ -213,7 +215,7 @@ const ResultsAsPdf = ({context, value}: { value: string, context: { title: strin
             <View style={styles.resultSection}>
                 <Image style={styles.resultArrow} src={resultArrow.src}/>
                 <View style={styles.resultSummary}><Text style={ styles.resultTitle }>{ context.title }</Text>
-                    <Text style={styles.resultDescription}>{getResultDescription(context.title)}</Text>
+                    <Text style={styles.resultDescription}>{getResultDescription(context.title.toLowerCase()).description}</Text>
                 </View>
                 <View style={styles.resultValue}>
                     <Text>{value}</Text>
@@ -222,15 +224,16 @@ const ResultsAsPdf = ({context, value}: { value: string, context: { title: strin
             <Text style={ styles.h3 }>Kategorien</Text>
             <View style={ styles.legende }>
                 <Text style={ styles.kategoryBg["emotionale"] }>Emotionale</Text>
-                <Text style={ styles.kategoryBg["kognitive"] }>Kognitive</Text>
+                <Text style={ styles.kategoryBg["sonsorische"] }>Sensorische</Text>
                 <Text style={ styles.kategoryBg["soziale"] }>Soziale</Text>
-                <Text style={ styles.kategoryBg["sensorische"] }>Sensorische</Text>
+                <Text style={ styles.kategoryBg["kognitive"] }>Kognitive</Text>
+
             </View>
             <Text style={ styles.h3 }>Das hast Du im Test geantwortet:</Text>
             { ListOfAnswers }
 
            <View style={styles.contactSection}>
-               <Text style={ styles.resultDescription }>hier ist dann der text für deine empfehlung mit kontakt und qr code zu </Text>
+               <Text style={ styles.resultDescription }>{getResultDescription(context.title.toLowerCase()).cta}</Text>
                <View style={styles.qrCodeContainer}>
                    <Text>Scannen und Kennenlernen</Text>
                    <Image src={contactImg.src} style={styles.qrCode}/>
