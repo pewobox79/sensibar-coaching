@@ -3,13 +3,13 @@ import {AnswerType, QuestionsType} from "@/types/generalTypes";
 
 interface QuestionStore {
     values: QuestionsType,
-    addItem: (answer:{documentId: string, answer: AnswerType, question: string}) => void,
-    updateItem:(documentId: string, updatedField: {answer: AnswerType})=>void
+    addItem: (answer:{documentId: string, answer: AnswerType, question: string, kategory:string}) => void,
+    updateItem:(documentId: string, updatedField: {answer: AnswerType,question: string, kategory:string})=>void
 }
 
 export const useQuestionsStore = create<QuestionStore>((set) => ({
     values: [],
-    addItem: (answer:{documentId: string, answer: AnswerType, question: string}) =>
+    addItem: (answer:{documentId: string, answer: AnswerType, question: string, kategory:string}) =>
         set((state:QuestionStore) => ({
             values: [...state.values, answer],
         })),
