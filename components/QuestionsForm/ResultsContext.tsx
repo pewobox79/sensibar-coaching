@@ -25,7 +25,7 @@ const ResultsContext = ({value}: { value: string }) => {
         <PDFDownloadLink className={ "globalButton" } document={ <ResultsAsPdf context={context} value={value}/> }
                          fileName="sensibar-selbsttest-ergebnis.pdf">
             { ({loading}) =>
-                loading ? 'Loading document...' : 'Download!'
+                loading ? 'Dokument lädt...' : 'Download Ergebnis'
             }
         </PDFDownloadLink>
         <Button type={ "submit" } title={ "An Sensibar Schicken" } action={ () => console.log("sensibar") }/>
