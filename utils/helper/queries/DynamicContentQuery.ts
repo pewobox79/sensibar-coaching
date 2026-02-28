@@ -27,3 +27,8 @@ export const DynamicContentQuery = qs.stringify({
 });
 
 
+
+export const QuestionContentQuery = qs.stringify({
+    populate:true
+})
+

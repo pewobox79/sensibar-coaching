@@ -4,14 +4,11 @@ import styles from '@/styles/Footer.module.css'
 import Link from "next/link";
 import {useEffect, useState} from "react";
 import {getNavigation} from "@/lib/strapi/generalHelper";
+import {getActualYear} from "@/utils/helper/formater";
 
-const Footer=()=>{
+const Footer = () => {
 
-    const [footerNav, setFooterNav]=useState([])
-
-const date = new Date();
-    const year = date.getFullYear();
-
+    const [footerNav, setFooterNav] = useState([])
 
     useEffect(() => {
         async function fetchNavigation() {
@@ -29,21 +26,29 @@ const date = new Date();
 
     }, [])
 
-    const footerNavItems = footerNav.filter((item:{label:string})=> item.label =="impressum" || item.label == "datenschutz").map((item:{id:string, label: string, href:string})=>{
+    const footerNavItems = footerNav.filter((item: {
+        label: string
+    }) => item.label == "impressum" || item.label == "datenschutz").map((item: {
+        id: string,
+        label: string,
+        href: string
+    }) => {
 
-        return <div key={item.id} className={styles.footerLink}><Link href={item.href} className={"linkStyle"}>{item.label.toUpperCase()}</Link></div>
+        return <div key={ item.id } className={ styles.footerLink }><Link href={ item.href }
+                                                                          className={ "linkStyle" }>{ item.label.toUpperCase() }</Link>
+        </div>
     })
     return <footer>
 
         <div className={ styles.footerInner }>
-            <div className={styles.footerNavWrapper}>
+            <div className={ styles.footerNavWrapper }>
                 { footerNavItems }
             </div>
 
 
         </div>
 
-        <div className={styles.legalFooterNote}><p>&copy; { year } Yessica Wolf. All Rights Reserved.</p></div>
+        <div className={ styles.legalFooterNote }><p>&copy; { getActualYear() } Yessica Wolf. All Rights Reserved.</p></div>
 
     </footer>
 }

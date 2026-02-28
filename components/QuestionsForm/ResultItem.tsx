@@ -7,7 +7,6 @@ import {useRouter} from "next/navigation";
 const ResultItem = ({diff}: { diff: number }) => {
     const router = useRouter()
     const {values} = useQuestionsStore()
-
     function handleSubmit() {
 
         let resultValue= 0;

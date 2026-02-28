@@ -3,29 +3,29 @@ import {useQuestionsStore} from "@/stores/useQuestionsStore";
 import {useState} from "react";
 import {AnswerType} from "@/types/generalTypes";
 
-const QuestionsItem = ({title, documentId, qNumber, index}: {
+const QuestionsItem = ({title, kategory, documentId, qNumber, index}: {
     title: string,
     qNumber: number,
+    kategory: string,
     documentId: string,
     index: number,
 }) => {
-
     const {addItem, updateItem} = useQuestionsStore();
     const [number, setNumber] = useState(0)
-    const [answer, setAnswer] = useState<{question: string, answer:AnswerType, documentId: string}>({
+    const [answer, setAnswer] = useState<{question: string, answer:AnswerType, documentId: string, kategory:string}>({
         question: "",
         answer: "",
+        kategory:"",
         documentId: documentId
     })
 
-    function handleChange(e: { target: { checked: boolean, value: AnswerType } }) {
-
-        setAnswer({...answer, question: title as string, answer: e.target.value})
+    function handleChange(e: { target: { name: string, checked: boolean, value: AnswerType } }) {
+        setAnswer({...answer, question: e.target.name, answer: e.target.value, kategory})
         if (number === 0) {
             addItem(answer)
             setNumber(1)
         }
-        updateItem(documentId, {answer: e.target.value})
+        updateItem(documentId, {answer: e.target.value, question: e.target.name, kategory})
 
 
     }
@@ -43,13 +43,13 @@ const QuestionsItem = ({title, documentId, qNumber, index}: {
             <div className={ styles.questionInputElement }>
 
                 <input id={ title+"1" } type={ "radio" } value="true" checked={ answer.answer === "true" } name={ title }
-                       onChange={ handleChange }/>
+                       onChange={ handleChange } data-kategory={kategory}/>
                 <label htmlFor={ title+"1" }>Ja</label>
             </div>
 
             <div className={ styles.questionInputElement }>
 
-                <input id={ title+"2" } type={ "radio" } value="false" checked={ answer.answer === "false" }
+                <input id={ title+"2" } type={ "radio" } name={title} value="false" checked={ answer.answer === "false" }
                        onChange={ handleChange }/>
                 <label htmlFor={ title +"2"}>Nein</label>
             </div>

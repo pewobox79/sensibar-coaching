@@ -7,7 +7,7 @@
 
 .calendlyWrapper{
 
-    margin: 30px 0;
+    margin: 50px 0;
 }
 
 .contactGridWrapper{
@@ -54,5 +54,9 @@
 
     .contactGridRight a{
         margin: 0 10px
+    }
+
+    .calendlyWrapper{
+        margin-top: 30px
     }
 }

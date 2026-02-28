@@ -1,5 +1,5 @@
 import {ClientData} from "@/stores/useClientStore";
-import {DynamicContentQuery} from "@/utils/helper/queries/DynamicContentQuery";
+import {DynamicContentQuery, QuestionContentQuery} from "@/utils/helper/queries/DynamicContentQuery";
 
 const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
 
@@ -219,9 +219,8 @@ export const getTestQuestions = async () => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/testing-questions?pagination[pageSize]=40`, {next: {revalidate: 60}})
+        const response = await fetch(`${ STRAPI_URI }/api/testing-questions?pagination[pageSize]=40&${QuestionContentQuery}`, {next: {revalidate: 60}})
         return await response.json()
-
     } catch (e) {
 
         console.error('Error fetching navigation data:', e)

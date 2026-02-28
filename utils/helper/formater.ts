@@ -18,3 +18,9 @@ export function formatIsoDateToGerman(isoDate: string): string {
 
 // Example:
 formatIsoDateToGerman("2026-03-26"); // "26.03.2026"
+
+export const getActualYear =()=>{
+
+    const date = new Date();
+    return date.getFullYear();
+}

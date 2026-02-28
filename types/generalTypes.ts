@@ -6,6 +6,7 @@ export type QuestionsType = {
     documentId: string,
     question: string,
     answer: AnswerType,
+    kategory: string,
     title?: string,
     key?: string;
 }[]
