@@ -16,7 +16,6 @@ import ContactSection from "@/components/fontendEndComponents/ContactSection";
 import References from "@/components/fontendEndComponents/References/References";
 
 const StrapiItemsRendering =(item:Items)=>{
-    console.log("rendered item", item)
     switch(item?.__component){
         case "elements.jumbotron":
             return <BackgroundImgWithText data={item as JumbotronType}/>
