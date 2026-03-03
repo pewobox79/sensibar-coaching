@@ -99,7 +99,7 @@
         position: fixed;
         background-color: #fff;
         display: flex;
-        min-height: 50px;
+        min-height: 30px;
         width: 100%;
     }
 
@@ -107,7 +107,7 @@
         width: 100%;
         margin: auto;
         max-width: 1000px;
-        padding: 30px 0 0 0;
+        padding: 20px 0 0 0;
         display: flex;
         justify-content: center
     }
@@ -122,7 +122,7 @@
 
     .desktopNavInner > ul > li {
         list-style-type: none;
-        margin: 0 0 20px 10px;
+        margin: 0 0 0 10px;
     }
 
     .desktopNavInner > ul > li > a {
