@@ -16,7 +16,10 @@ body {
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
-
+.container{
+    width: 100%;
+    padding: 40px
+}
 body {
     color: var(--textColor);
     font-family: var(--font-montserrat);
@@ -242,7 +245,9 @@ input[type="checkbox"] {
 
 
 @media screen and (min-width: 768px) {
-
+    .container{
+        padding: 120px
+    }
     h1 {
         font-size: 4rem;
     }
