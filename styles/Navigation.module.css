@@ -37,7 +37,7 @@
 
 .open {
 
-    display: flex;
+    display: block;
 
 }
 
@@ -54,6 +54,7 @@
 .burgerButtonColor{
     color: var(--background);
 }
+
 .burgerButton {
     position: fixed;
     bottom: 20px;
