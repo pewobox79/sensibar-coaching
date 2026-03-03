@@ -2,6 +2,7 @@ import {ClientData} from "@/stores/useClientStore";
 import {DynamicContentQuery, QuestionContentQuery} from "@/utils/helper/queries/DynamicContentQuery";
 
 const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
+const FRONTEND_URI = process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'
 
 const config = {
     method: 'GET',
@@ -23,6 +24,16 @@ export const getNavigation = async () => {
     }
 }
 
+export const getHomePageFromLocalApi = async ()=>{
+
+    try{
+        const response = await fetch(`${FRONTEND_URI}/api/homepage`, {next: {revalidate: 40}})
+        const data = await response.json()
+        return data.response
+    }catch(err){
+        console.error("Error fetching homepage data:", err)
+    }
+}
 export const getHomepage = async () => {
 
     const URL = `${ STRAPI_URI }/api/homepage/?${ DynamicContentQuery }`
