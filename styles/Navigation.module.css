@@ -18,9 +18,6 @@
     border-radius: 5px;
     background-color: var(--background);
     align-items: center;
-
-
-
 }
 
 @keyframes mobileNavEffect {
@@ -57,7 +54,8 @@
 .burgerButton {
     position: fixed;
     bottom: 20px;
-    right: 14%
+    right: 14%;
+    z-index: 30
 
 }
 
