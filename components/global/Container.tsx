@@ -5,7 +5,7 @@ const Container = ({children, id, backgroundColor = "white"}: {
     children: ReactNode,
     backgroundColor?: CSSProperties["backgroundColor"]
 }) => {
-    return <div className={"container"} style={ {
+    return <div className={"sectionContainer"} style={ {
         backgroundColor: `${ backgroundColor }`,
         color: `${ backgroundColor != "#fff" ? "white" : "#f333" }`
     } } id={ id }>

@@ -70,9 +70,9 @@ const RichTextRenderer = ({blocks, textColor}: { blocks: TextBlock, textColor?:s
         </div>
     })
     return (
-        <>
+        <div className={styles.contentInner}>
             { RenderedComponents }
-        </>
+        </div>
     );
 };
 export default RichTextRenderer
