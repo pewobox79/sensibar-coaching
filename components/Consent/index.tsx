@@ -57,7 +57,7 @@ const Consent = () => {
                 </div>
             </div>
 
-        </div> : <div className={styles.fingerPrint}><FontAwesomeIcon icon={ faFeather } style={{width: 30, height:30}} onClick={handleConsent}/></div> }</>
+        </div> : <div className={styles.fingerPrint}><FontAwesomeIcon icon={ faFeather } style={{width: 30, height:30}} className={styles.fingerPrintColor} onClick={handleConsent}/></div> }</>
 }
 
 export default Consent;

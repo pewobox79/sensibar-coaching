@@ -53,6 +53,9 @@
     bottom: 30px;
     left: 30px;
 }
+.fingerPrintColor{
+    color: var(--background);
+}
 
 
 @media screen and (min-width: 768px){
