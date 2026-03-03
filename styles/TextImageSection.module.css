@@ -65,7 +65,8 @@
     }
 
     .imageContainer {
-        display: inline-block;
+        min-height: 800px;
+        height: auto;
         flex: 0 0 25%;
     }
 }
