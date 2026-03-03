@@ -2,8 +2,8 @@
     background-color: white;
 }
 
-.headerElement > img {
-    margin: auto
+.headerElement > a > img {
+    margin: auto;
 }
 
 .logo {
