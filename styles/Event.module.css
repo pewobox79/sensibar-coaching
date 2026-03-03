@@ -1,3 +1,7 @@
+.eventOverviewWrapper{
+    margin: 0
+}
+
 .contentInner{
     padding: 0 20px
 }
@@ -140,9 +144,14 @@
 }
 
 @media screen and (min-width: 768px){
-.singleEventWrapper{
-    padding-top: 100px
-}
+
+    .eventOverviewWrapper{
+        margin-top: 60px;
+    }
+
+    .singleEventWrapper {
+        padding-top: 100px
+    }
 
     .singleEventInner {
         padding: 40px;
