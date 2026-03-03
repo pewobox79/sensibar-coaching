@@ -173,7 +173,7 @@ input[type="checkbox"] {
 
 .linkStyle {
     color: var(--background);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     text-decoration: none;
     font-family: var(--font-montserrat);
 }
@@ -195,7 +195,7 @@ input[type="checkbox"] {
 }
 
 .input-group >.form-check >.form-check-label {
-    margin-left: 10px
+    margin-left: 5px
 }
 
 .globalModal {
@@ -256,7 +256,7 @@ input[type="checkbox"] {
 
     .mainContent {
         width: 100%;
-        max-width: 1300px
+        max-width: 1300px;
     }
 
     .innerWrapper{

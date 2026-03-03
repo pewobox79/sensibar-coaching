@@ -25,6 +25,8 @@
     width: 100%;
     padding: 60px 20px 0 20px;
     text-align: left;
+    display: flex;
+    align-content: center;
     color: var(--background);
 }
 

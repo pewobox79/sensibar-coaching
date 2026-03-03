@@ -6,6 +6,8 @@ import '@/styles/References.css'
 import Container from "@/components/global/Container";
 import {BgColorType, ReferencesTypes} from "@/types/generalTypes";
 import {getColor} from "@/utils/helper/colorHelper";
+import Stern from "@/assets/images/sensibar-stern-square.png";
+import Image from "next/image";
 // SOURCE: https://github.com/leandrowd/react-responsive-carousel
 
 const ReferencesSlider = ({references, bgColor, title}: { references: ReferencesTypes["data"], bgColor: BgColorType, title: string }) => {
@@ -13,7 +15,7 @@ const ReferencesSlider = ({references, bgColor, title}: { references: References
         return <ReferenceItem key={reference.documentId} {...reference} color={bgColor?.color}/>
     })
     return <Container id={"references"} backgroundColor={getColor(bgColor?.color || "white").bgColor}>
-        <h2 className='referenceHeading'>{ title || '' }</h2>
+        <div className='referenceHeading'><h2 >{ title || '' }</h2> <Image src={Stern.src} alt="Logo" width={60} height={60}/></div>
         <div className='referenceWrapper'>
         <Carousel autoPlay={true} dynamicHeight={true} emulateTouch={true} showIndicators={false} showStatus={false} infiniteLoop={true} showArrows={false}>
             { ListOfReferences }

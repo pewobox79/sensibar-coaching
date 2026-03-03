@@ -1,7 +1,25 @@
-.headerElement {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    right: 0;
-    z-index: 10
+.headerElement{
+    display: flex;
+    justify-content: center;
+    background-color: white;
+}
+
+.logo{
+    display: block;
+
+}
+@media screen and (min-width: 860px) {
+
+    .headerElement {
+        display: block;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        right: 0;
+        z-index: 10;
+        background: transparent;
+    }
+    .logo{
+        display: none
+    }
 }
