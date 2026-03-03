@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname} from "next/navigation";
 import {getValidInternalLink} from "@/lib/strapi/generalHelper";
 import Image from 'next/image'
-import Logo from '@/assets/images/sensibar_logo_new.png'
+import Logo from '@/assets/images/sensibar-coaching-logo-neu.png'
 
 
 const DesktopNav = ({navigationData}: { navigationData: { label: string, href: string, id: string }[] }) => {
@@ -20,7 +20,7 @@ const DesktopNav = ({navigationData}: { navigationData: { label: string, href: s
             return <li key={ item.id } >
                 <Link href={ getValidInternalLink(pathname, item.href) }
                       className={ pathname === item.href ? "activeLink" : "linkStyle" }>
-                    <Image src={Logo.src} alt="Logo" width={180} height={150}/>
+                    <Image src={Logo.src} alt="Logo" width={180} height={60}/>
                 </Link>
             </li>
 
