@@ -51,6 +51,9 @@
     right: 100px
 }
 
+.burgerButtonColor{
+    color: var(--background);
+}
 .burgerButton {
     position: fixed;
     bottom: 20px;

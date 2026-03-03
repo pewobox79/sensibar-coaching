@@ -1,13 +1,16 @@
-.headerElement{
-    display: flex;
-    justify-content: center;
+.headerElement {
     background-color: white;
 }
 
-.logo{
+.headerElement > img {
+    margin: auto
+}
+
+.logo {
     display: block;
 
 }
+
 @media screen and (min-width: 860px) {
 
     .headerElement {
@@ -17,9 +20,10 @@
         top: 0;
         right: 0;
         z-index: 10;
-        background-color: rgba(255,255,255,0);
+        background-color: rgba(255, 255, 255, 0);
     }
-    .logo{
+
+    .logo {
         display: none
     }
 }

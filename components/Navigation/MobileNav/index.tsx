@@ -26,7 +26,7 @@ const MobileNav = ({handleOpen, open, navigationData}: {
     return <div className={ navStyling }>
         <div className={ styles.mobileNavInner }>
             <div className={ styles.closeButton }>
-                <FontAwesomeIcon icon={ faClose } style={ {width: 30, height: 30} } onClick={ handleOpen }/>
+                <FontAwesomeIcon icon={ faClose } style={ {width: 30, height: 30}} className={ styles.burgerButtonColor } onClick={ handleOpen }/>
             </div>
             <ul>
                 { NavItems }

@@ -35,7 +35,7 @@ const Navigation = () => {
     return <nav>
 
         <div className={ styles.burgerButton }>
-            { !open && <FontAwesomeIcon icon={ faBars } onClick={ handleOpen } style={ {width: 40, height: 40} }/> }
+            { !open && <FontAwesomeIcon icon={ faBars } onClick={ handleOpen } className={styles.burgerButtonColor} style={ {width: 40, height: 40} }/> }
         </div>
         <DesktopNav navigationData={ navigation }/>
         <MobileNav handleOpen={ handleOpen } open={ open } navigationData={ navigation }/>
