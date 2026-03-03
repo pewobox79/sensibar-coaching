@@ -6,6 +6,7 @@
     justify-content: flex-start;
     align-items: center;
     position: relative;
+    margin-top: 0
 }
 
 .textBlock {
@@ -19,6 +20,9 @@
 
 @media screen and (min-width: 768px) {
 
+    .backgroundImgWithTextInner{
+        margin-top: 50px;
+    }
     .textBlock {
         padding: 0 30px;
         background-color: var(--seachBackground);
