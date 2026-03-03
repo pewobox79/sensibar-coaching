@@ -4,30 +4,44 @@ import {getColor} from "@/utils/helper/colorHelper";
 import {createImgUrl} from "@/utils/helper/imgHelper";
 import styles from '@/styles/TextImgGrid.module.css'
 import Button from "@/components/global/Button";
-import { TextImgGridTypes} from "@/types/generalTypes";
+import {TextImgGridTypes} from "@/types/generalTypes";
 
-const TextImgGrid = ({data}:{data: TextImgGridTypes}) => {
+const TextImgGrid = ({data}: { data: TextImgGridTypes }) => {
     const colorSet = getColor(data?.bgColor?.color as string)
     const buttonColorSet = getColor(data?.button?.bgColor?.color as string)
     return <Container id={ data.hashId } backgroundColor={ colorSet.bgColor }>
         <div className={ 'sectionInner' }>
             <div>
                 <div className={ styles.textImgImagesGridTextGrid }>
-                    <div>
-                        <RichTextRenderer blocks={ data.leftTextBlock } textColor={colorSet.color}/>
+                    <div className={ styles.textImageGridBlock }>
+                        <RichTextRenderer blocks={ data.leftTextBlock } textColor={ colorSet.color }/>
                         <div style={ {paddingBottom: 30} }></div>
-                        <div className={styles.desktopBtn}><Button type={ "button" } title={ data?.button?.label || '' } href={data?.button?.href || '/'} target={data?.button?.target || '_blank'}
-                                     style={ {color: buttonColorSet?.color, backgroundColor: buttonColorSet?.bgColor} }/></div></div>
-                    <div><RichTextRenderer blocks={ data.rightTextBlock } textColor={colorSet.color}/></div>
-                    <div className={styles.mobileBtn}><Button type={ "button" } title={ data?.button?.label || '' } href={data?.button?.href || '/'} target={data?.button?.target || '_blank'}
-                                                               style={ {color: buttonColorSet?.color, backgroundColor: buttonColorSet?.bgColor} }/></div>
+                        <div className={ styles.desktopBtn }><Button type={ "button" }
+                                                                     title={ data?.button?.label || '' }
+                                                                     href={ data?.button?.href || '/' }
+                                                                     target={ data?.button?.target || '_blank' }
+                                                                     style={ {
+                                                                         color: buttonColorSet?.color,
+                                                                         backgroundColor: buttonColorSet?.bgColor
+                                                                     } }/></div>
+                    </div>
+                    <div className={ styles.textImageGridBlock }>
+                        <RichTextRenderer blocks={ data.rightTextBlock } textColor={ colorSet.color }/>
+                    </div>
+                    <div className={ styles.mobileBtn }><Button type={ "button" } title={ data?.button?.label || '' }
+                                                                href={ data?.button?.href || '/' }
+                                                                target={ data?.button?.target || '_blank' }
+                                                                style={ {
+                                                                    color: buttonColorSet?.color,
+                                                                    backgroundColor: buttonColorSet?.bgColor
+                                                                } }/></div>
                 </div>
             </div>
 
             { data.images && <div className={ styles.textImgImagesGrid }>
                 { data?.images?.map((image: { url: string }) => {
                     return <img className={ styles.textImgImagesGridItem } key={ image.url }
-                                src={ createImgUrl(image.url) } alt={'sensibel und wunderbar'}/>
+                                src={ createImgUrl(image.url) } alt={ 'sensibel und wunderbar' }/>
                 }) }
             </div> }
         </div>

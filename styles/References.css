@@ -24,7 +24,8 @@
 .referenceHeading {
     width: 100%;
     padding: 60px 20px 0 20px;
-    text-align: left
+    text-align: left;
+    color: var(--background);
 }
 
 

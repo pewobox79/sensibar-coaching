@@ -36,6 +36,10 @@
         flex-direction: row;
 
     }
+
+    .textImageGridBlock {
+        padding: 0 30px
+    }
     .textImgImagesGrid{
         flex-direction: row;
     }

@@ -17,7 +17,7 @@ const ContactSection =({data}:{data: ContactSectionTypes})=>{
             <div className={styles.contactGridWrapper}>
 
                 <div className={styles.calendlyWrapper}>
-                    <h3 style={{color: colorSet.color}}>Lass uns kennen lernen!</h3>
+                    <h3 style={{color: colorSet.color, paddingBottom: 10}}>Lass uns kennen lernen!</h3>
                 <CalendlyPopup/>
                 </div>
 

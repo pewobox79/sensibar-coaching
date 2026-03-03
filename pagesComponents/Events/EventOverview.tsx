@@ -1,6 +1,8 @@
 'use client'
 
 import OverviewItem from "@/components/workshops/OverviewItem";
+import Container from "@/components/global/Container";
+import {getColor} from "@/utils/helper/colorHelper";
 
 
 const EventOverview = (props:{ data: []}) => {
@@ -10,8 +12,8 @@ const EventOverview = (props:{ data: []}) => {
     })
 
 
-    return <>
-        <h1>Meine Workshops</h1>
+    return <Container id="" backgroundColor={"white"}>
+        <h1 style={{color: getColor("black").color, textAlign: "center"}}>Meine Workshops</h1>
         <br/>
 
         { ListOfWorkshops }
@@ -19,7 +21,7 @@ const EventOverview = (props:{ data: []}) => {
         <div style={{marginTop:"20px"}}><p style={ {fontSize: "1.4rem"} }>weitere Termine folgen...</p></div>
 
 
-    </>
+    </Container>
 }
 
 
