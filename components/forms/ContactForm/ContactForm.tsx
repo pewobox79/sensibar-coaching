@@ -36,7 +36,7 @@ const ContactForm = () => {
 
     return <Container id={ "contactForm" }>
         <div className={ styles.formWrapper }>
-            <h3 className={ styles.formHeading }>Du möchtest mich was fragen?</h3>
+            <h3 className={ styles.formHeading }>Du hast noch Fragen?</h3>
             <form>
                 <div className={ styles.formGroup }>
                     <label className={ styles.label } htmlFor="name">Deine Name</label>
@@ -53,7 +53,7 @@ const ContactForm = () => {
                               rows={ 5 } onChange={ handleChange }></textarea>
                 </div>
             </form>
-            <Button type={ "submit" } action={ handleSubmit } title={ "Schreiben mir" } style={ {margin: '20px 0'} }/>
+            <Button type={ "submit" } action={ handleSubmit } title={ "Schreib mir" } style={ {margin: '20px 0'} }/>
         </div>
         <ToastMessage state={ status } setState={ setStatus }/>
     </Container>

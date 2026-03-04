@@ -44,8 +44,6 @@ const Footer = () => {
             <div className={ styles.footerNavWrapper }>
                 { footerNavItems }
             </div>
-
-
         </div>
 
         <div className={ styles.legalFooterNote }><p>&copy; { getActualYear() } Yessica Wolf. All Rights Reserved.</p></div>
