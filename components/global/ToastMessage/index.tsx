@@ -1,12 +1,9 @@
 import {Toast} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClose} from '@fortawesome/free-solid-svg-icons'
-import {Dispatch, SetStateAction} from "react";
+import {ToastMessageTypes} from "@/types/generalTypes";
 
-const ToastMessage = ({state, setState}: {
-    state: { msg: string, state: boolean, type: string },
-    setState: Dispatch<SetStateAction<{ state: boolean; msg: string; type: string; }>>
-}) => {
+const ToastMessage = ({state, setState}: ToastMessageTypes) => {
 
     function handleClose() {
 

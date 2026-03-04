@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import SMTPTransport from "nodemailer/lib/smtp-transport";
+import {ContactFormTypes} from "@/types/generalTypes";
 
 const password = process.env.NEXT_PUBLIC_G_APP_PASSWORD
 export const transporter = nodemailer.createTransport({
@@ -33,6 +34,20 @@ export async function sendSubmissionEmail(userId: string, email: string, worksho
     }
 }
 
+export async function sendContactFormEmail(data: ContactFormTypes) {
+    try {
+        const info = await transporter.sendMail({
+            to: 'hello@sensibar-coaching.de', // list of receivers
+            replyTo: data.email,
+            subject: "Du hast eine neue Nachricht erhalten!", // Subject line
+            html: `<div><p>Du hast eine neue Nachricht von ${data.name} erhalten</p><p>Die Nachricht lautet: </p><p>${data.message}</p><p></p></div>`,
+
+        })
+        return {msg: "Email erfolgreich verschickt", info}
+    } catch (e) {
+        return ({msg: "Fehler beim Verschicken", error: e})
+    }
+}
 
 export async function sendRegistrationFinalEmail(userId: string, email: string, name: string, workshopLink: string, title: string, workshopDate: string, location: {
     city: string,

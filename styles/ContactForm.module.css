@@ -1,0 +1,41 @@
+.formWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 20px;
+}
+
+.formGroup{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+}
+
+.inputField {
+    border: 1px solid var(--background);
+    min-height: 30px;
+    border-radius: 10px;
+    padding: 15px;
+    font-family: 'Montserrat';
+    font-size: 1.1rem
+}
+
+.formHeading {
+    color: var(--textColor);
+    margin-bottom: 20px;
+}
+.label{
+    color: var(--textColor);
+    font-weight: bold;
+    font-family: 'Montserrat';
+}
+
+
+@media screen and  (min-width: 768px){
+    .formWrapper{
+        max-width: 800px;
+        margin: auto
+    }
+}

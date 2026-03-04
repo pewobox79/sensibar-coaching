@@ -1,3 +1,5 @@
+import {Dispatch, SetStateAction} from "react";
+
 export type QuestionKategory = "sensorische" | "soziale" | "kognitive" | "emotionale"
 
 export type AnswerType = "false" | "true" | string
@@ -147,4 +149,17 @@ export type ReferenceType={
     wer: string
     referenz: []
     color?: string
+}
+
+
+export interface ContactFormTypes{
+    name: string
+    email:string
+    message: string
+}
+
+export interface ToastMessageTypes {
+    state: { msg: string, state: boolean, type: string },
+    setState: Dispatch<SetStateAction<{ state: boolean; msg: string; type: string; }>>
+
 }

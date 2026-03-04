@@ -6,6 +6,7 @@ import styles from '@/styles/ContactSection.module.css'
 import Button from "@/components/global/Button";
 import {ContactSectionTypes} from "@/types/generalTypes";
 import CalendlyPopup from "@/components/fontendEndComponents/CalendlyPopup";
+import ContactForm from "@/components/forms/ContactForm/ContactForm";
 
 const ContactSection =({data}:{data: ContactSectionTypes})=>{
 
@@ -21,6 +22,7 @@ const ContactSection =({data}:{data: ContactSectionTypes})=>{
                 <CalendlyPopup/>
                 </div>
 
+                <ContactForm/>
                 <div className={styles.contactGridLeft}>
                     <RichTextRenderer blocks={data.contactData} textColor={colorSet.color}/>
                     <div>{data.legalLinks.map((link)=>{
@@ -36,6 +38,7 @@ const ContactSection =({data}:{data: ContactSectionTypes})=>{
                     return <Button key={socialLink.id} type={"button"} title={socialLink.label} href={socialLink.href} target={socialLink?.target}/>
                 })}</div>
                 </div>
+
             </div>
 
         </div>
