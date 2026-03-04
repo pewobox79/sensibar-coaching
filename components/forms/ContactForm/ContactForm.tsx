@@ -22,7 +22,9 @@ const ContactForm = () => {
 
     async function handleSubmit() {
 
-        if (!formData.email.includes('@') || !formData.email.includes('.')) {
+        const email = formData.email.trim()
+
+        if (!email.includes('@') || !email.includes('.') ||email.includes(' ')) {
             setStatus({state: true, msg: 'Es muss ein gültige Email sein', type: 'error'})
             return
         }
