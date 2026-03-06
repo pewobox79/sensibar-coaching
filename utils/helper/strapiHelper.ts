@@ -17,10 +17,22 @@ export const formatVowel = (value: string): string => {
         '&Ouml;': 'Ö',
         '&szlig;': 'ß',
         '&nbsp;': ' ',
-        '&amp;': '&', // keep last (see note below)
+        '&amp;': '&',
+        '&bdquo;': '„',
+        '&ndash;': '–',
+        '&mdash;': '—',
+        '&ldquo;': '“',
+        '&rdquo;': '”',
+        '&euro;': '€',
+        '&lt;': '<',
+        '&gt;': '>',
+        '&middot;': '·',
+        '&bull;': '•',
+        '&sect;': '§'
+
     };
 
-    const pattern = /&(uuml|auml|ouml|Uuml|Auml|Ouml|szlig|nbsp|amp);/g;
+    const pattern = /&(uuml|auml|ouml|Uuml|Auml|Ouml|szlig|nbsp|amp|bdquo|ndash|mdash|ldquo|rdquo|euro|lt|gt|middot|bull|sect);/g;
 
     return value.replace(pattern, (match) => replacements[match] ?? match);
 };
