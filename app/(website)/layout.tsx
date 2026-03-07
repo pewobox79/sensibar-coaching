@@ -4,6 +4,7 @@ import MainLayout from "@/layouts/MainLayout";
 import PageLayout from "@/layouts/PageLayout";
 import Consent from "@/components/Consent";
 import { Poppins, Montserrat, Whisper } from 'next/font/google'
+import {SENSIBAR_URL} from "@/utils/variables";
 
 const poppins = Poppins({
     subsets: ['latin'],
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
         url: "/favicon.png"
     }],
     alternates:{
-        canonical: "/"
+        canonical: `${SENSIBAR_URL}/`
     },
     openGraph:{
         type: "website",

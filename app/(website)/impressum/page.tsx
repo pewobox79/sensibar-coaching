@@ -2,6 +2,7 @@ import {getBasicPageContent} from "@/lib/strapi/generalHelper";
 import RenderContentHelper from "@/components/strapi/RenderContentHelper";
 import {Suspense} from "react";
 import type {Metadata} from "next";
+import {SENSIBAR_URL} from "@/utils/variables";
 
 export const metadata: Metadata = {
     title: "SENSIBAR | sensibel & wunderbar",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
         url: "/favicon.png"
     }],
     alternates:{
-        canonical: "/impressum"
+        canonical: `${SENSIBAR_URL}/impressum`
     },
     openGraph:{
         type: "website",

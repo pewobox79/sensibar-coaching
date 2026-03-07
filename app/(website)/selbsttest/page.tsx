@@ -2,16 +2,18 @@ import SelbstTestPage from "@/pagesComponents/SelbstTestPage";
 import {getQuestionsPageIntro, getTestQuestions} from "@/lib/strapi/generalHelper";
 
 import { Metadata } from 'next'
+import {SENSIBAR_URL} from "@/utils/variables";
 
 export async function generateMetadata(): Promise<Metadata> {
 
     // Fetch data based on slug (can be from CMS, DB, etc.)
     const data = await getQuestionsPageIntro();
+    const canonicalPath = `${SENSIBAR_URL}/selbsttest`
     return {
         title:  `SENSIBAR | ${data?.data?.seoData?.metaTitle}`,
         description: data?.data?.seoData?.metaDescription,
         alternates:{
-            canonical: "/selbsttest"
+            canonical: canonicalPath
         },
         openGraph: {
             title: data?.data?.seoData?.metaTitle,
