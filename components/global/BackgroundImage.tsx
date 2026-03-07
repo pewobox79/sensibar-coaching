@@ -1,10 +1,12 @@
-import {createImgUrl} from "@/utils/helper/imgHelper";
+import {getBestAvailableImgResolution} from "@/utils/helper/imgHelper";
+import {ImageType} from "@/types/generalTypes";
 
-const BackgroundImage =({imageUrl}:{imageUrl:string})=>{
-    if(!imageUrl) return null
-    const imgUrl = createImgUrl(imageUrl)
+const BackgroundImage =({image}:{image:ImageType})=>{
+
+    const selectedImage = getBestAvailableImgResolution(image)
+    if(!selectedImage) return null
     const backgroundStyle={
-        backgroundImage: `url(${imgUrl})`,
+        backgroundImage: `url(${selectedImage.url})`,
         backgroundSize:'cover',
         backgroundPosition:'center',
         backgroundRepeat:'no-repeat',

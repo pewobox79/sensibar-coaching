@@ -14,10 +14,18 @@ export type QuestionsType = {
 }[]
 
 export type TextBlock = { type: string, level: number, format: string, children: [] }[]
-export type ImageType = {
-    url: string,
-    alternativeText?: string
+export interface ImageType {
+    documentId?: string | undefined,
+    alternativeText?: string,
+    formats?: {
+        small?: { url?: string },
+        medium?: { url?: string },
+        large?: { url?: string },
+        thumbnail?: { url?: string }
+    }
+    url?: string
 }
+
 
 export type LinkType = {
     active: boolean
@@ -163,3 +171,5 @@ export interface ToastMessageTypes {
     setState: Dispatch<SetStateAction<{ state: boolean; msg: string; type: string; }>>
 
 }
+
+export type IMAGE_SIZE_PRIORITY = "thumbnail" | "small" | "medium" | "large" | "original"

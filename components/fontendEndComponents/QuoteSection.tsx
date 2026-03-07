@@ -12,7 +12,7 @@ const QuoteSection = ({data}: { data: QuoteSectionTypes }) => {
 
     return <Container id={ data.hashId } backgroundColor={ colorSet.bgColor }>
         <div className={styles.quoteSectionInner} >
-            { data.hasBgImage && <BackgroundImage imageUrl={ data?.image?.url as string }/> }
+            { data.hasBgImage && <BackgroundImage image={ data?.image}/> }
             <div className={styles.quoteTextBlock}>
                 <h2 style={{textAlign: "center", color: `${colorSet.color}`}}>{ data.title }</h2>
                 <h3 style={{textAlign: "center", color: `${colorSet.color}`}} className={styles.signature}>Yessica Wolf</h3>

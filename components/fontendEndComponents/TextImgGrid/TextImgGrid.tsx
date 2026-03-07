@@ -1,10 +1,10 @@
 import Container from "@/components/global/Container";
 import RichTextRenderer from "@/components/strapi/RenderContentHelper";
 import {getColor} from "@/utils/helper/colorHelper";
-import {createImgUrl} from "@/utils/helper/imgHelper";
+import { getBestAvailableImgResolution} from "@/utils/helper/imgHelper";
 import styles from '@/styles/TextImgGrid.module.css'
 import Button from "@/components/global/Button";
-import {TextImgGridTypes} from "@/types/generalTypes";
+import {ImageType, TextImgGridTypes} from "@/types/generalTypes";
 
 const TextImgGrid = ({data}: { data: TextImgGridTypes }) => {
     const colorSet = getColor(data?.bgColor?.color as string)
@@ -39,9 +39,11 @@ const TextImgGrid = ({data}: { data: TextImgGridTypes }) => {
             </div>
 
             { data.images && <div className={ styles.textImgImagesGrid }>
-                { data?.images?.map((image: { url: string }) => {
-                    return <img className={ styles.textImgImagesGridItem } key={ image.url }
-                                src={ createImgUrl(image.url) } alt={ 'sensibel und wunderbar' }/>
+                { data?.images?.map((image: ImageType) => {
+
+                    const selectedImage = getBestAvailableImgResolution(image)
+                    return <img className={ styles.textImgImagesGridItem } key={ selectedImage.url }
+                                src={selectedImage.url} alt={ 'sensibel und wunderbar' }/>
                 }) }
             </div> }
         </div>

@@ -2,7 +2,7 @@ import styles from '@/styles/TextImageSection.module.css'
 import Container from "@/components/global/Container";
 import Button from "@/components/global/Button";
 import RenderContentHelper from "@/components/strapi/RenderContentHelper";
-import {createImgUrl} from "@/utils/helper/imgHelper";
+import { getBestAvailableImgResolution} from "@/utils/helper/imgHelper";
 import {TextBlock, TextImageSectionType} from "@/types/generalTypes";
 import {getColor} from "@/utils/helper/colorHelper";
 
@@ -14,7 +14,7 @@ const TextImgSection = ({isTextLeft = false, backgroundColor, sectionId, body, b
     backgroundColor?: TextImageSectionType["bgColor"],
     sectionId: string
 }) => {
-    const imgUrl = createImgUrl(image?.url)
+    const img = getBestAvailableImgResolution(image)
     const buttonColor = getColor(button?.bgColor?.color as string)
     const background = getColor(backgroundColor?.color as string)
     const customStyle = isTextLeft ? styles.textImgSectionInnerLeftToRight : styles.textImgSectionInnerRightToRight
@@ -31,7 +31,7 @@ const TextImgSection = ({isTextLeft = false, backgroundColor, sectionId, body, b
                 </div>
             </div>
             <div className={ styles.imageContainer }>
-                <img src={ imgUrl } alt={image?.alternativeText ||"Sensibar Coaching hochsensible menschen"}/>
+                <img src={ img.url } alt={image?.alternativeText ||"Sensibar Coaching hochsensible menschen"}/>
             </div>
         </div>
     </Container>
