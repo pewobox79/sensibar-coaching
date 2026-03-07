@@ -32,6 +32,9 @@ export const metadata: Metadata = {
     icons:[{
         url: "/favicon.png"
     }],
+    alternates:{
+        canonical: "/"
+    },
     openGraph:{
         type: "website",
         url: "https://sensibar-coaching.de",

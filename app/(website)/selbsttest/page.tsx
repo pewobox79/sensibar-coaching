@@ -10,6 +10,9 @@ export async function generateMetadata(): Promise<Metadata> {
     return {
         title:  `SENSIBAR | ${data?.data?.seoData?.metaTitle}`,
         description: data?.data?.seoData?.metaDescription,
+        alternates:{
+            canonical: "/selbsttest"
+        },
         openGraph: {
             title: data?.data?.seoData?.metaTitle,
             description: data?.data?.seoData?.metaDescription,
