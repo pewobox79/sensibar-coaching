@@ -1,7 +1,34 @@
 import {getBasicPageContent} from "@/lib/strapi/generalHelper";
 import RenderContentHelper from "@/components/strapi/RenderContentHelper";
 import {Suspense} from "react";
+import type {Metadata} from "next";
 
+export const metadata: Metadata = {
+    title: "SENSIBAR | sensibel & wunderbar",
+    description: "Hochsensible Menschen bekommen bei mir hilfreiche tipps und methoden für eine bessere Lebensqualität",
+    icons:[{
+        url: "/favicon.png"
+    }],
+    alternates:{
+        canonical: "/datenschutz"
+    },
+    openGraph:{
+        type: "website",
+        url: "https://sensibar-coaching.de",
+        title: "SENSIBAR | sensibel & wunderbar",
+        description: "Hochsensible Menschen bekommen bei mir hilfreiche tipps und methoden für eine bessere Lebensqualität",
+        images: [
+            {
+                url: "/favicon.png",
+                width: 1200,
+                height: 630,
+                alt: "SENSIBAR | sensibel & wunderbar",
+            },
+        ],
+        siteName: "SENSIBAR | sensibel & wunderbar",
+        locale: "de_DE",
+    }
+};
 const Datenschutz = async () => {
 
     const data = await getBasicPageContent("datenschutz")
