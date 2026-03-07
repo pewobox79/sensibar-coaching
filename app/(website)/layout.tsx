@@ -34,7 +34,7 @@ export const metadata: Metadata = {
         url: "/favicon.png"
     }],
     alternates:{
-        canonical: `${SENSIBAR_URL}/`
+        canonical: `${SENSIBAR_URL}`
     },
     openGraph:{
         type: "website",

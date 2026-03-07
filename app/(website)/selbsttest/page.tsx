@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
     // Fetch data based on slug (can be from CMS, DB, etc.)
     const data = await getQuestionsPageIntro();
-    const canonicalPath = `${SENSIBAR_URL}/selbsttest`
+    const canonicalPath = `${SENSIBAR_URL}selbsttest`
     return {
         title:  `SENSIBAR | ${data?.data?.seoData?.metaTitle}`,
         description: data?.data?.seoData?.metaDescription,
