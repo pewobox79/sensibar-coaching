@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
         title:  `SENSIBAR | Workshops für Hochsensiblität`,
         description: 'Hochsensiblität ist bei vielen nicht bekannt. In unseren Workshops lernen Sie sich selbst besser kennen. Wir geben Ihnen Tools mit, um mit Hochsensibilität besser zu leben',
         alternates: {
-            canonical: `${SENSIBAR_URL}/workshops`
+            canonical: `${SENSIBAR_URL}workshops`
         },openGraph: {
             title: "SENSIBAR | Workshops für Hochsensiblität",
             description: 'Hochsensiblität ist bei vielen nicht bekannt. In unseren Workshops lernen Sie sich selbst besser kennen. Wir geben Ihnen Tools mit, um mit Hochsensibilität besser zu leben',
