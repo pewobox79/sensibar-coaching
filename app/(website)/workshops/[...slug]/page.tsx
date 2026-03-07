@@ -10,7 +10,6 @@ type Props = {
 }
 
 export async function generateMetadata({params}: Props): Promise<Metadata> {
-
     const {slug} = await params
     // Fetch data based on slug (can be from CMS, DB, etc.)
     const data = await getSingleWorkshop(slug[1]);
