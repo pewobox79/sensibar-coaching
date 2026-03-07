@@ -16,7 +16,7 @@ const SingleEvent = (props:{data:EventDetailsProps}) => {
         <div className={ styles.singleEventWrapper }>
             <div className={ styles.singleEventInner }>
                 <div className={ styles.singleEventHeader }>
-                    <h3>{ workshopDetails?.title }</h3>
+                    <h1>{ workshopDetails?.title }</h1>
                 </div>
 
                 <div className={ styles.singleEventMainContent }>
