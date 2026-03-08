@@ -4,14 +4,14 @@ import styles from '@/styles/Event.module.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {  faLocationDot, faCalendar, faClock } from '@fortawesome/free-solid-svg-icons'
 import {formatTimeToAdminFormat} from "@/lib/strapi/workshopHelper";
-import {EventDetailsProps} from "@/pagesComponents/Events/SingleEvent";
+import {WorkshopTypes} from "@/types/generalTypes";
 
 type EventInfoTypes ={
     workshop_date: string,
     workshopTimeStart: string,
     workshopTimeEnd: string,
     workshopType: string,
-    location: EventDetailsProps['location']
+    location: WorkshopTypes['location']
 }
 const EventInfoBox =({workshop_date, workshopTimeStart, workshopTimeEnd, workshopType, location}:EventInfoTypes )=>{
     const addressData = `${location?.street} ${location?.streetNumber}, ${location?.zipCode} ${location?.city} `
