@@ -4,9 +4,10 @@ import EventRegistration from "@/components/forms/EventRegistration";
 import EventInfoBox from "@/components/forms/EventRegistration/EventInfoBox";
 import RichTextRenderer from "@/components/strapi/RenderContentHelper";
 import Container from "@/components/global/Container";
+import {WorkshopTypes} from "@/types/generalTypes";
 
-export type EventDetailsProps={title:string, description:[],workshop_date:string,ws_status: string, workshopTimeStart:string,workshopTimeEnd:string, documentId:string, id:string, type: string, location: {street: string, zipCode: string, country: string,streetNumber: string, city:string} }
-const SingleEvent = (props:{data:EventDetailsProps}) => {
+
+const SingleEvent = (props:{data:WorkshopTypes}) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-expect-error
     const workshopDetails:EventDetailsProps = props.data ? props?.data:{}

@@ -14,6 +14,7 @@ export type QuestionsType = {
 }[]
 
 export type TextBlock = { type: string, level: number, format: string, children: [] }[]
+
 export interface ImageType {
     documentId?: string | undefined,
     alternativeText?: string,
@@ -32,12 +33,12 @@ export type LinkType = {
     href: string
     id: number | string
     label: string
-    target: 'internal' |'external' |undefined
+    target: 'internal' | 'external' | undefined
     titleAttribute: string,
     bgColor?: { color: string }
 }
 
-export type BgColorType = { color: 'lightBeige' |'beige' | 'white' | 'darkGrey' }
+export type BgColorType = { color: 'lightBeige' | 'beige' | 'white' | 'darkGrey' }
 
 export interface TextBlockType {
     __component: string
@@ -57,7 +58,7 @@ export interface JumbotronType {
     bgColor: BgColorType
 }
 
-export interface QuoteSectionTypes{
+export interface QuoteSectionTypes {
     __component: string,
     id: string,
     title: string
@@ -65,11 +66,12 @@ export interface QuoteSectionTypes{
     hashId: string
     bgColor: BgColorType
     image: ImageType
-    hasBgImage:boolean
+    hasBgImage: boolean
 }
+
 export interface TextImageSectionType {
     __component: string
-    hashId?:string
+    hashId?: string
     textLeft: boolean
     bgColor: BgColorType
     image: ImageType
@@ -88,16 +90,16 @@ export interface GridItemTypes {
     id: string
     link: LinkType
     image?: ImageType
-    hasIcon:boolean
-    border:{
+    hasIcon: boolean
+    border: {
         color: BgColorType
-        position: "right" |"left" | "bottom" |"top" |"leftTop" |"bottomRight"
+        position: "right" | "left" | "bottom" | "top" | "leftTop" | "bottomRight"
     }
 
 }
 
 export interface GridBundleType {
-    hashId:string
+    hashId: string
     item: GridItemTypes[]
     bgColor: BgColorType
     title: string
@@ -108,7 +110,7 @@ export interface GridBundleType {
 export interface TextImgGridTypes {
     __component: string
     id: string
-    hashId:string
+    hashId: string
     button: LinkType
     leftTextBlock: TextBlock
     rightTextBlock: TextBlock
@@ -117,7 +119,7 @@ export interface TextImgGridTypes {
 }
 
 
-export interface ContactSectionTypes{
+export interface ContactSectionTypes {
     __component: string
     socialLinks: LinkType[]
     legalLinks: LinkType[]
@@ -127,7 +129,14 @@ export interface ContactSectionTypes{
     id: string
 }
 
-export type Items = JumbotronType | TextImageSectionType | TextBlockType | GridBundleType | TextImgGridTypes | ContactSectionTypes |ReferenceSectionTypes
+export type Items =
+    JumbotronType
+    | TextImageSectionType
+    | TextBlockType
+    | GridBundleType
+    | TextImgGridTypes
+    | ContactSectionTypes
+    | ReferenceSectionTypes
 
 export interface StrapiData {
     items: Items[]
@@ -137,22 +146,23 @@ export interface StrapiData {
 
 export interface ReferenceSectionTypes {
     __component: string
-    bgColor: {id: string, color:BgColorType["color"] }
-    title: string |undefined
+    bgColor: { id: string, color: BgColorType["color"] }
+    title: string | undefined
     id: string
     internalName: string
 
 }
+
 export interface ReferencesTypes {
-    data:ReferenceType[]
-    bgColor: {color: BgColorType}
-    title?: string |undefined
+    data: ReferenceType[]
+    bgColor: { color: BgColorType }
+    title?: string | undefined
     __component: string
 
 
 }
 
-export type ReferenceType={
+export type ReferenceType = {
     documentId: string
     wer: string
     referenz: []
@@ -160,9 +170,9 @@ export type ReferenceType={
 }
 
 
-export interface ContactFormTypes{
+export interface ContactFormTypes {
     name: string
-    email:string
+    email: string
     message: string
 }
 
@@ -173,3 +183,18 @@ export interface ToastMessageTypes {
 }
 
 export type IMAGE_SIZE_PRIORITY = "thumbnail" | "small" | "medium" | "large" | "original"
+export type SpeakerType = { name?: string, id: string, quote?: string, image?: ImageType }
+
+export type WorkshopTypes = {
+    title: string
+    description: []
+    workshop_date: string
+    ws_status: string
+    workshopTimeStart: string
+    workshopTimeEnd: string
+    documentId: string
+    id: string
+    type: string
+    speaker: SpeakerType[]
+    location: { street: string, zipCode: string, country: string, streetNumber: string, city: string }
+}

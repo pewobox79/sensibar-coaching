@@ -1,3 +1,5 @@
+import {SingleWorkshopQuery, WorkshopQuery} from "@/utils/helper/queries/workshopQuery";
+
 const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
 
 const config = {
@@ -11,7 +13,7 @@ export const getAllWorkshops = async () => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/workshops?populate=*`, {
+        const response = await fetch(`${ STRAPI_URI }/api/workshops?${WorkshopQuery}`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
@@ -33,7 +35,7 @@ export const getAllWorkshops = async () => {
 export const getSingleWorkshop = async (id: string | unknown) => {
 
     try {
-        const response = await fetch(`${ STRAPI_URI }/api/workshops/${ id }?populate=*`, {
+        const response = await fetch(`${ STRAPI_URI }/api/workshops/${ id }?${SingleWorkshopQuery}`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
