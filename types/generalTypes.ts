@@ -187,6 +187,7 @@ export type SpeakerType = { name?: string, id: string, quote?: string, image?: I
 
 export type WorkshopTypes = {
     title: string
+    format: string
     description: []
     workshop_date: string
     ws_status: string

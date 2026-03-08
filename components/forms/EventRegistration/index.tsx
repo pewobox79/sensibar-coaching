@@ -14,15 +14,15 @@ import {
 } from "@/lib/strapi/workshopHelper";
 import EmailInfo from "@/components/global/EmailInfo";
 import Loader from "@/components/global/Loader";
-import {EventDetailsProps} from "@/pagesComponents/Events/SingleEvent";
 import {createNewTicket} from "@/lib/strapi/ticketHelper";
+import {WorkshopTypes} from "@/types/generalTypes";
 
 
 const EventRegistration = ({workshopId, workshopDate, workshopName, location, workshopType}: {
     workshopDate: string,
     workshopId: string,
     workshopName: string,
-    location: EventDetailsProps['location'],
+    location: WorkshopTypes['location'],
     workshopType: string
 }) => {
     const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV ? process.env.NEXT_PUBLIC_STRAPI_URL_DEV : ""
