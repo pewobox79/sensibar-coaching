@@ -25,7 +25,7 @@ const GridItem =({data}:{data: GridItemTypes})=>{
     }
     const image = getBestAvailableImgResolution(data.image as ImageType)
 
-    const elementStyle = `${styles.gridItemWrapper} ${borderStyle[data?.border?.position as GridItemTypes["border"]["position"]]} ${borderColor[data?.border?.color?.color]} `
+    const elementStyle = `${styles.gridItwemWrapper} ${borderStyle[data?.border?.position as GridItemTypes["border"]["position"]]} ${borderColor[data?.border?.color?.color]} `
     return <a href={data?.link?.href} className={elementStyle}>
         {data.hasIcon && <img className={styles.gridItemImg} alt={data?.image?.alternativeText || "coaching hochsensible"} src={image?.url} width={100} height={100}/>}
         <div className={styles.gridItemContent}>

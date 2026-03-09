@@ -5,6 +5,7 @@ import EventInfoBox from "@/components/forms/EventRegistration/EventInfoBox";
 import RichTextRenderer from "@/components/strapi/RenderContentHelper";
 import Container from "@/components/global/Container";
 import {WorkshopTypes} from "@/types/generalTypes";
+import PayPalBtn from "@/components/PayPal/PayPalBtn";
 
 
 const SingleEvent = (props:{data:WorkshopTypes}) => {
@@ -27,6 +28,7 @@ const SingleEvent = (props:{data:WorkshopTypes}) => {
                         </div>
                     </div>
                     <div className={ styles.singleEventContent50 }>
+                        <PayPalBtn/>
                         <EventInfoBox location={workshopDetails?.location} workshop_date={workshopDetails?.workshop_date} workshopTimeStart={workshopDetails?.workshopTimeStart} workshopTimeEnd={workshopDetails?.workshopTimeEnd} workshopType={workshopDetails?.type}/>
                         {workshopDetails.ws_status === "confirmed" &&<EventRegistration workshopId={workshopDetails.documentId} workshopDate={workshopDetails.workshop_date} workshopName={workshopDetails.title} location={workshopDetails.location} workshopType={workshopDetails.type}/>}</div>
                 </div>
