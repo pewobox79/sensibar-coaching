@@ -7,7 +7,7 @@ const Container = ({children, id, backgroundColor = "white"}: {
 }) => {
     return <div className={"sectionContainer"} style={ {
         backgroundColor: `${ backgroundColor }`,
-        color: `${ backgroundColor != "#fff" ? "white" : "#f333" }`
+        color: `${ backgroundColor != "#fff" ? "white" : "rgba(23, 23, 23, 1)" }`
     } } id={ id }>
         { children }
 

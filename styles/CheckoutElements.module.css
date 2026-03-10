@@ -1,0 +1,39 @@
+.checkoutOverviewWrapper {
+    margin: 100px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    min-height: 300px;
+
+}
+
+.checkoutTable {
+ border-radius: 10px;
+    border: 1px solid lightgray;
+    margin: 20px 0
+}
+
+.checkoutTableHeader{
+    padding: 10px;
+    min-height: 40px;
+    background-color: var(--background);
+}
+
+.checkoutTableBody{
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+}
+
+.checkoutTableFooter{
+    padding: 10px;
+}
+
+@media screen and (min-width: 768px) {
+
+    .checkoutOverviewWrapper{
+        width: 100%
+    }
+
+}

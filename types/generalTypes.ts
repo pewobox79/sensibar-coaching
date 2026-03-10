@@ -4,6 +4,14 @@ export type QuestionKategory = "sensorische" | "soziale" | "kognitive" | "emotio
 
 export type AnswerType = "false" | "true" | string
 
+export type LocationType = {
+    street: string,
+    number: string,
+    city: string,
+    zipCode: string,
+    country: string
+}
+
 export type QuestionsType = {
     documentId: string,
     question: string,
@@ -197,5 +205,5 @@ export type WorkshopTypes = {
     id: string
     type: string
     speaker: SpeakerType[]
-    location: { street: string, zipCode: string, country: string, streetNumber: string, city: string }
+    location: LocationType
 }

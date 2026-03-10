@@ -3,6 +3,7 @@ import {getAllWorkshops, getSingleWorkshop} from "@/lib/strapi/workshopHelper";
 import {Metadata} from "next";
 import {createWorkshopLink} from "@/utils/helper/formater";
 import {slugify} from "@/utils/helper/slugify";
+import TicketOrderPage from "@/pagesComponents/orders/TicketOrderPage";
 
 export const dynamicParams = true
 type Props = {
@@ -31,7 +32,7 @@ type Props = {
 const TicketPage = async ({params}: Props) => {
     const {slug} = await params
 
-    return <h1>ticketpage{JSON.stringify(slug)}</h1>
+    return <TicketOrderPage {...slug}/>
 }
 
 export default TicketPage;

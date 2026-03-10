@@ -65,8 +65,7 @@ p {
 
 .innerWrapper {
     word-break: break-word;
-    width: 100%;
-    border: 1px solid red
+    width: 100%
 }
 
 .mainContent {
@@ -123,6 +122,9 @@ p {
 }
 
 .globalTextLink {
+    font-family: var(--font-montserrat);
+    font-size: 1.2rem;
+    color: var(--textColor);
     margin: 5px;
     padding: 10px;
     text-decoration: none;

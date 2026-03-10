@@ -29,7 +29,7 @@ const SingleEvent = (props:{data:WorkshopTypes}) => {
                     </div>
                     <div className={ styles.singleEventContent50 }>
                         <EventInfoBox location={workshopDetails?.location} workshop_date={workshopDetails?.workshop_date} workshopTimeStart={workshopDetails?.workshopTimeStart} workshopTimeEnd={workshopDetails?.workshopTimeEnd} workshopType={workshopDetails?.type}/>
-                        {workshopDetails.ws_status === "confirmed" &&<EventRegistration workshopId={workshopDetails.documentId} workshopDate={workshopDetails.workshop_date} workshopName={workshopDetails.title} location={workshopDetails.location} workshopType={workshopDetails.type}/>}</div>
+                        {workshopDetails.ws_status === "confirmed" &&<EventRegistration format={workshopDetails?.format} workshopId={workshopDetails.documentId} workshopDate={workshopDetails.workshop_date} workshopName={workshopDetails.title} location={workshopDetails.location} workshopType={workshopDetails.type}/>}</div>
                 </div>
             </div>
 
