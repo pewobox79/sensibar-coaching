@@ -6,9 +6,6 @@ import {slugify} from "@/utils/helper/slugify";
 import TicketOrderPage from "@/pagesComponents/orders/TicketOrderPage";
 
 export const dynamicParams = true
-type Props = {
-    params: Promise<{ slug: unknown[] }>
-}
 
 /*export async function generateMetadata({params}: Props): Promise<Metadata> {
     const {slug} = await params
@@ -29,10 +26,8 @@ type Props = {
     }
 }*/
 
-const TicketPage = async ({params}: Props) => {
-    const {slug} = await params
-
-    return <TicketOrderPage {...slug}/>
+const TicketPage = async () => {
+    return <TicketOrderPage/>
 }
 
 export default TicketPage;

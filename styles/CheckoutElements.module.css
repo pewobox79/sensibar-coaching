@@ -4,36 +4,87 @@
     flex-direction: column;
     width: 95%;
     min-height: 300px;
+    height: auto
 
 }
 
 .checkoutTable {
- border-radius: 10px;
+    border-radius: 10px;
     border: 1px solid lightgray;
     margin: 20px 0
 }
 
-.checkoutTableHeader{
+.checkoutTableHeader {
     padding: 10px;
     min-height: 40px;
     background-color: var(--background);
+    margin-bottom: 10px;
 }
 
-.checkoutTableBody{
+.checkoutTableBody {
     padding: 30px;
     display: flex;
     flex-direction: column;
     min-height: 300px;
 }
 
-.checkoutTableFooter{
+.checkoutTableFooter {
     padding: 10px;
+}
+
+.checkoutTablePrice {
+    padding: 10px 0;
+    width: 100%;
+}
+
+.checkoutTablePriceDetail {
+    display: flex;
+    justify-content: space-between;
+    line-height: 1.5
+}
+
+.checkoutTableInner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.checkoutTableInner {
+    width: 100%;
+    padding: 30px 0;
+}
+
+.checkoutTableInnerDescription {
+    width: 100%;
+    padding: 10px 0;
+    line-height: 1.5
+}
+
+.checkoutTableFinalPrice{
+    font-weight: bold;
+    padding: 20px 0;
 }
 
 @media screen and (min-width: 768px) {
 
-    .checkoutOverviewWrapper{
-        width: 100%
+
+    .checkoutTableInner {
+        flex-direction: row;
     }
 
+    .checkoutTablePrice {
+        width: 48%;
+    }
+
+    .checkoutTableInnerDescription {
+        width: 48%
+    }
+}
+
+@media screen and (min-width: 1300px) {
+
+    .checkoutOverviewWrapper {
+        width: 100%
+    }
 }

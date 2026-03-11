@@ -20,14 +20,16 @@ import {useOrderStore} from "@/stores/useOrderStore";
 import {useRouter} from "next/navigation";
 
 
-const EventRegistration = ({workshopId, workshopDate, workshopName, location, workshopType, format}: {
-    workshopDate: string,
-    workshopId: string,
-    workshopName: string,
-    location: WorkshopTypes['location'],
-    workshopType: string
-    format: string
-}) => {
+const EventRegistration = ({
+                               documentId,
+                               workshop_date,
+                               title,
+                               location,
+                               type,
+                               format,
+                               workshopPrice,
+                               speaker
+                           }: WorkshopTypes) => {
 
     const router = useRouter()
     const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV ? process.env.NEXT_PUBLIC_STRAPI_URL_DEV : ""
@@ -59,7 +61,7 @@ const EventRegistration = ({workshopId, workshopDate, workshopName, location, wo
             phone: '',
         },
         condition: "",
-        workshops: workshopId,
+        workshops: documentId,
 
     }
 
@@ -70,7 +72,7 @@ const EventRegistration = ({workshopId, workshopDate, workshopName, location, wo
         validateOnChange: false,
         onSubmit: async (values) => {
             setRegistrationProcess(true)
-            const {ticketId} = await createNewTicket(workshopDate, workshopId)
+            const {ticketId} = await createNewTicket(workshop_date, documentId)
             try {
                 const cleanedFirstname = values.firstname.replace(/\s+/g, '').toLowerCase();
                 const cleanedLastname = values.lastname.replace(/\s+/g, '').toLowerCase();
@@ -111,22 +113,28 @@ const EventRegistration = ({workshopId, workshopDate, workshopName, location, wo
                                 addOrder({
                                     ticketId,
                                     clientId: newContactId,
-                                    eventName: workshopName,
+                                    eventName: title,
+                                    speaker,
                                     clientName: `${ values.firstname } ${ values.lastname }`,
-                                    eventDate: workshopDate,
+                                    eventDate: workshop_date,
                                     eventLocation: location,
-                                    eventType: workshopType,
-                                    billing: true,
+                                    ticketPrice: workshopPrice,
+                                    eventType: type,
+                                    billing: false,
                                     eventFormat: format,
                                     billingAddress: {
-                                        street: "new contact address",
-                                        city: "new contact city",
-                                        number: "new contact state",
-                                        zipCode: "new contact zip",
-                                        country: "new contact country"
+                                        street: "",
+                                        city: "",
+                                        streetNumber: "",
+                                        zipCode: "",
+                                        country: ""
+                                    },
+                                    rightOfWithdrawal: {
+                                        hasAccepted: false,
+                                        date: new Date()
                                     }
                                 })
-                                getSingleWorkshop(workshopId).then(workshop => {
+                                getSingleWorkshop(documentId).then(workshop => {
 
                                     const updatedWorkshopData = {
                                         contactList: [workshop?.data?.contacts],
@@ -134,7 +142,7 @@ const EventRegistration = ({workshopId, workshopDate, workshopName, location, wo
                                     }
                                     updatedWorkshopData.contactList.push(newContactId)
 
-                                    addContactToWorkshop(newData.data.documentId, workshopId, updatedWorkshopData).then(() => {
+                                    addContactToWorkshop(newData.data.documentId, documentId, updatedWorkshopData).then(() => {
                                         setRegistrationProcess(false)
                                         setError({...error, state: false})
                                         setSuccess({...success, state: true, msg: "Your registration was successfully"})
@@ -153,11 +161,11 @@ const EventRegistration = ({workshopId, workshopDate, workshopName, location, wo
                                             },
                                             body: JSON.stringify({
                                                 id: newData.data?.documentId,
-                                                workshopName: workshopName,
-                                                workshopId: workshopId,
+                                                workshopName: title,
+                                                workshopId: documentId,
                                                 email: newData?.data?.contact[0].email,
                                                 location: location,
-                                                workshopType: workshopType,
+                                                workshopType: type,
                                             }),
                                         })
 
@@ -174,22 +182,28 @@ const EventRegistration = ({workshopId, workshopDate, workshopName, location, wo
                         addOrder({
                             ticketId,
                             clientId: existingContactId,
-                            eventName: workshopName,
+                            eventName: title,
+                            speaker,
                             clientName: `${ values.firstname } ${ values.lastname }`,
-                            eventDate: workshopDate,
+                            eventDate: workshop_date,
                             eventLocation: location,
-                            eventType: workshopType,
-                            billing: true,
+                            eventType: type,
+                            ticketPrice: workshopPrice,
+                            billing: false,
                             eventFormat: format,
                             billingAddress: {
-                                street: "existing contact address",
-                                city: "existing contact city",
-                                number: "existing contact state",
-                                zipCode: "existing contact zip",
-                                country: "existing country"
+                                street: "",
+                                city: "",
+                                streetNumber: "",
+                                zipCode: "",
+                                country: ""
+                            },
+                            rightOfWithdrawal: {
+                                hasAccepted: false,
+                                date: new Date()
                             }
                         })
-                        getSingleWorkshop(workshopId).then((workshop) => {
+                        getSingleWorkshop(documentId).then((workshop) => {
                             const updatedWorkshopData = {
                                 contactList: [workshop.data.contacts],
                                 ticketList: [workshop.data.event_tickets]
@@ -197,7 +211,7 @@ const EventRegistration = ({workshopId, workshopDate, workshopName, location, wo
                             updatedWorkshopData.contactList.push(existingContactId)
 
                             addTicketToExistingContact(ticketId, existingContactId)
-                            addContactToWorkshop(existingContactId, workshopId, updatedWorkshopData).then(() => {
+                            addContactToWorkshop(existingContactId, documentId, updatedWorkshopData).then(() => {
                                 setRegistrationProcess(false)
                                 setError({...error, state: false})
                                 setSuccess({...success, state: true, msg: "Your registration was successfully"})
@@ -216,8 +230,8 @@ const EventRegistration = ({workshopId, workshopDate, workshopName, location, wo
                                     body: JSON.stringify({
                                         id: existingContactId,
                                         email: data?.data[0].contact[0].email,
-                                        workshopName: workshopName,
-                                        workshopId: workshopId,
+                                        workshopName: title,
+                                        workshopId: documentId,
                                     }),
                                 })
 

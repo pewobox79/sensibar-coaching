@@ -24,3 +24,8 @@ export const getActualYear =()=>{
     const date = new Date();
     return date.getFullYear();
 }
+
+
+export const formatPrice =(price: number)=>{
+    return `€ ${price?.toFixed(2)} Euro`;
+}

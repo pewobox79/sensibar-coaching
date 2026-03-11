@@ -6,7 +6,7 @@ export type AnswerType = "false" | "true" | string
 
 export type LocationType = {
     street: string,
-    number: string,
+    streetNumber: string,
     city: string,
     zipCode: string,
     country: string
@@ -206,4 +206,5 @@ export type WorkshopTypes = {
     type: string
     speaker: SpeakerType[]
     location: LocationType
+    workshopPrice: number
 }
