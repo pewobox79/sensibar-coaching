@@ -4,6 +4,7 @@ import {getColor} from "@/utils/helper/colorHelper";
 import BackgroundImage from "@/components/global/BackgroundImage";
 import Button from "@/components/global/Button";
 import styles from '@/styles/QuoteSection.module.css'
+import SignatureElement from "@/components/global/blocks/SignatureElement";
 
 const QuoteSection = ({data}: { data: QuoteSectionTypes }) => {
 
@@ -11,12 +12,14 @@ const QuoteSection = ({data}: { data: QuoteSectionTypes }) => {
     const btnColorSet = getColor(data?.button?.bgColor?.color as string)
 
     return <Container id={ data.hashId } backgroundColor={ colorSet.bgColor }>
-        <div className={styles.quoteSectionInner} >
-            { data.hasBgImage && <BackgroundImage image={ data?.image}/> }
-            <div className={styles.quoteTextBlock}>
-                <h2 style={{textAlign: "center", color: `${colorSet.color}`}}>{ data.title }</h2>
-                <h3 style={{textAlign: "center", color: `${colorSet.color}`}} className={styles.signature}>Yessica Wolf</h3>
-                <div className={styles.quoteButton}>{data.button && <Button type={"button"} title={data?.button?.label} href={data?.button?.href} style={{backgroundColor: btnColorSet.bgColor, margin: "auto", width: "50%"}}/>}</div>
+        <div className={ styles.quoteSectionInner }>
+            { data.hasBgImage && <BackgroundImage image={ data?.image }/> }
+            <div className={ styles.quoteTextBlock }>
+                <h2 style={ {textAlign: "center", color: `${ colorSet.color }`} }>{ data.title }</h2>
+                <SignatureElement color={ colorSet.color }/>
+                <div className={ styles.quoteButton }>{ data.button &&
+                  <Button type={ "button" } title={ data?.button?.label } href={ data?.button?.href }
+                          style={ {backgroundColor: btnColorSet.bgColor, margin: "auto", width: "50%"} }/> }</div>
 
             </div>
 

@@ -33,7 +33,7 @@ const StrapiItemsRendering =(item:Items)=>{
             return <References data={item as ReferenceSectionTypes}/>
         case 'components.text-img-component':
             const textImageItem = item as TextImageSectionType;
-            return <TextImageSection body={textImageItem?.text as TextImageSectionType["text"]} isTextLeft={textImageItem?.textLeft} sectionId={textImageItem?.hashId ||''} image={textImageItem?.image} button={textImageItem.link } backgroundColor={textImageItem.bgColor}/>
+            return <TextImageSection body={textImageItem?.text as TextImageSectionType["text"]} isTextLeft={textImageItem?.textLeft} sectionId={textImageItem?.hashId ||''} image={textImageItem?.image} button={textImageItem.link } backgroundColor={textImageItem.bgColor} hasPolaroid={textImageItem.hasPolaroid}/>
         default: return <div>No component available</div>
     }
 

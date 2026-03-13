@@ -12,6 +12,11 @@
     flex: 1;
 }
 
+.textBodyForPolaroid {
+    flex:1;
+    width: 100%
+}
+
 .textBodyInner {
     padding: 30px;
     display: flex;
@@ -60,6 +65,10 @@
         flex: 0 0 75%;
     }
 
+    .textBodyForPolaroid {
+        max-width: 65% ;
+        flex: 0 0 75%;
+    }
     .textBodyInner {
         padding: 100px
     }

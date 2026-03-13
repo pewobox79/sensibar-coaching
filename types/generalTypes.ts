@@ -81,6 +81,7 @@ export interface TextImageSectionType {
         title?: string
         body?: TextBlock
     }
+    hasPolaroid?: boolean
 }
 
 export interface GridItemTypes {
