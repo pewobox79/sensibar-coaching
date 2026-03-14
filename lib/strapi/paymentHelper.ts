@@ -1,8 +1,8 @@
 import {BEARER_TOKEN, STRAPI_URI} from "@/utils/constantValues";
 import {PaymentQuery} from "@/utils/helper/queries/paymentQuery";
-import { OrderTypes} from "@/types/generalTypes";
+import {OrderTypes} from "@/types/generalTypes";
 
-export const createNewPaymentInStrapi = async (ticketId:string) => {
+export const createNewPaymentInStrapi = async (ticketId: string) => {
     const paymentData = {
         event_ticket: ticketId
     }
@@ -35,28 +35,49 @@ export const getSinglePayment = async (paymentId: string) => {
     return await payment.json()
 }
 
-export const updatePaymentInStrapi = async (paymentId:string, storedValue:OrderTypes, paymentRes:{id: string, status: string, payer: {payer_id: string}}) => {
-    const {clientId, billingAddress,billing, transaction , rightOfWithdrawal}=storedValue
+export const updatePaymentInStrapi = async (paymentId: string, storedValue: OrderTypes, paymentRes: {
+    id: string,
+    status: string,
+    payer: { payer_id: string }
+}) => {
+    const {clientId, billingAddress, billing, transaction, rightOfWithdrawal} = storedValue
 
-    const updatedPaymentData ={
-        contact: clientId,
-        transaction:{
-            ...transaction,
-            transactionId: paymentRes?.id ||"",
-            transactionState: paymentRes?.status,
-            payerId: paymentRes?.payer.payer_id
+    const dataToSubmit ={
+        withBilling: {
+            contact: clientId,
+            transaction: {
+                ...transaction,
+                transactionId: paymentRes?.id || "",
+                transactionState: paymentRes?.status,
+                payerId: paymentRes?.payer.payer_id,
+                transactionDate: new Date
+            },
+            billing,
+            rightOfWithdrawal,
+            billingAddress
         },
-        billing,
-        rightOfWithdrawal,
-        billingAddress
+        noBilling:{
+            contact: clientId,
+            transaction: {
+                ...transaction,
+                transactionId: paymentRes?.id || "",
+                transactionState: paymentRes?.status,
+                payerId: paymentRes?.payer.payer_id,
+                transactionDate: new Date
+            },
+            rightOfWithdrawal,
+        }
     }
-   const paymentUpdateRes = await fetch(`${ STRAPI_URI }/api/payments/${ paymentId }`, {
+
+    const checkDataToSubmit = billing ? dataToSubmit.withBilling : dataToSubmit.noBilling
+
+    const paymentUpdateRes = await fetch(`${ STRAPI_URI }/api/payments/${ paymentId }`, {
         method: "PUT",
         headers: {
             Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`,
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({data:{...updatedPaymentData}}),
+        body: JSON.stringify({data: {...checkDataToSubmit}}),
     })
 
     return {msg: "payment updated successfully", paymentUpdateRes}
