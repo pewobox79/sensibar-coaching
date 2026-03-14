@@ -1,4 +1,5 @@
 import {PAYPAL_CLIENT_ID, PAYPAL_ENV, PAYPAL_SECRET_KEY} from "@/utils/constantValues";
+import {PayPalCaptureResponse} from "@/types/generalTypes";
 
 const endpoint_url = PAYPAL_ENV === 'sandbox' ? 'https://api-m.sandbox.paypal.com' : 'https://api-m.paypal.com';
 export const generatePayPalAccessToken = async (): Promise<void> => {
@@ -59,7 +60,7 @@ console.log("submit data", data)
 
 
     },
-    createPayment: async (orderId: string): Promise<void> => {
+    createPayment: async (orderId: string): Promise<PayPalCaptureResponse> => {
 
         const accessToken = await generatePayPalAccessToken()
 
@@ -70,7 +71,7 @@ console.log("submit data", data)
                 'Authorization': `Bearer ${accessToken}`
             }
         })
-            return await handleResponse(response)
+            return await handleResponse(response) as PayPalCaptureResponse;
 
     }
 }

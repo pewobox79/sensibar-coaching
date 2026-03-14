@@ -247,3 +247,11 @@ export interface TransactionType {
 }
 
 type PaymentProviderTypes = "paypal" | "mastercard"
+
+export type PayPalCaptureResponse = {
+    id: string;
+    status: string;
+    payer?: {
+        payer_id: string;
+    };
+};
