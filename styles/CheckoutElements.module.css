@@ -65,7 +65,12 @@
     font-weight: bold;
     padding: 20px 0;
 }
+.checkoutTableButtons{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 
+}
 @media screen and (min-width: 768px) {
 
 
@@ -79,6 +84,10 @@
 
     .checkoutTableInnerDescription {
         width: 48%
+    }
+
+    .checkoutTableButtons{
+        flex-direction: row;
     }
 }
 

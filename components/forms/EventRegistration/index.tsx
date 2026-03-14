@@ -12,12 +12,12 @@ import {
     checkIfContactExists, getSingleWorkshop,
 
 } from "@/lib/strapi/workshopHelper";
-import EmailInfo from "@/components/global/EmailInfo";
 import Loader from "@/components/global/Loader";
-import {createNewTicket} from "@/lib/strapi/ticketHelper";
 import {WorkshopTypes} from "@/types/generalTypes";
 import {useOrderStore} from "@/stores/useOrderStore";
 import {useRouter} from "next/navigation";
+import {createNewTicket} from "@/lib/strapi/ticketHelper";
+import {createNewPaymentInStrapi} from "@/lib/strapi/paymentHelper";
 
 
 const EventRegistration = ({
@@ -33,12 +33,10 @@ const EventRegistration = ({
 
     const router = useRouter()
     const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV ? process.env.NEXT_PUBLIC_STRAPI_URL_DEV : ""
-    const {value, addOrder} = useOrderStore()
-    console.log("value", value)
+    const { addOrder} = useOrderStore()
     const [error, setError] = useState({state: false, msg: "", type: "error"});
     const [success, setSuccess] = useState({state: false, msg: "", type: "success"});
     const [registrationProcess, setRegistrationProcess] = useState(false);
-    const [emailInfo, setEmailInfo] = useState(false);
     const RegistrationSchema = yup.object().shape({
         firstname: yup.string().required('Vorname ist verpflichtend'),
         lastname: yup.string().required('Nachname ist verpflichtend'),
@@ -72,176 +70,140 @@ const EventRegistration = ({
         validateOnChange: false,
         onSubmit: async (values) => {
             setRegistrationProcess(true)
+
             const {ticketId} = await createNewTicket(workshop_date, documentId)
+            //const initPaymentData = await initNewTicketAndPayment(workshop_date, documentId)
             try {
                 const cleanedFirstname = values.firstname.replace(/\s+/g, '').toLowerCase();
                 const cleanedLastname = values.lastname.replace(/\s+/g, '').toLowerCase();
                 const cleanedEmail = values.contact.email?.trim()?.toLowerCase();
-                checkIfContactExists(cleanedFirstname, cleanedLastname, cleanedEmail).then(data => {
-                    const dataMapping = {
-                        data: {
-                            personalData: {
-                                firstname: cleanedFirstname,
-                                lastname: cleanedLastname
-                            },
-                            contact: [{
-                                email: values.contact.email,
-                                phone: values.contact.phone
-                            }],
-                            gdpr: !values.gdpr,
-                            event_tickets: [ticketId],
-                            condition_status: {
-                                sensitiveStatus: values.condition,
-                            },
-                        }
+                const data = await checkIfContactExists(cleanedFirstname, cleanedLastname, cleanedEmail)
+                const dataMapping = {
+                    data: {
+                        personalData: {
+                            firstname: cleanedFirstname,
+                            lastname: cleanedLastname
+                        },
+                        contact: [{
+                            email: values.contact.email,
+                            phone: values.contact.phone
+                        }],
+                        gdpr: !values.gdpr,
+                        event_tickets: [ticketId || ""],
+                        condition_status: {
+                            sensitiveStatus: values.condition,
+                        },
                     }
+                }
 
-                    if (data?.msg === "new contact") {
-                        const config = {
-                            method: "POST",
-                            headers: {
-                                'Content-Type': 'application/json',
-                                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN ? process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN : "" }`
-                            },
-                            body: JSON.stringify(dataMapping)
-                        }
-                        fetch(`${ STRAPI_URI }/api/contacts/?populate=*`, config).then(response => response.json())
-                            .then(newData => {
+                const paymentData = await createNewPaymentInStrapi(ticketId)
+                if (data?.msg === "new contact") {
+                    const config = {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN ? process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN : "" }`
+                        },
+                        body: JSON.stringify(dataMapping)
+                    }
+                    fetch(`${ STRAPI_URI }/api/contacts/?populate=*`, config).then(response => response.json())
+                        .then(newData => {
 
-                                const newContactId = newData?.data?.documentId
+                            const newContactId = newData?.data?.documentId
 
-                                addOrder({
-                                    ticketId,
-                                    clientId: newContactId,
-                                    eventName: title,
-                                    speaker,
-                                    clientName: `${ values.firstname } ${ values.lastname }`,
-                                    eventDate: workshop_date,
-                                    eventLocation: location,
-                                    ticketPrice: workshopPrice,
-                                    eventType: type,
-                                    billing: false,
-                                    eventFormat: format,
-                                    billingAddress: {
-                                        street: "",
-                                        city: "",
-                                        streetNumber: "",
-                                        zipCode: "",
-                                        country: ""
-                                    },
-                                    rightOfWithdrawal: {
-                                        hasAccepted: false,
-                                        date: new Date()
-                                    }
-                                })
-                                getSingleWorkshop(documentId).then(workshop => {
-
-                                    const updatedWorkshopData = {
-                                        contactList: [workshop?.data?.contacts],
-                                        ticketList: [workshop?.data?.event_tickets]
-                                    }
-                                    updatedWorkshopData.contactList.push(newContactId)
-
-                                    addContactToWorkshop(newData.data.documentId, documentId, updatedWorkshopData).then(() => {
-                                        setRegistrationProcess(false)
-                                        setError({...error, state: false})
-                                        setSuccess({...success, state: true, msg: "Your registration was successfully"})
-                                        formik.resetForm()
-                                        setTimeout(() => {
-                                            setSuccess({...success, state: false})
-                                            setEmailInfo(true)
-                                            router.push(`/tickets/${ ticketId }`)
-
-                                        }, 3000)
-
-                                        fetch('/api/db/participant', {
-                                            method: 'POST',
-                                            headers: {
-                                                'Content-Type': 'application/json',
-                                            },
-                                            body: JSON.stringify({
-                                                id: newData.data?.documentId,
-                                                workshopName: title,
-                                                workshopId: documentId,
-                                                email: newData?.data?.contact[0].email,
-                                                location: location,
-                                                workshopType: type,
-                                            }),
-                                        })
-
-                                    })
-
-                                })
+                            addOrder({
+                                ticketId: ticketId || "",
+                                clientId: newContactId,
+                                eventName: title,
+                                speaker,
+                                clientName: `${ values.firstname } ${ values.lastname }`,
+                                eventDate: workshop_date,
+                                eventLocation: location,
+                                ticketPrice: workshopPrice,
+                                eventType: type,
+                                billing: false,
+                                eventFormat: format,
+                                billingAddress: {
+                                    street: "",
+                                    city: "",
+                                    streetNumber: "",
+                                    zipCode: "",
+                                    country: ""
+                                },
+                                rightOfWithdrawal: {
+                                    hasAccepted: false,
+                                    date: new Date()
+                                }
                             })
+                            getSingleWorkshop(documentId).then(workshop => {
 
+                                const updatedWorkshopData = {
+                                    contactList: [workshop?.data?.contacts],
+                                    ticketList: [workshop?.data?.event_tickets]
+                                }
+                                updatedWorkshopData.contactList.push(newContactId)
 
-                    } else {
+                                addContactToWorkshop(newData.data.documentId, documentId, updatedWorkshopData).then(() => {
+                                    setError({...error, state: false})
+                                    setSuccess({...success, state: true, msg: "Your registration was successfully"})
+                                    setTimeout(() => {
+                                        setSuccess({...success, state: false})
+                                        router.push(`/tickets/${ ticketId }?pid=${ paymentData?.documentId || "" }`)
 
-                        const existingContactId = data?.data[0].documentId
-
-                        addOrder({
-                            ticketId,
-                            clientId: existingContactId,
-                            eventName: title,
-                            speaker,
-                            clientName: `${ values.firstname } ${ values.lastname }`,
-                            eventDate: workshop_date,
-                            eventLocation: location,
-                            eventType: type,
-                            ticketPrice: workshopPrice,
-                            billing: false,
-                            eventFormat: format,
-                            billingAddress: {
-                                street: "",
-                                city: "",
-                                streetNumber: "",
-                                zipCode: "",
-                                country: ""
-                            },
-                            rightOfWithdrawal: {
-                                hasAccepted: false,
-                                date: new Date()
-                            }
-                        })
-                        getSingleWorkshop(documentId).then((workshop) => {
-                            const updatedWorkshopData = {
-                                contactList: [workshop.data.contacts],
-                                ticketList: [workshop.data.event_tickets]
-                            }
-                            updatedWorkshopData.contactList.push(existingContactId)
-
-                            addTicketToExistingContact(ticketId, existingContactId)
-                            addContactToWorkshop(existingContactId, documentId, updatedWorkshopData).then(() => {
-                                setRegistrationProcess(false)
-                                setError({...error, state: false})
-                                setSuccess({...success, state: true, msg: "Your registration was successfully"})
-                                formik.resetForm()
-                                setTimeout(() => {
-                                    setSuccess({...success, state: false})
-                                    setEmailInfo(true)
-                                    router.push(`/tickets/${ ticketId }`)
-                                }, 3000)
-
-                                fetch('/api/db/participant', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                    },
-                                    body: JSON.stringify({
-                                        id: existingContactId,
-                                        email: data?.data[0].contact[0].email,
-                                        workshopName: title,
-                                        workshopId: documentId,
-                                    }),
+                                    }, 3000)
                                 })
 
                             })
-
-
                         })
-                    }
 
-                })
+
+                } else {
+
+                    const existingContactId = data?.data[0].documentId
+
+                    addOrder({
+                        ticketId,
+                        clientId: existingContactId,
+                        eventName: title,
+                        speaker,
+                        clientName: `${ values.firstname } ${ values.lastname }`,
+                        eventDate: workshop_date,
+                        eventLocation: location,
+                        eventType: type,
+                        ticketPrice: workshopPrice,
+                        billing: false,
+                        eventFormat: format,
+                        billingAddress: {
+                            street: "",
+                            city: "",
+                            streetNumber: "",
+                            zipCode: "",
+                            country: ""
+                        },
+                        rightOfWithdrawal: {
+                            hasAccepted: false,
+                            date: new Date()
+                        }
+                    })
+                    getSingleWorkshop(documentId).then((workshop) => {
+                        const updatedWorkshopData = {
+                            contactList: [workshop.data.contacts],
+                            ticketList: [workshop.data.event_tickets]
+                        }
+                        updatedWorkshopData.contactList.push(existingContactId)
+
+                        addTicketToExistingContact(ticketId, existingContactId)
+                        addContactToWorkshop(existingContactId, documentId, updatedWorkshopData).then(() => {
+                            setError({...error, state: false})
+                            setSuccess({...success, state: true, msg: "Your registration was successfully"})
+                            setTimeout(() => {
+                                setSuccess({...success, state: false})
+                                router.push(`/tickets/${ ticketId }?pid=${ paymentData?.documentId || "" }`)
+                            }, 3000)
+                        })
+                    })
+                }
+
 
             } catch (err) {
                 console.log("catch", err)
@@ -375,12 +337,10 @@ const EventRegistration = ({
             </div>
             <div style={ {display: "flex", justifyContent: "center"} }>
 
-                { registrationProcess ? <Loader/> : <Button type={ "submit" }/> }
+                { registrationProcess ? <Loader/> : <Button type={ "submit" } title={ "Weiter" }/> }
 
             </div>
             <div style={ {padding: "40px 0"} }>
-                { emailInfo && <EmailInfo setEmailInfo={ setEmailInfo }/> }
-                { success.state && <ToastMessage state={ success } setState={ setSuccess }/> }
                 { error.state && <ToastMessage state={ error } setState={ setError }/> }
             </div>
 

@@ -7,6 +7,10 @@ import {useOrderStore} from "@/stores/useOrderStore";
 import Link from "next/link";
 import {formatIsoDateToGerman, formatPrice} from "@/utils/helper/formater";
 import BillingAddress from "@/components/forms/BillingAddress/BillingAddress";
+import {PAYPAL_CLIENT_ID} from "@/utils/constantValues";
+import EmailInfo from "@/components/global/EmailInfo";
+import Button from "@/components/global/Button";
+import {PayPalScriptProvider} from "@paypal/react-paypal-js";
 
 const Overview = () => {
 
@@ -17,12 +21,7 @@ const Overview = () => {
     console.log("orderpage", value)
 
     const speakerNameList = value?.speaker?.map((speaker)=>speaker.name) || []
-    const TAX_VALUE = 19
-    const priceCalculation = () => {
-        const price = value?.ticketPrice || 0
-        const tax = price * Number(`0.${ TAX_VALUE }`)
-        return formatPrice(price + tax)
-    }
+    const netPrice = value?.ticketPrice * (1-0.19)
     return <>
         <div className={ styles.checkoutTable }>
             <div className={ styles.checkoutTableHeader }>
@@ -39,15 +38,15 @@ const Overview = () => {
                     <div className={ styles.checkoutTablePrice }>
                         <div className={ styles.checkoutTablePriceDetail }>
                             <p>Einzelpreis: </p>
-                            <p>{ formatPrice(value?.ticketPrice) } </p>
+                            <p>{ formatPrice(netPrice) } </p>
                         </div>
                         <div className={ styles.checkoutTablePriceDetail }>
                             <p>MwSt: 19% </p>
-                            <p>{ formatPrice(value?.ticketPrice * 0.19) }</p>
+                            <p>{ formatPrice(value.ticketPrice-netPrice) }</p>
                         </div>
                         <div className={ styles.checkoutTablePriceDetail }>
                             <p className={ styles.checkoutTableFinalPrice }>Endpreis:</p>
-                            <p className={ styles.checkoutTableFinalPrice }>{ priceCalculation() }</p>
+                            <p className={ styles.checkoutTableFinalPrice }>{ formatPrice(value.ticketPrice)}</p>
                         </div>
                     </div>
                 </div>
@@ -68,9 +67,18 @@ const Overview = () => {
                 target={ "_blank" }>Widerrufsbelehrung</Link>gelesen und akzeptiere diese.</label>
         </div>
 
-        <PayPalProvider clientId={ "09809" }>
-            <PayPalBtn enabled={ value?.rightOfWithdrawal?.hasAccepted }/>
-        </PayPalProvider>
+        <div className={ styles.checkoutTableButtons }>
+            <PayPalScriptProvider options={{
+                clientId: PAYPAL_CLIENT_ID,
+                currency: "EUR",
+                intent: "capture",
+                "disable-funding": "card,bancontact,sepa,eps,giropay,ideal,p24,sofort"
+            }}>
+                <PayPalBtn enabled={ value?.rightOfWithdrawal?.hasAccepted } price={Number(value?.ticketPrice)} orderId={value.ticketId}/>
+            </PayPalScriptProvider>
+
+            <Button type={"button"} title={"Abbrechen"} href={"/workshops"} />
+        </div>
     </>
 }
 

@@ -1,34 +1,9 @@
 import {create} from "zustand";
-import {LocationType, SpeakerType} from "@/types/generalTypes";
+import {LocationType, OrderStore, OrderTypes} from "@/types/generalTypes";
 
-type OrderTypes = {
-    ticketId: string
-    clientId: string
-    clientName: string
-    eventDate: string
-    speaker?:SpeakerType[]
-    eventLocation: LocationType
-    ticketPrice: number
-    eventName: string
-    eventType: string
-    billing: boolean
-    billingAddress?: LocationType
-    eventFormat: string
-    rightOfWithdrawal: {
-        hasAccepted: boolean,
-        date: Date
-    }
-}
 
-interface OrderStore {
-    value: OrderTypes,
-    addOrder: (order: OrderTypes) => void
-    handleWithdrawal: () => void
-    updateBillingAddress: (name: keyof LocationType, value: string) => void
-    updateBillingState: ()=>void
-}
 
-const initValues: OrderTypes = {
+export const initOrderValues: OrderTypes = {
     clientName: "",
     clientId: "",
     eventName: "",
@@ -60,7 +35,7 @@ const initValues: OrderTypes = {
 }
 
 export const useOrderStore = create<OrderStore>((set) => ({
-    value: initValues,
+    value: initOrderValues,
     addOrder: (order: OrderTypes) => {
         console.log("order", order)
         set(() => ({value: order}))

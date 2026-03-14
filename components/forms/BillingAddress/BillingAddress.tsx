@@ -51,13 +51,31 @@ const BillingAddress = () => {
                 <div className={ styles.formItem }>
                     <Form.Control
                         type="text"
+                        id="zipCode"
+                        placeholder="Postleitzahl"
+                        value={ value.billingAddress?.zipCode }
+                        onChange={ handleUpdateBillingAddress }
+                        inputMode={ "text" }
+                        name={ "zipCode" }
+                    />
+                </div>
+                <div className={ styles.formItem }>
+
+                    <Form.Control
+                        as="select"
+                        type="text"
                         id="country"
                         placeholder="Land"
                         value={ value.billingAddress?.country}
                         onChange={ handleUpdateBillingAddress}
                         inputMode={ "text" }
                         name={ "country" }
-                    />
+                    >
+                        <option value="">Land auswählen</option>
+                        <option value="Deutschland">Deutschland</option>
+                        <option value="Österreich">Österreich</option>
+                        <option value="Schweiz">Schweiz</option>
+                    </Form.Control>
                 </div>
             </form>
         </div>

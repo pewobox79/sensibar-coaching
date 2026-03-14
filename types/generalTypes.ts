@@ -208,3 +208,42 @@ export type WorkshopTypes = {
     location: LocationType
     workshopPrice: number
 }
+
+
+export interface OrderTypes {
+    ticketId: string
+    clientId: string
+    clientName: string
+    eventDate: string
+    speaker?:SpeakerType[]
+    eventLocation: LocationType
+    ticketPrice: number
+    eventName: string
+    eventType: string
+    billing: boolean
+    billingAddress?: LocationType
+    eventFormat: string
+    rightOfWithdrawal: {
+        hasAccepted: boolean,
+        date: Date
+    },
+    transaction?: TransactionType
+}
+
+export interface OrderStore {
+    value: OrderTypes,
+    addOrder: (order: OrderTypes) => void
+    handleWithdrawal: () => void
+    updateBillingAddress: (name: keyof LocationType, value: string) => void
+    updateBillingState: ()=>void
+}
+
+
+export interface TransactionType {
+    transactionId: string
+    transactionState: string
+    transactionDate:string
+    provider: PaymentProviderTypes
+}
+
+type PaymentProviderTypes = "paypal" | "mastercard"
