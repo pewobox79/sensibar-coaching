@@ -7,25 +7,22 @@ import {useState} from "react";
 import ToastMessage from "@/components/global/ToastMessage";
 import EmailInfo from "@/components/global/EmailInfo";
 import {useRouter} from "next/navigation";
+import {sendMailingAfterRegistration} from "@/utils/helper/proxyHelper/sendMailing";
 
 const PayPalBtn = ({enabled, paymentId}: { enabled: boolean, price: number, orderId: string, paymentId: string }) => {
 
         const {value} = useOrderStore()
         const router = useRouter();
-
         const [success, setSuccess] = useState({msg: "", state: false, type: ""})
         const [emailInfo, setEmailInfo] = useState(false)
-
-
         async function handleOnApprove(data: OnApproveData) {
 
             const approved = await approvePaypalPayment(paymentId, data, value)
 
             if (approved.paypalRes?.status === "COMPLETED" && approved?.strapiRes?.msg.includes("success")) {
-                console.log("approved status", approved.paypalRes?.status)
                 setSuccess({state: true, msg: "Payment successful", type: "success"})
                 setEmailInfo(true)
-               // await sendSubmissionEmail(value.clientId, "pewobox79@gmail.com", value.eventName, value.contactEmail)
+                await sendMailingAfterRegistration(value.clientId, value.contactEmail, value.eventName, value.workshopId)
                 setTimeout(() => {
                     router.push("/selbsttest")
                 }, 3000)
@@ -45,7 +42,7 @@ const PayPalBtn = ({enabled, paymentId}: { enabled: boolean, price: number, orde
                 pointerEvents: enabled ? "auto" : "none",
                 opacity: enabled ? 1 : 0.5
             } }
-        >{ emailInfo && <PayPalButtons
+        >{ !emailInfo && <PayPalButtons
           createOrder={ async () => {
               return await createPayment(value)
           } }
