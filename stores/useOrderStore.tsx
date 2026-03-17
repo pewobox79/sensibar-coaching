@@ -7,6 +7,8 @@ export const initOrderValues: OrderTypes = {
     clientName: "",
     clientId: "",
     eventName: "",
+    workshopId: "",
+    contactEmail: "",
     ticketId: "",
     speaker: [],
     ticketPrice: 0,

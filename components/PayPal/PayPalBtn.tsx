@@ -6,7 +6,6 @@ import {OnApproveData} from "@paypal/paypal-js";
 import {useState} from "react";
 import ToastMessage from "@/components/global/ToastMessage";
 import EmailInfo from "@/components/global/EmailInfo";
-import {sendSubmissionEmail} from "@/utils/helper/mailingHelper";
 import {useRouter} from "next/navigation";
 
 const PayPalBtn = ({enabled, paymentId}: { enabled: boolean, price: number, orderId: string, paymentId: string }) => {
@@ -26,7 +25,7 @@ const PayPalBtn = ({enabled, paymentId}: { enabled: boolean, price: number, orde
                 console.log("approved status", approved.paypalRes?.status)
                 setSuccess({state: true, msg: "Payment successful", type: "success"})
                 setEmailInfo(true)
-                await sendSubmissionEmail(value.clientId, "pewobox79@gmail.com", value.eventName, value.contactEmail)
+               // await sendSubmissionEmail(value.clientId, "pewobox79@gmail.com", value.eventName, value.contactEmail)
                 setTimeout(() => {
                     router.push("/selbsttest")
                 }, 3000)
