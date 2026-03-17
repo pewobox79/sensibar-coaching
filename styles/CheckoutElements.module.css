@@ -7,7 +7,12 @@
     height: auto
 
 }
-
+.cancelOrderButtons{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 .checkoutTable {
     border-radius: 10px;
     border: 1px solid lightgray;

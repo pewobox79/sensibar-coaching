@@ -35,9 +35,6 @@ async function handleResponse(response: Response) {
 export const paypalFunctions = {
     createOrder: async (price: number): Promise<{ id:string, status: string,links:[] }> => {
         const accessToken = await generatePayPalAccessToken()
-
-        console.log("accessToken", accessToken)
-
         const data = {
             intent: 'CAPTURE',
             purchase_units: [{
@@ -47,7 +44,6 @@ export const paypalFunctions = {
                 }
             }]
         }
-console.log("submit data", data)
         const response = await fetch(endpoint_url + '/v2/checkout/orders', {
             method: 'POST',
             headers: {

@@ -1,10 +1,6 @@
 import {ClientData} from "@/stores/useClientStore";
 import {DynamicContentQuery, QuestionContentQuery} from "@/utils/helper/queries/DynamicContentQuery";
 import {BEARER_TOKEN, FRONTEND_URI, STRAPI_URI} from "@/utils/constantValues";
-import {PaymentQuery} from "@/utils/helper/queries/paymentQuery";
-import {createNewTicket} from "@/lib/strapi/ticketHelper";
-import {createNewPaymentInStrapi} from "@/lib/strapi/paymentHelper";
-import {initOrderValues} from "@/stores/useOrderStore";
 
 const config = {
     method: 'GET',

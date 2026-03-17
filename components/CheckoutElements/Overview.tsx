@@ -1,27 +1,48 @@
 'use client'
 import styles from '@/styles/CheckoutElements.module.css'
 import PayPalBtn from "@/components/PayPal/PayPalBtn";
-import {PayPalProvider} from "@paypal/react-paypal-js/sdk-v6";
-import {useSearchParams} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import {useOrderStore} from "@/stores/useOrderStore";
 import Link from "next/link";
 import {formatIsoDateToGerman, formatPrice} from "@/utils/helper/formater";
 import BillingAddress from "@/components/forms/BillingAddress/BillingAddress";
 import {PAYPAL_CLIENT_ID} from "@/utils/constantValues";
-import EmailInfo from "@/components/global/EmailInfo";
 import Button from "@/components/global/Button";
 import {PayPalScriptProvider} from "@paypal/react-paypal-js";
+import {deletePayment} from "@/lib/strapi/paymentHelper";
+import GlobalModal from "@/components/global/GlobalModal";
+import {useModalOpen} from "@/stores/useModalOpen";
+import {deleteTicket} from "@/lib/strapi/ticketHelper";
+import PaymentCancelation from "@/utils/modalMessages/paymentCancelation";
 
 const Overview = () => {
 
     const search = useSearchParams()
-    const {value, handleWithdrawal, updateBillingState} = useOrderStore()
+    const paymentId = search.get("pid") || ""
+    const router = useRouter();
+    const {status, setOrderCancelModal} = useModalOpen()
+
+    const {value, handleWithdrawal, updateBillingState, resetOrderData} = useOrderStore()
 
     console.log("params", search.get("name"))
     console.log("orderpage", value)
 
-    const speakerNameList = value?.speaker?.map((speaker)=>speaker.name) || []
-    const netPrice = value?.ticketPrice * (1-0.19)
+    async function handleCancel(paymentId: string) {
+
+        const resPaymentDelete = await deletePayment(paymentId)
+        await deleteTicket(value.ticketId)
+        resetOrderData()
+
+
+        if (resPaymentDelete.msg === "payment deleted successfully") {
+
+            router.push("/workshops")
+        }
+
+    }
+
+    const speakerNameList = value?.speaker?.map((speaker) => speaker.name) || []
+    const netPrice = value?.ticketPrice * (1 - 0.19)
     return <>
         <div className={ styles.checkoutTable }>
             <div className={ styles.checkoutTableHeader }>
@@ -42,11 +63,11 @@ const Overview = () => {
                         </div>
                         <div className={ styles.checkoutTablePriceDetail }>
                             <p>MwSt: 19% </p>
-                            <p>{ formatPrice(value.ticketPrice-netPrice) }</p>
+                            <p>{ formatPrice(value.ticketPrice - netPrice) }</p>
                         </div>
                         <div className={ styles.checkoutTablePriceDetail }>
                             <p className={ styles.checkoutTableFinalPrice }>Endpreis:</p>
-                            <p className={ styles.checkoutTableFinalPrice }>{ formatPrice(value.ticketPrice)}</p>
+                            <p className={ styles.checkoutTableFinalPrice }>{ formatPrice(value.ticketPrice) }</p>
                         </div>
                     </div>
                 </div>
@@ -58,7 +79,7 @@ const Overview = () => {
                    onChange={ updateBillingState }/>
             <label htmlFor="rechnungsaddresse" style={ {fontSize: "1rem"} }>Ich möchte eine Rechnung haben</label>
         </div>
-        {value.billing && (<BillingAddress/>)}
+        { value.billing && (<BillingAddress/>) }
         <div className={ styles.checkoutTableFooter }>
             <input id="widerrufsbelehrung" type="checkbox" checked={ value?.rightOfWithdrawal?.hasAccepted }
                    onChange={ handleWithdrawal }/>
@@ -68,17 +89,26 @@ const Overview = () => {
         </div>
 
         <div className={ styles.checkoutTableButtons }>
-            <PayPalScriptProvider options={{
+            <PayPalScriptProvider options={ {
                 clientId: PAYPAL_CLIENT_ID,
                 currency: "EUR",
                 intent: "capture",
                 "disable-funding": "card,bancontact,sepa,eps,giropay,ideal,p24,sofort"
-            }}>
-                <PayPalBtn enabled={ value?.rightOfWithdrawal?.hasAccepted } price={Number(value?.ticketPrice)} orderId={value.ticketId}/>
+            } }>
+                <PayPalBtn enabled={ value?.rightOfWithdrawal?.hasAccepted } paymentId={ paymentId }
+                           price={ Number(value?.ticketPrice) } orderId={ value.ticketId }/>
             </PayPalScriptProvider>
 
-            <Button type={"button"} title={"Abbrechen"} href={"/workshops"} />
+            <Button type={ "submit" } title={ "Abbrechen" } href={ "/workshops" } action={ setOrderCancelModal }/>
         </div>
+
+        { status.cancelOrder && (<GlobalModal type={ "cancelOrder" }>
+            <PaymentCancelation/>
+            <div className={ styles.cancelOrderButtons }>
+                <Button type={ "submit" } title={ "Bin mir sicher" } action={ () => handleCancel(paymentId) }/>
+                <Button type={ "submit" } title={ "Ticketkauf fortsetzen" } action={ setOrderCancelModal }/>
+            </div>
+        </GlobalModal>) }
     </>
 }
 

@@ -215,6 +215,8 @@ export interface OrderTypes {
     clientId: string
     clientName: string
     eventDate: string
+    workshopId: string
+    contactEmail: string
     speaker?:SpeakerType[]
     eventLocation: LocationType
     ticketPrice: number
@@ -232,6 +234,7 @@ export interface OrderTypes {
 
 export interface OrderStore {
     value: OrderTypes,
+    resetOrderData: () => void
     addOrder: (order: OrderTypes) => void
     handleWithdrawal: () => void
     updateBillingAddress: (name: keyof LocationType, value: string) => void

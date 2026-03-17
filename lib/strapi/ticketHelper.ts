@@ -50,3 +50,24 @@ export const createNewTicket =async (workshopDate:string, workshopId:string)=>{
 
 
 }
+
+export const deleteTicket = async (ticketId:string) => {
+    try {
+
+        await fetch(`${ STRAPI_URI }/api/event-tickets/${ticketId}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+            }
+        })
+        return {msg:"ticket deleted successfully"}
+
+
+    } catch (err) {
+
+        console.error("ticket konnte nicht gelöscht werden", err)
+        return {msg: "ticket delete failed."}
+
+    }
+
+}

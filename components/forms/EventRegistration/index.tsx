@@ -109,11 +109,13 @@ const EventRegistration = ({
                     fetch(`${ STRAPI_URI }/api/contacts/?populate=*`, config).then(response => response.json())
                         .then(newData => {
 
-                            const newContactId = newData?.data?.documentId
+                            const {documentId, contact} = newData?.data
 
                             addOrder({
                                 ticketId: ticketId || "",
-                                clientId: newContactId,
+                                clientId: documentId,
+                                contactEmail: contact?.[0].email,
+                                workshopId: documentId,
                                 eventName: title,
                                 speaker,
                                 clientName: `${ values.firstname } ${ values.lastname }`,
@@ -141,7 +143,7 @@ const EventRegistration = ({
                                     contactList: [workshop?.data?.contacts],
                                     ticketList: [workshop?.data?.event_tickets]
                                 }
-                                updatedWorkshopData.contactList.push(newContactId)
+                                updatedWorkshopData.contactList.push(documentId)
 
                                 addContactToWorkshop(newData.data.documentId, documentId, updatedWorkshopData).then(() => {
                                     setError({...error, state: false})
@@ -159,12 +161,14 @@ const EventRegistration = ({
 
                 } else {
 
-                    const existingContactId = data?.data[0].documentId
+                    const {documentId:ContactId,contact} = data?.data[0]
 
                     addOrder({
                         ticketId,
-                        clientId: existingContactId,
+                        clientId: ContactId,
                         eventName: title,
+                        workshopId: documentId,
+                        contactEmail: contact?.[0].email,
                         speaker,
                         clientName: `${ values.firstname } ${ values.lastname }`,
                         eventDate: workshop_date,
@@ -190,10 +194,10 @@ const EventRegistration = ({
                             contactList: [workshop.data.contacts],
                             ticketList: [workshop.data.event_tickets]
                         }
-                        updatedWorkshopData.contactList.push(existingContactId)
+                        updatedWorkshopData.contactList.push(documentId)
 
-                        addTicketToExistingContact(ticketId, existingContactId)
-                        addContactToWorkshop(existingContactId, documentId, updatedWorkshopData).then(() => {
+                        addTicketToExistingContact(ticketId, ContactId)
+                        addContactToWorkshop(ContactId, documentId, updatedWorkshopData).then(() => {
                             setError({...error, state: false})
                             setSuccess({...success, state: true, msg: "Your registration was successfully"})
                             setTimeout(() => {

@@ -42,7 +42,7 @@ export const updatePaymentInStrapi = async (paymentId: string, storedValue: Orde
 }) => {
     const {clientId, billingAddress, billing, transaction, rightOfWithdrawal} = storedValue
 
-    const dataToSubmit ={
+    const dataToSubmit = {
         withBilling: {
             contact: clientId,
             transaction: {
@@ -56,7 +56,7 @@ export const updatePaymentInStrapi = async (paymentId: string, storedValue: Orde
             rightOfWithdrawal,
             billingAddress
         },
-        noBilling:{
+        noBilling: {
             contact: clientId,
             transaction: {
                 ...transaction,
@@ -81,4 +81,20 @@ export const updatePaymentInStrapi = async (paymentId: string, storedValue: Orde
     })
 
     return {msg: "payment updated successfully", paymentUpdateRes}
+}
+
+export const deletePayment = async (paymentId: string) => {
+    try {
+       await fetch(`${ STRAPI_URI }/api/payments/${ paymentId }`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+            }
+        })
+
+        return {msg: "payment deleted successfully"}
+    } catch (e) {
+        console.error("error delete payment", e)
+        return {msg: "error deleting payment details"}
+    }
 }

@@ -5,7 +5,10 @@ import {faClose} from "@fortawesome/free-solid-svg-icons";
 import {useModalOpen} from "@/stores/useModalOpen";
 
 
-const GlobalModal = ({children, type}: { children: React.ReactElement[] | React.ReactElement|React.ReactNode , type: "create" |"contacts" |"absage"}) => {
+const GlobalModal = ({children, type}: {
+    children: React.ReactElement[] | React.ReactElement | React.ReactNode,
+    type: "cancelOrder" | "create" | "contacts" | "absage"
+}) => {
     let modalAction
 
     switch (type) {
@@ -18,12 +21,15 @@ const GlobalModal = ({children, type}: { children: React.ReactElement[] | React.
         case "absage":
             modalAction = useModalOpen.getState().setCancelWorkshopModalClose;
             break;
+        case "cancelOrder":
+            modalAction = useModalOpen.getState().setOrderCancelModal;
+            break;
         default:
             throw new Error("Invalid modal type");
     }
 
     return (
-        <div className={ "globalModal" } >
+        <div className={ "globalModal" }>
             <div className={ "globalModalInner" }>
                 <div className={ "modalCloseButton" } onClick={ modalAction }><FontAwesomeIcon icon={ faClose }/></div>
                 <div className={ "globalModalBody" }>
