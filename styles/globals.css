@@ -103,7 +103,6 @@ p {
 }
 
 .globalButton {
-
     min-width: 100px;
     max-width: 200px;
     width: auto;
@@ -118,7 +117,7 @@ p {
     transition-timing-function: ease-in-out;
     transition-duration: 0.4s;
     text-decoration: none;
-    margin: 0 10px
+    margin: 10px 0 10px 10px
 }
 
 .globalTextLink {
