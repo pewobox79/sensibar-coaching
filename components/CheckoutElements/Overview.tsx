@@ -25,7 +25,7 @@ const Overview = () => {
     const {value, handleWithdrawal, updateBillingState, resetOrderData} = useOrderStore()
 
     console.log("params", search.get("name"))
-    console.log("orderpage", value)
+    console.log("paymentId in overview", paymentId)
 
     async function handleCancel(paymentId: string) {
 

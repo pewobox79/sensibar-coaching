@@ -12,6 +12,7 @@ import {sendMailingAfterRegistration} from "@/utils/helper/proxyHelper/sendMaili
 const PayPalBtn = ({enabled, paymentId}: { enabled: boolean, price: number, orderId: string, paymentId: string }) => {
 
         const {value} = useOrderStore()
+    console.log("value in PayPalBtn", value)
         const router = useRouter();
         const [success, setSuccess] = useState({msg: "", state: false, type: ""})
         const [emailInfo, setEmailInfo] = useState(false)
@@ -22,7 +23,7 @@ const PayPalBtn = ({enabled, paymentId}: { enabled: boolean, price: number, orde
             if (approved.paypalRes?.status === "COMPLETED" && approved?.strapiRes?.msg.includes("success")) {
                 setSuccess({state: true, msg: "Payment successful", type: "success"})
                 setEmailInfo(true)
-                await sendMailingAfterRegistration(value.clientId, value.contactEmail, value.eventName, value.workshopId)
+                await sendMailingAfterRegistration(value.clientId, value.contactEmail, value.eventName, value.workshopId, paymentId)
                 setTimeout(() => {
                     router.push("/selbsttest")
                 }, 3000)

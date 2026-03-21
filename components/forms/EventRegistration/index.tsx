@@ -109,36 +109,36 @@ const EventRegistration = ({
                     fetch(`${ STRAPI_URI }/api/contacts/?populate=*`, config).then(response => response.json())
                         .then(newData => {
 
-                            const {documentId, contact} = newData?.data
+                            const {documentId:ClientId, contact} = newData?.data
 
-                            addOrder({
-                                ticketId: ticketId || "",
-                                clientId: documentId,
-                                contactEmail: contact?.[0].email,
-                                workshopId: documentId,
-                                eventName: title,
-                                speaker,
-                                clientName: `${ values.firstname } ${ values.lastname }`,
-                                eventDate: workshop_date,
-                                eventLocation: location,
-                                ticketPrice: workshopPrice,
-                                eventType: type,
-                                billing: false,
-                                eventFormat: format,
-                                billingAddress: {
-                                    street: "",
-                                    city: "",
-                                    streetNumber: "",
-                                    zipCode: "",
-                                    country: ""
-                                },
-                                rightOfWithdrawal: {
-                                    hasAccepted: false,
-                                    date: new Date()
-                                }
-                            })
+
                             getSingleWorkshop(documentId).then(workshop => {
-
+                                addOrder({
+                                    ticketId: ticketId || "",
+                                    clientId: ClientId,
+                                    contactEmail: contact?.[0].email,
+                                    workshopId: documentId || '',
+                                    eventName: title,
+                                    speaker,
+                                    clientName: `${ values.firstname } ${ values.lastname }`,
+                                    eventDate: workshop_date,
+                                    eventLocation: location,
+                                    ticketPrice: workshopPrice,
+                                    eventType: type,
+                                    billing: false,
+                                    eventFormat: format,
+                                    billingAddress: {
+                                        street: "",
+                                        city: "",
+                                        streetNumber: "",
+                                        zipCode: "",
+                                        country: ""
+                                    },
+                                    rightOfWithdrawal: {
+                                        hasAccepted: false,
+                                        date: new Date()
+                                    }
+                                })
                                 const updatedWorkshopData = {
                                     contactList: [workshop?.data?.contacts],
                                     ticketList: [workshop?.data?.event_tickets]

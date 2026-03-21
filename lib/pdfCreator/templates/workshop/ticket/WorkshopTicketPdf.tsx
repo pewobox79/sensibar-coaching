@@ -11,6 +11,7 @@ type WorkshopTicketPdfProps = {
     location: string;
     bookedBy: string;
     ticketNumber: string;
+    format: string
 };
 
 
@@ -21,6 +22,7 @@ const WorkshopTicketPdf =({
                               location,
                               bookedBy,
                               ticketNumber,
+    format,
                           }: WorkshopTicketPdfProps) => {
 
 
@@ -45,7 +47,7 @@ const WorkshopTicketPdf =({
                         <View>
                             <View style={styles.headerRow}>
                                 <View style={styles.workshopTitleBlock}>
-                                    <Text style={styles.eyebrow}>Event / Workshop</Text>
+                                    <Text style={styles.eyebrow}>{format.toUpperCase()}</Text>
                                     <Text style={styles.workshopTitle}>{workshopName}</Text>
                                 </View>
 

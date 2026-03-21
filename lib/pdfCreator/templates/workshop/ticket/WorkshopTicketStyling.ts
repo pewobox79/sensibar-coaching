@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
         minHeight: 170,
         display: "flex",
         flexDirection: "row",
-        borderRadius: 14,
+        borderRadius: 5,
         overflow: "hidden",
         backgroundColor: pdfColorSet.BG_COLOR_80,
         border: "1 solid #d8cfc2",
@@ -45,7 +45,8 @@ export const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     logo:{
-      height: 35,
+      height: 40,
+        borderRadius: 5,
     },
     brandLabel: {
         fontSize: 10,
@@ -90,13 +91,14 @@ export const styles = StyleSheet.create({
     },
     workshopTitle: {
         fontSize: 20,
+        height: "auto",
         fontWeight: "bold",
         color: pdfColorSet.GREY_COLOR,
         lineHeight: 1.2,
     },
     ticketBadge: {
         border: `1px solid ${pdfColorSet.SENSIBAR_BEIGE}`,
-        borderRadius: 10,
+        borderRadius: 5,
         paddingTop: 6,
         paddingBottom: 6,
         paddingHorizontal: 12,
@@ -109,7 +111,7 @@ export const styles = StyleSheet.create({
         marginBottom: 3,
     },
     ticketBadgeNumber: {
-        fontSize: 11,
+        fontSize: 7,
         fontWeight: "bold",
         color: "#7d5a50",
     },
@@ -145,7 +147,7 @@ export const styles = StyleSheet.create({
         width: 100,
         height: 130,
         border: `1px solid ${pdfColorSet.SENSIBAR_BEIGE}`,
-        borderRadius: 10,
+        borderRadius: 5,
         alignItems: "center",
         justifyContent: "center",
     },

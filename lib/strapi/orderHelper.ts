@@ -12,7 +12,6 @@ export const createPayment = async (value: OrderTypes) => {
 
 }
 
-
 export const approvePaypalPayment = async (paymentId:string, data:OnApproveData, storeValues:OrderTypes) => {
     const paymentRes = await paypalFunctions.createPayment(data.orderID)
     const updateRes = await updatePaymentInStrapi(paymentId, storeValues, paymentRes as unknown as {id: string, status: string, payer: {payer_id: string}})

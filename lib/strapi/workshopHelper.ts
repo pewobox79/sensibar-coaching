@@ -160,7 +160,7 @@ export const addContactToWorkshop = async (contactId: string, workshopId: string
 }
 
 
-export const executeDoubleOptIn = async (id: string | null, workshopLink: string, title: string, workshop_date: string, location: string, type: string) => {
+export const executeDoubleOptIn = async (id: string | null, workshopLink: string, title: string, workshop_date: string, location: string, type: string, paymentId:string |null) => {
 
     try {
 
@@ -195,7 +195,8 @@ export const executeDoubleOptIn = async (id: string | null, workshopLink: string
                     workshopTitle: title,
                     email: data.data.contact[0].email,
                     location: location,
-                    workshopType: type
+                    workshopType: type,
+                    paymentId
                 })
             }
 

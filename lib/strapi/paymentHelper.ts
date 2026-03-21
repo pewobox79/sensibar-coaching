@@ -24,8 +24,12 @@ export const createNewPaymentInStrapi = async (ticketId: string) => {
     }
 }
 
-export const getSinglePayment = async (paymentId: string) => {
-    const payment = await fetch(`${ STRAPI_URI }/api/payments/${ paymentId }`, {
+export const getSinglePaymentById = async (paymentId: string) => {
+
+    if (!paymentId) {
+        return {msg: "Falsche Payment id"}
+    }
+    const payment = await fetch(`${ STRAPI_URI }/api/payments/${ paymentId }?${PaymentQuery}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
@@ -34,7 +38,6 @@ export const getSinglePayment = async (paymentId: string) => {
 
     return await payment.json()
 }
-
 export const updatePaymentInStrapi = async (paymentId: string, storedValue: OrderTypes, paymentRes: {
     id: string,
     status: string,

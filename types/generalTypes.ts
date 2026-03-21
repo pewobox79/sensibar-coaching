@@ -1,4 +1,5 @@
 import {Dispatch, SetStateAction} from "react";
+import BillingAddress from "@/components/forms/BillingAddress/BillingAddress";
 
 export type QuestionKategory = "sensorische" | "soziale" | "kognitive" | "emotionale"
 
@@ -193,6 +194,35 @@ export interface ToastMessageTypes {
 export type IMAGE_SIZE_PRIORITY = "thumbnail" | "small" | "medium" | "large" | "original"
 export type SpeakerType = { name?: string, id: string, quote?: string, image?: ImageType }
 
+export type BillingAddressType = {
+    city: string
+    street: string
+    streetNumber: string
+    country: string
+    zipCode: string
+}
+export type EventTicketTypes = {
+    documentId: string
+    workshop: WorkshopTypes
+    ticketId: string
+
+}
+
+export interface StrapiPaymentProps {
+    event_ticket: EventTicketTypes
+    invoiceNumber: string
+    billing: boolean
+    billingAddress: BillingAddressType
+    transaction: TransactionType
+    contact: {
+        personalData: {
+            firstname: string,
+            lastname: string,
+        }
+    }
+}
+
+
 export type WorkshopTypes = {
     title: string
     format: string
@@ -217,7 +247,7 @@ export interface OrderTypes {
     eventDate: string
     workshopId: string
     contactEmail: string
-    speaker?:SpeakerType[]
+    speaker?: SpeakerType[]
     eventLocation: LocationType
     ticketPrice: number
     eventName: string
@@ -238,14 +268,14 @@ export interface OrderStore {
     addOrder: (order: OrderTypes) => void
     handleWithdrawal: () => void
     updateBillingAddress: (name: keyof LocationType, value: string) => void
-    updateBillingState: ()=>void
+    updateBillingState: () => void
 }
 
 
 export interface TransactionType {
     transactionId: string
     transactionState: string
-    transactionDate:string
+    transactionDate: string
     provider: PaymentProviderTypes
 }
 
