@@ -84,7 +84,7 @@
         padding: 10px;
         flex-direction: column;
         border-right: 1px solid var(--background);
-        box-shadow: var(--backgroundBoxShadow) 10px 0px 10px -2px;
+        box-shadow: var(--backgroundBoxShadow) 10px 0 10px -2px;
         align-items: center;
         justify-content: normal;
     }
