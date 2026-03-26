@@ -8,7 +8,7 @@ import Link from "next/link";
 import {useState} from "react";
 import ToastMessage from "@/components/global/ToastMessage";
 import {
-    addContactToWorkshop, addTicketToExistingContact,
+    addContactToWorkshop, addTicketToExistingContact, calculateWorkshopPriceForPayPal,
     checkIfContactExists, getSingleWorkshop,
 
 } from "@/lib/strapi/workshopHelper";
@@ -123,7 +123,7 @@ const EventRegistration = ({
                                     clientName: `${ values.firstname } ${ values.lastname }`,
                                     eventDate: workshop_date,
                                     eventLocation: location,
-                                    ticketPrice: workshopPrice,
+                                    ticketPrice: calculateWorkshopPriceForPayPal(Number(workshopPrice)),
                                     eventType: type,
                                     billing: false,
                                     eventFormat: format,
@@ -174,7 +174,7 @@ const EventRegistration = ({
                         eventDate: workshop_date,
                         eventLocation: location,
                         eventType: type,
-                        ticketPrice: workshopPrice,
+                        ticketPrice: calculateWorkshopPriceForPayPal(Number(workshopPrice)),
                         billing: false,
                         eventFormat: format,
                         billingAddress: {

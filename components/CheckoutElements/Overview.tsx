@@ -9,14 +9,13 @@ import BillingAddress from "@/components/forms/BillingAddress/BillingAddress";
 import {PAYPAL_CLIENT_ID} from "@/utils/constantValues";
 import Button from "@/components/global/Button";
 import {PayPalScriptProvider} from "@paypal/react-paypal-js";
-import {deletePayment, handlePaymentCancel} from "@/lib/strapi/paymentHelper";
+import {handlePaymentCancel} from "@/lib/strapi/paymentHelper";
 import GlobalModal from "@/components/global/GlobalModal";
 import {useModalOpen} from "@/stores/useModalOpen";
-import {deleteTicket} from "@/lib/strapi/ticketHelper";
 import PaymentCancelation from "@/utils/modalMessages/paymentCancelation";
 
 const Overview = () => {
-
+    const isSmallBusiness=true
     const search = useSearchParams()
     const paymentId = search.get("pid") || ""
     const router = useRouter();
@@ -24,12 +23,9 @@ const Overview = () => {
 
     const {value, handleWithdrawal, updateBillingState, resetOrderData} = useOrderStore()
 
-    console.log("params", search.get("name"))
-    console.log("paymentId in overview", paymentId)
-
-
     const speakerNameList = value?.speaker?.map((speaker) => speaker.name) || []
-    const netPrice = value?.ticketPrice * (1 - 0.19)
+    const tax = isSmallBusiness ? 0 : 0.19
+    const netPrice = value?.ticketPrice * (1 - tax)
     return <>
         <div className={ styles.checkoutTable }>
             <div className={ styles.checkoutTableHeader }>
@@ -49,7 +45,7 @@ const Overview = () => {
                             <p>{ formatPrice(netPrice) } </p>
                         </div>
                         <div className={ styles.checkoutTablePriceDetail }>
-                            <p>MwSt: 19% </p>
+                            <p>MwSt:{tax }% </p>
                             <p>{ formatPrice(value.ticketPrice - netPrice) }</p>
                         </div>
                         <div className={ styles.checkoutTablePriceDetail }>

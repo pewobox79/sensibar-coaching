@@ -1,4 +1,5 @@
 import {SingleWorkshopQuery, WorkshopQuery} from "@/utils/helper/queries/workshopQuery";
+import {formatPrice} from "@/utils/helper/formater";
 
 const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
 
@@ -444,4 +445,9 @@ export const deleteWorkshopById = async (id: string, token: string) => {
         return {msg: "failed to delete workshop", err}
     }
 
+}
+
+export const calculateWorkshopPriceForPayPal = (price: number):number => {
+    const fee = price * 0.0299 + 0.39
+    return  Math.ceil(price + fee)
 }
