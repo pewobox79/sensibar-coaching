@@ -37,8 +37,8 @@ const Widerrufsbelehrung = async () => {
     return <div className={ "innerWrapper" }>
 
 
-        <Suspense fallback={ "loading" }><h1>{ data.data ? data?.data[0]?.title : "" }</h1><RenderContentHelper
-            blocks={ data.data ? data.data[0].mainContent : [] }/></Suspense></div>
+        <Suspense fallback={ "loading" }><h1>{ data?.data ? data?.data[0]?.title : "" }</h1><RenderContentHelper
+            blocks={ data?.data ? data?.data[0]?.mainContent : [] }/></Suspense></div>
 }
 
 export default Widerrufsbelehrung;
