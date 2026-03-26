@@ -1,5 +1,5 @@
 import {create} from "zustand";
-import * as lodash from 'lodash';
+import lodash from 'lodash';
 
 // Define types for each part of the client data structure
 interface PersonalData {

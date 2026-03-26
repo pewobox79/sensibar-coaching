@@ -4,6 +4,14 @@ export type QuestionKategory = "sensorische" | "soziale" | "kognitive" | "emotio
 
 export type AnswerType = "false" | "true" | string
 
+export type LocationType = {
+    street: string,
+    streetNumber: string,
+    city: string,
+    zipCode: string,
+    country: string
+}
+
 export type QuestionsType = {
     documentId: string,
     question: string,
@@ -186,6 +194,35 @@ export interface ToastMessageTypes {
 export type IMAGE_SIZE_PRIORITY = "thumbnail" | "small" | "medium" | "large" | "original"
 export type SpeakerType = { name?: string, id: string, quote?: string, image?: ImageType }
 
+export type BillingAddressType = {
+    city: string
+    street: string
+    streetNumber: string
+    country: string
+    zipCode: string
+}
+export type EventTicketTypes = {
+    documentId: string
+    workshop: WorkshopTypes
+    ticketId: string
+
+}
+
+export interface StrapiPaymentProps {
+    event_ticket: EventTicketTypes
+    invoiceNumber: string
+    billing: boolean
+    billingAddress: BillingAddressType
+    transaction: TransactionType
+    contact: {
+        personalData: {
+            firstname: string,
+            lastname: string,
+        }
+    }
+}
+
+
 export type WorkshopTypes = {
     title: string
     format: string
@@ -198,5 +235,56 @@ export type WorkshopTypes = {
     id: string
     type: string
     speaker: SpeakerType[]
-    location: { street: string, zipCode: string, country: string, streetNumber: string, city: string }
+    location: LocationType
+    workshopPrice: number
 }
+
+
+export interface OrderTypes {
+    ticketId: string
+    clientId: string
+    clientName: string
+    eventDate: string
+    workshopId: string
+    contactEmail: string
+    speaker?: SpeakerType[]
+    eventLocation: LocationType
+    ticketPrice: number
+    eventName: string
+    eventType: string
+    billing: boolean
+    billingAddress?: LocationType
+    eventFormat: string
+    rightOfWithdrawal: {
+        hasAccepted: boolean,
+        date: Date
+    },
+    transaction?: TransactionType
+}
+
+export interface OrderStore {
+    value: OrderTypes,
+    resetOrderData: () => void
+    addOrder: (order: OrderTypes) => void
+    handleWithdrawal: () => void
+    updateBillingAddress: (name: keyof LocationType, value: string) => void
+    updateBillingState: () => void
+}
+
+
+export interface TransactionType {
+    transactionId: string
+    transactionState: string
+    transactionDate: string
+    provider: PaymentProviderTypes
+}
+
+type PaymentProviderTypes = "paypal" | "mastercard"
+
+export type PayPalCaptureResponse = {
+    id: string;
+    status: string;
+    payer?: {
+        payer_id: string;
+    };
+};

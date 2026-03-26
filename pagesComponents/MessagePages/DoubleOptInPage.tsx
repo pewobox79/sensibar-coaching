@@ -9,18 +9,19 @@ const DoubleOptInPage = () => {
     const searchParams = useSearchParams()
     const id = searchParams ? searchParams.get("id") : "";
     const workshopId = searchParams ? searchParams.get("wsId") : "";
+    const paymentId = searchParams ? searchParams.get("pId") : "";
 
     useEffect(() => {
         getSingleWorkshop(workshopId).then((data)=>{
             const workshopLink = data.data?.link?.href;
             const {title, workshop_date, location, type} = data?.data
 
-            executeDoubleOptIn(id, workshopLink, title, workshop_date, location, type).then(data => console.log(data));
+            executeDoubleOptIn(id, workshopLink, title, workshop_date, location, type, paymentId).then(data => console.log(data));
         })
 
 
         },
-        [id]
+        []
     )
     return <div className={"innerWrapper"}>
         <h3>Deine Anmeldung zu meinen Workshop. </h3>

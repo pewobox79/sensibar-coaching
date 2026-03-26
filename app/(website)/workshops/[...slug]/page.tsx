@@ -13,7 +13,6 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
     const {slug} = await params
     // Fetch data based on slug (can be from CMS, DB, etc.)
     const data = await getSingleWorkshop(slug[1]);
-    console.log("data metadata", data)
     const canonicalPath = createWorkshopLink(data?.data?.title, slug[1] as string)
     return {
         title: `SENSIBAR | ${ data?.data?.seoData?.metaTitle || data?.data?.title }`,

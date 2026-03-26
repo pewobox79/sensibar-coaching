@@ -1,3 +1,14 @@
+export const pdfColorSet ={
+    BLACK_COLOR: '#000',
+    BEIGE_COLOR:'#E6D3C6',
+    SENSIBAR_BEIGE: 'rgb(230, 211, 198)',
+    GREY_COLOR: '#535353',
+    EMOTIONAL_COLOR:'#eb8f8c',
+    BG_COLOR_80: 'rgba(240, 223, 211, 0.09)'
+}
+
+
+
 export function getResultDescription(title: string) {
 
     const ctaNoSensible = 'Dein Ergebnis zeigt, dass Hochsensibilität bei dir keine große Rolle spielt. Vielleicht hilft dir diese Erkenntnis schon, deinen Alltag noch bewusster wahrzunehmen. Wenn du jemanden kennst – privat oder beruflich –, für den der Test interessant sein könnte, freue ich mich sehr, wenn du ihn weiterempfiehlst. Herzliche Grüße, Yessica'

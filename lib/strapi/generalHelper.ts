@@ -1,13 +1,11 @@
 import {ClientData} from "@/stores/useClientStore";
 import {DynamicContentQuery, QuestionContentQuery} from "@/utils/helper/queries/DynamicContentQuery";
-
-const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
-const FRONTEND_URI = process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'
+import {BEARER_TOKEN, FRONTEND_URI, STRAPI_URI} from "@/utils/constantValues";
 
 const config = {
     method: 'GET',
     headers: {
-        Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+        Authorization: `Bearer ${ BEARER_TOKEN }`,
     },
     next: {revalidate: 0}
 }
@@ -24,13 +22,13 @@ export const getNavigation = async () => {
     }
 }
 
-export const getHomePageFromLocalApi = async ()=>{
+export const getHomePageFromLocalApi = async () => {
 
-    try{
-        const response = await fetch(`${FRONTEND_URI}/api/homepage`, {next: {revalidate: 40}})
+    try {
+        const response = await fetch(`${ FRONTEND_URI }/api/homepage`, {next: {revalidate: 40}})
         const data = await response.json()
         return data.response
-    }catch(err){
+    } catch (err) {
         console.error("Error fetching homepage data:", err)
     }
 }
@@ -230,7 +228,7 @@ export const getTestQuestions = async () => {
 
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/testing-questions?pagination[pageSize]=40&${QuestionContentQuery}`, {next: {revalidate: 60}})
+        const response = await fetch(`${ STRAPI_URI }/api/testing-questions?pagination[pageSize]=40&${ QuestionContentQuery }`, {next: {revalidate: 60}})
         return await response.json()
     } catch (e) {
 
@@ -290,7 +288,7 @@ export const getValidInternalLink = (sitepath: string, href: string) => {
 
 }
 
-export const getPage = async (slug:string) => {
+export const getPage = async (slug: string) => {
     try {
         const response = await fetch(`${ STRAPI_URI }/api/pages?filter[slug][$eq]=${ slug }&${ DynamicContentQuery }`, {
             method: "GET",
@@ -305,7 +303,7 @@ export const getPage = async (slug:string) => {
     }
 }
 
-export const getReferences =async ()=>{
+export const getReferences = async () => {
 
     try {
         const response = await fetch(`${ STRAPI_URI }/api/references?populate=*`, {

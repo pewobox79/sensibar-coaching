@@ -54,7 +54,7 @@ h4 {
 }
 
 p {
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 * {
@@ -65,8 +65,7 @@ p {
 
 .innerWrapper {
     word-break: break-word;
-    width: 100%;
-    border: 1px solid red
+    width: 100%
 }
 
 .mainContent {
@@ -104,7 +103,6 @@ p {
 }
 
 .globalButton {
-
     min-width: 100px;
     max-width: 200px;
     width: auto;
@@ -119,10 +117,13 @@ p {
     transition-timing-function: ease-in-out;
     transition-duration: 0.4s;
     text-decoration: none;
-    margin: 0 10px
+    margin: 10px 0 10px 10px
 }
 
 .globalTextLink {
+    font-family: var(--font-montserrat);
+    font-size: 1.2rem;
+    color: var(--textColor);
     margin: 5px;
     padding: 10px;
     text-decoration: none;
@@ -170,6 +171,12 @@ p {
         transform: rotate(360deg);
     }
 }
+
+
+.loaderView {
+    text-align: center;
+}
+
 
 .globalButton:hover {
     background-color: var(--background);
@@ -267,9 +274,15 @@ input[type="checkbox"] {
     h3 {
         font-size: 2.4rem;
     }
-    h4{
+
+    h4 {
         font-size: 2rem;
     }
+
+    p {
+        font-size: 1.2rem;
+    }
+
     .mainContent {
         width: 100%;
         max-width: 1300px;
