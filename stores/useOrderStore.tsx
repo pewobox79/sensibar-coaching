@@ -40,7 +40,6 @@ export const useOrderStore = create<OrderStore>((set) => ({
     value: initOrderValues,
     resetOrderData: () => set(() => ({value: initOrderValues})),
     addOrder: (order: OrderTypes) => {
-        console.log(order)
         set(() => ({value: order}))
     },
     handleWithdrawal: () => {
