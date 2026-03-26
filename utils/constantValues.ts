@@ -1,4 +1,4 @@
-export const PAYPAL_CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID ||"Paypal";
+export const PAYPAL_CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "Paypal";
 export const PAYPAL_SECRET_KEY = process.env.NEXT_PUBLIC_PAYPAL_APP_SECRET ||"";
 export const PAYPAL_API_URL = process.env.NEXT_PUBLIC_PAYPAL_API_URL ||"https://paypal.me";
 

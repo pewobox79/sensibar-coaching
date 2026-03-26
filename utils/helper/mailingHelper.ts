@@ -20,12 +20,17 @@ export const transporter = nodemailer.createTransport({
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function sendSubmissionEmail(userId: string, email: string, workshopName: string, workshopId: string, paymentId: string) {
+    const url = `https://www.sensibar-coaching.de/rueckmeldungen/doubleOptIn?id=${userId}&wsId=${workshopId}&pId=${paymentId}`;
     try {
         const info = await transporter.sendMail({
             to: `${ email }`, // list of receivers
             subject: "Deine Workshop Registrierung", // Subject line
-            text: `Danke für Deine Anmeldung zum Workshop "${ workshopName.toUpperCase() }".\n Bitte klicke auf den folgenden Link, um Deine Anmeldung zu bestätigen. https://www.sensibar-coaching.de/rueckmeldungen/doubleOptIn?id=${ userId }&wsId=${ workshopId }&pId=${paymentId} .\n Dein Sensibar Team`, // plain text body
-            //html: `<div>Danke für Deine Anmeldung. Bitte schließe Deine Anmeldung ab, um Deinen Platz zu sichern.<br/><a href={"https://www.webdeveloper-peterwolf.com/${userId}"} target="_blank"><h3>Anmeldung abschließen</h3></a> </div>`, // html body
+            text: `Danke für Deine Anmeldung zum Workshop "${workshopName.toUpperCase()}".
+
+            Bitte klicke auf den folgenden Link, um Deine Anmeldung zu bestätigen:
+            ${url}
+
+        Dein Sensibar Team`,
         })
 
         return {msg: "email sucessfully sent", info}
