@@ -1,5 +1,6 @@
 
 import {StyleSheet, Font} from "@react-pdf/renderer";
+import {pdfColorSet} from "@/lib/pdfCreator/helper";
 
 
 Font.register({
@@ -36,6 +37,10 @@ export const styles = StyleSheet.create({
     brandBlock: {
         width: "54%",
     },
+
+    logo:{
+    width: 130,
+},
     brandName: {
         fontSize: 22,
         fontFamily: "Montserrat",
@@ -47,9 +52,10 @@ export const styles = StyleSheet.create({
         fontSize: 10,
         color: "#7c7068",
         lineHeight: 1.5,
+        marginBottom: 12,
     },
     metaBlock: {
-        width: "38%",
+        width: "45%",
         backgroundColor: "#f7f2ec",
         border: "1 solid #dfd4c8",
         borderRadius: 10,
@@ -102,6 +108,11 @@ export const styles = StyleSheet.create({
         fontSize: 10,
         lineHeight: 1.6,
         color: "#2f2a26",
+    },
+
+    sellerAddressText:{
+        fontSize: 8,
+        paddingBottom: 30
     },
     sectionTitle: {
         fontSize: 12,
@@ -242,11 +253,30 @@ export const styles = StyleSheet.create({
         color: "#7d5a50",
     },
     footer: {
-        borderTop: "1 solid #e6ddd2",
-        paddingTop: 14,
+        borderTop: `1 solid ${pdfColorSet.BEIGE_COLOR}`,
+        paddingTop: 10,
+    },
+
+    footerRow: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "flex-start",
+        gap: 20,
+        marginBottom: 5,
+    },
+    footerBox: {
+        width: "56%",
+        padding: 5,
+    },
+    footerTitle: {
+        fontSize: 10,
+        fontFamily: "Montserrat",
+        fontWeight: "bold",
+        marginBottom: 8,
+        color: "#2f2a26",
     },
     footerText: {
-        fontSize: 8,
+        fontSize: 10,
         color: "#8b7b70",
         lineHeight: 1.5,
     },

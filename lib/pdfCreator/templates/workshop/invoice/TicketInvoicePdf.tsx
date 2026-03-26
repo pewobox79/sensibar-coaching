@@ -1,6 +1,7 @@
-import {Document, Page, Text, View} from "@react-pdf/renderer";
+import {Document, Image, Page, Text, View} from "@react-pdf/renderer";
 import React from "react";
 import {styles} from "@/lib/pdfCreator/templates/workshop/invoice/TicketInvoiceStyling";
+import logo from '@/assets/images/sensibar-coaching-logo-neu.png'
 
 
 type Party = {
@@ -24,7 +25,7 @@ type TicketInvoicePdfProps = {
     bookedBy: string;
     ticketNumber: string;
     quantity: number;
-    unitPriceNet: number;
+    unitPriceGross: number;
     vatRate?: number;
     taxNumber?: string;
     vatId?: string;
@@ -35,19 +36,20 @@ type TicketInvoicePdfProps = {
 };
 
 const formatMoney = (value: number, currency: string) => {
-    return `${value.toFixed(2).replace(".", ",")} ${currency}`;
+    return `${ value.toFixed(2).replace(".", ",") } ${ currency }`;
 };
 
-const formatParty = (party: Party) => {
+const formatParty = (party: Party, type: "seller" | "buyer") => {
     return [
         party.name,
         party.street,
-        `${party.zip} ${party.city}`,
-        party.country ? party.country : null,
+        `${ party.zip } ${ party.city }`,
+        party.country && type === "buyer" ? party.country : null,
     ]
         .filter(Boolean)
-        .join("\n");
+        .join(`${ type === "buyer" ? "\n" : " - " }`);
 };
+
 
 const TicketInvoicePdf = ({
                               seller,
@@ -62,7 +64,7 @@ const TicketInvoicePdf = ({
                               bookedBy,
                               ticketNumber,
                               quantity,
-                              unitPriceNet,
+                              unitPriceGross,
                               vatRate = 19,
                               taxNumber,
                               vatId,
@@ -72,163 +74,188 @@ const TicketInvoicePdf = ({
                               currency = "EUR",
                           }: TicketInvoicePdfProps) => {
 
-    const netAmount = quantity * unitPriceNet;
+    /*const netAmount = quantity * unitPriceNet;
     const vatAmount = isSmallBusiness ? 0 : netAmount * (vatRate / 100);
-    const grossAmount = netAmount + vatAmount;
+    const grossAmount = netAmount + vatAmount;*/
+
+    const grossAmount = quantity * unitPriceGross;
+    const netUnitPrice = isSmallBusiness ? unitPriceGross : unitPriceGross / (1 + vatRate / 100);
+    const netAmount = quantity * netUnitPrice;
+    const vatAmount = grossAmount - netAmount;
 
     const taxOrVatLabel = taxNumber ? "Steuernummer" : "USt-IdNr.";
     const taxOrVatValue = taxNumber ? taxNumber : vatId ? vatId : "—";
 
 
-    return  <Document>
-        <Page size="A4" style={styles.page}>
-            <View style={styles.topBar} />
+    return <Document>
+        <Page size="A4" style={ styles.page }>
+            {/*<View style={styles.topBar} />*/ }
 
-            <View style={styles.header}>
-                <View style={styles.brandBlock}>
-                    <Text style={styles.brandName}>{seller.name}</Text>
-                    <Text style={styles.brandSubline}>
-                        Professionelle Rechnungsübersicht für Workshop-Tickets
+            <View style={ styles.header }>
+                <View style={ styles.brandBlock }>
+                    <Image src={ logo.src } style={ styles.logo }/>
+
+                    <Text style={ styles.brandSubline }>
+                        <Text style={ styles.sellerAddressText }>{ formatParty(seller, "seller") }</Text>
+                    </Text>
+                    <Text style={ styles.brandSubline }>
+                        <Text style={ styles.addressText }>{ formatParty(buyer, "buyer") }</Text>
                     </Text>
                 </View>
 
-                <View style={styles.metaBlock}>
-                    <Text style={styles.metaTitle}>Rechnung</Text>
+                <View style={ styles.metaBlock }>
+                    <Text style={ styles.metaTitle }>Rechnung</Text>
 
-                    <View style={styles.metaRow}>
-                        <Text style={styles.metaLabel}>Rechnungsnr.</Text>
-                        <Text style={styles.metaValue}>{invoiceNumber}</Text>
+                    <View style={ styles.metaRow }>
+                        <Text style={ styles.metaLabel }>Rechnungsnr.</Text>
+                        <Text style={ styles.metaValue }>{ invoiceNumber }</Text>
                     </View>
 
-                    <View style={styles.metaRow}>
-                        <Text style={styles.metaLabel}>Rechnungsdatum</Text>
-                        <Text style={styles.metaValue}>{invoiceDate}</Text>
+                    <View style={ styles.metaRow }>
+                        <Text style={ styles.metaLabel }>Rechnungsdatum</Text>
+                        <Text style={ styles.metaValue }>{ invoiceDate }</Text>
                     </View>
 
-                    <View style={styles.metaRow}>
-                        <Text style={styles.metaLabel}>Leistungsdatum</Text>
-                        <Text style={styles.metaValue}>{serviceDate}</Text>
+                    <View style={ styles.metaRow }>
+                        <Text style={ styles.metaLabel }>Leistungsdatum</Text>
+                        <Text style={ styles.metaValue }>{ serviceDate }</Text>
                     </View>
 
-                    <View style={styles.metaRow}>
-                        <Text style={styles.metaLabel}>Zahlungsart</Text>
-                        <Text style={styles.metaValue}>{paymentMethod}</Text>
+                    <View style={ styles.metaRow }>
+                        <Text style={ styles.metaLabel }>Zahlungsart</Text>
+                        <Text style={ styles.metaValue }>{ paymentMethod }</Text>
                     </View>
 
-                    <View style={styles.metaRow}>
-                        <Text style={styles.metaLabel}>Status</Text>
-                        <Text style={styles.metaValue}>{paymentStatus}</Text>
+                    <View style={ styles.metaRow }>
+                        <Text style={ styles.metaLabel }>Status</Text>
+                        <Text style={ styles.metaValue }>{ paymentStatus }</Text>
                     </View>
 
-                    <View style={styles.metaRow}>
-                        <Text style={styles.metaLabel}>{taxOrVatLabel}</Text>
-                        <Text style={styles.metaValue}>{taxOrVatValue}</Text>
+                    <View style={ styles.metaRow }>
+                        <Text style={ styles.metaLabel }>{ taxOrVatLabel }</Text>
+                        <Text style={ styles.metaValue }>{ taxOrVatValue }</Text>
                     </View>
                 </View>
             </View>
 
-            <View style={styles.addressRow}>
-                <View style={styles.addressCard}>
-                    <Text style={styles.addressLabel}>Rechnungsaussteller</Text>
-                    <Text style={styles.addressText}>{formatParty(seller)}</Text>
+            {/*<View style={ styles.addressRow }>
+                <View style={ styles.addressCard }>
+                    <Text style={ styles.addressLabel }>Rechnungsaussteller</Text>
+                    <Text style={ styles.addressText }>{ formatParty(seller) }</Text>
                 </View>
 
-                <View style={styles.addressCard}>
-                    <Text style={styles.addressLabel}>Rechnungsempfänger</Text>
-                    <Text style={styles.addressText}>{formatParty(buyer)}</Text>
+                <View style={ styles.addressCard }>
+                    <Text style={ styles.addressLabel }>Rechnungsempfänger</Text>
+                    <Text style={ styles.addressText }>{ formatParty(buyer) }</Text>
                 </View>
-            </View>
+            </View>*/}
 
-            <View style={styles.introBox}>
-                <Text style={styles.sectionTitle}>Abgerechnete Leistung</Text>
-                <Text style={styles.introText}>
+            <View style={ styles.introBox }>
+                <Text style={ styles.sectionTitle }>Abgerechnete Leistung</Text>
+                <Text style={ styles.introText }>
                     Berechnet wird ein personalisiertes Workshop-Ticket für die unten aufgeführte Veranstaltung.
                     Die Rechnung enthält alle relevanten Ticket- und Leistungsinformationen.
                 </Text>
             </View>
 
-            <View style={styles.table}>
-                <View style={styles.tableHeader}>
-                    <Text style={[styles.tableHeaderText, styles.colPos]}>Pos.</Text>
-                    <Text style={[styles.tableHeaderText, styles.colDesc]}>Leistungsbeschreibung</Text>
-                    <Text style={[styles.tableHeaderText, styles.colQty]}>Menge</Text>
-                    <Text style={[styles.tableHeaderText, styles.colUnit]}>Einzelpreis</Text>
-                    <Text style={[styles.tableHeaderText, styles.colTax]}>USt.</Text>
-                    <Text style={[styles.tableHeaderText, styles.colTotal]}>Betrag</Text>
+            <View style={ styles.table }>
+                <View style={ styles.tableHeader }>
+                    <Text style={ [styles.tableHeaderText, styles.colPos] }>Pos.</Text>
+                    <Text style={ [styles.tableHeaderText, styles.colDesc] }>Leistungsbeschreibung</Text>
+                    <Text style={ [styles.tableHeaderText, styles.colQty] }>Menge</Text>
+                    <Text style={ [styles.tableHeaderText, styles.colUnit] }>Einzelpreis</Text>
+                    <Text style={ [styles.tableHeaderText, styles.colTax] }>USt.</Text>
+                    <Text style={ [styles.tableHeaderText, styles.colTotal] }>Betrag</Text>
                 </View>
 
-                <View style={styles.tableRow}>
-                    <Text style={[styles.cellText, styles.colPos]}>1</Text>
+                <View style={ styles.tableRow }>
+                    <Text style={ [styles.cellText, styles.colPos] }>1</Text>
 
-                    <View style={styles.colDesc}>
-                        <Text style={styles.cellText}>Workshop-Ticket: {workshopName}</Text>
-                        <Text style={styles.cellText}>Datum: {workshopDate}</Text>
-                        <Text style={styles.cellText}>Uhrzeit: {workshopTime}</Text>
-                        <Text style={styles.cellText}>Ort: {workshopLocation}</Text>
-                        <Text style={styles.cellText}>Buchende Person: {bookedBy}</Text>
-                        <Text style={styles.cellText}>Ticketnummer: {ticketNumber}</Text>
+                    <View style={ styles.colDesc }>
+                        <Text style={ styles.cellText }>Workshop-Ticket: { workshopName }</Text>
+                        <Text style={ styles.cellText }>Datum: { workshopDate }</Text>
+                        <Text style={ styles.cellText }>Uhrzeit: { workshopTime }</Text>
+                        <Text style={ styles.cellText }>Ort: { workshopLocation }</Text>
+                        <Text style={ styles.cellText }>Buchende Person: { bookedBy }</Text>
+                        <Text style={ styles.cellText }>Ticketnummer: { ticketNumber }</Text>
                     </View>
 
-                    <Text style={[styles.cellText, styles.colQty]}>{quantity}</Text>
-                    <Text style={[styles.cellText, styles.colUnit]}>
-                        {formatMoney(unitPriceNet, currency)}
+                    <Text style={ [styles.cellText, styles.colQty] }>{ quantity }</Text>
+                    <Text style={ [styles.cellText, styles.colUnit] }>
+                        { formatMoney(netAmount, currency) }
                     </Text>
-                    <Text style={[styles.cellText, styles.colTax]}>
-                        {isSmallBusiness ? "—" : `${vatRate} %`}
+                    <Text style={ [styles.cellText, styles.colTax] }>
+                        { isSmallBusiness ? "0 %" : `${ vatRate } %` }
                     </Text>
-                    <Text style={[styles.cellText, styles.colTotal]}>
-                        {formatMoney(netAmount, currency)}
+                    <Text style={ [styles.cellText, styles.colTotal] }>
+                        { formatMoney(unitPriceGross, currency) }
                     </Text>
                 </View>
             </View>
 
-            <View style={styles.noteRow}>
-                <View style={styles.noteBox}>
-                    <Text style={styles.noteTitle}>Hinweise</Text>
+            <View style={ styles.noteRow }>
+                <View style={ styles.noteBox }>
+                    <Text style={ styles.noteTitle }>Hinweise</Text>
 
-                    <Text style={styles.noteText}>
-                        Leistungsdatum: {serviceDate}
+                    <Text style={ styles.noteText }>
+                        Leistungsdatum: { serviceDate }
                     </Text>
-                    <Text style={styles.noteText}>
-                        Zahlungsstatus: {paymentStatus}
+                    <Text style={ styles.noteText }>
+                        Zahlungsstatus: { paymentStatus }
                     </Text>
-                    <Text style={styles.noteText}>
-                        Zahlungsart: {paymentMethod}
+                    <Text style={ styles.noteText }>
+                        Zahlungsart: { paymentMethod }
                     </Text>
 
-                    {isSmallBusiness ? (
-                        <Text style={styles.noteText}>
+                    { isSmallBusiness ? (
+                        <Text style={ styles.noteText }>
                             Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.
                         </Text>
                     ) : (
-                        <Text style={styles.noteText}>
+                        <Text style={ styles.noteText }>
                             Enthalten ist die gesetzliche Umsatzsteuer in ausgewiesener Höhe.
                         </Text>
-                    )}
+                    ) }
                 </View>
 
-                <View style={styles.totalsBox}>
-                    <View style={styles.totalsRow}>
-                        <Text style={styles.totalsLabel}>Nettobetrag</Text>
-                        <Text style={styles.totalsValue}>{formatMoney(netAmount, currency)}</Text>
+                <View style={ styles.totalsBox }>
+                    <View style={ styles.totalsRow }>
+                        <Text style={ styles.totalsLabel }>Nettobetrag</Text>
+                        <Text style={ styles.totalsValue }>{ formatMoney(netAmount, currency) }</Text>
                     </View>
 
-                    <View style={styles.totalsRow}>
-                        <Text style={styles.totalsLabel}>Umsatzsteuer</Text>
-                        <Text style={styles.totalsValue}>
-                            {isSmallBusiness ? formatMoney(0, currency) : formatMoney(vatAmount, currency)}
+                    <View style={ styles.totalsRow }>
+                        <Text style={ styles.totalsLabel }>Umsatzsteuer</Text>
+                        <Text style={ styles.totalsValue }>
+                            { isSmallBusiness ? formatMoney(0, currency) : formatMoney(vatAmount, currency) }
                         </Text>
                     </View>
 
-                    <View style={styles.grandTotalRow}>
-                        <Text style={styles.grandTotalLabel}>Gesamtbetrag</Text>
-                        <Text style={styles.grandTotalValue}>{formatMoney(grossAmount, currency)}</Text>
+                    <View style={ styles.grandTotalRow }>
+                        <Text style={ styles.grandTotalLabel }>Gesamtbetrag</Text>
+                        <Text style={ styles.grandTotalValue }>{ formatMoney(grossAmount, currency) }</Text>
                     </View>
                 </View>
             </View>
 
-            <View style={styles.footer}>
-                <Text style={styles.footerText}>
+            <View style={ styles.footer }>
+                <View style={ styles.footerRow }>
+                    <View style={ styles.footerBox }>
+                        <Text style={ styles.footerTitle }>Bankverbindung</Text>
+
+                        <Text style={ styles.footerText }>
+                            Bank: SpardaBank
+                        </Text>
+                        <Text style={ styles.footerText }>
+                            IBAN: DE023488023848238
+                        </Text>
+                        <Text style={ styles.footerText }>
+                            BIC: BIC90809
+                        </Text>
+                    </View>
+
+                </View>
+                <Text style={ styles.footerText }>
                     Diese Rechnung wurde elektronisch erstellt und ist ohne Unterschrift gültig.
                 </Text>
             </View>

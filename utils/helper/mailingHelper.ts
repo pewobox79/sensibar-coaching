@@ -20,9 +20,6 @@ export const transporter = nodemailer.createTransport({
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function sendSubmissionEmail(userId: string, email: string, workshopName: string, workshopId: string, paymentId: string) {
-
-
-    console.log(`doi email link: https://www.sensibar-coaching.de/rueckmeldungen/doubleOptIn?id=${ userId }&wsId=${ workshopId }&pId=${paymentId} `)
     try {
         const info = await transporter.sendMail({
             to: `${ email }`, // list of receivers

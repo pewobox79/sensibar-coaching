@@ -1,6 +1,8 @@
 import {BEARER_TOKEN, STRAPI_URI} from "@/utils/constantValues";
 import {PaymentQuery} from "@/utils/helper/queries/paymentQuery";
 import {OrderTypes} from "@/types/generalTypes";
+import {deleteTicket} from "@/lib/strapi/ticketHelper";
+import {AppRouterInstance} from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 export const createNewPaymentInStrapi = async (ticketId: string) => {
     const paymentData = {
@@ -99,5 +101,16 @@ export const deletePayment = async (paymentId: string) => {
     } catch (e) {
         console.error("error delete payment", e)
         return {msg: "error deleting payment details"}
+    }
+}
+
+export async function handlePaymentCancel(paymentId: string, ticketId:string, reset: ()=>void, router: AppRouterInstance) {
+
+    const resPaymentDelete = await deletePayment(paymentId)
+    await deleteTicket(ticketId)
+    reset()
+
+    if (resPaymentDelete.msg === "payment deleted successfully") {
+        router.push("/workshops")
     }
 }

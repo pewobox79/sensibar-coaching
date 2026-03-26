@@ -8,14 +8,34 @@ import ToastMessage from "@/components/global/ToastMessage";
 import EmailInfo from "@/components/global/EmailInfo";
 import {useRouter} from "next/navigation";
 import {sendMailingAfterRegistration} from "@/utils/helper/proxyHelper/sendMailing";
+import {handlePaymentCancel} from "@/lib/strapi/paymentHelper";
 
 const PayPalBtn = ({enabled, paymentId}: { enabled: boolean, price: number, orderId: string, paymentId: string }) => {
 
-        const {value} = useOrderStore()
-    console.log("value in PayPalBtn", value)
+        const {value, resetOrderData} = useOrderStore()
         const router = useRouter();
         const [success, setSuccess] = useState({msg: "", state: false, type: ""})
         const [emailInfo, setEmailInfo] = useState(false)
+        const [error, setError] = useState({
+            msg: "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal",
+            state: false,
+            type: "error"
+        })
+
+        async function handleCancel() {
+            await handlePaymentCancel(paymentId, value.ticketId, resetOrderData, router)
+        }
+
+        async function handleError() {
+            setError({...error, state: true})
+            setTimeout(() => {
+
+                handlePaymentCancel(paymentId, value.ticketId, resetOrderData, router)
+            }, 2000)
+
+
+        }
+
         async function handleOnApprove(data: OnApproveData) {
 
             const approved = await approvePaypalPayment(paymentId, data, value)
@@ -48,8 +68,11 @@ const PayPalBtn = ({enabled, paymentId}: { enabled: boolean, price: number, orde
               return await createPayment(value)
           } }
           onApprove={ handleOnApprove }
+          onError={ handleError }
+          onCancel={ handleCancel }
         /> }
             <ToastMessage state={ success } setState={ setSuccess }/>
+            <ToastMessage state={ error } setState={ setError }/>
         </div>
     }
 ;

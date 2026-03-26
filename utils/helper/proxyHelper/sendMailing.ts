@@ -8,8 +8,6 @@ export const sendMailingAfterRegistration = async (contactId:string, contactEmai
         workshopId: workshopId,
         paymentId:paymentId,
     }
-
-    console.log("sending data for email to participant route after registration at", dataToSend)
     try{
         const response = await fetch('/api/db/participant', {
             method: 'POST',

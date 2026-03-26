@@ -9,7 +9,7 @@ import BillingAddress from "@/components/forms/BillingAddress/BillingAddress";
 import {PAYPAL_CLIENT_ID} from "@/utils/constantValues";
 import Button from "@/components/global/Button";
 import {PayPalScriptProvider} from "@paypal/react-paypal-js";
-import {deletePayment} from "@/lib/strapi/paymentHelper";
+import {deletePayment, handlePaymentCancel} from "@/lib/strapi/paymentHelper";
 import GlobalModal from "@/components/global/GlobalModal";
 import {useModalOpen} from "@/stores/useModalOpen";
 import {deleteTicket} from "@/lib/strapi/ticketHelper";
@@ -27,19 +27,6 @@ const Overview = () => {
     console.log("params", search.get("name"))
     console.log("paymentId in overview", paymentId)
 
-    async function handleCancel(paymentId: string) {
-
-        const resPaymentDelete = await deletePayment(paymentId)
-        await deleteTicket(value.ticketId)
-        resetOrderData()
-
-
-        if (resPaymentDelete.msg === "payment deleted successfully") {
-
-            router.push("/workshops")
-        }
-
-    }
 
     const speakerNameList = value?.speaker?.map((speaker) => speaker.name) || []
     const netPrice = value?.ticketPrice * (1 - 0.19)
@@ -105,7 +92,7 @@ const Overview = () => {
         { status.cancelOrder && (<GlobalModal type={ "cancelOrder" }>
             <PaymentCancelation/>
             <div className={ styles.cancelOrderButtons }>
-                <Button type={ "submit" } title={ "Bin mir sicher" } action={ () => handleCancel(paymentId) }/>
+                <Button type={ "submit" } title={ "Bin mir sicher" } action={ () => handlePaymentCancel(paymentId, value.ticketId, resetOrderData, router) }/>
                 <Button type={ "submit" } title={ "Ticketkauf fortsetzen" } action={ setOrderCancelModal }/>
             </div>
         </GlobalModal>) }

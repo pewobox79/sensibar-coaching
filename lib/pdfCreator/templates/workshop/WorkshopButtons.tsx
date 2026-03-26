@@ -13,11 +13,10 @@ const WorkshopButtons = (props:StrapiPaymentProps) => {
     return <div style={ {display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap"} }>
         { billing && <PDFDownloadLink className={ "globalButton" } document={ <TicketInvoicePdf
             seller={ {
-                name: "Sensibar Coaching",
-                street: "Musterstraße 1",
-                zip: "20354",
-                city: "Hamburg",
-                country: "Deutschland",
+                name: "Yessica Wolf",
+                street: "Lindenstrasse 6a",
+                zip: "85309",
+                city: "Pörnbach"
             } }
             buyer={ {
                 name: `${ capitalizeFirstLetter(contact?.personalData?.firstname) } ${ capitalizeFirstLetter(contact?.personalData?.lastname) }`,
@@ -36,11 +35,12 @@ const WorkshopButtons = (props:StrapiPaymentProps) => {
             bookedBy={ `${ capitalizeFirstLetter(contact?.personalData?.firstname) } ${ capitalizeFirstLetter(contact?.personalData?.lastname) }` }
             ticketNumber={ event_ticket?.ticketId }
             quantity={ 1 }
-            unitPriceNet={ 84.03 }
+            unitPriceGross={ event_ticket.workshop.workshopPrice }
             vatRate={ 19 }
             taxNumber="12/345/67890"
             paymentMethod={ transaction?.provider || '' }
             paymentStatus={ transaction?.transactionState === "COMPLETED" ? "bezahlt" : "offen" }
+            isSmallBusiness={true}
         /> }
                                       fileName="ticket-rechnung.pdf">
             { ({loading}) =>
