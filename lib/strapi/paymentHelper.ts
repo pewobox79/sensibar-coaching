@@ -31,10 +31,10 @@ export const getSinglePaymentById = async (paymentId: string) => {
     if (!paymentId) {
         return {msg: "Falsche Payment id"}
     }
-    const payment = await fetch(`${ STRAPI_URI }/api/payments/${ paymentId }?${PaymentQuery}`, {
+    const payment = await fetch(`${ STRAPI_URI }/api/payments/${ paymentId }?${ PaymentQuery }`, {
         method: "GET",
         headers: {
-            Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+            Authorization: `Bearer ${ BEARER_TOKEN }`
         }, next: {revalidate: 10}
     })
 
@@ -79,7 +79,7 @@ export const updatePaymentInStrapi = async (paymentId: string, storedValue: Orde
     const paymentUpdateRes = await fetch(`${ STRAPI_URI }/api/payments/${ paymentId }`, {
         method: "PUT",
         headers: {
-            Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`,
+            Authorization: `Bearer ${ BEARER_TOKEN }`,
             "Content-Type": "application/json",
         },
         body: JSON.stringify({data: {...checkDataToSubmit}}),
@@ -90,10 +90,10 @@ export const updatePaymentInStrapi = async (paymentId: string, storedValue: Orde
 
 export const deletePayment = async (paymentId: string) => {
     try {
-       await fetch(`${ STRAPI_URI }/api/payments/${ paymentId }`, {
+        await fetch(`${ STRAPI_URI }/api/payments/${ paymentId }`, {
             method: "DELETE",
             headers: {
-                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+                Authorization: `Bearer ${ BEARER_TOKEN }`
             }
         })
 
@@ -104,7 +104,7 @@ export const deletePayment = async (paymentId: string) => {
     }
 }
 
-export async function handlePaymentCancel(paymentId: string, ticketId:string, reset: ()=>void, router: AppRouterInstance) {
+export async function handlePaymentCancel(paymentId: string, ticketId: string, reset: () => void, router: AppRouterInstance) {
 
     const resPaymentDelete = await deletePayment(paymentId)
     await deleteTicket(ticketId)

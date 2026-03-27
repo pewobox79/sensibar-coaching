@@ -9,11 +9,10 @@ const TicketPage = async ({params, searchParams}:{params:Promise<{slug:string[]}
     const {slug}=await params;
     const search = await searchParams
 
-    const strapiPayment = await getSinglePaymentById(search.pId)
-    console.log(strapiPayment)
-
     if(slug.includes("documents")){
-        return <TicketDocumentsPage {...strapiPayment.data}/>
+        const strapiPayment = await getSinglePaymentById(search.pId)
+        console.log(strapiPayment)
+        return <TicketDocumentsPage {...strapiPayment?.data}/>
     }
     return <TicketOrderPage/>
 }

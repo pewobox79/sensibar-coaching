@@ -13,8 +13,15 @@ export const createPayment = async (value: OrderTypes) => {
 }
 
 export const approvePaypalPayment = async (paymentId:string, data:OnApproveData, storeValues:OrderTypes) => {
+    let updateRes
     const paymentRes = await paypalFunctions.createPayment(data.orderID)
-    const updateRes = await updatePaymentInStrapi(paymentId, storeValues, paymentRes as unknown as {id: string, status: string, payer: {payer_id: string}})
+    console.log("payment res in approvePaypalPayment",paymentRes)
+
+    if(paymentRes){
+        console.log("paymentRes paypal is true")
+        updateRes = await updatePaymentInStrapi(paymentId, storeValues, paymentRes as unknown as {id: string, status: string, payer: {payer_id: string}})
+    }
+
     return { paypalRes: paymentRes, strapiRes: updateRes}
 
 
