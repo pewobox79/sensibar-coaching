@@ -40,7 +40,6 @@ export const useOrderStore = create<OrderStore>((set) => ({
     value: initOrderValues,
     resetOrderData: () => set(() => ({value: initOrderValues})),
     addOrder: (order: OrderTypes) => {
-        console.log("adding order", order);
         set(() => ({value: order}))
     },
     handleWithdrawal: () => {
@@ -53,7 +52,6 @@ export const useOrderStore = create<OrderStore>((set) => ({
         }))
     },
     updateBillingAddress: (name: keyof LocationType, value: string) => {
-        console.log("updating billing address", name, value);
         set((state) => ({
             value: {
                 ...state.value,

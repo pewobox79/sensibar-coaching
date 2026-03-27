@@ -78,7 +78,6 @@ const EventRegistration = ({
                 const cleanedLastname = values.lastname.replace(/\s+/g, '').toLowerCase();
                 const cleanedEmail = values.contact.email?.trim()?.toLowerCase();
                 const data = await checkIfContactExists(cleanedFirstname, cleanedLastname, cleanedEmail)
-                console.log("contact exists", data)
                 const dataMapping = {
                     data: {
                         personalData: {
@@ -98,7 +97,6 @@ const EventRegistration = ({
                 }
 
                 const paymentData = await createNewPaymentInStrapi(ticketId)
-                console.log("paymentData on event registeration", paymentData)
                 if (data?.msg === "new contact") {
                     const config = {
                         method: "POST",
@@ -110,12 +108,7 @@ const EventRegistration = ({
                     }
                     fetch(`${ STRAPI_URI }/api/contacts/?populate=*`, config).then(response => response.json())
                         .then(newData => {
-
-                            console.log("new contact", newData);
-
                             const {documentId:ClientId, contact} = newData?.data
-
-
                             getSingleWorkshop(documentId).then(workshop => {
                                 addOrder({
                                     ticketId: ticketId || "",

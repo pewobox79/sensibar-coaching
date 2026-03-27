@@ -2,6 +2,7 @@ import {Document, Image, Page, Text, View} from "@react-pdf/renderer";
 import React from "react";
 import {styles} from "@/lib/pdfCreator/templates/workshop/invoice/TicketInvoiceStyling";
 import logo from '@/assets/images/sensibar-coaching-logo-neu.png'
+import {calculateWorkshopPriceForPayPal} from "@/lib/strapi/workshopHelper";
 
 
 type Party = {
@@ -78,8 +79,8 @@ const TicketInvoicePdf = ({
     const vatAmount = isSmallBusiness ? 0 : netAmount * (vatRate / 100);
     const grossAmount = netAmount + vatAmount;*/
 
-    const grossAmount = quantity * unitPriceGross;
-    const netUnitPrice = isSmallBusiness ? unitPriceGross : unitPriceGross / (1 + vatRate / 100);
+    const grossAmount = quantity * calculateWorkshopPriceForPayPal(unitPriceGross);
+    const netUnitPrice = isSmallBusiness ? calculateWorkshopPriceForPayPal(unitPriceGross) : calculateWorkshopPriceForPayPal(unitPriceGross) / (1 + vatRate / 100);
     const netAmount = quantity * netUnitPrice;
     const vatAmount = grossAmount - netAmount;
 

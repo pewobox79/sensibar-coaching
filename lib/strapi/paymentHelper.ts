@@ -46,7 +46,6 @@ export const updatePaymentInStrapi = async (paymentId: string, storedValue: Orde
     payer: { payer_id: string }
 }) => {
     const {clientId, billingAddress, billing, transaction, rightOfWithdrawal} = storedValue
-console.log("pid in updatePaymentInStrapi", paymentId)
     const dataToSubmit = {
         withBilling: {
             contact: clientId,
