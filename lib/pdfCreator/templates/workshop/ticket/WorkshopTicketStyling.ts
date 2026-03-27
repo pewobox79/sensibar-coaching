@@ -90,7 +90,7 @@ export const styles = StyleSheet.create({
         marginBottom: 5,
     },
     workshopTitle: {
-        fontSize: 20,
+        fontSize: 15,
         height: "auto",
         fontWeight: "bold",
         color: pdfColorSet.GREY_COLOR,
