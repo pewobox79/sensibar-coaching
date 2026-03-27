@@ -11,7 +11,7 @@ import {sendMailingAfterRegistration} from "@/utils/helper/proxyHelper/sendMaili
 import {handlePaymentCancel} from "@/lib/strapi/paymentHelper";
 
 const PayPalBtn = ({enabled, paymentId}: { enabled: boolean, price: number, orderId: string, paymentId: string }) => {
-
+console.log("paymentIdIn paypalBtn",paymentId);
         const {value, resetOrderData} = useOrderStore()
         const router = useRouter();
         const [success, setSuccess] = useState({msg: "", state: false, type: ""})

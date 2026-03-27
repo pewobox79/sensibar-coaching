@@ -13,6 +13,7 @@ export const createPayment = async (value: OrderTypes) => {
 }
 
 export const approvePaypalPayment = async (paymentId:string, data:OnApproveData, storeValues:OrderTypes) => {
+   console.log("pid in approvePAypalpayment",paymentId)
     let updateRes
     const paymentRes = await paypalFunctions.createPayment(data.orderID)
     console.log("payment res in approvePaypalPayment",paymentRes)

@@ -23,6 +23,7 @@ const Overview = () => {
 
     const {value, handleWithdrawal, updateBillingState, resetOrderData} = useOrderStore()
 console.log("data in ticket,", value)
+console.log("paymentId,", paymentId)
     const speakerNameList = value?.speaker?.map((speaker) => speaker.name) || []
     const tax = isSmallBusiness ? 0 : 0.19
     const netPrice = value?.ticketPrice * (1 - tax)
