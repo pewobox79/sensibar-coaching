@@ -189,7 +189,7 @@ const TicketInvoicePdf = ({
                         { isSmallBusiness ? "0 %" : `${ vatRate } %` }
                     </Text>
                     <Text style={ [styles.cellText, styles.colTotal] }>
-                        { formatMoney(unitPriceGross, currency) }
+                        { formatMoney(calculateWorkshopPriceForPayPal(unitPriceGross), currency) }
                     </Text>
                 </View>
             </View>
