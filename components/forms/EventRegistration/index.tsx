@@ -98,6 +98,7 @@ const EventRegistration = ({
                 }
 
                 const paymentData = await createNewPaymentInStrapi(ticketId)
+                console.log("paymentData on event registeration", paymentData)
                 if (data?.msg === "new contact") {
                     const config = {
                         method: "POST",
