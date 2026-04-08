@@ -32,7 +32,8 @@ const WorkshopCard = (props: {
     description: [],
     workshopTimeStart: string,
     workshopTimeEnd: string,
-    location:{city: string, street: string, streetNumber: string, zipCode: string, country: string},
+    workshopPrice: number,
+    location: { city: string, street: string, streetNumber: string, zipCode: string, country: string },
 }) => {
 
     const INIT_WS_VALUES = {
@@ -45,11 +46,12 @@ const WorkshopCard = (props: {
         ws_status: props.ws_status,
         workshopTimeStart: props.workshopTimeStart,
         workshopTimeEnd: props.workshopTimeEnd,
-        city: props.location.city,
-        zipCode: props.location.zipCode,
-        country: props.location.country,
-        street: props.location.street,
-        streetNumber: props.location.streetNumber,
+        city: props.location?.city,
+        zipCode: props.location?.zipCode,
+        country: props.location?.country,
+        street: props.location?.street,
+        workshopPrice: props.workshopPrice,
+        streetNumber: props.location?.streetNumber,
     }
 
     const token = useLocalStorage("sensiUser")?.value
@@ -61,7 +63,7 @@ const WorkshopCard = (props: {
     const [error, setError] = useState({state: false, type: "error", msg: "absage konnte nicht verschickt werden"});
     const [openCancel, setOpenCancel] = useState(false);
 
-    function handleCopyLink(string:string, type: 'zoomLink' |'wsLink') {
+    function handleCopyLink(string: string, type: 'zoomLink' | 'wsLink') {
         navigator.clipboard.writeText(string).then(() => {
             setOnClipboard({...onClipboard, [type]: !onClipboard[type]});
         });
@@ -82,12 +84,13 @@ const WorkshopCard = (props: {
             ws_status: edit.values.ws_status,
             workshopTimeStart: formatTimeToStrapiFormat(edit.values.workshopTimeStart),
             workshopTimeEnd: formatTimeToStrapiFormat(edit.values.workshopTimeEnd),
-            location:{
-                city: edit.values.city,
-                street: edit.values.street,
-                streetNumber: edit.values.streetNumber,
-                zipCode: edit.values.zipCode,
-                country: edit.values.country,
+            workshopPrice: edit.values.workshopPrice,
+            location: {
+                city: edit.values?.city,
+                street: edit.values?.street,
+                streetNumber: edit.values?.streetNumber,
+                zipCode: edit.values?.zipCode,
+                country: edit.values?.country,
             }
 
 
@@ -231,18 +234,26 @@ const WorkshopCard = (props: {
 
         <div className={ styles.cardWrapper }>
             <div className={ styles.cardInner }>
-                { eventIsInThePast && <p className={styles.eventIsInPast}>Workshop liegt in der Vergangenheit!</p>}
+                { eventIsInThePast && <p className={ styles.eventIsInPast }>Workshop liegt in der Vergangenheit!</p> }
                 { edit.state ? <div className={ styles.editButton } onClick={ handleUpdateWorkshop }>
                         <FontAwesomeIcon icon={ faSave }/></div> :
                     <div className={ styles.editButton } onClick={ handleEditFeature }>
                         <FontAwesomeIcon icon={ faPen }/></div> }
 
                 <div className={ styles.cardBody } style={ {marginTop: `${ edit.state ? "20px" : null }`} }>
-                    { edit.state ? <WsEditItem type={ "text" } value={ edit.values.title } property={ "title" }
+                    { edit.state ?
+                        <WsEditItem type={ "text" } value={ edit.values.title } property={ "title" }
                                                changeAction={ handleChange }/> :
                         <h4 style={ {textAlign: "center"} }>{ edit.values.title }</h4> }
+
+
                     <div className={ styles.cardBodySection }>
                         <h4>Details:</h4>
+                        { edit.state ?
+                            <WsEditItem type={ "number" } value={ edit.values.workshopPrice } property={ "workshopPrice" }
+                                        changeAction={ handleChange }/> :
+                            <p>Preis: { edit.values.workshopPrice }</p> }
+
                         { edit.state ?
                             <WsEditItem type={ "date" } value={ edit.values.workshop_date } property={ "workshop_date" }
                                         changeAction={ handleChange }/> :
@@ -300,20 +311,20 @@ const WorkshopCard = (props: {
                         { edit.state ?
                             <WsEditItem type={ "text" } value={ edit.values.link.href as string } property={ "href" }
                                         changeAction={ handleChange }/> :
-                            <p className={styles.clipBoardLinks}>
+                            <p className={ styles.clipBoardLinks }>
                                 <a href={ `${ edit.values?.link?.href }` } title={ `${ props.link?.label }` }
-                                  target={ `${ edit.values.link?.target }` }>Zoom Link</a>
-                                <FontAwesomeIcon icon={ faCopy } style={{paddingLeft: 8}}
+                                   target={ `${ edit.values.link?.target }` }>Zoom Link</a>
+                                <FontAwesomeIcon icon={ faCopy } style={ {paddingLeft: 8} }
                                                  onClick={ () => handleCopyLink(edit.values?.link?.href, "zoomLink") }/>
                                 { onClipboard.zoomLink &&
                                   <span style={ {color: "green"} }>Link copied</span> }
                             </p>
                         }
                         { edit.state ?
-                            <div style={{paddingBottom: 30}}></div>:
+                            <div style={ {paddingBottom: 30} }></div> :
                             <p>
                                 Workshop Link
-                                <FontAwesomeIcon icon={ faCopy } style={{paddingLeft: 8}}
+                                <FontAwesomeIcon icon={ faCopy } style={ {paddingLeft: 8} }
                                                  onClick={ () => handleCopyLink(createWorkshopLink(props.title, props.documentId), "wsLink") }/>
                                 { onClipboard.wsLink &&
                                   <span style={ {color: "green"} }>Link copied</span> }
@@ -328,7 +339,7 @@ const WorkshopCard = (props: {
                       <h4>Teilnehmer: { props.contacts?.length }</h4>
                     </div> }
                 </div>
-                {!eventIsInThePast && <div className={ styles.cardButtons }>
+                { !eventIsInThePast && <div className={ styles.cardButtons }>
                     { props.ws_status === "confirmed" &&
                       <Button type={ "submit" } title={ "absagen" } action={ cancelMessageWindow }/> }
                     { props.ws_status === "cancelled" &&
@@ -336,7 +347,7 @@ const WorkshopCard = (props: {
                     { props.ws_status != "cancelled" && <Button type={ "submit" } title={ "einladen" }/> }
                     { props.ws_status === "planned" &&
                       <Button type={ "submit" } title={ "bestätigen" } action={ handleConfirmWorkshop }/> }
-                </div>}
+                </div> }
             </div>
             { contactDetails &&
               <WorkshopContactOverview contacts={ props.contacts } action={ handleContactDetails }/>

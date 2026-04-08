@@ -26,6 +26,7 @@ export interface FormValues {
     format: string
     workshopTimeStart: string,
     workshopTimeEnd: string,
+    workshopPrice:number,
     location: {
         street: string,
         zipCode: string,
@@ -49,6 +50,7 @@ const INIT_WS_VALUES: FormValues = {
     format: "Vortrag",
     workshopTimeStart: "",
     workshopTimeEnd: "",
+    workshopPrice: 0,
     location: {
         street: "",
         zipCode: "",
@@ -203,6 +205,15 @@ const WorkshopForm = () => {
 
 
                     <div className={ styles.formItem }>
+                        <label htmlFor={ "workshopPrice" }>Preis</label>
+                        <input type={ "number" } name={ "workshopPrice" } id={ "workshopPrice" } value={ formik.values.workshopPrice }
+                               onChange={ formik.handleChange } placeholder={ "Preis für den WS" }/>
+                        <p className={styles.inputErrorText}> {formik.errors?.workshopPrice}</p>
+                    </div>
+
+
+
+                    <div className={ styles.formItem }>
                         <label htmlFor={ "format" }>Format</label>
                         <select name={ "format" } id={ "format" } value={ formik.values.format }
                                 onChange={ formik.handleChange }>
@@ -212,6 +223,9 @@ const WorkshopForm = () => {
                         <p className={styles.inputErrorText}> {formik.errors.format}</p>
                     </div>
 
+                </div>
+
+                <div  className={ styles.workshopFormGroup }>
                     <div className={ styles.formItem }>
                         <label htmlFor={ "type" }>Type</label>
                         <select name={ "type" } id={ "type" } value={ formik.values.type }
@@ -228,9 +242,7 @@ const WorkshopForm = () => {
                                onChange={ formik.handleChange } placeholder={ "Zoom Link, Google Meet Link..." }/>
                         <p className={styles.inputErrorText}> {formik.errors?.link?.href}</p>
                     </div>
-
                 </div>
-
 
                 <div className={ styles.workshopFormGroup }>
 

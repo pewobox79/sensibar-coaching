@@ -1,6 +1,4 @@
 import {SingleWorkshopQuery, WorkshopQuery} from "@/utils/helper/queries/workshopQuery";
-import {formatPrice} from "@/utils/helper/formater";
-
 const STRAPI_URI = process.env.NEXT_PUBLIC_STRAPI_URL_DEV
 
 const config = {
