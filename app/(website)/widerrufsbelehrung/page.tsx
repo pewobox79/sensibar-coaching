@@ -33,7 +33,6 @@ export const metadata: Metadata = {
 const Widerrufsbelehrung = async () => {
 
     const data = await getBasicPageContent("widerrufsbelehrung")
-    console.log("data widerruf", data)
 
     return <div className={ "innerWrapper" }>
 

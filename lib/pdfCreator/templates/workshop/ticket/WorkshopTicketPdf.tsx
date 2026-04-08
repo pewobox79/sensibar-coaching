@@ -85,7 +85,7 @@ const WorkshopTicketPdf =({
 
                         <View style={styles.footer}>
                             <Text style={styles.footerText}>
-                                Dieses Ticket ist personalisiert und nur für die angegebene Buchung gültig.
+                                Dieses Ticket ist personalisiert und nur für die angegebene Buchung gültig. <a href="https://www.sensibar-coaching.de/widerrufsbelehrung">Widerrufsrecht</a>
                             </Text>
                         </View>
                     </View>
