@@ -62,7 +62,7 @@ const WorkshopCard = (props: {
     const [success, setSuccess] = useState({state: false, type: "success", msg: "Absage Emails versendet"});
     const [error, setError] = useState({state: false, type: "error", msg: "absage konnte nicht verschickt werden"});
     const [openCancel, setOpenCancel] = useState(false);
-
+console.log("contacts", props.contacts)
     function handleCopyLink(string: string, type: 'zoomLink' | 'wsLink') {
         navigator.clipboard.writeText(string).then(() => {
             setOnClipboard({...onClipboard, [type]: !onClipboard[type]});
@@ -336,7 +336,7 @@ const WorkshopCard = (props: {
 
                     { !edit.state && <div className={ `${ styles.cardBodySection } ${ styles.participantArea }` }
                                           onClick={ handleContactDetails }>
-                      <h4>Teilnehmer: { props.contacts?.length }</h4>
+                      <h4>Teilnehmer: { props.contacts?.length || 0 }</h4>
                     </div> }
                 </div>
                 { !eventIsInThePast && <div className={ styles.cardButtons }>
