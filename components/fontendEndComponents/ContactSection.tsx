@@ -23,6 +23,7 @@ const ContactSection = ({data}: { data: ContactSectionTypes }) => {
                     <div>
                             <RichTextRenderer blocks={ data.contactData } textColor={ colorSet.color }/>
                     </div>
+
                     <div className={ styles.socialLinksSection }>
                         <h3 style={ {color: colorSet.color} }>Folge mir gern auf</h3>
                         <div className={ styles.contactGridRight }>
