@@ -3,9 +3,13 @@ import StrapiItemsRendering from "@/layouts/StrapiItemsRendering";
 import {StrapiData} from "@/types/generalTypes";
 import {redirect} from "next/navigation";
 
-const AppointmentPage = async ({slug}: { slug: string }) => {
+const PageRenderComponent = async ({slug}: { slug: string }) => {
+    console.log("slug", slug)
     const pageData = await getPage(slug)
+    console.log("pageData", pageData)
     const selectedPage = pageData.data[0] as StrapiData
+
+    console.log("selected Page", selectedPage)
 
     if(!selectedPage) return redirect("/")
     return (
@@ -15,4 +19,4 @@ const AppointmentPage = async ({slug}: { slug: string }) => {
     );
 };
 
-export default AppointmentPage;
+export default PageRenderComponent;

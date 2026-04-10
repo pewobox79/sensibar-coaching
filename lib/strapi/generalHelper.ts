@@ -289,8 +289,9 @@ export const getValidInternalLink = (sitepath: string, href: string) => {
 }
 
 export const getPage = async (slug: string) => {
+    const url = `${ STRAPI_URI }/api/pages?filters[slug][$eq]=${ slug }&${ DynamicContentQuery }`
     try {
-        const response = await fetch(`${ STRAPI_URI }/api/pages?filter[slug][$eq]=${ slug }&${ DynamicContentQuery }`, {
+        const response = await fetch(url, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`

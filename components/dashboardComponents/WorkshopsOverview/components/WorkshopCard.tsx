@@ -62,7 +62,6 @@ const WorkshopCard = (props: {
     const [success, setSuccess] = useState({state: false, type: "success", msg: "Absage Emails versendet"});
     const [error, setError] = useState({state: false, type: "error", msg: "absage konnte nicht verschickt werden"});
     const [openCancel, setOpenCancel] = useState(false);
-console.log("contacts", props.contacts)
     function handleCopyLink(string: string, type: 'zoomLink' | 'wsLink') {
         navigator.clipboard.writeText(string).then(() => {
             setOnClipboard({...onClipboard, [type]: !onClipboard[type]});
