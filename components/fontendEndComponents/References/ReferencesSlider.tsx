@@ -6,7 +6,7 @@ import '@/styles/References.css'
 import Container from "@/components/global/Container";
 import {BgColorType, ReferencesTypes} from "@/types/generalTypes";
 import {getColor} from "@/utils/helper/colorHelper";
-import Stern from "@/assets/images/sensibar-stern-square.png";
+import Stern from "@/assets/images/stern/stern_transparent_v2.png";
 import Image from "next/image";
 // SOURCE: https://github.com/leandrowd/react-responsive-carousel
 

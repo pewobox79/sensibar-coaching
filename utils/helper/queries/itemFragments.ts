@@ -27,6 +27,21 @@ export const contactComponentFragment = {
         },
     },
 };
+
+export const logoSection = {
+    'components.logo-section': {
+        populate: {
+            bgColor: true,
+            logos: {
+                populate: {
+                    src: {
+                        fields: ["formats", "alternativeText"]
+                    }
+                }
+            }
+        }
+    },
+};
 export const textBlockFragment = {
     'elements.text-block': {
         populate: ['bgColor'],

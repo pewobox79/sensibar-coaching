@@ -4,7 +4,7 @@ import {
     ContactSectionTypes,
     GridBundleType,
     Items,
-    JumbotronType, QuoteSectionTypes, ReferenceSectionTypes,
+    JumbotronType, LogoSectionType, QuoteSectionTypes, ReferenceSectionTypes,
     TextBlockType,
     TextImageSectionType, TextImgGridTypes
 } from "@/types/generalTypes";
@@ -14,8 +14,10 @@ import QuoteSection from "@/components/fontendEndComponents/QuoteSection";
 import TextImgGrid from "@/components/fontendEndComponents/TextImgGrid/TextImgGrid";
 import ContactSection from "@/components/fontendEndComponents/ContactSection";
 import References from "@/components/fontendEndComponents/References/References";
+import LogoSection from "@/components/fontendEndComponents/LogoSection/LogoSection";
 
 const StrapiItemsRendering =(item:Items)=>{
+    console.log("item", item)
     switch(item?.__component){
         case "elements.jumbotron":
             return <BackgroundImgWithText data={item as JumbotronType}/>
@@ -29,6 +31,8 @@ const StrapiItemsRendering =(item:Items)=>{
             return <TextImgGrid data={item as TextImgGridTypes}/>
         case 'components.contact':
             return <ContactSection data={item as ContactSectionTypes}/>
+        case 'components.logo-section':
+            return <LogoSection data={item as LogoSectionType}/>
         case 'components.reference-section':
             return <References data={item as ReferenceSectionTypes}/>
         case 'components.text-img-component':

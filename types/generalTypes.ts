@@ -35,6 +35,22 @@ export interface ImageType {
     url?: string
 }
 
+export interface LogoSectionType {
+    id: number,
+    __component: string
+    internalName?: string
+    title: string,
+    logos: LogoType[]
+    bgColor: BgColorType
+}
+
+export interface LogoType {
+    hasLink: boolean,
+    href: string
+    alt: string
+    target: string
+    src: ImageType
+}
 
 export type LinkType = {
     active: boolean
@@ -146,6 +162,7 @@ export type Items =
     | TextImgGridTypes
     | ContactSectionTypes
     | ReferenceSectionTypes
+    | LogoSectionType
 
 export interface StrapiData {
     items: Items[]

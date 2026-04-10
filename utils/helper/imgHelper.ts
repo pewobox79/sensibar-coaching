@@ -1,5 +1,5 @@
 import {IMAGE_SIZE_PRIORITY, ImageType} from "@/types/generalTypes";
-import bgImage from '@/assets/images/sensibar-stern-square.png'
+import bgImage from '@/assets/images/stern/stern_transparent_v2.png'
 export const getBestAvailableImgResolution = (
     imgData: ImageType,
     preferredSize: IMAGE_SIZE_PRIORITY = "medium"
