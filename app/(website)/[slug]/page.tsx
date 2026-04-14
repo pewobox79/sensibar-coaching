@@ -1,6 +1,5 @@
 import LoginForm from "@/components/forms/LoginForm";
 import PageRenderComponent from "@/pagesComponents/PageRenderComponent/PageRenderComponent";
-
 const ActionPage = async ({params}: { params: { slug: string }, searchParams: { slug: string } }) => {
     const {slug} = await params;
 

@@ -11,8 +11,6 @@ const STERN_IMAGE_BY_BG_COLOR: Record<string, string> = {
 };
 
 export default function SternElement({ bgColor }: { bgColor: string }) {
-
-    console.log("bgColor", bgColor)
     const sternImageSrc = STERN_IMAGE_BY_BG_COLOR[bgColor] ?? SternWhite.src;
 
     return <Image src={sternImageSrc} alt="Logo" width={60} height={60} />;

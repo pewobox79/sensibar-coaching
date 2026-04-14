@@ -1,9 +1,7 @@
 import {getColor} from "@/utils/helper/colorHelper";
-import Image from "next/image";
-import Stern from "../../../assets/images/stern/stern_transparent_v2.png";
 import Container from "@/components/global/Container";
 import LogoItem from "@/components/fontendEndComponents/LogoSection/LogoItem";
-import {BgColorType, LogoSectionType, LogoType} from "@/types/generalTypes";
+import {LogoSectionType, LogoType} from "@/types/generalTypes";
 import SternElement from "@/components/global/SternElement";
 
 const LogoSection = ({data}:{data: LogoSectionType}) => {
@@ -15,7 +13,6 @@ const LogoSection = ({data}:{data: LogoSectionType}) => {
         </div>
             <div style={{padding: "20px 30px"}}>
                 {logos.map((logo:LogoType)=>{
-                    console.log("logo", logo)
                     return <LogoItem key={logo.src.documentId} {...logo}/>
                 })}
             </div></div>

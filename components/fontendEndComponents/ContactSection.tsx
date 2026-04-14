@@ -35,11 +35,6 @@ const ContactSection = ({data}: { data: ContactSectionTypes }) => {
 
                     </div>
                 </div>
-                <div style={{display:"flex", justifyContent:"center"}}>{ data.legalLinks.map((link) => {
-                            const textLinkColor = getColor(link?.bgColor?.color as string)
-                            return <a className={ 'globalTextLink' } style={ {color: textLinkColor.color} }
-                                      href={ link.href } key={ link.id }>{ link.label }</a>
-                        }) }</div>
             </div>
         </div>
     </Container>

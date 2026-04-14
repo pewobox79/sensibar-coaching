@@ -17,7 +17,6 @@ import References from "@/components/fontendEndComponents/References/References"
 import LogoSection from "@/components/fontendEndComponents/LogoSection/LogoSection";
 
 const StrapiItemsRendering =(item:Items)=>{
-    console.log("item", item)
     switch(item?.__component){
         case "elements.jumbotron":
             return <BackgroundImgWithText data={item as JumbotronType}/>

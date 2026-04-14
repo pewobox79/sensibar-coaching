@@ -22,8 +22,7 @@ export const contactComponentFragment = {
         populate: {
             bgColor: true,
             logo: true,
-            socialLinks: true,
-            legalLinks: true
+            socialLinks: true
         },
     },
 };

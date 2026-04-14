@@ -18,6 +18,7 @@ const BillingAddress = () => {
             <form >
                 <div className={ styles.formItem }>
                     <Form.Control
+                        required={true}
                         type="text"
                         id="street"
                         placeholder="Strasse"
@@ -28,6 +29,7 @@ const BillingAddress = () => {
                 </div>
                 <div className={ styles.formItem }>
                     <Form.Control
+                        required={true}
                         type="text"
                         id="streetNumber"
                         placeholder='Hausnummer'
@@ -39,6 +41,7 @@ const BillingAddress = () => {
                 </div>
                 <div className={ styles.formItem }>
                     <Form.Control
+                        required={true}
                         type="text"
                         id="city"
                         placeholder="Stadt"
@@ -50,6 +53,7 @@ const BillingAddress = () => {
                 </div>
                 <div className={ styles.formItem }>
                     <Form.Control
+                        required={true}
                         type="text"
                         id="zipCode"
                         placeholder="Postleitzahl"
@@ -62,6 +66,7 @@ const BillingAddress = () => {
                 <div className={ styles.formItem }>
 
                     <Form.Control
+                        required={true}
                         as="select"
                         type="text"
                         id="country"

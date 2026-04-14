@@ -9,6 +9,22 @@ const config = {
     },
     next: {revalidate: 0}
 }
+
+export const getLegalLinks =async ()=>{
+
+    try {
+
+        const response = await fetch(`${ STRAPI_URI }/api/legal-link-section?populate=*`, config)
+        return await response.json()
+
+    } catch (e) {
+
+        console.error('Error fetching navigation data:', e)
+    }
+
+}
+
+
 export const getNavigation = async () => {
 
     try {
