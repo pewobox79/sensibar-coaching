@@ -147,7 +147,6 @@ export interface TextImgGridTypes {
 export interface ContactSectionTypes {
     __component: string
     socialLinks: LinkType[]
-    legalLinks: LinkType[]
     bgColor: BgColorType
     hashId: string
     contactData: TextBlock

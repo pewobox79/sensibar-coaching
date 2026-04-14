@@ -43,6 +43,7 @@ export const getHomePageFromLocalApi = async () => {
     try {
         const response = await fetch(`${ FRONTEND_URI }/api/homepage`, {next: {revalidate: 40}})
         const data = await response.json()
+        console.log("data api homepage", data)
         return data.response
     } catch (err) {
         console.error("Error fetching homepage data:", err)

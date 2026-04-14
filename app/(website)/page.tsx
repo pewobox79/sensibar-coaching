@@ -16,6 +16,7 @@ export default async function Home() {
         } }><h3>Seite befindet sich im Umbau</h3></div>
     </Container>
     const homepageData = await getHomePageFromLocalApi()
+    console.log("homepage", homepageData)
     return (
         <Homepage data={ homepageData?.data }/>
     );
