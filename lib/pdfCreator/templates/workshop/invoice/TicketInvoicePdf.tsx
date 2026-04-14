@@ -1,4 +1,4 @@
-import {Document, Image, Page, Text, View} from "@react-pdf/renderer";
+import {Document, Image, Link, Page, Text, View} from "@react-pdf/renderer";
 import React from "react";
 import {styles} from "@/lib/pdfCreator/templates/workshop/invoice/TicketInvoiceStyling";
 import logo from '@/assets/images/sensibar-coaching-logo-neu.png'
@@ -259,6 +259,9 @@ const TicketInvoicePdf = ({
                 <Text style={ styles.footerText }>
                     Diese Rechnung wurde elektronisch erstellt und ist ohne Unterschrift gültig.
                 </Text>
+                <Link src="https://www.sensibar-coaching.de/widerrufsbelehrung" style={styles.footerText}>
+                    https://www.sensibar-coaching.de/widerrufsbelehrung
+                </Link>
             </View>
         </Page>
     </Document>

@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     },
     ticketWrapper: {
         width: "82%",
-        height: "28%",
+        height: "35%",
         minHeight: 170,
         display: "flex",
         flexDirection: "row",

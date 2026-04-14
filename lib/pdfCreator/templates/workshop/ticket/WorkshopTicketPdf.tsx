@@ -1,4 +1,4 @@
-import {Document, Image, Page, Text, View} from "@react-pdf/renderer";
+import {Document, Image, Page, Text, View, Link} from "@react-pdf/renderer";
 import React from "react";
 import logo from '@/assets/images/sensibar-coaching-logo-neu.png'
 import {styles} from "@/lib/pdfCreator/templates/workshop/ticket/WorkshopTicketStyling";
@@ -39,7 +39,7 @@ const WorkshopTicketPdf =({
                         </View>
 
                         <Text style={styles.brandSubline}>
-                            Bitte dieses Ticket zum Workshop mitbringen.
+                            ssBitte dieses Ticket zum Workshop mitbringen.
                         </Text>
                     </View>
 
@@ -85,8 +85,11 @@ const WorkshopTicketPdf =({
 
                         <View style={styles.footer}>
                             <Text style={styles.footerText}>
-                                Dieses Ticket ist personalisiert und nur für die angegebene Buchung gültig. <a href="https://www.sensibar-coaching.de/widerrufsbelehrung">Widerrufsrecht</a>
+                                Dieses Ticket ist personalisiert und nur für die angegebene Buchung gültig.
                             </Text>
+                            <Link src="https://www.sensibar-coaching.de/widerrufsbelehrung" style={styles.footerText}>
+                                https://www.sensibar-coaching.de/widerrufsbelehrung
+                            </Link>
                         </View>
                     </View>
                 </View>
