@@ -2,9 +2,10 @@ import {getColor} from "@/utils/helper/colorHelper";
 import {LinkType} from "@/types/generalTypes";
 
 const LinkElement = (link: LinkType) => {
+    const textLinkColor = getColor(link?.bgColor?.color as string)
 
     if(!link.active) return
-    const textLinkColor = getColor(link?.bgColor?.color as string)
+
     return <a className={ 'globalTextLink' }
               style={ {color: textLinkColor.color} }
               href={ link.href }
