@@ -163,6 +163,7 @@ export type Items =
     | ContactSectionTypes
     | ReferenceSectionTypes
     | LogoSectionType
+    | QuoteSectionTypes
 
 export interface StrapiData {
     items: Items[]

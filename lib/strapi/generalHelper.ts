@@ -7,21 +7,16 @@ const config = {
     headers: {
         Authorization: `Bearer ${ BEARER_TOKEN }`,
     },
-    next: {revalidate: 0}
+    next: {revalidate: 10}
 }
 
 export const getLegalLinks =async ()=>{
-
     try {
-
         const response = await fetch(`${ STRAPI_URI }/api/legal-link-section?populate=*`, config)
         return await response.json()
-
     } catch (e) {
-
         console.error('Error fetching navigation data:', e)
     }
-
 }
 
 
