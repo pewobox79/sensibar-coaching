@@ -75,6 +75,7 @@ export interface TextBlockType {
 
 export interface JumbotronType {
     __component: string,
+    textBoxLeft: boolean,
     id?: string | undefined
     Image?: ImageType | undefined
     image?: ImageType | undefined

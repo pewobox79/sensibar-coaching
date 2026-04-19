@@ -8,7 +8,8 @@
     position: relative;
 }
 
-.textBlock {
+.textBlockRight,
+.textBlockLeft {
     position: absolute;
     text-align: center;
     color: var(--headingColor);
@@ -16,16 +17,23 @@
     width: 100%
 }
 
-
 @media screen and (min-width: 768px) {
 
-    .backgroundImgWithTextInner{
+    .backgroundImgWithTextInner {
         margin-top: 100px;
     }
-    .textBlock {
+
+    .textBlockRight {
         padding: 0 30px;
         background-color: var(--seachBackground);
         right: 0;
+        width: auto
+    }
+
+    .textBlockLeft {
+        left: 0;
+        padding: 0 30px;
+        background-color: var(--seachBackground);
         width: auto
     }
 
