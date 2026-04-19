@@ -36,7 +36,7 @@ export const getNavigation = async () => {
 export const getHomePageFromLocalApi = async () => {
 
     try {
-        const response = await fetch(`${ FRONTEND_URI }/api/homepage`, {next: {revalidate: 40}})
+        const response = await fetch(`${ FRONTEND_URI }/api/homepage`)
         const data = await response.json()
         return data.response
     } catch (err) {
