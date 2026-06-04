@@ -8,11 +8,7 @@ const PageRenderComponent = async ({slug}: { slug: string }) => {
     const selectedPage = pageData.data[0] as StrapiData
 
     if(!selectedPage) return redirect("/")
-    return (
-        <div>
-            { selectedPage?.items?.map(item => <StrapiItemsRendering key={ item.id } { ...item }/>) }
-        </div>
-    );
+    return <>{ selectedPage?.items?.map(item => <StrapiItemsRendering key={ item.id } { ...item }/>) }</>
 };
 
-export default PageRenderComponent;
+export default PageRenderComponent
