@@ -1,0 +1,25 @@
+.logoInner {
+    display: flex;
+    align-items: center;
+    padding: 20px 10px;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+}
+
+.logoElement {
+    margin: 3px
+}
+
+.logoElement:First-child {
+    margin-left: 0;
+}
+
+@media screen and (min-width: 320px) {
+
+    .logoInner {
+        padding: 20px 30px;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+}

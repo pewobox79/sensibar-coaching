@@ -3,7 +3,7 @@ import Container from "@/components/global/Container";
 import LogoItem from "@/components/fontendEndComponents/LogoSection/LogoItem";
 import {LogoSectionType, LogoType} from "@/types/generalTypes";
 import SternElement from "@/components/global/SternElement";
-
+import styles from '@/styles/LogoSection.module.css'
 const LogoSection = ({data}:{data: LogoSectionType}) => {
     const colorSet = getColor(data?.bgColor?.color as string)
     const {title, logos} = data
@@ -11,7 +11,7 @@ const LogoSection = ({data}:{data: LogoSectionType}) => {
         <div className={"innerWrapper"}><div className='referenceHeading'><h2 style={{color: colorSet.color}}>{ title || '' }</h2>
            <SternElement bgColor={colorSet.bgColor}/>
         </div>
-            <div style={{padding: "20px 30px"}}>
+            <div className={styles.logoInner}>
                 {logos.map((logo:LogoType)=>{
                     return <LogoItem key={logo.src.documentId} {...logo}/>
                 })}
