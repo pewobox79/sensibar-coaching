@@ -8,8 +8,8 @@ import {formatTimeToAdminFormat} from "@/lib/strapi/workshopHelper";
 import {StrapiPaymentProps} from "@/types/generalTypes";
 
 const WorkshopButtons = (props:StrapiPaymentProps) => {
-    const {event_ticket, transaction, billingAddress, contact, invoiceNumber, billing} = props
-
+    const {event_ticket, transaction, billingAddress, contact, invoiceNumber, billing, wId} = props
+console.log("wId", wId)
     return <div style={ {display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap"} }>
         { billing && <PDFDownloadLink className={ "globalButton" } document={ <TicketInvoicePdf
             seller={ {
@@ -56,6 +56,7 @@ const WorkshopButtons = (props:StrapiPaymentProps) => {
             location={ event_ticket?.workshop?.location?.city || '' }
             bookedBy={ `${ capitalizeFirstLetter(contact?.personalData?.firstname) } ${ capitalizeFirstLetter(contact?.personalData?.lastname) }` }
             ticketNumber={ event_ticket?.ticketId?.split('-')[2] }
+            workshopId={wId}
         /> }
                          fileName="ticket.pdf">
             { ({loading}) =>

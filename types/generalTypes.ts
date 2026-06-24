@@ -228,6 +228,7 @@ export type EventTicketTypes = {
 
 export interface StrapiPaymentProps {
     event_ticket: EventTicketTypes
+    wId: string
     invoiceNumber: string
     billing: boolean
     billingAddress: BillingAddressType

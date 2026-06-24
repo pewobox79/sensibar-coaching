@@ -16,7 +16,7 @@ const DoubleOptInPage = () => {
             const workshopLink = data.data?.link?.href;
             const {title, workshop_date, location, type} = data?.data
 
-            executeDoubleOptIn(id, workshopLink, title, workshop_date, location, type, paymentId).then(data => console.log(data));
+            executeDoubleOptIn(id, workshopLink, title, workshop_date, location, type, paymentId, workshopId).then(data => console.log(data));
         })
 
 
