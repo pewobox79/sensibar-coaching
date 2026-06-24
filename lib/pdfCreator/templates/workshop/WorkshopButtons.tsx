@@ -9,7 +9,6 @@ import {StrapiPaymentProps} from "@/types/generalTypes";
 
 const WorkshopButtons = (props:StrapiPaymentProps) => {
     const {event_ticket, transaction, billingAddress, contact, invoiceNumber, billing, wId} = props
-console.log("wId", wId)
     return <div style={ {display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap"} }>
         { billing && <PDFDownloadLink className={ "globalButton" } document={ <TicketInvoicePdf
             seller={ {

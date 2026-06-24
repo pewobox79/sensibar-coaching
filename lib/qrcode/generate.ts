@@ -1,7 +1,6 @@
 import {SENSIBAR_URL} from "@/utils/variables";
 
 export const generateTicketQRCode = async (workshopId= "12324", ticketId= "134234") => {
-console.log("generate QR code", workshopId, ticketId)
     const url = `${ SENSIBAR_URL }/api/qrcode`;
 
     const config = {
