@@ -20,7 +20,7 @@ const DesktopNav = ({navigationData}: { navigationData: { label: string, href: s
             return <li key={ item.id } >
                 <Link href={ getValidInternalLink(pathname, item.href) }
                       className={ pathname === item.href ? "activeLink" : "linkStyle" }>
-                    <Image src={Logo.src} alt="Logo" width={180} height={60}/>
+                    <Image src={Logo.src} alt="Logo" width={250} height={95}/>
                 </Link>
             </li>
 
