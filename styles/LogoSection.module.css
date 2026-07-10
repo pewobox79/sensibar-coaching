@@ -7,16 +7,15 @@
     justify-content: center;
 }
 
-.logoElement {
-    margin: 3px
-}
-
 .logoElement:First-child {
     margin-left: 0;
 }
 
 @media screen and (min-width: 320px) {
 
+    .logoElement {
+        margin: 0 8px
+    }
     .logoInner {
         padding: 20px 30px;
         flex-direction: row;
