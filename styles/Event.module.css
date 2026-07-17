@@ -45,7 +45,6 @@
     flex-direction:column;
     padding-top: 40px;
     width: 100%;
-    max-width: 1000px
 
 
 }
@@ -178,8 +177,7 @@
     }
 
     .singleEventContent50{
-        align-items: center;
-        justify-content: center;
+        display: block;
         padding: 15px
     }
 

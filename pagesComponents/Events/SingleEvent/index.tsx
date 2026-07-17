@@ -4,7 +4,8 @@ import EventRegistration from "@/components/forms/EventRegistration";
 import EventInfoBox from "@/components/forms/EventRegistration/EventInfoBox";
 import RichTextRenderer from "@/components/strapi/RenderContentHelper";
 import Container from "@/components/global/Container";
-import {WorkshopTypes} from "@/types/generalTypes";
+import { WorkshopTypes} from "@/types/generalTypes";
+import SpeakerSection from "@/components/workshops/SpeakerSection";
 
 
 const SingleEvent = (props:{data:WorkshopTypes}) => {
@@ -28,6 +29,7 @@ const SingleEvent = (props:{data:WorkshopTypes}) => {
                     </div>
                     <div className={ styles.singleEventContent50 }>
                         <EventInfoBox price={workshopDetails?.workshopPrice} location={workshopDetails?.location} workshop_date={workshopDetails?.workshop_date} workshopTimeStart={workshopDetails?.workshopTimeStart} workshopTimeEnd={workshopDetails?.workshopTimeEnd} workshopType={workshopDetails?.type}/>
+                        {workshopDetails.speaker && <SpeakerSection speaker={workshopDetails.speaker}/>}
                         {workshopDetails.ws_status === "confirmed" &&<EventRegistration {...workshopDetails}/>}</div>
                 </div>
             </div>

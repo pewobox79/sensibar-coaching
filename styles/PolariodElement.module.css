@@ -1,4 +1,4 @@
-.polaroidElement{
+.polaroidElement_large{
     max-width: 400px;
     width: auto;
     min-height: 500px;
@@ -12,8 +12,20 @@
     cursor: pointer;
 }
 
-
-
+.polaroidElement_small {
+    max-width: 400px;
+    width: auto;
+    min-height: 200px;
+    height: auto;
+    background-color: white;
+    position: relative;
+    top: 0;
+    left: 0;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+    display: block;
+    margin: auto;
+    cursor: pointer;
+}
 
 
 .polaroidElement::before{
@@ -41,6 +53,9 @@
     margin: 0 auto
 }
 
+.polaroidElementInner > img{
+    width: 80%
+}
 .polaroidElementSignature{
     text-align: center;
     display: flex;
@@ -48,7 +63,6 @@
     align-items: center;
     color: var(--textColor);
     padding-top: 50px;
-
 }
 
 @media screen and (min-width: 756px) {
@@ -58,7 +72,23 @@
         left: 5%;
     }
 
-    .polaroidElement{
+    .polaroidElementInner > img{
+        width: 100%
+    }
+    .polaroidElement_small{
+        width: 200px;
+        height: 270px;
+        background-color: white;
+        position: relative;
+        top: 20%;
+        left: 5%;
+        transform: rotate(1deg) scale(1);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+        transform-origin: center center;
+        transition: transform 0.28s ease, box-shadow 0.28s ease;
+        cursor: pointer;
+    }
+    .polaroidElement_large {
         width: 400px;
         height: 500px;
         background-color: white;

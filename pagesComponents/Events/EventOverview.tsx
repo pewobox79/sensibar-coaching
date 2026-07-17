@@ -9,6 +9,7 @@ import {WorkshopTypes} from "@/types/generalTypes";
 
 const EventOverview = (props: { data: [] }) => {
     const ListOfWorkshops = props && props?.data?.map((item: WorkshopTypes) => {
+        console.log("item", item)
 
         return <OverviewItem { ...item } key={ item?.documentId } />
     })

@@ -8,6 +8,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const OverviewItem = ({title, workshop_date, documentId, format, location, type}: WorkshopTypes) => {
 
+    console.log("wo", workshop_date)
     const eventIsInThePast = isPastEvent(workshop_date)
     if (eventIsInThePast) return null
     return <div className={ styles.workshopListItemWrapper }>

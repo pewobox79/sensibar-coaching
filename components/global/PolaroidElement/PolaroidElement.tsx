@@ -2,16 +2,15 @@ import {ReactElement} from "react";
 import styles from "@/styles/PolariodElement.module.css";
 import SignatureElement from "@/components/global/blocks/SignatureElement";
 
-const PolaroidElement = ({children, backgroundColor}:{ children: ReactElement, backgroundColor?: string}) => {
+const PolaroidElement = ({children, backgroundColor, size="large", name}:{ children: ReactElement, backgroundColor?: string, size?: "small" |"large", name?: string}) => {
 
-
-    return <div className={styles.polaroidElement} style={{backgroundColor}}>
+    return <div className={`${size === "large" ? styles.polaroidElement_large : styles.polaroidElement_small}`} style={{backgroundColor}}>
 
         <div className={styles.polaroidElementInner}>
             { children }
         </div>
         <div className={styles.polaroidElementSignature}>
-            <SignatureElement />
+            <SignatureElement name={name} size={size}/>
         </div>
 
 
