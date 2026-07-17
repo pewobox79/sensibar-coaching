@@ -50,7 +50,8 @@
     position: relative;
     top: 20px;
     height: 67%;
-    margin: 0 auto
+    margin: 0 auto;
+    text-align: center;
 }
 
 .polaroidElementInner > img{
