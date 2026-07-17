@@ -2,7 +2,7 @@ import {ReactElement} from "react";
 import styles from "@/styles/PolariodElement.module.css";
 import SignatureElement from "@/components/global/blocks/SignatureElement";
 
-const PolaroidElement = ({children, backgroundColor, size="large", name}:{ children: ReactElement, backgroundColor?: string, size?: "small" |"large", name?: string}) => {
+const PolaroidElement = ({children, backgroundColor, size="large", name, signature}:{signature: boolean, children: ReactElement, backgroundColor?: string, size?: "small" |"large", name?: string}) => {
 
     return <div className={`${size === "large" ? styles.polaroidElement_large : styles.polaroidElement_small}`} style={{backgroundColor}}>
 
@@ -10,7 +10,7 @@ const PolaroidElement = ({children, backgroundColor, size="large", name}:{ child
             { children }
         </div>
         <div className={styles.polaroidElementSignature}>
-            <SignatureElement name={name} size={size}/>
+            {signature && <SignatureElement name={name} size={size}/>}
         </div>
 
 

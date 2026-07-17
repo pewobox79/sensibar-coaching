@@ -33,7 +33,7 @@ const TextImgSection = ({isTextLeft = false, backgroundColor, sectionId, body, b
                 </div>
             </div>
             <div className={ styles.imageContainer }>
-                {hasPolaroid ? <PolaroidElement size="large" backgroundColor={buttonColor.bgColor}><img src={ img.url } alt={image?.alternativeText ||"Sensibar Coaching hochsensible menschen"}/></PolaroidElement>:<img src={ img.url } alt={image?.alternativeText ||"Sensibar Coaching hochsensible menschen"}/>}
+                {hasPolaroid ? <PolaroidElement signature ={true} size="large" backgroundColor={buttonColor.bgColor}><img src={ img.url } alt={image?.alternativeText ||"Sensibar Coaching hochsensible menschen"}/></PolaroidElement>:<img src={ img.url } alt={image?.alternativeText ||"Sensibar Coaching hochsensible menschen"}/>}
             </div>
         </div>
     </Container>

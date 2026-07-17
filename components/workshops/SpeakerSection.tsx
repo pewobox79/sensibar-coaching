@@ -4,7 +4,7 @@ import {SpeakerType} from "@/types/generalTypes";
 const SpeakerSection =({speaker}:{speaker:SpeakerType[]})=>{
     if(!speaker) return
 
-    const SpeakerElements = speaker.map((item:SpeakerType) => <PolaroidElement key={item.name + item.id} name={item.name} size="small" ><img src={item.image?.formats?.thumbnail?.url} alt={item.name}/></PolaroidElement>)
+    const SpeakerElements = speaker.map((item:SpeakerType) => <PolaroidElement key={item.name + item.id} signature={false} name={item.name} size="small" ><img src={item.image?.formats?.thumbnail?.url} alt={item.name}/></PolaroidElement>)
 
     return <section style={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", marginTop: 20}}>
         <h3>Referenten</h3>
