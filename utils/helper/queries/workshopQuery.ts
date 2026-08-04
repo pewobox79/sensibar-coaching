@@ -16,7 +16,7 @@ export const WorkshopQuery = qs.stringify({
 export const SingleWorkshopQuery = qs.stringify({
     populate: {
         location: {
-            fields: ['city', 'street', 'zipCode', 'country']
+            fields: ['city', 'street', 'zipCode', 'country', "streetNumber"]
         },
         speaker: {
             populate: {

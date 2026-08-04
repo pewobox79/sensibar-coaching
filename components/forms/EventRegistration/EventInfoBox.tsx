@@ -22,7 +22,7 @@ const EventInfoBox =({workshop_date, workshopTimeStart, workshopTimeEnd, worksho
         <div className={styles.detailsBoxItem}><i><FontAwesomeIcon icon={faCalendar} style={{width:' 40px'}}/></i> {workshop_date} </div>
         <div className={styles.detailsBoxItem}><i><FontAwesomeIcon icon={faClock} style={{width:' 40px'}}/></i> {formatTimeToAdminFormat(workshopTimeStart as string)} bis {formatTimeToAdminFormat(workshopTimeEnd as string)} Uhr </div>
         <div className={styles.detailsBoxItem}><i><FontAwesomeIcon icon={faTag} style={{width:' 40px'}}/></i>{formatPrice(calculateWorkshopPriceForPayPal(Number(price)))} </div>
-        {location &&     <div className={styles.detailsBoxItem}><i><FontAwesomeIcon icon={faLocationDot} style={{width:' 40px'}}/></i>{workshopType != "online" ? addressData: workshopType}</div>}
+        <div className={styles.detailsBoxItem}><i><FontAwesomeIcon icon={faLocationDot} style={{width:' 40px'}}/></i>{workshopType != "online" ? addressData: workshopType}</div>
     </div>
 }
 
