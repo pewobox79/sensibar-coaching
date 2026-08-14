@@ -8,7 +8,8 @@ export const WorkshopQuery = qs.stringify({
         speaker: {
             fields: ["name"]
         }
-    }
+    },
+    sort: ['workshop_date:asc']
 }, {
     encodeValuesOnly: true
 })
