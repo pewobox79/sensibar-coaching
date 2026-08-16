@@ -16,10 +16,11 @@ const OverviewItem = ({title, workshop_date, documentId, format, location, type}
             <div className={ styles.workshopListItemTitle }>
                 <h4>{ title }</h4>
             </div>
-            <div>
-                <h4>{format}</h4>
-                <p><FontAwesomeIcon icon={faCalendar} style={{width:' 40px'}}/>{ formatIsoDateToGerman(workshop_date) }</p>
-                <p><FontAwesomeIcon icon={faLocationDot} style={{width:' 40px'}}/>{location?.city || type}</p>
+            <div className={ styles.workshopListItemDetails }>
+                    <h4>{format}</h4>
+                    <p><FontAwesomeIcon icon={faCalendar} style={{width:' 40px'}}/>{ formatIsoDateToGerman(workshop_date) }</p>
+                    <p><FontAwesomeIcon icon={faLocationDot} style={{width:' 40px'}}/>{location?.city || type}</p>
+
             </div>
         </div>
         <Button type={ "button" } title={ "details" } href={ createWorkshopLink(title, documentId) } />
