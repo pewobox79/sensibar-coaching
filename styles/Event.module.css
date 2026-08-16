@@ -181,6 +181,15 @@
         display: block;
         padding: 15px
     }
+    .singleEventContent50:first-child{
+        width: 60%;
+        flex: 0 0 65%;
+    }
+
+    .singleEventContent50:last-child{
+        width: 40%;
+        flex: 0 0 35%;
+    }
 
     .singleEventDetailsBoxWrapper {
         width: 80%;
