@@ -12,6 +12,7 @@ const SingleEvent = (props:{data:WorkshopTypes}) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-expect-error
     const workshopDetails:EventDetailsProps = props.data ? props?.data:{}
+    console.log(workshopDetails)
 
     return <Container id={"single workshop"}>
 
@@ -29,7 +30,7 @@ const SingleEvent = (props:{data:WorkshopTypes}) => {
                     </div>
                     <div className={ styles.singleEventContent50 }>
                         <EventInfoBox price={workshopDetails?.workshopPrice} location={workshopDetails?.location} workshop_date={workshopDetails?.workshop_date} workshopTimeStart={workshopDetails?.workshopTimeStart} workshopTimeEnd={workshopDetails?.workshopTimeEnd} workshopType={workshopDetails?.type}/>
-                        {workshopDetails.speaker && <SpeakerSection speaker={workshopDetails.speaker}/>}
+                        {workshopDetails.speaker.length > 0 && <SpeakerSection speaker={workshopDetails.speaker}/>}
                         {workshopDetails.ws_status === "confirmed" &&<EventRegistration {...workshopDetails}/>}</div>
                 </div>
             </div>
