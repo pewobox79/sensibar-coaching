@@ -12,7 +12,6 @@ const SingleEvent = (props:{data:WorkshopTypes}) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-expect-error
     const workshopDetails:EventDetailsProps = props.data ? props?.data:{}
-    console.log(workshopDetails)
 
     return <Container id={"single workshop"}>
 
