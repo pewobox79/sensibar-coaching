@@ -17,11 +17,12 @@ type EventInfoTypes ={
 }
 const EventInfoBox =({workshop_date, workshopTimeStart, workshopTimeEnd, workshopType, location, price}:EventInfoTypes )=>{
     const addressData = `${location?.street} ${location?.streetNumber}, ${location?.zipCode} ${location?.city} `
+    console.log("price", price)
     return <div className={styles.singleEventDetailsBoxWrapper}>
         <div className={styles.detailsBoxItemHeader}><h3>Event Details</h3></div>
         <div className={styles.detailsBoxItem}><i><FontAwesomeIcon icon={faCalendar} style={{width:' 40px'}}/></i> {workshop_date} </div>
         <div className={styles.detailsBoxItem}><i><FontAwesomeIcon icon={faClock} style={{width:' 40px'}}/></i> {formatTimeToAdminFormat(workshopTimeStart as string)} bis {formatTimeToAdminFormat(workshopTimeEnd as string)} Uhr </div>
-        <div className={styles.detailsBoxItem}><i><FontAwesomeIcon icon={faTag} style={{width:' 40px'}}/></i>{formatPrice(calculateWorkshopPriceForPayPal(Number(price)))} </div>
+        <div className={styles.detailsBoxItem}><i><FontAwesomeIcon icon={faTag} style={{width:' 40px'}}/></i>{price > 0 ? formatPrice(calculateWorkshopPriceForPayPal(Number(price))) : "kostenfrei"} </div>
         <div className={styles.detailsBoxItem}><i><FontAwesomeIcon icon={faLocationDot} style={{width:' 40px'}}/></i>{workshopType != "online" ? addressData: workshopType}</div>
     </div>
 }

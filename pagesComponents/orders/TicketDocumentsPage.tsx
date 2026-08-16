@@ -10,10 +10,9 @@ const WorkshopButtons = dynamic(
 
 export default function TicketDocumentsPage(props:StrapiPaymentProps) {
   if (!props) return <div>Rechnung und Ticket sind nicht bekannt</div>;
-
   return (
     <>
-      <h1>Ticket Documents</h1>
+      <h1>Deine Dokumente</h1>
       <WorkshopButtons {...props} />
     </>
   );
