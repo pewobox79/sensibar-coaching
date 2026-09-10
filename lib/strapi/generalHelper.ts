@@ -57,6 +57,21 @@ export const getHomepage = async () => {
         console.error('Error fetching navigation data:', e)
     }
 }
+export const getAdventCalendar = async () => {
+
+    const URL = `${ STRAPI_URI }/api/advent-calendar/?populate=*`
+
+
+    try {
+        const response = await fetch(URL, config)
+        return await response.json()
+
+    } catch (e) {
+
+        console.error('Error fetching navigation data:', e)
+    }
+}
+
 
 export const getBasicPageContent = async (slug: string) => {
 

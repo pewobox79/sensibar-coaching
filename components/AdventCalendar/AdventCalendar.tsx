@@ -1,6 +1,7 @@
 import "@/styles/AdventCalendar.css";
 import Container from "@/components/global/Container";
 import {AdventCard} from "@/components/AdventCalendar/AdventCard";
+import {getAdventCalendar} from "@/lib/strapi/generalHelper";
 
 const days = [
     {day: 1, variant: "accent"},
@@ -33,20 +34,23 @@ const days = [
 ];
 
 
-
-export default function AdventCalendar() {
-
+export default async function AdventCalendar() {
+    const {data} = await getAdventCalendar()
+    const calendarItems = data?.items
+    console.log("items calender", calendarItems)
     return (
         <Container id="calendarPage">
             <div className="adventCalendar">
-                { days.map((item, index) => (
-                    <AdventCard
+                { days.map((item, index) => {
+                    const itemContent = calendarItems[item.day-1]
+                    return <AdventCard
                         key={ item.day }
                         day={ item.day }
+                        content={ itemContent }
                         variant={ item.variant }
                         index={ index }
                     />
-                )) }
+                }) }
             </div>
         </Container>
     );

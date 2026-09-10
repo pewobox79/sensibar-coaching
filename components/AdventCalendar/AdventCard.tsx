@@ -5,6 +5,8 @@ import React, {useState} from "react";
 import {isReadyToOpen} from "@/utils/adventCalendarHelper";
 import AdventCardOpen from "@/components/AdventCalendar/AdventCardOpen";
 import {useLocalStorage} from "@/hooks/useLocalStorage";
+import AdventCardModal from "@/components/AdventCalendar/AdventCardModal";
+import {AdventCardTypes} from "@/types/generalTypes";
 
 const decorationSets = [
     {
@@ -56,14 +58,16 @@ function SnowDots() {
     );
 }
 
-export function AdventCard({day, variant, index}: { day: number, variant?: string, index: number }) {
+export function AdventCard({day, variant, index, content}: AdventCardTypes) {
 
     const {value, setStoredValue} = useLocalStorage("adventCalendar_values", [])
     const decorations = decorationSets[index % decorationSets.length];
-    const [open, setOpen] = useState(false );
+    const [open, setOpen] = useState(false);
     const [message, setMessage] = useState(false)
+    const [modal, setModal] = useState(false)
 
     const isOpened = value?.includes(day);
+
     function handleOpen() {
         if (isReadyToOpen(day)) {
             if(value.includes(day)) return
@@ -76,24 +80,39 @@ export function AdventCard({day, variant, index}: { day: number, variant?: strin
         setMessage(true)
     }
 
+    function handleModal() {
+        setModal(!modal)
+    }
+
     return (
-        <button
-            className={ `adventCard ${
-                variant === "accent" ? "adventCardAccent" : ""
-            } ${ open || isOpened ? "adventCardOpened" : "" }` }
-            type="button"
-            onClick={ handleOpen }
-        >
+        <>
+            <button
+                className={ `adventCard ${
+                    variant === "accent" ? "adventCardAccent" : ""
+                } ${ open || isOpened ? "adventCardOpened" : "" }` }
+                type="button"
+                onClick={ handleOpen }
+            >
 
-            <div className="decorations">
-                { decorations.flakes.map((flake, flakeIndex) => (
-                    <Snowflake key={ flakeIndex } style={ flake }/>
-                )) }
-                <SnowDots/>
-            </div>
+                <div className="decorations">
+                    { decorations.flakes.map((flake, flakeIndex) => (
+                        <Snowflake key={ flakeIndex } style={ flake }/>
+                    )) }
+                    <SnowDots/>
+                </div>
 
-            { message ? <p>Kalender kann erst am { day }. Dezember geöffnet werden</p> :
-                isOpened || open ? <AdventCardOpen day={day} /> : <span className="dayNumber">{ day }</span> }
-        </button>
+                { message ? <div className={"tooEarly"}>Kalender kann erst am { day }. Dezember geöffnet werden</div> :
+                    isOpened || open ? <AdventCardOpen day={day} handleModal={handleModal}/> : <span className="dayNumber">{ day }</span> }
+            </button>
+
+            {modal && (
+                <AdventCardModal
+                    day={day}
+                    modal={modal}
+                    handleModal={handleModal}
+                    content={content}
+                />
+            )}
+        </>
     );
 }

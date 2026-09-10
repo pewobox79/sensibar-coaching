@@ -92,18 +92,31 @@
     left: 20px;
 }
 
+.tooEarly {
+    padding: 10px;
+    font-size: 1rem;
+    font-family: var(--font-montserrat);
+    color: var(--textColor)
+}
 
 .adventCardModal{
     display: none;
-    position: absolute;
-    width: 90%;
-    height: 90%;
-    overflow: hidden;
+    position: fixed;
+    inset: 0;
+    width: 90vw;
+    max-width: 1200px;
+    padding: 20px;
+    height: 80vh;
+    margin: auto;
+    overflow: auto;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: white;
-    border: 1px solid red
+    background-color: rgba(255, 255, 255, 0.95);
+    z-index: 9999;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
 }
 
 .adventCardModalOpen {

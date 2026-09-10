@@ -13,6 +13,7 @@ type RichTextChild = {
     url?: string
     bold?: boolean
     italic?: boolean
+    target?:string
     underline?: boolean
     strikethrough?: boolean
     children?: RichTextChild[]
@@ -31,8 +32,9 @@ const RichTextRenderer = ({ blocks, textColor }: { blocks: TextBlock, textColor?
             const key = `${child.text || child.type}-${index}`
 
             if (child.type === "link") {
+                console.log("child link", child)
                 return (
-                    <Link className="innerTextLinkStyle" href={child.url || "#"} key={key}>
+                    <Link className="innerTextLinkStyle" href={child.url || "#"} target={child.target || "_self"} key={key}>
                         {renderInlineChildren(child.children)}
                     </Link>
                 )

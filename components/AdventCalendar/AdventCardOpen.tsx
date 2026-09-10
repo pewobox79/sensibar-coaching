@@ -1,21 +1,12 @@
-import React, {useState} from "react";
-import AdventCardModal from "@/components/AdventCalendar/AdventCardModal";
+import Button from "@/components/global/Button";
 
-const AdventCardOpen =({day}:{day:number}) => {
-    const [modal, setModal] = useState(false)
+const AdventCardOpen =({day, handleModal}:{day:number, handleModal: () => void}) => {
 
-    function handleModal(){
-        setModal(!modal)
-    }
   return (
-    <>
         <div>
             <span className="dayNumberOnOpen">{ day }</span>
-            Inhalt des Adventskalenders
-            <div onClick={handleModal}>click</div>
+            <Button type={"submit"}  title={"Türchen öffnen"} action={handleModal}/>
         </div>
-        {modal && <AdventCardModal modal={modal} handleModal={handleModal} />}
-    </>
   )
 }
 
