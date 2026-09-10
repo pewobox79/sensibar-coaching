@@ -5,6 +5,7 @@ import React, {useState} from "react";
 import {isReadyToOpen} from "@/utils/adventCalendarHelper";
 import {number} from "yup";
 import AdventCardOpen from "@/components/AdventCalendar/AdventCardOpen";
+import {useLocalStorage} from "@/hooks/useLocalStorage";
 
 const decorationSets = [
     {
@@ -56,16 +57,18 @@ function SnowDots() {
     );
 }
 
-export function AdventCard({setStoredValue, storedValues, day, variant, index}: { setStoredValue: (newValue: unknown)=>void | undefined, storedValues: number[], day: number, variant?: string, index: number }) {
+export function AdventCard({day, variant, index}: { day: number, variant?: string, index: number }) {
+
+    const {value, setStoredValue} = useLocalStorage("adventCalendar_values", [])
     const decorations = decorationSets[index % decorationSets.length];
     const [open, setOpen] = useState(false );
     const [message, setMessage] = useState(false)
 
-    const isOpened = storedValues?.includes(day);
+    const isOpened = value?.includes(day);
     function handleOpen() {
         if (isReadyToOpen(day)) {
-            if(storedValues.includes(day)) return
-            const updatedDays = storedValues ? [...storedValues, day]: [day]
+            if(value.includes(day)) return
+            const updatedDays = value ? [...value, day]: [day]
             setStoredValue(updatedDays)
             setOpen(true)
             return

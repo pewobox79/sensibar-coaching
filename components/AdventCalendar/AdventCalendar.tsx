@@ -1,8 +1,6 @@
-'use client'
 import "@/styles/AdventCalendar.css";
 import Container from "@/components/global/Container";
 import {AdventCard} from "@/components/AdventCalendar/AdventCard";
-import {useLocalStorage} from "@/hooks/useLocalStorage";
 
 const days = [
     {day: 1, variant: "accent"},
@@ -37,15 +35,13 @@ const days = [
 
 
 export default function AdventCalendar() {
-    const {value, setStoredValue} = useLocalStorage("adventCalendar_values", [])
+
     return (
         <Container id="calendarPage">
             <div className="adventCalendar">
                 { days.map((item, index) => (
                     <AdventCard
                         key={ item.day }
-                        storedValues={ value }
-                        setStoredValue={ setStoredValue }
                         day={ item.day }
                         variant={ item.variant }
                         index={ index }
