@@ -65,7 +65,7 @@ const WorkshopForm = () => {
 
     const [success, setSuccess] = useState({state: false, msg: "Neuer Workshop angelegt", type: "success"})
     const [error, setError] = useState({state: false, msg: "workshop konnte nicht angelegt werden", type: "error"})
-    const token = useLocalStorage("sensiUser")
+    const {value:token} = useLocalStorage("sensiUser", null)
 
 
     const workshopSchema = Yup.object().shape({

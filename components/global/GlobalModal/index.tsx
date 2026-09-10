@@ -7,11 +7,14 @@ import {useModalOpen} from "@/stores/useModalOpen";
 
 const GlobalModal = ({children, type}: {
     children: React.ReactElement[] | React.ReactElement | React.ReactNode,
-    type: "cancelOrder" | "create" | "contacts" | "absage"
+    type: "cancelOrder" | "create" | "contacts" | "absage" | "adventCard"
 }) => {
     let modalAction
 
     switch (type) {
+        case "adventCard":
+            modalAction = useModalOpen.getState().setAdventCardModalOpen;
+            break;
         case "create":
             modalAction = useModalOpen.getState().setCreateModalClose;
             break;

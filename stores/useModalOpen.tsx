@@ -1,7 +1,7 @@
     import {create} from "zustand";
 
 interface modalOpen {
-    status: { search: boolean, treatmentForm: boolean, createModal: boolean, contacts: boolean, workshop: boolean, cancelOrder: boolean }
+    status: { adventCard: boolean, search: boolean, treatmentForm: boolean, createModal: boolean, contacts: boolean, workshop: boolean, cancelOrder: boolean }
     setSearchOpen: () => void;
     setSearchClose: () => void;
     setTreatmentFormOpen: () => void;
@@ -9,14 +9,16 @@ interface modalOpen {
     setCreateModalOpen: () => void;
     setCreateModalClose: () => void;
     setContactsTableOpen: () => void;
+    setAdventCardModalOpen: () => void;
     setContactsTableClose: () => void;
     setCancelWorkshopModalOpen: ()=>void;
     setCancelWorkshopModalClose: ()=>void;
+    setAdventCardModalClose: ()=>void;
     setOrderCancelModal: ()=>void;
 }
 
 export const useModalOpen = create<modalOpen>((set) => ({
-    status: {search: false, treatmentForm: false, createModal: false, contacts: false, workshop: false, cancelOrder:false},
+    status: {adventCard: false, search: false, treatmentForm: false, createModal: false, contacts: false, workshop: false, cancelOrder:false},
 
     // Update search to open
     setSearchOpen: () => set((state) => ({
@@ -40,6 +42,10 @@ export const useModalOpen = create<modalOpen>((set) => ({
 
     setCreateModalOpen: () => set((state) => ({
         status: {...state.status, createModal: true}
+    })),
+
+    setAdventCardModalOpen: () => set((state) => ({
+        status: {...state.status, adventCard: true}
     })),
 
     // Update treatmentForm to close
@@ -68,6 +74,11 @@ export const useModalOpen = create<modalOpen>((set) => ({
     // Update treatmentForm to close
     setOrderCancelModal: () => set((state) => ({
         status: {...state.status, cancelOrder: !state.status.cancelOrder}
+    })),
+
+    // Update adventCard to close
+    setAdventCardModalClose: () => set((state) => ({
+        status: {...state.status, adventCard: !state.status.adventCard}
     })),
 
 }));

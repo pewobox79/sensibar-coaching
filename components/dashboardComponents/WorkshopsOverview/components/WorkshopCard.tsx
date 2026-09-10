@@ -54,7 +54,7 @@ const WorkshopCard = (props: {
         streetNumber: props.location?.streetNumber,
     }
 
-    const token = useLocalStorage("sensiUser")?.value
+    const {value:token} = useLocalStorage("sensiUser", null)
     const eventIsInThePast = isPastEvent(props.workshop_date)
     const [contactDetails, setContactDetails] = useState(false)
     const [edit, setEdit] = useState({state: false, values: INIT_WS_VALUES});

@@ -12,7 +12,7 @@ import ToastMessage from "@/components/global/ToastMessage";
 
 const LoginForm = () => {
     const router = useRouter();
-    const localStorage = useLocalStorage("sensiUser")
+    const localStorage = useLocalStorage("sensiUser", null)
     const [error, setError] = useState({msg: "", state: false, type: "error"})
     const [success, setSuccess] = useState({state: false, msg: "", type: "success"})
     const LoginSchema = yup.object().shape({

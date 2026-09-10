@@ -18,7 +18,7 @@ const TransformationForm = ({data}: { data: ContactData }) => {
     const router = useRouter()
 
     const [success, setSuccess] = useState({state: false, msg: "Neuer Coachee hinzugefügt", type: "success"})
-    const token = useLocalStorage("sensiUser")?.value
+    const {value:token} = useLocalStorage("sensiUser", null)
 
     async function handleTransformationToClient() {
 

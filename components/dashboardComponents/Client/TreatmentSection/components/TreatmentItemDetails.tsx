@@ -9,7 +9,7 @@ import {useLocalStorage} from "@/hooks/useLocalStorage";
 import ToastMessage from "@/components/global/ToastMessage";
 
 const TreatmentItemDetails = () => {
-    const token = useLocalStorage("sensiUser")?.value
+    const {value:token} = useLocalStorage("sensiUser", null)
     const clientContext = useClientStore()
 
 

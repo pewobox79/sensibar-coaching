@@ -14,7 +14,7 @@ import {useLocalStorage} from "@/hooks/useLocalStorage";
 
 const ContactDetails = ({context}: { context: ClientData }) => {
 
-    const token = useLocalStorage("sensiUser")?.value
+    const {value:token} = useLocalStorage("sensiUser", null)
     const [edit, setEdit] = useState(false)
     const [success, setSuccess]=useState({state: false, type: "success", msg:"Kontakt aktualisiert"})
     const [error, setError]=useState({state: false, type: "error", msg:""})

@@ -24,7 +24,7 @@ const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactEl
     const openSearch = useModalOpen().setSearchOpen;
     const openCreateModal = useModalOpen().setCreateModalOpen
     const closeCreateModal = useModalOpen().setCreateModalClose
-    const removeStorage = useLocalStorage("sensiUser")
+    const {deleteLocalStorage} = useLocalStorage("sensiUser", null)
 
     function handleCreateNewWorkshop(){
 
@@ -64,7 +64,7 @@ const DashboardLayout = ({children}: { children: React.ReactNode | React.ReactEl
             }
 
         })
-        removeStorage?.deleteLocalStorage()
+        deleteLocalStorage()
         router.push("/login")
 
     }

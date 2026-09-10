@@ -11,7 +11,7 @@ import * as yup from 'yup'
 
 const CreateClient = () => {
 
-    const token = useLocalStorage("sensiUser")?.value;
+    const {value:token} = useLocalStorage("sensiUser", null);
     const [success, setSuccess] = useState({state: false, msg: "Coachee angelegt", type: "success"});
     const [error, setError] = useState({state: false, msg: "Fehler beim Anlegen", type: "error"});
 

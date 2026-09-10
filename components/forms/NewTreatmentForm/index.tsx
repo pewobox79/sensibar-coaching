@@ -12,7 +12,7 @@ import {useLocalStorage} from "@/hooks/useLocalStorage";
 
 const NewTreatmentForm = ({clientId, clientName}: { clientId: string, clientName: string }) => {
 
-    const token = useLocalStorage("sensiUser")?.value
+    const {value:token} = useLocalStorage("sensiUser", null)
     const modalClose = useModalOpen().setTreatmentFormClose;
     const [success, setSuccess] = useState({state: false, msg: "", type: "success"});
     const [error, setError] = useState({state: false, msg: "", type: "error"});
