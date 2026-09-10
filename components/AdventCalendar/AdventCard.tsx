@@ -3,7 +3,6 @@ import {CSSProperties} from "react";
 
 import React, {useState} from "react";
 import {isReadyToOpen} from "@/utils/adventCalendarHelper";
-import {number} from "yup";
 import AdventCardOpen from "@/components/AdventCalendar/AdventCardOpen";
 import {useLocalStorage} from "@/hooks/useLocalStorage";
 

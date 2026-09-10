@@ -16,7 +16,6 @@ const Consent = () => {
 
     useEffect(() => {
         if(localStorage?.value != null){
-
             setOpen(false)
         }
     }, [])
