@@ -23,7 +23,9 @@ const AdventCalendarSubscriptionForm = ({handleModal}: { handleModal: () => void
     const [error, setError] = useState({state: false, msg: "", type: "error"})
     const SubscriptionSchema = yup.object().shape({
         email: yup.string().email("Es muss eine gültige Email sein").required('Email ist verpflichtend'),
-        acceptedPolicy: yup.boolean().required('Sie müssen die Datenschutzbestimmungen akzeptieren')
+        acceptedPolicy: yup.boolean()
+            .oneOf([true], "Sie müssen die Datenschutzbestimmungen akzeptieren")
+            .required("Sie müssen die Datenschutzbestimmungen akzeptieren")
     })
 
     const formik = useFormik({
