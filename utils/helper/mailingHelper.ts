@@ -20,15 +20,15 @@ export const transporter = nodemailer.createTransport({
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function sendSubmissionEmail(userId: string, email: string, workshopName: string, workshopId: string, paymentId: string) {
-    const url = `https://www.sensibar-coaching.de/rueckmeldungen/doubleOptIn?id=${userId}&wsId=${workshopId}&pId=${paymentId}`;
+    const url = `https://www.sensibar-coaching.de/rueckmeldungen/doubleOptIn?id=${ userId }&wsId=${ workshopId }&pId=${ paymentId }`;
     try {
         const info = await transporter.sendMail({
             to: `${ email }`, // list of receivers
             subject: "Deine Workshop Registrierung", // Subject line
-            text: `Danke für Deine Anmeldung zum Workshop "${workshopName.toUpperCase()}".
+            text: `Danke für Deine Anmeldung zum Workshop "${ workshopName.toUpperCase() }".
 
             Bitte klicke auf den folgenden Link, um Deine Anmeldung zu bestätigen:
-            ${url}
+            ${ url }
 
         Dein Sensibar Team`,
         })
@@ -45,8 +45,29 @@ export async function sendContactFormEmail(data: ContactFormTypes) {
             to: 'hello@sensibar-coaching.de', // list of receivers
             replyTo: data.email,
             subject: "Du hast eine neue Nachricht erhalten!", // Subject line
-            html: `<div><p>Du hast eine neue Nachricht von ${data.name} erhalten</p><p>Die Nachricht lautet: </p><p>${data.message}</p><p></p></div>`,
+            html: `<div><p>Du hast eine neue Nachricht von ${ data.name } erhalten</p><p>Die Nachricht lautet: </p><p>${ data.message }</p><p></p></div>`,
 
+        })
+        return {msg: "Email erfolgreich verschickt", info}
+    } catch (e) {
+        return ({msg: "Fehler beim Verschicken", error: e})
+    }
+}
+
+export async function sendAdventCalendarSubscriptionEmail(data: {email: string, sid: string}) {
+    try {
+        const info = await transporter.sendMail({
+            to: data.email,
+            replyTo: "hello@sensibar-coaching.de",
+            subject: "Dein Adventskalender-Abonnement!",
+            html: `<div><p>Hallo, Du hast Dich für den Adventskalender erfolgreich angemeldet, um keines der Überraschungen zu verpassen!</p>
+                    <p>Solltest du das nicht selbst gewesen sein, dann kannst du die Anmeldung mit folgendem Link zurückziehen: https://www.sensibar-coaching.de/advent-kalender-rueckruf?sid=${ data.sid } </p></div>`,
+            text: `Hallo,
+
+Du hast Dich für den Adventskalender erfolgreich angemeldet, um keine Überraschung zu verpassen!
+
+Solltest du das nicht selbst gewesen sein, dann kannst du die Anmeldung mit folgendem Link zurückziehen: https://www.sensibar-coaching.de/advent-kalender-rueckruf?sid=${ data.sid }
+`
         })
         return {msg: "Email erfolgreich verschickt", info}
     } catch (e) {
@@ -82,7 +103,7 @@ export async function sendRegistrationFinalEmail(userId: string, email: string, 
             subject: "Dein Platz ist gesichert!", // Subject line
             from: 'hello@sensibar-coaching.de',
             replyTo: 'hello@sensibar-coaching.de',
-            html: `<div><p>Hey ${ name.toUpperCase() },</p> <p>Deine Anmeldung zum Workshop ${ title.toUpperCase() } am ${ workshopDate } ist bestätigt.</p>${ content }<p><p>Deine Rechnung und das Ticket findest du <a href="https://www.sensibar-coaching.de/tickets/documents?pId=${paymentId}&wId=${workshopId}">hier</a>:</p>Ich freue mich auf Dich, </p><p>Deine Yessica</p><p>Sensibar-Coaching | sensibel & wunderbar</p><p>Email: hello@sensibar-coaching.de <br/>Mobil: +49 176 625 05 701<br/>Adresse: Lindenstrasse 6a 85309 Pörnbach</p></div>`, // html body
+            html: `<div><p>Hey ${ name.toUpperCase() },</p> <p>Deine Anmeldung zum Workshop ${ title.toUpperCase() } am ${ workshopDate } ist bestätigt.</p>${ content }<p><p>Deine Rechnung und das Ticket findest du <a href="https://www.sensibar-coaching.de/tickets/documents?pId=${ paymentId }&wId=${ workshopId }">hier</a>:</p>Ich freue mich auf Dich, </p><p>Deine Yessica</p><p>Sensibar-Coaching | sensibel & wunderbar</p><p>Email: hello@sensibar-coaching.de <br/>Mobil: +49 176 625 05 701<br/>Adresse: Lindenstrasse 6a 85309 Pörnbach</p></div>`, // html body
         })
 
         return {msg: "email sucessfully sent", info}
@@ -110,7 +131,7 @@ export async function sendWorkshopCancelEmail(emails: string[], title: string, w
     }
 }
 
-export async function sendEmailToAdminAfterNewWorkshopRegistration(title: string, workshopDate: string, firstname: string, lastname:string) {
+export async function sendEmailToAdminAfterNewWorkshopRegistration(title: string, workshopDate: string, firstname: string, lastname: string) {
 
     try {
         const info = await transporter.sendMail({
@@ -118,7 +139,7 @@ export async function sendEmailToAdminAfterNewWorkshopRegistration(title: string
             to: 'hello@sensibar-coaching.de',
             subject: "Neue Workshop anmeldung!", // Subject line
 
-            html: `<div><p>Hallo Yessica,</p> <p>Du hast eine neue Anmeldung zu dem Workshop ${ title?.toUpperCase() } am ${ workshopDate } von ${firstname?.toUpperCase()} ${lastname.toUpperCase()}.</div>`, // html body
+            html: `<div><p>Hallo Yessica,</p> <p>Du hast eine neue Anmeldung zu dem Workshop ${ title?.toUpperCase() } am ${ workshopDate } von ${ firstname?.toUpperCase() } ${ lastname.toUpperCase() }.</div>`, // html body
         })
         return {msg: "email sucessfully sent", info}
     } catch (e) {

@@ -1,5 +1,6 @@
 import qs from 'qs';
 import {
+    adventCalendarFragment,
     contactComponentFragment,
     gridSectionFragment,
     jumbotronFragment, logoSection, quoteSectionFragment, referencesFragment,
@@ -28,8 +29,21 @@ export const DynamicContentQuery = qs.stringify({
 });
 
 
+export const AdventCalendarQuery = qs.stringify({
+    populate: {
+        items: {
+                ...adventCalendarFragment,
+        },
+    },
+}, {
+    encodeValuesOnly: true,
+});
+
+
 
 export const QuestionContentQuery = qs.stringify({
     populate:true
 })
+
+
 

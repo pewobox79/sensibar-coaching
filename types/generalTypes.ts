@@ -313,5 +313,8 @@ export type AdventCardTypes = {
     day: number
     variant?: string
     index: number
-    content?: { isText: boolean, content?: TextBlock | string }
+    image?: ImageType
+    youtube?: string
+    isText: boolean
+    content?: { content?: TextBlock | string }
 }

@@ -73,6 +73,15 @@ export const quoteSectionFragment = {
     },
 };
 
+export const adventCalendarFragment = {
+    populate: {
+        image: {
+            fields: ['url', 'alternativeText', 'formats'],
+        },
+    },
+};
+
+
 export const gridSectionFragment = {
     'elements.grid-section': {
         populate: {

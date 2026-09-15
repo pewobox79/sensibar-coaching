@@ -1,7 +1,8 @@
-export const isReadyToOpen =(day:number)=>{
-    const date = new Date()
-    const today = date.getDate()
-    const month = date.getMonth()
-    const DEZ_MONTH = 8
-    return month === DEZ_MONTH && today >= day
-}
+import { Temporal } from "@js-temporal/polyfill";
+
+export const isReadyToOpen = (day: number) => {
+    if(!day) return false
+    const today = Temporal.Now.plainDateISO();
+    const DECEMBER = 12;
+    return today.month === DECEMBER && today.day >= day;
+};

@@ -30,3 +30,22 @@ export const notifyContactAfterRegistration = async (registerType: "newContact" 
         })
 
 }
+
+export const subscribeAdventCalender = async (data: {email: string, sid: string})=>{
+
+    try{
+        const response = await fetch('/api/db/adventsubscription', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({...data}),
+        })
+        const json = await response.json()
+        console.log("subscribe email response", json)
+        return json
+    }catch(err){
+        console.log(err)
+
+    }
+}

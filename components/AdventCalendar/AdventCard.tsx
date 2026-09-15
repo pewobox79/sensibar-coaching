@@ -58,7 +58,7 @@ function SnowDots() {
     );
 }
 
-export function AdventCard({day, variant, index, content}: AdventCardTypes) {
+export function AdventCard({day, variant, index, content, image, isText, youtube}: AdventCardTypes) {
 
     const {value, setStoredValue} = useLocalStorage("adventCalendar_values", [])
     const decorations = decorationSets[index % decorationSets.length];
@@ -70,8 +70,8 @@ export function AdventCard({day, variant, index, content}: AdventCardTypes) {
 
     function handleOpen() {
         if (isReadyToOpen(day)) {
-            if(value.includes(day)) return
-            const updatedDays = value ? [...value, day]: [day]
+            if (value.includes(day)) return
+            const updatedDays = value ? [...value, day] : [day]
             setStoredValue(updatedDays)
             setOpen(true)
             return
@@ -84,16 +84,19 @@ export function AdventCard({day, variant, index, content}: AdventCardTypes) {
         setModal(!modal)
     }
 
+
+    const adventCardClassName = `adventCard ${
+        variant === "accent" ? "adventCardAccent" : ""
+    } ${ open || isOpened ? "adventCardOpened" : "" }`
+
+
     return (
         <>
             <button
-                className={ `adventCard ${
-                    variant === "accent" ? "adventCardAccent" : ""
-                } ${ open || isOpened ? "adventCardOpened" : "" }` }
+                className={ adventCardClassName }
                 type="button"
                 onClick={ handleOpen }
             >
-
                 <div className="decorations">
                     { decorations.flakes.map((flake, flakeIndex) => (
                         <Snowflake key={ flakeIndex } style={ flake }/>
@@ -101,18 +104,23 @@ export function AdventCard({day, variant, index, content}: AdventCardTypes) {
                     <SnowDots/>
                 </div>
 
-                { message ? <div className={"tooEarly"}>Kalender kann erst am { day }. Dezember geöffnet werden</div> :
-                    isOpened || open ? <AdventCardOpen day={day} handleModal={handleModal}/> : <span className="dayNumber">{ day }</span> }
+                { message ?
+                    <div className={ "tooEarly" }>Kalender kann erst am { day }. Dezember geöffnet werden</div> :
+                    isOpened || open ? <AdventCardOpen day={ day } handleModal={ handleModal }/> :
+                        <span className="dayNumber">{ day }</span> }
             </button>
 
-            {modal && (
+            { modal && (
                 <AdventCardModal
-                    day={day}
-                    modal={modal}
-                    handleModal={handleModal}
-                    content={content}
+                    day={ day }
+                    modal={ modal }
+                    handleModal={ handleModal }
+                    content={ content }
+                    isText={ isText }
+                    image={ image }
+                    youtube={ youtube }
                 />
-            )}
+            ) }
         </>
     );
 }

@@ -1,5 +1,9 @@
 import {ClientData} from "@/stores/useClientStore";
-import {DynamicContentQuery, QuestionContentQuery} from "@/utils/helper/queries/DynamicContentQuery";
+import {
+    AdventCalendarQuery,
+    DynamicContentQuery,
+    QuestionContentQuery
+} from "@/utils/helper/queries/DynamicContentQuery";
 import {BEARER_TOKEN, FRONTEND_URI, STRAPI_URI} from "@/utils/constantValues";
 
 const config = {
@@ -59,12 +63,14 @@ export const getHomepage = async () => {
 }
 export const getAdventCalendar = async () => {
 
-    const URL = `${ STRAPI_URI }/api/advent-calendar/?populate=*`
+    const URL = `${ STRAPI_URI }/api/advent-calendar/?${ AdventCalendarQuery }`
 
 
     try {
         const response = await fetch(URL, config)
-        return await response.json()
+        const data = await response.json()
+        console.log(data)
+        return data
 
     } catch (e) {
 
@@ -249,6 +255,59 @@ export const createNewCoachee = async (token: string, newData: unknown) => {
 
 }
 
+export const createAdventSubscription =async (newData: { email: string, acceptedPolicy: boolean })=>{
+    try {
+        const response = await fetch(`${ STRAPI_URI }/api/advent-calendar-reminders`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+            },
+            body: JSON.stringify({data: newData})
+        })
+        const data = await response.json()
+        if (!response.ok) {
+            return {msg: data.error.message, status: response.statusText}
+        } else {
+            return {msg: "subscription created", data: data.data}
+        }
+
+
+    } catch (err) {
+
+
+        return {msg: "Subscription failed to create", err}
+
+    }
+
+}
+
+export const removeAdventsSubscription = async (sid: string)=> {
+
+    const url = `${ STRAPI_URI }/api/advent-calendar-reminders/${sid}`
+    console.log("url",url)
+    try {
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${ process.env.NEXT_PUBLIC_STRAPI_BEARER_TOKEN }`
+            },
+        })
+        if (!response.ok) {
+            return {msg: "Ihre Abmeldung ist fehlgeschlagen", status: response.statusText}
+        } else {
+            return {msg: "Sie wurden erfolgreich abgemeldet", data: response}
+        }
+
+
+    } catch (err) {
+
+
+        return {msg: "Remove of Subscriber failed in catch", err}
+
+    }
+
+}
 
 export const getTestQuestions = async () => {
 

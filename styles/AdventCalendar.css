@@ -1,7 +1,9 @@
 /* ----------------------------------
    Page
 ---------------------------------- */
-
+.text {
+    color: var(--textColor);
+}
 .calendarPage {
     width: 100%;
     min-height: 100vh;
@@ -24,7 +26,7 @@
     max-width: 1440px;
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 12px
 }
 
 /* 6 Elemente pro Reihe */
@@ -52,7 +54,7 @@
 .adventCardOpened {
     position: relative;
     opacity: 0.5;
-    transform: scale(1.05);
+    gap: 12px
 }
 /* ----------------------------------
    Zahl
@@ -117,6 +119,14 @@
     border: 1px solid black;
     border-radius: 10px;
     text-align: center;
+}
+
+.adventCardModalImage {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    object-fit: contain;
 }
 
 .adventCardModalOpen {
@@ -264,7 +274,7 @@
 
     .adventCalendar {
         gap: 10px;
-        margin: 200px auto;
+        margin: 200px auto 0 auto;
     }
 
     .adventCard {
