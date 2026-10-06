@@ -120,11 +120,10 @@ export const getClientsArray = async (type: "patient" | "all") => {
 
 
 export const getSelectedClientFromAPI = async (firstname: string, lastname: string) => {
-
-
+const url = `${ STRAPI_URI }/api/contacts/?filters[personalData][firstname][$eq]=${ firstname.toLowerCase() }&filters[personalData][lastname][$eq]=${ lastname.toLowerCase() }&populate=*`
     try {
 
-        const response = await fetch(`${ STRAPI_URI }/api/contacts/?filters[personalData][firstname][$eq]=${ firstname.toLowerCase() }&[personalData][lastname][$eq]=${ lastname.toLowerCase() }&populate=*`, config)
+        const response = await fetch(url, config)
         const clientData = await response.json()
         return clientData.data[0]
 
