@@ -41,7 +41,6 @@ export default async function AdventCalendar() {
     const calendarItems = data?.items
     return (
         <Container id="calendarPage">
-
             <div className="adventCalendar">
                 { days.map((item, index) => {
                     const itemContent = calendarItems[item.day-1]

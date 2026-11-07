@@ -22,6 +22,15 @@ const AdventCardModal = ({
     youtube?: string;
 }) => {
 
+    function getYouTubeEmbedUrl(url: string): string {
+        const parsedUrl = new URL(url);
+
+        const videoId = parsedUrl.pathname.startsWith("/shorts/")
+            ? parsedUrl.pathname.split("/")[2]
+            : parsedUrl.searchParams.get("v");
+
+        return `https://www.youtube-nocookie.com/embed/${videoId}`;
+    }
     const renderContent = () => {
         if (isText && content?.content) {
             return <RenderContentHelper blocks={content.content as TextBlock} />;
@@ -30,12 +39,11 @@ const AdventCardModal = ({
         if (youtube && !isText) {
             return (
                 <iframe
-                    width="auto"
-                    height="auto"
-                    src={youtube}
+                    width="600"
+                    height="1200"
+                    src={getYouTubeEmbedUrl(youtube)}
                     title="Advent Calendar Youtube Video"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                 />
             );
