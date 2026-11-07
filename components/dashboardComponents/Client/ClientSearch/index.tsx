@@ -34,6 +34,7 @@ const ClientSearch = () => {
 
 
             getSelectedClientFromAPI(firstName, lastName).then(data => {
+                console.log("selected from API", data)
                 const updatedClientState = {...data, selectedClientDetails: {type: "", details: "", title: ""}} //removes old selection details state
                 useClientStore.getState().setClientData(updatedClientState)
             })
