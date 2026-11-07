@@ -2,7 +2,6 @@ import "@/styles/AdventCalendar.css";
 import Container from "@/components/global/Container";
 import {AdventCard} from "@/components/AdventCalendar/AdventCard";
 import {getAdventCalendar} from "@/lib/strapi/generalHelper";
-import AdventCalenderSubscription from "@/components/AdventCalendar/AdventCalenderSubscription";
 import AdventModalButton from "@/components/AdventCalendar/AdventModalButton";
 
 const days = [
