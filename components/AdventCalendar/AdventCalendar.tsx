@@ -40,6 +40,12 @@ export default async function AdventCalendar() {
     const calendarItems = data?.items
     return (
         <Container id="calendarPage">
+            <div className="adventCalendarHeading">
+                <h1>
+                    Advent Calendar
+                </h1>
+                <AdventModalButton />
+            </div>
             <div className="adventCalendar">
                 { days.map((item, index) => {
                     const itemContent = calendarItems[item.day-1]
@@ -55,7 +61,7 @@ export default async function AdventCalendar() {
                     />
                 }) }
             </div>
-            <AdventModalButton />
+
         </Container>
     );
 }

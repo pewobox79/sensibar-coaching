@@ -21,14 +21,16 @@
 
 .adventCalendar {
     width: 100%;
-    margin-top: 200px;
+    margin-top: 100px;
     padding: 10px;
     max-width: 1440px;
     display: flex;
     flex-wrap: wrap;
     gap: 12px
 }
-
+.adventCalendarHeading {
+    margin: 10px 0 50px 10px
+}
 /* 6 Elemente pro Reihe */
 
 .adventCard {
@@ -253,6 +255,13 @@
     transform: translateY(-1px);
 }
 
+@media screen and (min-width: 760px) {
+
+    .adventCalendarHeading {
+        margin: 150px 0 50px 10px;
+    }
+
+}
 /* ----------------------------------
    Tablet
 ---------------------------------- */
@@ -274,12 +283,11 @@
 
     .adventCalendar {
         gap: 10px;
-        margin: 200px auto 0 auto;
+        margin: auto 0 auto;
     }
 
     .adventCard {
         flex: 0 0 calc((100% - 10px) / 2);
-
         border-radius: 10px;
     }
 
