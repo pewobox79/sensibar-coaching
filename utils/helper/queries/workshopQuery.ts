@@ -19,6 +19,9 @@ export const SingleWorkshopQuery = qs.stringify({
         location: {
             fields: ['city', 'street', 'zipCode', 'country', "streetNumber"]
         },
+        link: {
+            fields: ["href"]
+        },
         speaker: {
             populate: {
                 image: {
