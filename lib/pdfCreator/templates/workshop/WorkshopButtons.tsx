@@ -56,6 +56,7 @@ const WorkshopButtons = (props:StrapiPaymentProps) => {
             bookedBy={ `${ capitalizeFirstLetter(contact?.personalData?.firstname) } ${ capitalizeFirstLetter(contact?.personalData?.lastname) }` }
             ticketNumber={ event_ticket?.ticketId?.split('-')[2] }
             workshopId={wId}
+            workshopType={event_ticket?.workshop?.type}
         /> }
                          fileName="ticket.pdf">
             { ({loading}) =>

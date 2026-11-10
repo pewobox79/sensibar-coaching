@@ -1,6 +1,8 @@
 import nodemailer from 'nodemailer';
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 import {ContactFormTypes} from "@/types/generalTypes";
+import {formatTimeToAdminFormat} from "@/lib/strapi/workshopHelper";
+import {formatIsoDateToGerman} from "@/utils/helper/formater";
 
 const password = process.env.NEXT_PUBLIC_G_APP_PASSWORD
 export const transporter = nodemailer.createTransport({
@@ -75,7 +77,7 @@ Solltest du das nicht selbst gewesen sein, dann kannst du die Anmeldung mit folg
     }
 }
 
-export async function sendRegistrationFinalEmail(userId: string, email: string, name: string, workshopLink: string, title: string, workshopDate: string, location: {
+export async function sendRegistrationFinalEmail(userId: string, email: string, name: string, workshopLink: string, title: string, workshopTimeStart: string, workshopDate: string, location: {
     city: string,
     street: string,
     streetNumber: string,
@@ -103,7 +105,7 @@ export async function sendRegistrationFinalEmail(userId: string, email: string, 
             subject: "Dein Platz ist gesichert!", // Subject line
             from: 'hello@sensibar-coaching.de',
             replyTo: 'hello@sensibar-coaching.de',
-            html: `<div><p>Hey ${ name.toUpperCase() },</p> <p>Deine Anmeldung zum Workshop ${ title.toUpperCase() } am ${ workshopDate } ist bestätigt.</p>${ content }<p><p>Deine Rechnung und das Ticket findest du <a href="https://www.sensibar-coaching.de/tickets/documents?pId=${ paymentId }&wId=${ workshopId }">hier</a>:</p>Ich freue mich auf Dich, </p><p>Deine Yessica</p><p>Sensibar-Coaching | sensibel & wunderbar</p><p>Email: hello@sensibar-coaching.de <br/>Mobil: +49 176 625 05 701<br/>Adresse: Lindenstrasse 6a 85309 Pörnbach</p></div>`, // html body
+            html: `<div><p>Hey ${ name.toUpperCase() },</p> <p>Deine Anmeldung zum Workshop ${ title.toUpperCase() } am ${ formatIsoDateToGerman(workshopDate) } um ${formatTimeToAdminFormat(workshopTimeStart)} ist bestätigt.</p>${ content }<p><p>Deine Rechnung und das Ticket findest du <a href="https://www.sensibar-coaching.de/tickets/documents?pId=${ paymentId }&wId=${ workshopId }">hier</a>:</p>Ich freue mich auf Dich, </p><p>Deine Yessica</p><p>Sensibar-Coaching | sensibel & wunderbar</p><p>Email: hello@sensibar-coaching.de <br/>Mobil: +49 176 625 05 701<br/>Adresse: Lindenstrasse 6a 85309 Pörnbach</p></div>`, // html body
         })
 
         return {msg: "email sucessfully sent", info}

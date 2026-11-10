@@ -9,7 +9,7 @@ export const PaymentQuery = qs.stringify({
         event_ticket: {
             populate:{
                 workshop:{
-                    fields: ['title', 'workshop_date', 'workshopTimeStart', 'workshopTimeEnd', 'format', 'workshopPrice'],
+                    fields: ['title', 'workshop_date', 'workshopTimeStart', 'workshopTimeEnd', 'format', 'workshopPrice', "type"],
                     populate:{
                         location:true
                     }

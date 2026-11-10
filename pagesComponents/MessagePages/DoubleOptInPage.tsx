@@ -14,8 +14,8 @@ const DoubleOptInPage = () => {
     useEffect(() => {
         getSingleWorkshop(workshopId).then((data)=>{
             const workshopLink = data.data?.link?.href || "Kein Online Workshop";
-            const {title, workshop_date, location, type} = data?.data
-            executeDoubleOptIn(id, workshopLink, title, workshop_date, location, type, paymentId, workshopId).then(data => console.log(data));
+            const {title, workshop_date, location, type, workshopTimeStart} = data?.data
+            executeDoubleOptIn(id, workshopLink, title, workshop_date, location, type, paymentId, workshopId, workshopTimeStart).then(data => console.log(data));
         })
 
 

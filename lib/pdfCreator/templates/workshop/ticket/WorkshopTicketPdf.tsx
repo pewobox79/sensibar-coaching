@@ -14,6 +14,7 @@ type WorkshopTicketPdfProps = {
     ticketNumber: string;
     format: string
     workshopId: string
+    workshopType: string
 };
 
 
@@ -25,7 +26,8 @@ const WorkshopTicketPdf = ({
                                bookedBy,
                                ticketNumber,
                                format,
-                               workshopId
+                               workshopId,
+                               workshopType
                            }: WorkshopTicketPdfProps) => {
 
 
@@ -76,7 +78,8 @@ const WorkshopTicketPdf = ({
 
                                 <View style={ styles.detailItem }>
                                     <Text style={ styles.detailLabel }>Location</Text>
-                                    <Text style={ styles.detailValue }>{ location }</Text>
+                                    <Text
+                                        style={ styles.detailValue }>{ workshopType === "online" ? "Online" : location }</Text>
                                     <Text style={ styles.spacer }/>
                                     <Text style={ [styles.detailLabel, {marginTop: 10}] }>Buchende Person</Text>
                                     <Text style={ styles.detailValue }>{ bookedBy }</Text>
